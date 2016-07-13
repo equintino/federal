@@ -1,0 +1,74 @@
+<?php
+
+//~ Template for list.php
+// variables:
+//  $title - page title
+//  $status - status of TODOs to be displayed
+//  $todos - TODOs to be displayed
+
+?>
+<h1>
+    <img src="img/status/<?php echo $status; ?>.png" alt="" title="<?php echo Utils::capitalize($status); ?>" class="icon" />
+    <?php echo $title; ?>
+</h1>
+
+<?php if (empty($todos)): ?>
+    <p>Nenhum RNC encontrado.</p>
+<?php else: ?>
+    <ul class="list">
+        <?php foreach ($todos as $todo): ?>
+            <?php /* @var $todo Todo */ ?>
+            <?php 
+            //STATUS PENDENTE//
+            $tooLate = $status == ((Todo::STATUS_PENDING) && $todo->getDueOn() < new DateTime()) && $todo->getEliminacao() == $todo->getCreatedOn();
+            $tooLate2 = $status == ((Todo::STATUS_PENDING) && $todo->getEliminacao() < new DateTime()) && $todo->getEliminacao_novo() == $todo->getCreatedOn();
+            $tooLate3 = $status == ((Todo::STATUS_PENDING) && $todo->getEliminacao_novo() < new DateTime()) && $todo->getEficazData() == $todo->getCreatedOn() ;
+            $tooLate4 = $todo->getEficazData() != $todo->getCreatedOn();
+            ?> 
+            <li>
+                <?php if ($tooLate): ?>
+                    <img src="img/exclamation.png" alt="" title="Prazo esgotado!" class="icon"/>
+                <?php endif; ?>
+                <?php if (Utils::escape($todo->getAndamento())): ?>
+                    <img src="img/status/ANDAMENTO.png" alt="" title="Em Implementação!" class="icon"/>
+                <?php endif; ?>
+                <img src="img/priority/<?php echo $todo->getPriority(); ?>.png" alt="Prioridade <?php echo $todo->getPriority(); ?>" title="Prioridade <?php echo $todo->getPriority(); ?>" />
+                <h3><a href="<?php echo Utils::createLink('detail', array('id' => $todo->getId())) ?>"><?php echo Utils::escape($todo->getTitle()); ?></a></h3>
+                <?php if ($todo->getDescription()): ?>
+                    <p class="description"><?php echo Utils::escape($todo->getDescription()); ?></p>
+                <?php endif; ?>
+                <p><span class="label">Numero da RNC:</span> <?php echo Utils::escape($todo->getNumero()); ?></p>
+                <p><span class="label">Abertura RNC:</span> <?php echo Utils::escape(Utils::formatDateTime($todo->getCreatedOn())); ?></p>
+                <?php if($status <> Todo::STATUS_DONE): ?>
+                <p><span class="label">Retorno:</span>
+                    <?php if ($tooLate): ?><span class="too-late"><?php endif; ?>
+                    <?php echo Utils::escape(Utils::formatDateTime($todo->getDueOn())); ?>
+                    <?php if ($tooLate): ?></span><?php endif; ?>
+                </p>
+                <?php endif; ?>
+                <?php if (($todo->getEliminacao()!=$todo->getCreatedOn()) && $status <> Todo::STATUS_DONE) : ?>
+                <p><span class="label"><?php echo $eliminacao_nome ?></span>
+                    <?php if (@$tooLate2): ?><span class="too-late"><?php endif; ?>
+                    <?php echo Utils::escape(Utils::formatDateTime($todo->getEliminacao())); endif;
+                    if (($todo->getEliminacao_novo()!=$todo->getCreatedOn()) && $status<>Todo::STATUS_DONE) : ?>
+                     <?php if (@$tooLate2): ?></span><?php endif; ?>
+                </p>
+		<p><span class="label">Novo Prazo:</span>
+                    <?php if (@$tooLate3): ?><span class="too-late"><?php endif; ?>
+                    <?php echo Utils::escape(Utils::formatDateTime($todo->getEliminacao_novo())); endif;?>
+                    <?php if (@$tooLate3): ?></span><?php endif; ?>
+                </p>
+                <?php if(@$tooLate4): ?>
+                <p><span class="label">Conclusão:</span>
+                    <?php echo Utils::escape(Utils::formatDateTime($todo->getEficazData())); ?>
+                    <?php if (@$tooLate4): ?></span><?php endif; ?>
+                </p>
+                <?php endif; ?>
+                    <?php if (Utils::escape($todo->getNovoRnc())): ?>
+		<p><span class="label">Novo RNC:</span>
+                    <?php echo Utils::escape($todo->getNovoRnc()); endif; ?>
+                </p>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+<?php endif; ?>
