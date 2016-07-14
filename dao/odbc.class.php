@@ -3,31 +3,11 @@ include '../config/config.php';
 
 final class odbc {  
   private $db = null;
-  //private $banco='federal';
   
-  function __construct(){
-    //$conn = new odbc();
-    //self::odbc -> odbc_connect($this->banco,'','')or die(odbc_errormsg());
-    
-    //return self::odbc;
-    //// Descrição da conexao ////
-    //$result = @odbc_data_source( $conn, SQL_FETCH_FIRST );
-    /*
-    while($result){
-        echo "DSN: " . $result['server'] . " - " . $result['description'] . "<br>\n";
-        $result = @odbc_data_source( $link, SQL_FETCH_NEXT );
+    public function __destruct(){  
+        $this->db = null;
     }
-     * 
-     */
-        //// Fim da Descrição ////
-  }
- // function __destruct{  
-   // public function __destruct() {
-        //$this->db = null;
-    //}
- // }
     public function getDb() {
-        //// conexao com banco ////
         if ($this->db !== null) {
             return $this->db;
         }
@@ -40,13 +20,11 @@ final class odbc {
         return $this->db;
     }
     public function query($sql) {
-        //// executa a query ////
         $result = odbc_exec($this->getDb(),$sql);
 
         return $result;
     }
     public function listaTabela(){	
-        //// Lista Tabelas ////
         $result = odbc_tables($this->getDb());
         $tables = array();
         while (odbc_fetch_row($result)){
@@ -56,7 +34,6 @@ final class odbc {
         return $tabelas;
     }
     public function listaConteudo($sql){
-        // lista conteudo //
         $conn = new odbc();
         $result=$conn -> query($sql);
         odbc_result_all($result,'Border=1 cellspacing=0 cellpadding=5'); 
@@ -85,6 +62,53 @@ final class odbc {
        $colunas[]=odbc_field_name($result,$x);
      }
      return $colunas;
+    }
+    public function find(odbcSearchCriteria $search = null) {
+        $result = array();
+        foreach ($this->query($this->getFindSql($search)) as $row) {
+            $odbc = new Odbc();
+            odbcMapper::map($todo, $row);
+            $result[$odbc->getId()] = $odbc;
+        }
+        return $result;
+    }
+    private function getFindSql(odbcSearchCriteria $search = null) {
+        $sql = 'SELECT * FROM todo WHERE 1';
+                //deleted = 0 ';
+        $orderBy = null;
+                //' priority, due_on';
+        if ($search !== null) {
+            if ($search->getStatus() !== null) {
+                $sql .= 'AND status = ' . $this->getDb()->quote($search->getStatus());
+                /*
+                switch ($search->getStatus()) {
+                    case Todo::STATUS_PENDING:
+                        $orderBy = 'due_on, priority';
+                        break;
+                    case Todo::STATUS_DONE:
+                    case Todo::STATUS_VOIDED:
+                    case Todo::STATUS_CANCELADO:
+                        $orderBy = 'due_on DESC, priority';
+                        break;
+                    default:
+                        throw new Exception('No order for status: ' . $search->getStatus());
+                }          
+                 */
+            }
+        }
+        $sql .= ' ORDER BY ' . $orderBy;
+        return $sql;
+    }
+    private function getFindSql2(odbcSearchCriteria $search = null) {
+        $sql = 'SELECT * FROM todo WHERE 1';
+        $orderBy = 'id';
+        if ($search !== null) {
+            if ($search->getStatus() !== null) {
+                $sql .= 'AND status = ' . $this->getDb()->quote($search->getStatus());
+            }
+        }
+        $sql .= ' ORDER BY ' . $orderBy;
+        return $sql;
     }
 }
 

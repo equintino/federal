@@ -1,4 +1,7 @@
 <?php
+/**
+ * Miscellaneous utility methods.
+ */
 final class Utils {
     private function __construct() {
     }

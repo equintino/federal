@@ -1,5 +1,4 @@
 <?php
-/*
 $status = Utils::getUrlParam('status');
 TodoValidator::validateStatus($status);
 
@@ -21,5 +20,5 @@ if(Utils::capitalize($status)=='Vencido'){
     $title = 'Não Conformidades '.Utils::capitalize($status);
 }
 $todos = $dao->find($search);
-*/
+
 ?>

@@ -1,6 +1,15 @@
+<?php
+
+//~ Template for list.php
+// variables:
+//  $title - page title
+//  $status - status of TODOs to be displayed
+//  $todos - TODOs to be displayed
+
+?>
 <h1>
     <img src="img/status/<?php echo $status; ?>.png" alt="" title="<?php echo Utils::capitalize($status); ?>" class="icon" />
-    <?php //echo $title; ?>
+    <?php echo $title; ?>
 </h1>
 
 <?php if (empty($todos)): ?>
