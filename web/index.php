@@ -57,8 +57,8 @@ function odbc_result_all_ex($res, $sTable, $sRow){
 */
 include '../dao/odbc.class.php';
 
-$conecta = new odbc();
-$conecta -> listaTabela();
+//$conecta = new odbc();
+//$conecta -> listaTabela();
 die;
 
 //// area de teste ////
