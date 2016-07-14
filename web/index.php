@@ -57,8 +57,29 @@ function odbc_result_all_ex($res, $sTable, $sRow){
 */
 include '../dao/odbc.class.php';
 
-//$conecta = new odbc();
-//$conecta -> listaTabela();
+
+// chama a classe //
+$teste = new odbc();
+print_r($teste -> listaTabela());// Listar tabelas // ok
+
+$tabela = 'sinipend';
+$campo = 'TITULAR';
+$busca = 'MARIA julia';
+//$sql = "SELECT * FROM $tabela WHERE $campo LIKE '%$busca%'";// busca //
+//$sql = "SELECT * FROM $tabela WHERE 1";// lista todo o conteudo //
+//$teste -> listaConteudo($sql);// metodo de busca //
+//$tabela = 'Beneficiarios';
+echo "<br>";
+$col1 = "ENDOSSO";
+$col2 = "TITULAR";
+//print_r(odbc_result($result,$col1));
+//echo ' - ';
+//print_r(odbc_result($result,$col2));
+//echo '<br>';
+$data = array('TITULAR','ENDOSSO');
+$sql = "SELECT * FROM $tabela WHERE 1";
+//$teste->listaCampo($sql,$data);// executa uma query // ok
+print_r($teste->listaColunas($sql));// lista colunas // ok
 die;
 
 //// area de teste ////

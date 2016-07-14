@@ -42,6 +42,7 @@ final class odbc {
     public function query($sql) {
         //// executa a query ////
         $result = odbc_exec($this->getDb(),$sql);
+
         return $result;
     }
     public function listaTabela(){	
@@ -76,36 +77,16 @@ final class odbc {
         }
         echo '</table>';
     }
-}
-// chama a classe //
-$teste = new odbc();
-//print_r($teste -> listaTabela());// Listar tabelas // ok
-
-$tabela = 'sinipend';
-$campo = 'TITULAR';
-$busca = 'MARIA julia';
-//$sql = "SELECT * FROM $tabela WHERE $campo LIKE '%$busca%'";// busca //
-//$sql = "SELECT * FROM $tabela WHERE 1";// lista todo o conteudo //
-//$teste -> listaConteudo($sql);// metodo de busca //
-$tabela = 'Beneficiarios';
-echo "<br>";
-$col1 = "ENDOSSO";
-$col2 = "TITULAR";
-//print_r(odbc_result($result,$col1));
-//echo ' - ';
-//print_r(odbc_result($result,$col2));
-//echo '<br>';
-$data = array('TITULAR','ENDOSSO');
-$sql = "SELECT * FROM $tabela WHERE 1";
-//$teste->listaCampo($sql,$data);// executa uma query // ok
-$result=$teste->query($sql);
-echo '<br>';
-$colunas=odbc_num_fields($result);
-for($x=1;$x<$colunas+1;$x++){
-    print_r(odbc_field_name($result,$x));
-    if ($x!=$colunas){
-        echo ' - ';
+    public function listaColunas($sql){
+     $conn = new odbc();
+     $result=$conn->query($sql);
+     $colunas_num=odbc_num_fields($result);
+     for($x=1;$x<$colunas_num+1;$x++){
+       $colunas[]=odbc_field_name($result,$x);
+     }
+     return $colunas;
     }
 }
+
 
 
