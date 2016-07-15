@@ -30,23 +30,29 @@ final class OdbcDao {
         }
         return $tabelas;
     }
-    public function listaConteudo($sql){
+    public function listaConteudo($tabela){
+        $sql = "SELECT * FROM $tabela WHERE 1";
+        print_r($tabela);
         $conn = new OdbcDao();
         $result=$conn -> query($sql);
         odbc_result_all($result,'Border=1 cellspacing=0 cellpadding=5'); 
     }
-    public function listaCampo($sql,$data){
+    public function listaCampo($tabela,$campo,$busca){
+        $sql = "SELECT * FROM $tabela WHERE $campo like '%$busca%'";
         $conn = new OdbcDao();
         $result=$conn -> query($sql);
         echo '<table>';
         while (odbc_fetch_row($result)) {
             echo '<tr>';
-            for($x=0;$x<count($data);$x++){
-                $col[$x] = $data[$x];
+            //for($x=0;$x<count($data);$x++){
+                //$col[$x] = $data[$x];
                 echo '<td>';
-                echo odbc_result($result, $col[$x]);
+                //echo odbc_result($result);
+        print_r(odbc_result($result, $campo));
+        echo ' - ';
+        print_r(odbc_result($result, 'nome'));
                 echo '</td>';
-            }
+            //}
             echo "</tr>";
         }
         echo '</table>';
@@ -71,8 +77,8 @@ final class OdbcDao {
          //echo '<br>teste<br>';
          //print_r($search);
         foreach ($this->query($this->getFindSql($search)) as $row) {
-            $odbc = new OdbcDao();
-            odbcMapper::map($odbc, $row);
+            $odbc = new Odbc();
+            OdbcMapper::map($todo, $row);
             $result[$odbc->getidbenefi()] = $odbc;
         }
         return $result;

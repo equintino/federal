@@ -1,5 +1,7 @@
 <?php
+
 final class OdbcSearchCriteria {
+ 
     private $status = null;
     
     public function getStatus() {

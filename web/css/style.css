@@ -4,7 +4,7 @@
     padding: 0;
 }
 table{
-	#border: solid 1px #ccc;
+	//border: solid 1px #ccc;
 	color: graytext;
     font-weight: bolder;
 }
@@ -13,7 +13,7 @@ table{
 }
 #imediata{
     width: 99%;
-    #padding: 8px;
+    //padding: 8px;
 }
 #campo{
     width: 99%;
@@ -24,16 +24,6 @@ table{
 	font-style: italic;
 	color: red;
 	text-align: right;
-}
-.nome_tb{
-	#width: 90px;
-}
-.col1{
-	#width: 10px;
-}
-.col3{
-	#text-align: right;
-	#width: 110px;
 }
 .cadastro{
 	box-shadow: 10px 10px 5px #888888;
@@ -108,8 +98,8 @@ ul.list {
 .list li img {
     float: left;
     margin: -3px 15px 0 0;
-    #width: 18px;
-    #height: 18px;
+    //#width: 18px;
+    //#height: 18px;
 }
 .list p.description {
     margin-bottom: 5px;
@@ -144,7 +134,6 @@ form .field {
 }
 form label {
     float: left;
-    #width: 97px;
     line-height: 18px;
     padding: 1px;
     font-weight: bold;
@@ -163,7 +152,6 @@ textarea {
     padding: 1px 0 1px 3px;
     border: 1px solid #d6d6d6;
     color: #414141;
-    #margin-bottom: 15px;
     overflow: auto;
     float: left;
 }
@@ -181,7 +169,7 @@ select{
 	padding-right: 3px;
     border-radius: 3px;
     background-color: #fff;
-    #background: #fff url("http://www.scottgood.com/jsg/blog.nsf/images/arrowdown.gif") no-repeat 90% 50%;
+    //#background: #fff url("http://www.scottgood.com/jsg/blog.nsf/images/arrowdown.gif") no-repeat 90% 50%;
 }
 /*
 .select-style {
@@ -290,14 +278,6 @@ form input.submit:hover {
     width: 100%;
 }
 
-.tail-top-right {
-    #position: absolute;
-    #right: 0;
-    #top: 0;
-    #width: 50%;
-    #height: 180px;
-    #background: url(../img/header-bg-right.jpg) repeat-x right top;
-}
 
 .statuses {
     float: left;

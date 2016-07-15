@@ -5,17 +5,59 @@
 final class Odbc {
 
     // priority
-    //const PRIORITY_HIGH = 1;
-    //const PRIORITY_MEDIUM = 2;
-    //const PRIORITY_LOW = 3;
+    const PRIORITY_HIGH = 1;
+    const PRIORITY_MEDIUM = 2;
+    const PRIORITY_LOW = 3;
     // status
-    //const STATUS_PENDING = "PENDENTE";
-    //const STATUS_DONE = "RESOLVIDA";
-    //const STATUS_VOIDED = "VENCIDO";
-    //const STATUS_CANCELADO = "CANCELADO";
-    //const ANDAMENTO = 0;
+    const STATUS_PENDING = "PENDENTE";
+    const STATUS_DONE = "RESOLVIDA";
+    const STATUS_VOIDED = "VENCIDO";
+    const STATUS_CANCELADO = "CANCELADO";
+    const ANDAMENTO = 0;
 
-    // colunas tabela Beneficiarios //
+    /** @var int */
+    private $id;
+    /** @var string */
+    private $priority;
+    /** @var DateTime */
+    private $createdOn;
+    /** @var DateTime */
+    private $dueOn;
+    private $prazo;
+    /** @var DateTime */
+    private $lastModifiedOn;
+    /** @var string */
+    private $title;
+    /** @var string */
+    private $description;
+    /** @var string */
+    private $comment;
+    /** @var string one of PENDING/COMPLETED/VOIDED */
+    private $status;
+    /** @var boolean */
+    private $deleted;
+    private $titulo;
+    private $comentario;
+    private $detalhamento;
+    private $descricao;
+    private $origem;
+    private $tipoacao;
+    private $processo;
+    private $identificador;
+    private $causa;
+    private $imediata;
+    private $corretiva;
+    private $implementador;
+    private $eliminacao;
+    private $eliminacao_novo;
+    private $reg_eficacia;
+    private $resp_verificacao;
+    private $eficaz_data;
+    private $novo_rnc;
+    private $eficaz;
+    private $andamento;
+    
+    // atributos tabela Beneficiarios //
     private $idbenefi;
     private $idtitular;
     private $sinistro;
@@ -65,6 +107,7 @@ final class Odbc {
        echo "$coluna<br>";
       }
     }
+
     public static function allStatuses() {
         return array(
             self::STATUS_PENDING,
@@ -102,16 +145,14 @@ final class Odbc {
     public function setNumero($numero){
         $this->numero = $numero;
     }
-
-    /**
-     * @return int one of 1/2/3
-     */
-    public function getidbenefi() {
-        return $this->idbenefi;
+        
+    public function getPriority() {
+        return $this->priority;
     }
 
-    public function setidbenefi($idbenefi) {
-        $this->idbenefi = $idbenefi;
+    public function setPriority($priority) {
+        OdbcValidator::validatePriority($priority);
+        $this->priority = $priority;
     }
 
     /**
@@ -317,7 +358,7 @@ final class Odbc {
     }
 
     public function setStatus($status) {
-        TodoValidator::validateStatus($status);
+        OdbcValidator::validateStatus($status);
         $this->status = $status;
     }
 
@@ -330,6 +371,158 @@ final class Odbc {
 
     public function setDeleted($deleted) {
         $this->deleted = (bool) $deleted;
+    }
+    
+    //// tabela Beneficiarios ////
+    public function getidbenefi(){
+        return $this->idbenefi;
+    }
+    public function setidbenefi($idbenefi){
+        $this->idbenefi = $idbenefi;
+    }
+    public function getsinistro(){
+        return $this->sinistro;
+    }
+    public function setsinistro($sinistro){
+        $this->sinistro = $sinistro;
+    }
+    public function getapolice(){
+        return $this->apolice;
+    }
+    public function setapolice($apolice){
+        $this->apolice = $apolice;
+    }
+    public function getendosso(){
+        return $this->endosso;
+    }
+    public function setendosso($endosso){
+        $this->endosso = $endosso;
+    }
+    public function getnome(){
+        return $this->nome;
+    }
+    public function setnome($nome){
+        $this->nome = $nome;
+    }
+    public function gettipo(){
+        return $this->tipo;
+    }
+    public function settipo($tipo){
+        $this->tipo = $tipo;
+    }   
+    public function getendereco(){
+        return $this->endereco;
+    }
+    public function setendereco($endereco){
+        $this->endereco = $endereco;
+    }  
+    public function getnumero(){
+        return $this->numero;
+    }
+    public function setnumero($numero){
+        $this->numero = $numero;
+    } 
+    public function getcomplemento(){
+        return $this->complemento;
+    }
+    public function setcomplemento($complemento){
+        $this->complemento = $complemento;
+    }  
+    public function getbairro(){
+        return $this->bairro;
+    }
+    public function setbairro($bairro){
+        $this->bairro = $bairro;
+    }   
+    public function getmunicipio(){
+        return $this->municipio;
+    }
+    public function setmunicipio($municipio){
+        $this->municipio = $municipio;
+    }   
+    public function getestado(){
+        return $this->estado;
+    }
+    public function setestado($estado){
+        $this->estado = $estado;
+    }
+    public function getuf(){
+        return $this->uf;
+    }
+    public function setuf($uf){
+        $this->uf = $uf;
+    }    
+    public function getcep(){
+        return $this->cep;
+    }
+    public function setcep($cep){
+        $this->cep = $cep;
+    }   
+    public function getvlindeniza(){
+        return $this->vlindeniza;
+    }
+    public function setvlindeniza($vlindeniza){
+        $this->vlindeniza = $vlindeniza;
+    }    
+    public function gettpcobertura(){
+        return $this->tpcobertura;
+    }
+    public function settpcobertura($tpcobertura){
+        $this->tpcobertura = $tpcobertura;
+    }     
+    public function getcpf(){
+        return $this->cpf;
+    }
+    public function setcpf($cpf){
+        $this->cpf = $cpf;
+    }      
+    public function getidentidade(){
+        return $this->identidade;
+    }
+    public function setidentidade($identidade){
+        $this->identidade = $identidade;
+    }
+    public function getpercentual(){
+        return $this->percentual;
+    }
+    public function setpercentual($percentual){
+        $this->percentual = $percentual;
+    }     
+    public function gettel_fixo(){
+        return $this->tel_fixo;
+    }
+    public function settel_fixo($tel_fixo){
+        $this->tel_fixo = $tel_fixo;
+    }       
+    public function gettel_cel(){
+        return $this->tel_cel;
+    }
+    public function settel_cel($tel_cel){
+        $this->tel_cel = $tel_cel;
+    }  
+    public function getemail(){
+        return $this->email;
+    }
+    public function setemail($email){
+        $this->email = $email;
+    }   
+    public function getbanco(){
+        return $this->banco;
+    }
+    public function setbanco($banco){
+        $this->banco = $banco;
+    }   
+    public function getagencia(){
+        return $this->agencia;
+    }
+    public function setagencia($agencia){
+        $this->agencia = $agencia;
+    }
+    public function getconta(){
+        return $this->conta;
+    }
+    public function setconta($conta){
+        $this->conta = $conta;
     }
 }
 ?>

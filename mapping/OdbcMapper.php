@@ -8,103 +8,103 @@ class OdbcMapper {
             $odbc->setidbenefi($properties['idbenefi']);
         }
         if (array_key_exists('priority', $properties)) {
-            $todo->setPriority($properties['priority']);
+            $odbc->setPriority($properties['priority']);
         }
         if (array_key_exists('created_on', $properties)) {
             $createdOn = self::createDateTime($properties['created_on']);
             if ($createdOn) {
-                $todo->setCreatedOn($createdOn);
+                $odbc->setCreatedOn($createdOn);
             }
         }
         if (array_key_exists('due_on', $properties)) {
             $dueOn = self::createDateTime($properties['due_on']);
             if ($dueOn) {
-                $todo->setDueOn($dueOn);
+                $odbc->setDueOn($dueOn);
             }
         }
         if (array_key_exists('eliminacao', $properties)) {
             $eliminacao = self::createDateTime($properties['eliminacao']);
             if ($eliminacao) {
-                $todo->setEliminacao($eliminacao);
+                $odbc->setEliminacao($eliminacao);
             }
         }
         if (array_key_exists('eliminacao_novo', $properties)) {
             $eliminacao_novo = self::createDateTime($properties['eliminacao_novo']);
             if ($eliminacao_novo) {
-                $todo->setEliminacao_novo($eliminacao_novo);
+                $odbc->setEliminacao_novo($eliminacao_novo);
             }
         }
         if (array_key_exists('last_modified_on', $properties)) {
             $lastModifiedOn = self::createDateTime($properties['last_modified_on']);
             if ($lastModifiedOn) {
-                $todo->setLastModifiedOn($lastModifiedOn);
+                $odbc->setLastModifiedOn($lastModifiedOn);
             }
         }
         if (array_key_exists('eficaz_data', $properties)) {
             $eficaz_data = self::createDateTime($properties['eficaz_data']);
             if ($eficaz_data) {
-                $todo->setEficazData($eficaz_data);
+                $odbc->setEficazData($eficaz_data);
             }
         }
         if (array_key_exists('title', $properties)) {
-            $todo->setTitle(trim($properties['title']));
+            $odbc->setTitle(trim($properties['title']));
         }
         if (array_key_exists('andamento', $properties)) {
-            $todo->setAndamento($properties['andamento']);
+            $odbc->setAndamento($properties['andamento']);
         }
         if (array_key_exists('description', $properties)) {
-            $todo->setDescription(trim($properties['description']));
+            $odbc->setDescription(trim($properties['description']));
         }
         if (array_key_exists('comment', $properties)) {
-            $todo->setComment(trim($properties['comment']));
+            $odbc->setComment(trim($properties['comment']));
         }
         if (array_key_exists('status', $properties)) {
-            $todo->setStatus($properties['status']);
+            $odbc->setStatus($properties['status']);
         }
         if (array_key_exists('deleted', $properties)) {
-            $todo->setDeleted($properties['deleted']);
+            $odbc->setDeleted($properties['deleted']);
         }
         if (array_key_exists('descricao', $properties)){
-            $todo->setDescricao($properties['descricao']);
+            $odbc->setDescricao($properties['descricao']);
         }
         if (array_key_exists('numero', $properties)) {
             $odbc->setNumero(trim($properties['numero']));
         }
         if (array_key_exists('origem', $properties)){
-            $todo->setOrigem($properties['origem']);
+            $odbc->setOrigem($properties['origem']);
         }
         if (array_key_exists('tipoacao', $properties)){
-            $todo->setTipoacao($properties['tipoacao']);
+            $odbc->setTipoacao($properties['tipoacao']);
         }
         if (array_key_exists('processo', $properties)){
-            $todo->setProcesso($properties['processo']);
+            $odbc->setProcesso($properties['processo']);
         }
         if (array_key_exists('identificador', $properties)){
-            $todo->setIdentificador($properties['identificador']);
+            $odbc->setIdentificador($properties['identificador']);
         }
         if (array_key_exists('causa', $properties)){
-            $todo->setCausa($properties['causa']);
+            $odbc->setCausa($properties['causa']);
         }
         if (array_key_exists('imediata', $properties)){
-            $todo->setImediata($properties['imediata']);
+            $odbc->setImediata($properties['imediata']);
         }
         if (array_key_exists('corretiva', $properties)){
-            $todo->setCorretiva($properties['corretiva']);
+            $odbc->setCorretiva($properties['corretiva']);
         }
         if (array_key_exists('implementador', $properties)){
-            $todo->setImplementador($properties['implementador']);
+            $odbc->setImplementador($properties['implementador']);
         }
         if (array_key_exists('reg_eficacia', $properties)){
-            $todo->setRegEficacia($properties['reg_eficacia']);
+            $odbc->setRegEficacia($properties['reg_eficacia']);
         }
         if (array_key_exists('resp_verificacao', $properties)){
-            $todo->setRespVerificacao($properties['resp_verificacao']);
+            $odbc->setRespVerificacao($properties['resp_verificacao']);
         }
         if (array_key_exists('novo_rnc', $properties)) {
-            $todo->setNovoRnc($properties['novo_rnc']);
+            $odbc->setNovoRnc($properties['novo_rnc']);
         }
         if (array_key_exists('eficaz', $properties)) {
-            $todo->setEficaz($properties['eficaz']);
+            $odbc->setEficaz($properties['eficaz']);
         }
     }
     private static function createDateTime($input) {
