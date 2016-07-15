@@ -1,6 +1,10 @@
 <h1>
-    <img src="img/status/<?php echo $status; ?>.png" alt="" title="<?php echo Utils::capitalize($status); ?>" class="icon" />
-    <?php //echo $title; ?>
+    <!--<img src="img/status/<?php //echo $status; ?>.png" alt="" title="<?php //echo Utils::capitalize($status); ?>" class="icon" />-->
+    <?php 
+     if(@$title){
+      echo $title;
+     }
+     ?>
 </h1>
 
 <?php if (empty($todos)): ?>

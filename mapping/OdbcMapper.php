@@ -1,10 +1,11 @@
 <?php
 class OdbcMapper {
     private function __construct() {
+     print_r('passei por aqui');
     }
     public static function map(Odbc $odbc, array $properties) {
-        if (array_key_exists('id', $properties)) {
-            $todo->setId($properties['id']);
+        if (array_key_exists('idbenefi', $properties)) {
+            $odbc->setidbenefi($properties['idbenefi']);
         }
         if (array_key_exists('priority', $properties)) {
             $todo->setPriority($properties['priority']);
@@ -67,7 +68,7 @@ class OdbcMapper {
             $todo->setDescricao($properties['descricao']);
         }
         if (array_key_exists('numero', $properties)) {
-            $todo->setNumero(trim($properties['numero']));
+            $odbc->setNumero(trim($properties['numero']));
         }
         if (array_key_exists('origem', $properties)){
             $todo->setOrigem($properties['origem']);

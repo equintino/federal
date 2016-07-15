@@ -6,28 +6,22 @@
  * on the next page; typically after form submitting.)
  */
 final class Flash {
-
     const FLASHES_KEY = '_flashes';
-
     private static $flashes = null;
-
-
+    
     private function __construct() {
     }
-
     public static function hasFlashes() {
         self::initFlashes();
         return count(self::$flashes) > 0;
     }
-
     public static function addFlash($message) {
         if (!strlen(trim($message))) {
-            throw new Exception('Cannot insert empty flash message.');
+            throw new Exception('Não pode adicionar um flash em branco.');
         }
         self::initFlashes();
         self::$flashes[] = $message;
     }
-
     /**
      * Get flash messages and clear them.
      * @return array flash messages
@@ -38,7 +32,6 @@ final class Flash {
         self::$flashes = array();
         return $copy;
     }
-
     private static function initFlashes() {
         if (self::$flashes !== null) {
             return;
@@ -48,7 +41,5 @@ final class Flash {
         }
         self::$flashes = &$_SESSION[self::FLASHES_KEY];
     }
-
 }
-
 ?>

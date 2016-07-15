@@ -1,7 +1,5 @@
 <?php
-include '../config/config.php';
-
-final class odbc {  
+final class OdbcDao {  
   private $db = null;
   
     public function __destruct(){  
@@ -21,7 +19,6 @@ final class odbc {
     }
     public function query($sql) {
         $result = odbc_exec($this->getDb(),$sql);
-
         return $result;
     }
     public function listaTabela(){	
@@ -34,12 +31,12 @@ final class odbc {
         return $tabelas;
     }
     public function listaConteudo($sql){
-        $conn = new odbc();
+        $conn = new OdbcDao();
         $result=$conn -> query($sql);
         odbc_result_all($result,'Border=1 cellspacing=0 cellpadding=5'); 
     }
     public function listaCampo($sql,$data){
-        $conn = new odbc();
+        $conn = new OdbcDao();
         $result=$conn -> query($sql);
         echo '<table>';
         while (odbc_fetch_row($result)) {
@@ -54,8 +51,9 @@ final class odbc {
         }
         echo '</table>';
     }
-    public function listaColunas($sql){
-     $conn = new odbc();
+    public function listaColunas($tabela){
+     $conn = new OdbcDao();
+     $sql = "SELECT * FROM $tabela WHERE 1";
      $result=$conn->query($sql);
      $colunas_num=odbc_num_fields($result);
      for($x=1;$x<$colunas_num+1;$x++){
@@ -63,19 +61,26 @@ final class odbc {
      }
      return $colunas;
     }
-    public function find(odbcSearchCriteria $search = null) {
+    public function find(OdbcSearchCriteria $search = null) {
         $result = array();
+        //echo '<br>teste<br>';
+         //echo($this->query($this->getFindSql($search)));
+         //echo '<br>';
+         //print_r($this->query($this->getFindSql($search)));
+         //print_r($this->getFindSql($search));
+         //echo '<br>teste<br>';
+         //print_r($search);
         foreach ($this->query($this->getFindSql($search)) as $row) {
-            $odbc = new Odbc();
-            odbcMapper::map($todo, $row);
-            $result[$odbc->getId()] = $odbc;
+            $odbc = new OdbcDao();
+            odbcMapper::map($odbc, $row);
+            $result[$odbc->getidbenefi()] = $odbc;
         }
         return $result;
     }
-    private function getFindSql(odbcSearchCriteria $search = null) {
-        $sql = 'SELECT * FROM todo WHERE 1';
+    private function getFindSql(OdbcSearchCriteria $search = null) {
+        $sql = 'SELECT * FROM Beneficiarios WHERE 1';
                 //deleted = 0 ';
-        $orderBy = null;
+        //$orderBy = null;
                 //' priority, due_on';
         if ($search !== null) {
             if ($search->getStatus() !== null) {
@@ -96,21 +101,29 @@ final class odbc {
                  */
             }
         }
-        $sql .= ' ORDER BY ' . $orderBy;
+        //$sql .= ' ORDER BY ' . $orderBy;
         return $sql;
     }
-    private function getFindSql2(odbcSearchCriteria $search = null) {
-        $sql = 'SELECT * FROM todo WHERE 1';
-        $orderBy = 'id';
+    public function find2() {
+      $busca = $this->query($this->getFindSql2());
+      $row = odbc_fetch_array($busca);
+      var_dump($row);
+        //foreach ($this->query($this->getFindSql2()) as $row) {
+            $odbc = new Odbc();
+            OdbcMapper::map($odbc, $row);
+            $idbenefi = $odbc->getidbenefi();
+        //}
+        return @$idbenefi;
+    }
+    private function getFindSql2(OdbcSearchCriteria $search = null) {
+        $sql = 'SELECT * FROM Beneficiarios WHERE 1';
+        $orderBy = 'idbenefi';
         if ($search !== null) {
-            if ($search->getStatus() !== null) {
-                $sql .= 'AND status = ' . $this->getDb()->quote($search->getStatus());
-            }
+            //if ($search->getStatus() !== null) {
+                //$sql .= 'AND status = ' . $this->getDb()->quote($search->getStatus());
+            //}
         }
         $sql .= ' ORDER BY ' . $orderBy;
         return $sql;
     }
 }
-
-
-

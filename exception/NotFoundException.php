@@ -5,5 +5,4 @@
 final class NotFoundException extends Exception {
 
 }
-
 ?>

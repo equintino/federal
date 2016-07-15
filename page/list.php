@@ -1,6 +1,23 @@
 <?php
+$dao = new OdbcDao();
+$search = new OdbcSearchCriteria();
+$tabela = 'Beneficiarios';
+$dados = $dao->listaColunas($tabela);
+//print_r($dao->listaTabela());
+//$Odbc = new Odbc();
+//$dados = array('coluna1','coluna2','coluna3');
+$odbc = $dao->find2($search);
+//print_r(Odbc::getidtitular());
+//Odbc::variaveis($dados);
+//print_r($Odbc);
+
+//$empresa = 'Federal de Seguros S/A em Liquidação Extrajudicial Ltda';
+//$title = 'Sistema de Sinistro '.Utils::capitalize($empresa);
+
+//print_r($dao);
+//print_r($search);
 /*
-$status = Utils::getUrlParam('status');
+$status = Utils::getUrlParam('status');+
 TodoValidator::validateStatus($status);
 
 $dao = new TodoDao();
@@ -12,7 +29,6 @@ $resp_verificacao_nome = 'Responsável pela Verificação:';
 $acao_eficaz_nome = 'A Ação foi Eficaz?';
 $conclusao_nome = 'Conclusão:';
 // data for template
-$title = 'Não Conformidades '.Utils::capitalize($status);
 if(Utils::capitalize($status)=='Vencido'){
     $title = 'Prazos '.Utils::capitalize($status); 
 }elseif(Utils::capitalize($status)=='Cancelado'){
