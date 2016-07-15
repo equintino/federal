@@ -79,6 +79,23 @@ final class Utils {
         }
         return $todo;
     }
+    public static function getOdbcByGetId() {
+        $id = null;
+        try {
+            $id = self::getUrlParam('id');
+        } catch (Exception $ex) {
+            throw new NotFoundException('No ODBC identifier provided.');
+        }
+        if (!is_numeric($id)) {
+            throw new NotFoundException('Invalid ODBC identifier provided.');
+        }
+        $dao = new OdbcDao();
+        $odbc = $dao->findById($id);
+        if ($odbc === null) {
+            throw new NotFoundException('Unknown ODBC identifier provided.');
+        }
+        return $odbc;
+    }
 
     /**
      * Capitalize the first letter of the given string
