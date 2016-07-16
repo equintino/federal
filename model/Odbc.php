@@ -16,29 +16,30 @@ final class Odbc {
     const ANDAMENTO = 0;
 
     /** @var int */
-    private $id;
+    //private $id;
     /** @var string */
-    private $priority;
+    //private $priority;
     /** @var DateTime */
     private $createdOn;
     /** @var DateTime */
     private $dueOn;
-    private $prazo;
+    //private $prazo;
     /** @var DateTime */
     private $lastModifiedOn;
     /** @var string */
-    private $title;
+    //private $title;
     /** @var string */
-    private $description;
+    //private $description;
     /** @var string */
-    private $comment;
+    //private $comment;
     /** @var string one of PENDING/COMPLETED/VOIDED */
     private $status;
     /** @var boolean */
     private $deleted;
-    private $titulo;
-    private $comentario;
-    private $detalhamento;
+    //private $titulo;
+    //private $comentario;
+    //private $detalhamento;
+    /*
     private $descricao;
     private $origem;
     private $tipoacao;
@@ -56,7 +57,7 @@ final class Odbc {
     private $novo_rnc;
     private $eficaz;
     private $andamento;
-    
+    */
     // atributos tabela Beneficiarios //
     private $idbenefi;
     private $idtitular;
@@ -92,7 +93,7 @@ final class Odbc {
     private $CÓDIGO;
     private $COBERTURA;
     
-    private $status;
+    //private $status;
     
     public function __construct() {
         date_default_timezone_set ( "America/Sao_Paulo" );
@@ -138,12 +139,6 @@ final class Odbc {
             throw new Exception('Cannot change identifier to ' . $idtitular . ', already set to ' . $this->idtitular);
         }
         $this->idtitular = (int) $idtitular;
-    }
-    public function getNumero(){
-        return $this->numero;
-    }
-    public function setNumero($numero){
-        $this->numero = $numero;
     }
         
     public function getPriority() {
@@ -415,7 +410,7 @@ final class Odbc {
     }
     public function setendereco($endereco){
         $this->endereco = $endereco;
-    }  
+    } 
     public function getnumero(){
         return $this->numero;
     }
@@ -523,6 +518,18 @@ final class Odbc {
     }
     public function setconta($conta){
         $this->conta = $conta;
+    }  
+    public function getCÓDIGO(){
+        return $this->CÓDIGO;
+    }
+    public function setCÓDIGO($CÓDIGO){
+        $this->CÓDIGO = $CÓDIGO;
+    }
+    public function getCOBERTURA(){
+        return $this->COBERTURA;
+    }
+    public function setCOBERTURA($COBERTURA){
+        $this->COBERTURA = $COBERTURA;
     }
 }
 ?>

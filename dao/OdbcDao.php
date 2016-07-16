@@ -78,7 +78,7 @@ final class OdbcDao {
          //print_r($search);
         foreach ($this->query($this->getFindSql($search)) as $row) {
             $odbc = new Odbc();
-            OdbcMapper::map($todo, $row);
+            OdbcMapper::map($odbc, $row);
             $result[$odbc->getidbenefi()] = $odbc;
         }
         return $result;
@@ -110,20 +110,28 @@ final class OdbcDao {
         //$sql .= ' ORDER BY ' . $orderBy;
         return $sql;
     }
-    public function find2() {
-      $busca = $this->query($this->getFindSql2());
-      $row = odbc_fetch_array($busca);
-      var_dump($row);
-        //foreach ($this->query($this->getFindSql2()) as $row) {
+    public function find2(OdbcSearchCriteria $search = null) {
+      $busca = $this->query($this->getFindSql2($search));
+      $odbc = odbc_fetch_object($busca);
+      var_dump($odbc);
+         echo "<br><br>";
+        foreach ($odbc as $row) {
+         print_r($row);
+         echo "<br><br>";
             $odbc = new Odbc();
+            print_r($odbc);
             OdbcMapper::map($odbc, $row);
-            $idbenefi = $odbc->getidbenefi();
-        //}
-        return @$idbenefi;
+            $result[$odbc->getidbenefi()] = $odbc;
+            //$idbenefi = $odbc->getidbenefi();
+        }
+            echo '<br>';
+            print_r($odbc);
+            echo '<br>';
+        return @$result;
     }
     private function getFindSql2(OdbcSearchCriteria $search = null) {
         $sql = 'SELECT * FROM Beneficiarios WHERE 1';
-        $orderBy = 'idbenefi';
+        $orderBy = 'idtitular';
         if ($search !== null) {
             //if ($search->getStatus() !== null) {
                 //$sql .= 'AND status = ' . $this->getDb()->quote($search->getStatus());

@@ -3,10 +3,11 @@ $dao = new OdbcDao();
 $search = new OdbcSearchCriteria();
 $tabela = 'Beneficiarios';
 $dados = $dao->listaColunas($tabela);
-//print_r($dao->listaTabela());
+$listaTabelas=$dao->listaTabela();
+
 //$Odbc = new Odbc();
 //$dados = array('coluna1','coluna2','coluna3');
-$odbc = $dao->find2($search);
+$odbc = $dao->find2();die;
 //print_r(Odbc::getidtitular());
 //Odbc::variaveis($dados);
 //print_r($Odbc);
@@ -66,7 +67,6 @@ $data = array('TITULAR','ENDOSSO');
 $sql = "SELECT * FROM $tabela WHERE 1";
 //$teste->listaCampo($sql,$data);// executa uma query // ok
 print_r($teste->listaColunas($sql));// lista colunas // ok
-die;
 
 //// area de teste ////
 $tabela='Beneficiarios';
@@ -91,7 +91,6 @@ echo(odbc_result($result2,$campo2));
 
 //// fecha conexao ////	
 odbc_close($conn);
-die;
 	
 $table="Beneficiarios";
 $sql = "SELECT * FROM $table"; 
