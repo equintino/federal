@@ -2,13 +2,13 @@
 
 final class OdbcSearchCriteria {
  
-    private $status = null;
+    private $sinistro = null;
     
-    public function getStatus() {
-        return $this->status;
+    public function getsinistro() {
+        return $this->sinistro;
     }
-    public function setStatus($status) {
-        $this->status = $status;
+    public function setsinistro($sinistro) {
+        $this->sinistro = $sinistro;
         return $this;
     }
 }

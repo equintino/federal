@@ -1,13 +1,17 @@
 <?php
+$sinistro = Utils::getUrlParam('sinistro');
+
 $dao = new OdbcDao();
 $search = new OdbcSearchCriteria();
+$search->setsinistro($sinistro);
 $tabela = 'Beneficiarios';
 $dados = $dao->listaColunas($tabela);
 $listaTabelas=$dao->listaTabela();
 
-//$Odbc = new Odbc();
+
+///$Odbc = new Odbc();
 //$dados = array('coluna1','coluna2','coluna3');
-$odbc = $dao->find2();die;
+$odbc = $dao->find2($search);die;
 //print_r(Odbc::getidtitular());
 //Odbc::variaveis($dados);
 //print_r($Odbc);
