@@ -114,10 +114,10 @@ final class OdbcDao {
     }
     public function find2(OdbcSearchCriteria $search = null) {
       $busca = $this->query($this->getFindSql2($search));
-     print_r($busca);die;
+      //print_r($busca);die;
       //$row = odbc_($busca);
      //print_r($busca);
-     die;
+     //die;
       //var_dump($odbc);
       echo "<br><br>";
       //$odbc = odbc_fetch_array($busca);
@@ -125,26 +125,27 @@ final class OdbcDao {
          echo "<br><br>";
         foreach ($busca as $key => $row) {
          echo "<br><br>";
-            //$odbc = new Odbc();
-            print_r($row);
+            $odbc = new Odbc();
+            //print_r($row);
             OdbcMapper::map($odbc, $row);
-            print_r($result);
             $result[$odbc->getidbenefi()] = $odbc;
+            //print_r($result);
             //$idbenefi = $odbc->getidbenefi();
         }
-        die;
-            echo '<br>';
-            print_r($odbc);
-            echo '<br>';
+        //die;
+            //echo '<br>';
+            //print_r($result);
+            //echo '<br>';
         return @$result;
     }
     private function getFindSql2(OdbcSearchCriteria $search = null) {
-     echo(foreach($search as $item));die;
+     //print_r(foreach($this->query($search) as $item));die;
+        //print_r($search->getsinistro());die;
         $sql = "SELECT * FROM Beneficiarios WHERE ";
         $orderBy = 'sinistro';
         if ($search !== null) {
             if ($search->getsinistro() !== null) {
-                $sql .= " sinistro like '%".$search."%'";
+                $sql .= "sinistro like '%".$search->getsinistro()."%'";
             }
         }else{
           $sql.= 1;

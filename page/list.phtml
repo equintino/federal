@@ -7,33 +7,36 @@
      ?>
 </h1>
 
-<?php if (empty($todos)): ?>
+<?php if (empty($odbcs)): ?>
     <p>Nenhum RNC encontrado.</p>
 <?php else: ?>
     <ul class="list">
-        <?php foreach ($todos as $todo): ?>
-            <?php /* @var $todo Todo */ ?>
+        <?php foreach ($odbcs as $odbc): ?>
+            <?php  print_r($odbc); ?>
             <?php 
             //STATUS PENDENTE//
+           /*
             $tooLate = $status == ((Todo::STATUS_PENDING) && $todo->getDueOn() < new DateTime()) && $todo->getEliminacao() == $todo->getCreatedOn();
             $tooLate2 = $status == ((Todo::STATUS_PENDING) && $todo->getEliminacao() < new DateTime()) && $todo->getEliminacao_novo() == $todo->getCreatedOn();
             $tooLate3 = $status == ((Todo::STATUS_PENDING) && $todo->getEliminacao_novo() < new DateTime()) && $todo->getEficazData() == $todo->getCreatedOn() ;
             $tooLate4 = $todo->getEficazData() != $todo->getCreatedOn();
+            * 
+            */
             ?> 
             <li>
-                <?php if ($tooLate): ?>
-                    <img src="img/exclamation.png" alt="" title="Prazo esgotado!" class="icon"/>
-                <?php endif; ?>
-                <?php if (Utils::escape($todo->getAndamento())): ?>
+                <?php //if ($tooLate): ?>
+                    <!--img src="img/exclamation.png" alt="" title="Prazo esgotado!" class="icon"/>
+                <?php //endif; ?>
+                <?php //if (Utils::escape($todo->getAndamento())): ?>
                     <img src="img/status/ANDAMENTO.png" alt="" title="Em Implementação!" class="icon"/>
+                <?php //endif; ?>
+                <img src="img/priority/<?php //echo $todo->getPriority(); ?>.png" alt="Prioridade <?php //echo $todo->getPriority(); ?>" title="Prioridade <?php //echo $todo->getPriority(); ?>" />-->
+                <h3><a href="<?php //echo Utils::createLink('detail', array('sinistro' => $odbc->getsinistro())) ?>"><?php echo Utils::escape($odbc->getsinistro()); ?></a></h3>
+                <?php if ($odbc->getnome()): ?>
+                    <p class="description"><?php echo Utils::escape($odbc->getnome()); ?></p>
                 <?php endif; ?>
-                <img src="img/priority/<?php echo $todo->getPriority(); ?>.png" alt="Prioridade <?php echo $todo->getPriority(); ?>" title="Prioridade <?php echo $todo->getPriority(); ?>" />
-                <h3><a href="<?php echo Utils::createLink('detail', array('id' => $todo->getId())) ?>"><?php echo Utils::escape($todo->getTitle()); ?></a></h3>
-                <?php if ($todo->getDescription()): ?>
-                    <p class="description"><?php echo Utils::escape($todo->getDescription()); ?></p>
-                <?php endif; ?>
-                <p><span class="label">Numero da RNC:</span> <?php echo Utils::escape($todo->getNumero()); ?></p>
-                <p><span class="label">Abertura RNC:</span> <?php echo Utils::escape(Utils::formatDateTime($todo->getCreatedOn())); ?></p>
+                <p><span class="label">Numero da RNC:</span> <?php echo Utils::escape($odbc->getnome()); ?></p>
+                <p><span class="label">Abertura RNC:</span> <?php echo Utils::escape(Utils::formatDateTime($odbc->getCreatedOn())); ?></p>
                 <?php if($status <> Todo::STATUS_DONE): ?>
                 <p><span class="label">Retorno:</span>
                     <?php if ($tooLate): ?><span class="too-late"><?php endif; ?>
