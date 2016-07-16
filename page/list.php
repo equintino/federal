@@ -5,9 +5,8 @@ $dao = new OdbcDao();
 $search = new OdbcSearchCriteria();
 $search->setsinistro($sinistro);
 $tabela = 'Beneficiarios';
-$dados = $dao->listaColunas($tabela);
+//$dados = $dao->listaColunas($tabela);
 $listaTabelas=$dao->listaTabela();
-
 
 ///$Odbc = new Odbc();
 //$dados = array('coluna1','coluna2','coluna3');

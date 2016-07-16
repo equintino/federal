@@ -18,9 +18,11 @@ final class OdbcDao {
         return $this->db;
     }
     public function query($sql) {
-        $result = odbc_exec($this->getDb(),$sql);
-        print_r($result);
-        return $result;
+      $statement = odbc_exec($this->getDb(),$sql);
+      while($linha = odbc_fetch_array($statement)){
+        $result[]=$linha;
+      }
+      return $result;
     }
     public function listaTabela(){	
         $result = odbc_tables($this->getDb());
@@ -33,7 +35,6 @@ final class OdbcDao {
     }
     public function listaConteudo($tabela){
         $sql = "SELECT * FROM $tabela WHERE 1";
-        print_r($tabela);
         $conn = new OdbcDao();
         $result=$conn -> query($sql);
         odbc_result_all($result,'Border=1 cellspacing=0 cellpadding=5'); 
@@ -113,8 +114,10 @@ final class OdbcDao {
     }
     public function find2(OdbcSearchCriteria $search = null) {
       $busca = $this->query($this->getFindSql2($search));
+     print_r($busca);die;
       //$row = odbc_($busca);
-     //print_r($busca);die;
+     //print_r($busca);
+     die;
       //var_dump($odbc);
       echo "<br><br>";
       //$odbc = odbc_fetch_array($busca);
@@ -136,12 +139,15 @@ final class OdbcDao {
         return @$result;
     }
     private function getFindSql2(OdbcSearchCriteria $search = null) {
-        $sql = "SELECT * FROM Beneficiarios WHERE 1";
+     echo(foreach($search as $item));die;
+        $sql = "SELECT * FROM Beneficiarios WHERE ";
         $orderBy = 'sinistro';
         if ($search !== null) {
-            //if ($search->getStatus() !== null) {
-                //$sql .= 'AND status = ' . $this->getDb()->quote($search->getStatus());
-            //}
+            if ($search->getsinistro() !== null) {
+                $sql .= " sinistro like '%".$search."%'";
+            }
+        }else{
+          $sql.= 1;
         }
         $sql .= ' ORDER BY ' . $orderBy;
         return $sql;
