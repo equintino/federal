@@ -45,10 +45,8 @@ final class OdbcDao {
         $result=$conn -> query($sql);
         echo '<table>';
         while (odbc_fetch_row($result)) {
-            echo '<tr>';
             //for($x=0;$x<count($data);$x++){
                 //$col[$x] = $data[$x];
-                echo '<td>';
                 //echo odbc_result($result);
         print_r(odbc_result($result, $campo));
         echo ' - ';
@@ -119,12 +117,12 @@ final class OdbcDao {
      //print_r($busca);
      //die;
       //var_dump($odbc);
-      echo "<br><br>";
+      //echo "<br><br>";
       //$odbc = odbc_fetch_array($busca);
       //var_dump($odbc);
-         echo "<br><br>";
+         //echo "<br><br>";
         foreach ($busca as $key => $row) {
-         echo "<br><br>";
+         //echo "<br><br>";
             $odbc = new Odbc();
             //print_r($row);
             OdbcMapper::map($odbc, $row);

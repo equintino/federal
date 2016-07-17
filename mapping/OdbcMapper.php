@@ -1,7 +1,7 @@
 <?php
 class OdbcMapper {
     private function __construct() {
-     print_r('passei por aqui');
+     //print_r('passei por aqui');
     }
     public static function map(Odbc $odbc, array $properties) {
         if (array_key_exists('idbenefi', $properties)) {

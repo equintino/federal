@@ -12,7 +12,7 @@
 <?php else: ?>
     <ul class="list">
         <?php foreach ($odbcs as $odbc): ?>
-            <?php  print_r($odbc); ?>
+            <?php  //print_r($odbc); ?>
             <?php 
             //STATUS PENDENTE//
            /*
@@ -37,34 +37,34 @@
                 <?php endif; ?>
                 <p><span class="label">Numero da RNC:</span> <?php echo Utils::escape($odbc->getnome()); ?></p>
                 <p><span class="label">Abertura RNC:</span> <?php echo Utils::escape(Utils::formatDateTime($odbc->getCreatedOn())); ?></p>
-                <?php if($status <> Todo::STATUS_DONE): ?>
+                <?php //if($status <> Todo::STATUS_DONE): ?>
                 <p><span class="label">Retorno:</span>
-                    <?php if ($tooLate): ?><span class="too-late"><?php endif; ?>
-                    <?php echo Utils::escape(Utils::formatDateTime($todo->getDueOn())); ?>
-                    <?php if ($tooLate): ?></span><?php endif; ?>
+                    <?php //if ($tooLate): ?><span class="too-late"><?php //endif; ?>
+                    <?php //echo Utils::escape(Utils::formatDateTime($todo->getDueOn())); ?>
+                    <?php //if ($tooLate): ?></span><?php //endif; ?>
                 </p>
-                <?php endif; ?>
-                <?php if (($todo->getEliminacao()!=$todo->getCreatedOn()) && $status <> Todo::STATUS_DONE) : ?>
-                <p><span class="label"><?php echo $eliminacao_nome ?></span>
-                    <?php if (@$tooLate2): ?><span class="too-late"><?php endif; ?>
-                    <?php echo Utils::escape(Utils::formatDateTime($todo->getEliminacao())); endif;
-                    if (($todo->getEliminacao_novo()!=$todo->getCreatedOn()) && $status<>Todo::STATUS_DONE) : ?>
-                     <?php if (@$tooLate2): ?></span><?php endif; ?>
+                <?php //endif; ?>
+                <?php //if (($odbc->getapolice()!=$todo->getCreatedOn()) && $status <> Todo::STATUS_DONE) : ?>
+                <p><span class="label"><?php //echo $eliminacao_nome ?></span>
+                    <?php //if (@$tooLate2): ?><span class="too-late"><?php //endif; ?>
+                    <?php //echo Utils::escape(Utils::formatDateTime($todo->getEliminacao())); endif;
+                    //if (($todo->getEliminacao_novo()!=$todo->getCreatedOn()) && $status<>Todo::STATUS_DONE) : ?>
+                     <?php //if (@$tooLate2): ?></span><?php //endif; ?>
                 </p>
 		<p><span class="label">Novo Prazo:</span>
-                    <?php if (@$tooLate3): ?><span class="too-late"><?php endif; ?>
-                    <?php echo Utils::escape(Utils::formatDateTime($todo->getEliminacao_novo())); endif;?>
-                    <?php if (@$tooLate3): ?></span><?php endif; ?>
+                    <?php //if (@$tooLate3): ?><span class="too-late"><?php //endif; ?>
+                    <?php //echo Utils::escape(Utils::formatDateTime($todo->getEliminacao_novo())); endif;?>
+                    <?php //if (@$tooLate3): ?></span><?php //endif; ?>
                 </p>
-                <?php if(@$tooLate4): ?>
+                <?php //if(@$tooLate4): ?>
                 <p><span class="label">Conclusão:</span>
-                    <?php echo Utils::escape(Utils::formatDateTime($todo->getEficazData())); ?>
-                    <?php if (@$tooLate4): ?></span><?php endif; ?>
+                    <?php //echo Utils::escape(Utils::formatDateTime($todo->getEficazData())); ?>
+                    <?php //if (@$tooLate4): ?></span><?php// endif; ?>
                 </p>
-                <?php endif; ?>
-                    <?php if (Utils::escape($todo->getNovoRnc())): ?>
+                <?php //endif; ?>
+                    <?php if (Utils::escape($odbc->getapolice())): ?>
 		<p><span class="label">Novo RNC:</span>
-                    <?php echo Utils::escape($todo->getNovoRnc()); endif; ?>
+                    <?php echo Utils::escape($odbc->getapolice()); endif; ?>
                 </p>
             </li>
         <?php endforeach; ?>
