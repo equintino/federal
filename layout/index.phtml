@@ -1,9 +1,3 @@
-<?php
-//~ Template for index.php
-// variables:
-//  $template - page to be displayed (included)
-//  $flashes - flash messages
-?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-br" lang="pt-br">
 <head>
@@ -38,14 +32,14 @@
                             <ul class="list">
                                 <li><span><a href="<?php echo Utils::createLink('home'); ?>">Home</a></span></li>
                                 <?php //$Odbc = new Odbc();$Odbc->setsinistro(81); ?>
-                                <li><span><a href="<?php echo Utils::createLink('list',array('sinistro' => null)) ?>"  ><img src="img/status/PENDENTE.png" alt="" title="Não Conformidades Pendentes" class="icon" />Processos de Sinistro</a></span></li>
+                                <li><span><a href="<?php echo Utils::createLink('list',array('sinistro' => 'lista')) ?>"  ><img src="img/status/PENDENTE.png" alt="" title="Precessos de Sinistro" class="icon" />Processos de Sinistro</a></span></li>
                                <!-- <li><span><a href="<?php //echo Utils::createLink('list', array('status' => Todo::STATUS_DONE)); ?>"
                                              ><img src="img/status/RESOLVIDA.png" alt="" title="Não Conformidades Resolvidas" class="icon" />RNCs Resolvidas</a></span></li>
                                 <li><span><a href="<?php //echo Utils::createLink('list', array('status' => Todo::STATUS_VOIDED)); ?>"
                                              ><img src="img/status/VENCIDO.png" alt="" title="Prazos Vencidos" class="icon" />Prazos Vencidos</a></span></li>
-                                <li><span><a href="<?php //echo Utils::createLink('list', array('status' => Todo::STATUS_CANCELADO)); ?>"><img src="img/status/CANCELADO.png" alt="" title="Registros Cancelados" class="icon" />RNCs Cancelados </a></span></li>
-                                <li class="last"><span><a href="<?php //echo Utils::createLink('add-edit'); ?>"
-                                             ><img src="img/action/add.png" alt="" title="Registrar Não Conformidade" class="icon" />Registrar Não Conformidade</a></span></li>-->
+                                <li><span><a href="<?php //echo Utils::createLink('list', array('status' => Todo::STATUS_CANCELADO)); ?>"><img src="img/status/CANCELADO.png" alt="" title="Registros Cancelados" class="icon" />RNCs Cancelados </a></span></li>-->
+                                <li class="last"><span><a href="<?php echo Utils::createLink('add-edit'); ?>"
+                                             ><img src="img/action/add.png" alt="" title="Registrar Não Conformidade" class="icon" />Cadastro de Processos de Sinistro</a></span></li>
                             </ul>
                         </div>
                     </div>

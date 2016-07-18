@@ -1,4 +1,6 @@
 <?php
+include 'teste.phtml';
+/*
 $errors = array();
 $todo = null;
 $edit = array_key_exists('id', $_GET);
@@ -62,4 +64,6 @@ if (array_key_exists('cancel', $_POST)) {
         Utils::redirect('detail', array('id' => $todo->getId()));
     }
 }
+ * 
+ */
 ?>

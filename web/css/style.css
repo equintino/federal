@@ -8,6 +8,10 @@ table{
 	color: graytext;
     font-weight: bolder;
 }
+.sinistro{
+    
+    height: 100px;
+}
 #titulo{
     width: 98%;
 }

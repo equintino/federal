@@ -9,7 +9,6 @@ final class Utils {
      */
     public static function createLink($page, array $params = array()) {
         $params = array_merge(array('page' => $page), $params);
-        // TODO add support for Apache's module rewrite
         return 'index.php?' .http_build_query($params);
     }
 

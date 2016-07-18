@@ -1,5 +1,4 @@
 <h1>
-    <!--<img src="img/status/<?php //echo $status; ?>.png" alt="" title="<?php //echo Utils::capitalize($status); ?>" class="icon" />-->
     <?php 
      if(@$title){
       echo $title;
@@ -12,26 +11,8 @@
 <?php else: ?>
     <ul class="list">
         <?php foreach ($odbcs as $odbc): ?>
-            <?php  //print_r($odbc); ?>
-            <?php 
-            //STATUS PENDENTE//
-           /*
-            $tooLate = $status == ((Todo::STATUS_PENDING) && $todo->getDueOn() < new DateTime()) && $todo->getEliminacao() == $todo->getCreatedOn();
-            $tooLate2 = $status == ((Todo::STATUS_PENDING) && $todo->getEliminacao() < new DateTime()) && $todo->getEliminacao_novo() == $todo->getCreatedOn();
-            $tooLate3 = $status == ((Todo::STATUS_PENDING) && $todo->getEliminacao_novo() < new DateTime()) && $todo->getEficazData() == $todo->getCreatedOn() ;
-            $tooLate4 = $todo->getEficazData() != $todo->getCreatedOn();
-            * 
-            */
-            ?> 
             <li>
-                <?php //if ($tooLate): ?>
-                    <!--img src="img/exclamation.png" alt="" title="Prazo esgotado!" class="icon"/>
-                <?php //endif; ?>
-                <?php //if (Utils::escape($todo->getAndamento())): ?>
-                    <img src="img/status/ANDAMENTO.png" alt="" title="Em Implementação!" class="icon"/>
-                <?php //endif; ?>
-                <img src="img/priority/<?php //echo $todo->getPriority(); ?>.png" alt="Prioridade <?php //echo $todo->getPriority(); ?>" title="Prioridade <?php //echo $todo->getPriority(); ?>" />-->
-                    <h3><a href="<?php //echo Utils::createLink('detail', array('sinistro' => $odbc->getsinistro())) ?>"><?php echo Utils::escape($odbc->getsinistro()); ?></a></h3>
+              <h3><a href="<?php //echo Utils::createLink('detail', array('sinistro' => $odbc->getsinistro())) ?>"><?php echo Utils::escape($odbc->getsinistro()); ?></a></h3>
                 <?php if ($odbc->getnome()): ?>
                     <p class="description"><?php echo Utils::escape($odbc->getnome()); ?></p>
                 <?php endif; ?>

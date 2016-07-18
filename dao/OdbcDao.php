@@ -112,7 +112,6 @@ final class OdbcDao {
     }
     public function find2(OdbcSearchCriteria $search = null) {
       $busca = $this->query($this->getFindSql2($search));
-      //print_r($busca);die;
       //$row = odbc_($busca);
      //print_r($busca);
      //die;
@@ -127,13 +126,14 @@ final class OdbcDao {
             //print_r($row);
             OdbcMapper::map($odbc, $row);
             $result[$odbc->getidbenefi()] = $odbc;
-            //print_r($result);
+            //print_r($result);die;
             //$idbenefi = $odbc->getidbenefi();
         }
         //die;
             //echo '<br>';
             //print_r($result);
             //echo '<br>';
+        //print_r($result);die;
         return @$result;
     }
     private function getFindSql2(OdbcSearchCriteria $search = null) {
@@ -141,15 +141,14 @@ final class OdbcDao {
         //print_r($search);die;
         $sql = "SELECT * FROM Beneficiarios WHERE ";
         $orderBy = 'sinistro';
-        if ($search !== null) {
-            if ($search->getsinistro() !== null) {
+        if ($search !== null && $search->getsinistro() != 'lista') {
+            if ($search->getsinistro() !== null ) {
                 $sql .= "sinistro like '%".$search->getsinistro()."%'";
             }
         }else{
           $sql.= 1;
         }
         $sql .= ' ORDER BY ' . $orderBy;
-          print_r($sql);die;
         return $sql;
     }
 }
