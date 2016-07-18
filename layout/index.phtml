@@ -37,8 +37,8 @@
                             <!--<div class="title"><a href="index.php">Aplicações</a></div>-->
                             <ul class="list">
                                 <li><span><a href="<?php echo Utils::createLink('home'); ?>">Home</a></span></li>
-                                <?php $Odbc = new Odbc();$Odbc->setsinistro(0135); ?>
-                                <li><span><a href="<?php echo Utils::createLink('list',array('sinistro' => $Odbc->getsinistro())) ?>" ><img src="img/status/PENDENTE.png" alt="" title="Não Conformidades Pendentes" class="icon" />RNCs Pendentes</a></span></li>
+                                <?php //$Odbc = new Odbc();$Odbc->setsinistro(81); ?>
+                                <li><span><a href="<?php echo Utils::createLink('list',array('sinistro' => null)) ?>"  ><img src="img/status/PENDENTE.png" alt="" title="Não Conformidades Pendentes" class="icon" />Processos de Sinistro</a></span></li>
                                <!-- <li><span><a href="<?php //echo Utils::createLink('list', array('status' => Todo::STATUS_DONE)); ?>"
                                              ><img src="img/status/RESOLVIDA.png" alt="" title="Não Conformidades Resolvidas" class="icon" />RNCs Resolvidas</a></span></li>
                                 <li><span><a href="<?php //echo Utils::createLink('list', array('status' => Todo::STATUS_VOIDED)); ?>"

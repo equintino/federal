@@ -1,3 +1,12 @@
+<script>
+function buscaSinistro() {
+    //var sinistro = prompt("Insira o número de sinistro");
+    if (sinistro != null) {
+        //document.getElementById("sinistro").innerHTML = 'Buscando por: '+sinistro;
+        //window.location.assign("datail.php?sinistro=sinistro")
+    }
+}
+</script>
 <?PHP
 // Main application class.
 final class Index {

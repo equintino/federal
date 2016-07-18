@@ -6,7 +6,7 @@
      }
      ?>
 </h1>
-
+<div id="sinistro"></div>
 <?php if (empty($odbcs)): ?>
     <p>Nenhum RNC encontrado.</p>
 <?php else: ?>
@@ -31,7 +31,7 @@
                     <img src="img/status/ANDAMENTO.png" alt="" title="Em Implementação!" class="icon"/>
                 <?php //endif; ?>
                 <img src="img/priority/<?php //echo $todo->getPriority(); ?>.png" alt="Prioridade <?php //echo $todo->getPriority(); ?>" title="Prioridade <?php //echo $todo->getPriority(); ?>" />-->
-                <h3><a href="<?php //echo Utils::createLink('detail', array('sinistro' => $odbc->getsinistro())) ?>"><?php echo Utils::escape($odbc->getsinistro()); ?></a></h3>
+                    <h3><a href="<?php //echo Utils::createLink('detail', array('sinistro' => $odbc->getsinistro())) ?>"><?php echo Utils::escape($odbc->getsinistro()); ?></a></h3>
                 <?php if ($odbc->getnome()): ?>
                     <p class="description"><?php echo Utils::escape($odbc->getnome()); ?></p>
                 <?php endif; ?>

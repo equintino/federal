@@ -138,7 +138,7 @@ final class OdbcDao {
     }
     private function getFindSql2(OdbcSearchCriteria $search = null) {
      //print_r(foreach($this->query($search) as $item));die;
-        //print_r($search->getsinistro());die;
+        //print_r($search);die;
         $sql = "SELECT * FROM Beneficiarios WHERE ";
         $orderBy = 'sinistro';
         if ($search !== null) {
@@ -149,6 +149,7 @@ final class OdbcDao {
           $sql.= 1;
         }
         $sql .= ' ORDER BY ' . $orderBy;
+          print_r($sql);die;
         return $sql;
     }
 }
