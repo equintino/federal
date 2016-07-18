@@ -1,5 +1,5 @@
 <?php
-include 'teste.phtml';
+//include 'teste.phtml';
 /*
 $errors = array();
 $todo = null;
