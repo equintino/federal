@@ -1,17 +1,45 @@
 <?php
-
-    if($edit){
-       $numero = Utils::escape($todo->getNumero()); 
+    if(@$edit){
+       $numero = Utils::escape($odbc->getsinistro()); 
     }else{
-        $dao2 = new TodoDao();
-        $numero_ = $dao2->find2();
-        $rest1 = substr($numero_, 0,-3);
-        $numero = str_pad($rest1+1, 3, 0, STR_PAD_LEFT) ."/".date("y");
+        $dao2 = new OdbcDao();
+        //$numero_ = $dao2->find2();
+        //$rest1 = substr($numero_, 0,-3);
+        //$numero = str_pad($rest1+1, 3, 0, STR_PAD_LEFT) ."/".date("y");
     }
+    /*
+     +        echo "<div class='sinistro'>";
++        echo "<table>
++        <tr><td>SINISTRO: </td><td><input type='text' name='sinistro' /></td>
++        <td>APÓLICE: </td><td><input type='text' name='apolice' /></td>
++        <td>CERTIFICADO: </td><td><input type='text' name='certificado' /></td>
++        <td>No. RAMO: </td><td><input type='text' name='ramo' /></td>
++        <td>COBERTURA: </td><td><input type='text' name='cobertura' /></td></tr>
++        <tr><td>DT SINISTRO: </td><td><input type='text' name='sinistro_data' /></td>
++        <td>DT AVISO: </td><td><input type='text' name='aviso_data' /></td>
++        <td>DT VIGENCIA INICIAL: </td><td><input type='text' name='vigencia_data' /></td>
++        <td>DT DOC OK: </td><td><input type='text' name='doc_ok' /></td></tr>
++        <tr><td>TITULAR: </td><td><input type='text' name='titular' /></td>
++        <td>CPF: </td><td><input type='text' name='cpf' /></td>
++        <td>AV/RUA/TRAV/PÇA/ALAM: </td><td><input type='text' name='rua' /></td></tr>
++        <tr><td>ENDEREÇO: </td><td><input type='text' name='endereco' /></td>
++        <td>NUMERO: </td><td><input type='text' name='numero' /></td>
++        <td>COMPLEMENTO: </td><td><input type='text' name='complemento' /></td></tr>
++        <tr><td>BAIRRO: </td><td><input type='text' name='bairro' /></td>
++        <td>CIDADE: </td><td><input type='text' name='cidade' /></td>
++        <td>ESTADO: </td><td><input type='text' name='estado' /></td></tr>
++        <tr><td>CEP: </td><td><input type='text' name='cep' /></td>
++        <td>TEL: </td><td><input type='tel' name='tel' /></td>
++        <td>EMAIL: </td><td><input type='email' name='email' /></td>
++        <td>TIPO SEGURO: </td><td><input type='text' name='tipo_seguro' /></td>
++        <td>IMPORTÂNCIA SEGURADA: </td><td><input type='text' name='imp_segurada' /></td></tr>";
++        echo "</table>";
++        echo "</div>";
+     */
 //~ Template para add-edit.php
 // variables:
 //  $errors - validação de erros
-//  $todo - submitted TODO
+//  $odbc - submitted TODO
 //  $edit - true para EDITAR, false para GRAVAR
 function error_field($title, array $errors) {
     foreach ($errors as $error) {
@@ -24,18 +52,18 @@ function error_field($title, array $errors) {
     return '';
 }
 
-    $teste = new teste();
-    print_r($teste -> form());die;
+    //$teste = new teste();
+    //print_r($teste -> form());die;
 
 
-/* @var $todo Todo */
+/* @var $odbc Todo */
 ?>
 
 <h1>
-    <?php if ($edit): ?>
-        <?php echo Utils::escape($todo->getTitle()); ?>
+    <?php if (@$edit): ?>
+        <?php echo Utils::escape($odbc->getsinistro()); ?>
     <?php else: ?>
-        Novo Registro de Não Conformidade
+        Cadastro de Processos de Sinistro
     <?php endif; ?>
 </h1>
 
@@ -53,27 +81,27 @@ function error_field($title, array $errors) {
 	<div class="cadastro">
 		<table border=1 cellspacing=3  bordercolor="#ccc">
         <tr><td>
-            <label class="col1">Número:</label>
+            <label class="col1">Sinistro:</label>
 		</td><td>	
-            <input type="hidden" name="todo[numero]" value="<?php echo $numero; ?>" class="text <?php echo error_field('numero', $errors); ?>" id="numero" />&nbsp&nbsp<?php echo $numero; ?>
+            <input type="text" name="odbc[sinistro]" value="<?php echo $sinistro; ?>" class="text <?php echo error_field('sinistro', $errors); ?>" id="sinistro" />&nbsp&nbsp<?php echo $sinistro; ?>
 		</td><td>
             <label class="col3">Prazo de Retorno:</label>
 		</td><td>
-            <input type="text" name="todo[due_on_date]" value="<?php echo Utils::escape($todo->getDueOn()->format('d/m/Y')); ?>"
+            <input type="text" name="odbc[due_on_date]" value="<?php echo Utils::escape($odbc->getDueOn()->format('d/m/Y')); ?>"
                    class="text datepicker<?php echo error_field('due_on', $errors); ?>" />
-			<input type='hidden' name='todo[due_on_hour]' value=15 /> 
-			<input type='hidden' name='todo[due_on_minute]' value=15 /> 
+			<input type='hidden' name='odbc[due_on_hour]' value=15 /> 
+			<input type='hidden' name='odbc[due_on_minute]' value=15 /> 
         </td></tr>	
         <tr><td>
             <label class="col1">Título:</label>
 		</td><td colspan=2>
-            <input type="text" name="todo[title]" value="<?php echo Utils::escape($todo->getTitle()); ?>" class="text<?php echo error_field('title', $errors); ?>" id="titulo"/>
+            <input type="text" name="odbc[title]" value="<?php echo Utils::escape($odbc->getTitle()); ?>" class="text<?php echo error_field('title', $errors); ?>" id="titulo"/>
         </td><td>
             <label>Prioridade:&nbsp&nbsp</label>
-            <select name="todo[priority]" class='select-style'>
+            <select name="odbc[priority]" class='select-style'>
             <?php foreach (Todo::allPriorities() as $priority): ?>
                 <option value="<?php echo $priority; ?>"
-                        <?php if ($priority == $todo->getPriority()): ?>
+                        <?php if ($priority == $odbc->getPriority()): ?>
                             selected="selected"
                         <?php endif; ?>
                         ><?php echo $priority; ?></option>
@@ -82,9 +110,9 @@ function error_field($title, array $errors) {
         </td></tr>
        <tr><td>
           <label class="col1">Origem:</label>
-          <?php $origem=Utils::escape($todo->getOrigem()); ?>
+          <?php $origem=Utils::escape($odbc->getOrigem()); ?>
 		</td><td>
-          <select name="todo[origem]" class='select-style'>
+          <select name="odbc[origem]" class='select-style'>
               <option value='<?php echo $origem;?>' selected><?php echo $origem ?></option>
               <option value="Serviço/Produto não conforme">Serviço/Produto Não Conforme</option>
               <option value="Reclamação do cliente">Reclamação do Cliente</option>
@@ -94,9 +122,9 @@ function error_field($title, array $errors) {
         </td><td>
           <label>Tipo de Ação:</label>
 		</td>  
-          <?php $tipoacao=Utils::escape($todo->getTipoacao()); ?>
+          <?php $tipoacao=Utils::escape($odbc->getTipoacao()); ?>
 		<td>  
-          <select name="todo[tipoacao]">
+          <select name="odbc[tipoacao]">
               <option value='<?php echo $tipoacao; ?>' selected><?php echo $tipoacao ?></option>
               <option value="Corretiva">Corretiva</option>
               <option value="Preventiva">Preventiva</option>
@@ -106,122 +134,122 @@ function error_field($title, array $errors) {
         <tr><td colspan=2>
             <font color="#4c7cbd"><b>Processo ou Setor Envolvido:</b></font>
 		</td><td colspan=2>
-            <input type="text" name="todo[processo]" value="<?php echo Utils::escape($todo->getProcesso()); ?>" size="45px" />
+            <input type="text" name="odbc[processo]" value="<?php echo Utils::escape($odbc->getProcesso()); ?>" size="45px" />
                   <!-- class="text<?php //echo error_field('processo', $errors); ?>"/>-->
         </td></tr>
         <tr><td colspan=2>
             <font color="#4c7cbd"><b>Responável pela Identificação:</b></font>
 		</td><td colspan=2>
-            <input type="text" name="todo[identificador]" value="<?php echo Utils::escape($todo->getIdentificador()); ?>" size="45"/>
+            <input type="text" name="odbc[identificador]" value="<?php echo Utils::escape($odbc->getIdentificador()); ?>" size="45"/>
                    <!--class="text<?php //echo error_field('identificador', $errors); ?>"/>-->
         </td></tr>
-		<input type='hidden' name='todo[description]' value='<?php echo Utils::escape($todo->getDescription()); ?>'/>
+		<input type='hidden' name='odbc[description]' value='<?php echo Utils::escape($odbc->getDescription()); ?>'/>
        <!-- <div class="field">
             <label>Description:</label>
-            <textarea name="todo[description]" cols="1" rows="1"
-                      class="<?php //echo error_field('description', $errors); ?>"><?php //echo Utils::escape($todo->getDescription()); ?></textarea>
+            <textarea name="odbc[description]" cols="1" rows="1"
+                      class="<?php //echo error_field('description', $errors); ?>"><?php //echo Utils::escape($odbc->getDescription()); ?></textarea>
         </div> -->
         <tr><td colspan="4">
             <label>Detalhamento do Registro de Não Conformidade e Evidências Encontradas:</label>
             </td></tr>
         <tr><td colspan=4>
-            <textarea name="todo[descricao]" cols="1" rows="1"
-                      class="<?php echo error_field('descricao', $errors); ?>"><?php echo Utils::escape($todo->getDescricao()); ?></textarea>	
+            <textarea name="odbc[descricao]" cols="1" rows="1"
+                      class="<?php echo error_field('descricao', $errors); ?>"><?php echo Utils::escape($odbc->getDescricao()); ?></textarea>	
         </td></tr>
         <tr><td colspan="4">
             <font color="#4c7cbd"><b>Causa da Não Conformidade:(Aplicação dos 5 porquês)</b></font>
             </td></tr>
 		<tr><td colspan=4>
-                        <textarea name="todo[causa]" ><?php echo Utils::escape($todo->getCausa()); ?></textarea>
+                        <textarea name="odbc[causa]" ><?php echo Utils::escape($odbc->getCausa()); ?></textarea>
                    <!--class="text<?php //echo error_field('causa', $errors); ?>"/>-->
         </td></tr>
-		<input type='hidden' name='todo[comment]' value='<?php echo Utils::escape($todo->getComment()); ?>'/>
+		<input type='hidden' name='odbc[comment]' value='<?php echo Utils::escape($odbc->getComment()); ?>'/>
         <!--<tr><td>
             <label class="nome_tb">Comentário:</label>
 		</td><td colspan=3>
-            <textarea name="todo[comment]" cols="1" rows="1"
-                      class="<?php //echo error_field('comment', $errors); ?>"><?php //echo Utils::escape($todo->getComment()); ?></textarea>
+            <textarea name="odbc[comment]" cols="1" rows="1"
+                      class="<?php //echo error_field('comment', $errors); ?>"><?php //echo Utils::escape($odbc->getComment()); ?></textarea>
         </td></tr>-->
         <tr><td colspan=4>
             <label>Ação Imediata:</label>
 		</td></tr>
 		<tr><td colspan=4>
-            <textarea name="todo[imediata]" class="<?php echo error_field('imediata', $errors); ?>" ><?php echo Utils::escape($todo->getImediata()); ?></textarea>
+            <textarea name="odbc[imediata]" class="<?php echo error_field('imediata', $errors); ?>" ><?php echo Utils::escape($odbc->getImediata()); ?></textarea>
         </td></tr>
         <tr><td colspan="4">
             <label>Ação Corretiva ou Preventiva:</label>
             </td></tr>
         <tr><td colspan=4>
-                <textarea name="todo[corretiva]" class="<?php echo error_field('corretiva', $errors); ?>" ><?php echo Utils::escape($todo->getCorretiva()); ?></textarea>
+                <textarea name="odbc[corretiva]" class="<?php echo error_field('corretiva', $errors); ?>" ><?php echo Utils::escape($odbc->getCorretiva()); ?></textarea>
         </td></tr>
         <tr><td colspan='4'>
             <label>Nome do Responsável pela Implementação:</label>
             </td></tr>
 		<tr><td colspan=4>
-            <input type='text' name="todo[implementador]" class="<?php echo error_field('implementador', $errors); ?>" value='<?php echo Utils::escape($todo->getImplementador()); ?>' id='campo' />
+            <input type='text' name="odbc[implementador]" class="<?php echo error_field('implementador', $errors); ?>" value='<?php echo Utils::escape($odbc->getImplementador()); ?>' id='campo' />
         </td></tr>
         <tr><td>
             <label class="col3">Eliminação:(Prazo)</label>
 	</td><td>
-            <input type="text" name="todo[eliminacao]" value="<?php 
-				if($todo->getEliminacao()==$todo->getCreatedOn()){
+            <input type="text" name="odbc[eliminacao]" value="<?php 
+				if($odbc->getEliminacao()==$odbc->getCreatedOn()){
 					echo '';
 				}else{
-					echo Utils::escape($todo->getEliminacao()->format('d/m/Y'));
+					echo Utils::escape($odbc->getEliminacao()->format('d/m/Y'));
 				}?>"
                    class="text datepicker<?php echo error_field('eliminacao', $errors); ?>" /> 
-			<input type='hidden' name='todo[eliminacao_min]' value=15 /> 
+			<input type='hidden' name='odbc[eliminacao_min]' value=15 /> 
         </td><td>
             <label class="col3">Novo Prazo:</label>
 	</td><td>
-            <input type="text" name="todo[eliminacao_novo]" value="<?php 
-                if($todo->getEliminacao_novo()==$todo->getCreatedOn()){
+            <input type="text" name="odbc[eliminacao_novo]" value="<?php 
+                if($odbc->getEliminacao_novo()==$odbc->getCreatedOn()){
 					echo '';
 				}else{
-					echo Utils::escape($todo->getEliminacao_novo()->format('d/m/Y'));
+					echo Utils::escape($odbc->getEliminacao_novo()->format('d/m/Y'));
 				}
 			?>"
                    class="text datepicker<?php echo error_field('eliminacao_novo', $errors); ?>" /> 
-			<input type='hidden' name='todo[eliminacao_novo_min]' value=15 /> 
+			<input type='hidden' name='odbc[eliminacao_novo_min]' value=15 /> 
         </td></tr>
         <tr><td colspan=4>
             <label>Registro da Verificação da Eficácia:</label>
 		</td></tr>
 		<tr><td colspan=4>
-            <textarea type='text' name="todo[comment]" class="<?php echo error_field('comment', $errors); ?>" ><?php echo Utils::escape($todo->getComment()); ?></textarea>
+            <textarea type='text' name="odbc[comment]" class="<?php echo error_field('comment', $errors); ?>" ><?php echo Utils::escape($odbc->getComment()); ?></textarea>
         </td></tr>
         <tr><td colspan=2>
             <label>Nome do Responsável pela Verificação:</label>
 		</td><td colspan=2>
-            <input type='text' name="todo[resp_verificacao]" class="<?php echo error_field('resp_verificacao', $errors); ?>" value='<?php echo Utils::escape($todo->getRespVerificacao()); ?>' id="campo"/>
+            <input type='text' name="odbc[resp_verificacao]" class="<?php echo error_field('resp_verificacao', $errors); ?>" value='<?php echo Utils::escape($odbc->getRespVerificacao()); ?>' id="campo"/>
         </td></tr>
 		<tr><td colspan=2>
 			<label>A Ação foi Eficaz?&nbsp </label>
-			<?php if(Utils::escape($todo->getEficaz())=='SIM'): ?>
-				<input type='radio' value='SIM' name='todo[eficaz]' checked /> SIM
-				<input type='radio' value='NÃO' name='todo[eficaz]'/> NÃO
-			<?php elseif(Utils::escape($todo->getEficaz())=='NÃO'): ?>
-				<input type='radio' value='SIM' name='todo[eficaz]' /> SIM
-				<input type='radio' value='NÃO' name='todo[eficaz]' checked /> NÃO
+			<?php if(Utils::escape($odbc->getEficaz())=='SIM'): ?>
+				<input type='radio' value='SIM' name='odbc[eficaz]' checked /> SIM
+				<input type='radio' value='NÃO' name='odbc[eficaz]'/> NÃO
+			<?php elseif(Utils::escape($odbc->getEficaz())=='NÃO'): ?>
+				<input type='radio' value='SIM' name='odbc[eficaz]' /> SIM
+				<input type='radio' value='NÃO' name='odbc[eficaz]' checked /> NÃO
 			<?php else: ?>
-				<input type='radio' value='SIM' name='todo[eficaz]' /> SIM
-				<input type='radio' value='NÃO' name='todo[eficaz]'/> NÃO
+				<input type='radio' value='SIM' name='odbc[eficaz]' /> SIM
+				<input type='radio' value='NÃO' name='odbc[eficaz]'/> NÃO
 			<?php endif ?>
 		</td><td>
             <label class="col3">Data:&nbsp&nbsp</label>
-            <input type="text" name="todo[eficaz_data]" value="<?php 
-                if($todo->getCreatedOn()==$todo->getEficazData()){
+            <input type="text" name="odbc[eficaz_data]" value="<?php 
+                if($odbc->getCreatedOn()==$odbc->getEficazData()){
 					echo '';
 				}else{
-					echo Utils::escape($todo->getEficazData()->format('d/m/Y'));
+					echo Utils::escape($odbc->getEficazData()->format('d/m/Y'));
 				}
 			?>"
                    class="text datepicker<?php echo error_field('eficaz_data', $errors); ?>" /> 
-			<input type='hidden' name='todo[eficaz_data_min]' value=15 /> 
+			<input type='hidden' name='odbc[eficaz_data_min]' value=15 /> 
         </td><td>
 			<?php $novo_rnc=null ?>
             <label class="col1">Novo RNC: &nbsp&nbsp</label>	
-            <input type="text" name="todo[novo_rnc]" value="<?php echo Utils::escape($todo->getNovoRnc()); ?>" class="text <?php echo error_field('novo_rnc', $errors); ?>" id="numero" />
+            <input type="text" name="odbc[novo_rnc]" value="<?php echo Utils::escape($odbc->getNovoRnc()); ?>" class="text <?php echo error_field('novo_rnc', $errors); ?>" id="numero" />
 		</td></tr>
 		<td colspan=4>
 		<div class='obs'>Obs: Se as ações não forem eficazes será aberto um novo Registro de Não Conformidade.</div>

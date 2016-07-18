@@ -1,69 +1,67 @@
 <?php
 //include 'teste.phtml';
-/*
+
 $errors = array();
-$todo = null;
+$odbc = null;
 $edit = array_key_exists('id', $_GET);
 
 if ($edit) {
-    $todo = Utils::getTodoByGetId();
+    $odbc = Utils::getOdbcByGetId();
 } else {
     // set defaults
-    $todo = new Todo();
-    $todo->setPriority(Todo::PRIORITY_MEDIUM);
+    $odbc = new Odbc();
+    //$odbc->setPriority(Todo::PRIORITY_MEDIUM);
     $dueOn = new DateTime("+5 day", new DateTimeZone('America/Sao_Paulo'));
     $eliminacaoPrazo = new DateTime("+30 day", new DateTimeZone('America/Sao_Paulo'));
     $dueOn->setTime(0, 0, 0);
-    $todo->setDueOn($dueOn);
-    $todo->setEliminacao($todo->getCreatedOn());
-    $todo->setEliminacao_novo($todo->getCreatedOn());
-    $todo->setEficazData($todo->getCreatedOn());
+    $odbc->setDueOn($dueOn);
+    //$odbc->setEliminacao($todo->getCreatedOn());
+    //$todo->setEliminacao_novo($todo->getCreatedOn());
+    //$odbc->setEficazData($odbc->getCreatedOn());
 }
 
 
 if (array_key_exists('cancel', $_POST)) {
     // redirect
-    Utils::redirect('detail', array('id' => $todo->getId()));
+    Utils::redirect('detail', array('id' => $odbc->getId()));
 } elseif (array_key_exists('save', $_POST)) {
-    // for security reasons, do not map the whole $_POST['todo']
+    // for security reasons, do not map the whole $_POST['odbc']
     $data = array(
-        'title' => $_POST['todo']['title'],
-        'due_on' => $_POST['todo']['due_on_date'] . ' ' . @$_POST['todo']['due_on_hour'] . ':' . @$_POST['todo']['due_on_minute'] . ':00',
-        'priority' => $_POST['todo']['priority'],
-        'description' => @$_POST['todo']['description'],
-        'comment' => @$_POST['todo']['comment'],
-        'descricao' => $_POST['todo']['descricao'],
-        'numero' => $_POST['todo']['numero'],
-        'origem' => $_POST['todo']['origem'],
-        'tipoacao' => $_POST['todo']['tipoacao'],
-        'processo' => $_POST['todo']['processo'],
-        'identificador' => $_POST['todo']['identificador'],
-        'causa' => $_POST['todo']['causa'],
-        'imediata' => $_POST['todo']['imediata'],
-        'corretiva' => $_POST['todo']['corretiva'],
-        'implementador' => $_POST['todo']['implementador'],
-        'eliminacao' => $_POST['todo']['eliminacao']. ' ' . date("H").":".$_POST['todo']['eliminacao_min'] . ':00',
-        'eliminacao_novo' => $_POST['todo']['eliminacao_novo']. ' ' . date("H").":".$_POST['todo']['eliminacao_novo_min'] . ':00',
-		'reg_eficacia' => $_POST['todo']['reg_eficacia'],
-		'resp_verificacao' => $_POST['todo']['resp_verificacao'],
-		'eficaz_data' => $_POST['todo']['eficaz_data']. ' ' . date("H").":".$_POST['todo']['eficaz_data_min'] . ':00',
-		'novo_rnc' => $_POST['todo']['novo_rnc'],
-		'eficaz' => @$_POST['todo']['eficaz']
+        'title' => $_POST['odbc']['title'],
+        'due_on' => $_POST['odbc']['due_on_date'] . ' ' . @$_POST['odbc']['due_on_hour'] . ':' . @$_POST['odbc']['due_on_minute'] . ':00',
+        'priority' => $_POST['odbc']['priority'],
+        'description' => @$_POST['odbc']['description'],
+        'comment' => @$_POST['odbc']['comment'],
+        'descricao' => $_POST['odbc']['descricao'],
+        'numero' => $_POST['odbc']['numero'],
+        'origem' => $_POST['odbc']['origem'],
+        'tipoacao' => $_POST['odbc']['tipoacao'],
+        'processo' => $_POST['odbc']['processo'],
+        'identificador' => $_POST['odbc']['identificador'],
+        'causa' => $_POST['odbc']['causa'],
+        'imediata' => $_POST['odbc']['imediata'],
+        'corretiva' => $_POST['odbc']['corretiva'],
+        'implementador' => $_POST['odbc']['implementador'],
+        'eliminacao' => $_POST['odbc']['eliminacao']. ' ' . date("H").":".$_POST['odbc']['eliminacao_min'] . ':00',
+        'eliminacao_novo' => $_POST['odbc']['eliminacao_novo']. ' ' . date("H").":".$_POST['odbc']['eliminacao_novo_min'] . ':00',
+		'reg_eficacia' => $_POST['odbc']['reg_eficacia'],
+		'resp_verificacao' => $_POST['odbc']['resp_verificacao'],
+		'eficaz_data' => $_POST['odbc']['eficaz_data']. ' ' . date("H").":".$_POST['odbc']['eficaz_data_min'] . ':00',
+		'novo_rnc' => $_POST['odbc']['novo_rnc'],
+		'eficaz' => @$_POST['odbc']['eficaz']
     );
     // mapear
-    TodoMapper::map($todo, $data);
+    OdbcMapper::map($odbc, $data);
     // validar
-    $errors = TodoValidator::validate($todo);
+    $errors = OdbcValidator::validate($todo);
   
     if (empty($errors)) {
         // gravar
-        $dao = new TodoDao();
-        $todo = $dao->save($todo);
+        $dao = new OdbcDao();
+        $odbc = $dao->save($odbc);
         Flash::addFlash('RNC salvo com sucesso.');
         // redirecionar
-        Utils::redirect('detail', array('id' => $todo->getId()));
+        Utils::redirect('detail', array('id' => $odbc->getId()));
     }
 }
- * 
- */
 ?>
