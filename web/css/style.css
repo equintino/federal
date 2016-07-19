@@ -8,10 +8,6 @@ table{
 	color: graytext;
     font-weight: bolder;
 }
-.sinistro{
-    
-    height: 100px;
-}
 #titulo{
     width: 98%;
 }
@@ -23,6 +19,26 @@ table{
     width: 99%;
     padding: 2px;
 }
+#header_cadastro ul li:hover{
+    background-color: bisque;
+    border: 0px solid gray;
+    #padding: 1px;
+}
+#header_cadastro ul li{
+    border: 1px solid gray;
+    padding-bottom: 11px;
+    padding-left: 11px;
+}
+#header_cadastro ul {
+    list-style: none;
+    #padding-top: 8px;
+}
+#header_cadastro ul li{
+    display: inline;
+}
+#header_cadastro ul li img{
+    padding-top: 6px;
+}
 .obs{
 	font-size: 9px;
 	font-style: italic;
@@ -33,11 +49,14 @@ table{
 	box-shadow: 10px 10px 5px #888888;
 }
 body {
-    background: url(../img/header-bg-left2.jpg) repeat-x top #F5F5F5;
+    //background: url(../img/header-bg-left2.jpg) repeat-x top #F5F5F5;
     font-family: Tahoma, Geneva, sans-serif;
     font-size: 100%;
     line-height: 1em;
     color: #414141;
+}
+.sinistro{   
+    height: 100px;
 }
 
 h1 {
