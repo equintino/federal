@@ -37,7 +37,7 @@ final class OdbcDao {
         $sql = "SELECT * FROM $tabela WHERE 1";
         $conn = new OdbcDao();
         $result=$conn -> query($sql);
-        //print_r($result);die;
+        return $result;
         odbc_result($result,'Border=1 cellspacing=0 cellpadding=5'); 
     }
     public function listaCampo($tabela,$campo,$busca){

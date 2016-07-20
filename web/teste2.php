@@ -6,8 +6,8 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <meta charset="UTF-8">
-        <title>Relatório</title>
+        <!--<meta charset="UTF-8">-->
+        <title>Relatorio</title>
     </head>
     <body>
         <?php
@@ -22,8 +22,38 @@ and open the template in the editor.
           //$search->setsinistro(93);
           //$search->setnome('joao');
           $tabela='Beneficiarios';
+          //$tabela='sinipend';
           
-          $dao->listaConteudo($tabela);die;
+          //print_r($dao->listaTabela());
+          echo '<br><br>';
+          //print_r($dao->listaConteudo($tabela));
+          
+          $quant=0;
+          $total=0;
+          $x=0;
+          $y=0;
+          $sinistro_ant=null;
+          echo '<table border=1 align=center cellspacing=0 spanspacing=0>';      
+          echo "<tr><th>SINISTRO</th><th>BENEFICIARIO</th><th>VL. INDENIZADO</th></tr>";
+            foreach($dao->listaConteudo($tabela) as $item){ 
+              if($item['vlindeniza'] != 0){
+                echo "<tr><td align=center>".$item['sinistro']."</td><td>".$item['nome']."</td><td align=right>".number_format($item['vlindeniza'],'2',',','.')."</td></tr>";
+                if($sinistro_ant != $item['sinistro']){
+                    $y++;
+                }
+                $sinistro_ant=$item['sinistro'];
+                $total=$total+$item['vlindeniza'];
+                $x++;
+              }
+            }
+           // echo "$quant - $x - $total - $y";die;
+          echo '</table>';
+          echo '<table align=center border=1 cellspacing=0>';
+          echo '<h3 align=center>RESUMO</h3>';
+          echo '<tr><th>SINISTROS</th><th>BENEFICIARIOS</th><th>TOTAL A INDENIZAR</th></tr>';
+          echo '<tr><td align=right>'.number_format($y,'0','','.').'</td><td align=right>'.number_format($x,'0','','.').'</td><td align=right>R$ '.number_format($total,'2',',','.').'</td></tr>';
+          echo '</table>';
+          die;
           //$odbcs = $dao->find2($search);
           //print_r($odbcs);die;
           
