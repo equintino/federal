@@ -20,24 +20,25 @@ table{
     padding: 2px;
 }
 #header_cadastro ul li:hover{
-    background-color: bisque;
-    border: 0px solid gray;
-    #padding: 1px;
+    background-color: beige;
+    padding-bottom: 7px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border: 1px solid gray;
 }
 #header_cadastro ul li{
-    border: 1px solid gray;
-    padding-bottom: 11px;
-    padding-left: 11px;
+    #border: 1px solid gray;
+    #padding-bottom: 6px;
+    padding-left: 6px;
+    padding-right: 6px;
+    display: inline;
 }
 #header_cadastro ul {
     list-style: none;
     #padding-top: 8px;
 }
-#header_cadastro ul li{
-    display: inline;
-}
 #header_cadastro ul li img{
-    padding-top: 6px;
+    padding-top: 4px;
 }
 .obs{
 	font-size: 9px;
@@ -54,6 +55,7 @@ body {
     font-size: 100%;
     line-height: 1em;
     color: #414141;
+    padding-top: 1px;
 }
 .sinistro{   
     height: 100px;

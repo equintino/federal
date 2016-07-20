@@ -37,7 +37,8 @@ final class OdbcDao {
         $sql = "SELECT * FROM $tabela WHERE 1";
         $conn = new OdbcDao();
         $result=$conn -> query($sql);
-        odbc_result_all($result,'Border=1 cellspacing=0 cellpadding=5'); 
+        //print_r($result);die;
+        odbc_result($result,'Border=1 cellspacing=0 cellpadding=5'); 
     }
     public function listaCampo($tabela,$campo,$busca){
         $sql = "SELECT * FROM $tabela WHERE $campo like '%$busca%'";
@@ -111,7 +112,9 @@ final class OdbcDao {
         return $sql;
     }
     public function find2(OdbcSearchCriteria $search = null) {
+     //print_r($search);die;
       $busca = $this->query($this->getFindSql2($search));
+      //print_r($busca);die;
       //$row = odbc_($busca);
      //print_r($busca);
      //die;
