@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Processos de Sinistro</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <script src="js/uol.js?refbusca=busca"></script><link rel="stylesheet" type="text/css" href="css/uolbuscad.css" />
+        
+        
+    </head>
+<body id="busca-home">
+<div id="all">
+	<div class="barrauol">
+		<script>writeUOLBar();</script>
+	</div>
+
+	<div id="header">
+		<h1>UOL Busca</h1>
+		<div id="searchform"><form id="busca-simples" action="/web/">
+			<div id="searchbox">
+				<table>
+					<tr><td id="sbtdinput"><input type="text" name="q" id="q" x-webkit-speech lang="pt" /></td><td id="sbtdbutton"><input type="submit" value="Buscar"></td></tr>
+				</table>
+			</div>
+			<p id="com-google"><span>com Google</span></p>
+		</form></div>
+	</div>
+
+	<div id="footer">
+		<div class="copyright"><script>writeCopyright()</script></div>
+	</div>
+</div>
+
+<script>
+        document.getElementById('q').focus();
+</script>
+
+<script type="text/javascript" src="js/busca.js" charset="iso-8859-1"></script>
+<script type="text/javascript">
+        var Config = Config||{};
+        Config.Metrics={
+                        breadcrumb : ['home'],
+                        typePage : 'busca',
+                        testAb: '',
+                        "search": {
+                                terms : '',
+                                type : 'home',
+                                filter : '',
+                                page : ''
+                        }
+        };
+        if(typeof countMetrics == 'function')
+        {
+                countMetrics(Config.Metrics);
+        }
+</script>
+</body>
+</html>
