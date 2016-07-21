@@ -33,7 +33,7 @@ and open the template in the editor.
           $x=0;
           $y=0;
           $sinistro_ant=null;
-          echo '<table border=1 align=center cellspacing=0 spanspacing=0>';      
+          echo '<table border=1 align=center cellspacing=0 spanspacing=0 class="tabela">';      
           echo "<tr><th>SINISTRO</th><th>BENEFICIARIO</th><th>VL. INDENIZADO</th></tr>";
             foreach($dao->listaConteudo($tabela) as $item){ 
               if($item['vlindeniza'] != 0){
@@ -48,8 +48,8 @@ and open the template in the editor.
             }
            // echo "$quant - $x - $total - $y";die;
           echo '</table>';
-          echo '<table align=center border=1 cellspacing=0>';
-          echo '<h3 align=center>RESUMO</h3>';
+          echo '<table align=center border=1 cellspacing=0 class="resumo">';
+          echo '<th colspan=3>RESUMO</th>';
           echo '<tr><th>SINISTROS</th><th>BENEFICIARIOS</th><th>TOTAL A INDENIZAR</th></tr>';
           echo '<tr><td align=right>'.number_format($y,'0','','.').'</td><td align=right>'.number_format($x,'0','','.').'</td><td align=right>R$ '.number_format($total,'2',',','.').'</td></tr>';
           echo '</table>';
