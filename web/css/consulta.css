@@ -1,0 +1,23 @@
+#menu{
+    background-color: #ccc;
+    width: 85%;
+    height: 30px;
+    margin: auto;
+}
+
+ul li{
+    list-style: none;
+    display: inline;
+    font-family:  "Verdana";
+    padding: 5px;
+}
+ul{
+    padding-top: 10px;
+}
+ul li:hover{
+    list-style: none;
+    display: inline;
+    font-family:  "Verdana";
+    padding: 5px;
+    background-color: white;
+}

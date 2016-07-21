@@ -90,13 +90,32 @@ this.cid = (f != '') ? 'inferior' : 'superior';
 h+=(fl) ? '<div class="barrauol-bg'+((f != '') ? ' barrauolbg-pos'+f : '')+' full">' : '';
 h+='<div id="barrauol'+((f != '') ? '_'+f : '')+'" class="buol2011'+(fl ? '':' barrauol-bg')+'">'+
 '<ul>'+
-'<li class="logouol"><a href="'+c+'http://www.uol.com.br/" target="_top" title="UOL - O melhor conte&uacute;do"><img src="http://imguol.com/c/_layout/v1/_geral/icones/logo-uol-2.png" border="0" width="61" height="21" alt="UOL - O melhor conte&uacute;do" title="UOL - O melhor conte&uacute;do" /></a></li>'+
-'<li class="suporte assinen"><a href="'+c+'http://clicklogger.rm.uol.com.br/?prd=1&grp=src:10;creative:barrauol&msr=Cliques%20de%20Origem:1&oper=11&redir=http://assine.uol.com.br/index.htm?eos=yes&promo=117570810&sg=300016192&sa=UOL-barra-assine&promochild=PROMOCOMBIAVSS" target="_top"><strong>Assine</strong><span> 0800 703 3000</span></a></li>'+
-'<li class="suporte sacn"><a href="'+c+'http://click.uol.com.br/?rf=barrageral&amp;u=https://sac.uol.com.br/">SAC</a></li>'; 
+'<li class="logouol">'
+
+'<!--<a href="'+c+'http://www.uol.com.br/" target="_top" title="UOL - O melhor conte&uacute;do"><img src="http://imguol.com/c/_layout/v1/_geral/icones/logo-uol-2.png" border="0" width="61" height="21" alt="UOL - O melhor conte&uacute;do" title="UOL - O melhor conte&uacute;do" /></a>-->'
+
+'</li>'+
+        
+'<li class="suporte assinen">'
+
+'<!--<a href="'+c+'http://clicklogger.rm.uol.com.br/?prd=1&grp=src:10;creative:barrauol&msr=Cliques%20de%20Origem:1&oper=11&redir=http://assine.uol.com.br/index.htm?eos=yes&promo=117570810&sg=300016192&sa=UOL-barra-assine&promochild=PROMOCOMBIAVSS" target="_top"><strong>Assine</strong><span> 0800 703 3000</span></a>-->'
+
+'</li>'+
+'<li class="suporte sacn">'
+
+'<!--<a href="'+c+'http://click.uol.com.br/?rf=barrageral&amp;u=https://sac.uol.com.br/">SAC</a>-->'
+
+'</li>'; 
 for (var j = 0; j < this.config.canais.length; j++) {
  h += this.li(this.config.canais[j].label,'canal buol_'+this.config.canais[j].classname, this.config.canais[j].url);
 }
-h+= '<li class="canal buol_home-page"><a href="http://click.uol.com.br/?rf=home2011-cabecalho-pagina-inicial&u=http://www.uol.com.br/p15"><i class="icone-casa-barraUOL"><!-- icone --></i></a><div><span>Fa&ccedil;a do UOL sua home page</span></div></li>';
+h+= '<li class="canal buol_home-page">'
+        
+'<!--<a href="http://click.uol.com.br/?rf=home2011-cabecalho-pagina-inicial&u=http://www.uol.com.br/p15"><i class="icone-casa-barraUOL"><!-- icone --></i></a>-->'
+        
+'<div><span></span></div>'
+        
+'</li>';
 h+= '</ul>'+
 '</div><div style="clear: left;"></div>';
 h+=(fl) ? '</div>' : '';
@@ -107,7 +126,7 @@ return h;
 },
 
 copyright : function(){
-	return '<div id="copyright">&copy; 1996-2015 UOL - O melhor conte&uacute;do. Todos os direitos reservados.</div>';
+	return '<div id="copyright">Processos de Sinistro - Federal de Seguros S.A. em Liquidação Extrajudicial.</div>';
 } 
 
 };
