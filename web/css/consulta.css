@@ -33,9 +33,22 @@ body{
 .resumo{
    position: absolute;
    top: 60px;
-   right: 150px;
+   #margin: auto;
+   right: 32%;
 }
 .tabela{
+    #position: relative;
+    #top: 115px;
+}
+#geral{
     position: relative;
-    top: 50px;
+    top: 112px;
+    height: 250px;  
+    overflow: auto;
+}
+th{
+    background-color: #ccc;
+}
+td{
+    background-color: white;
 }

@@ -22,7 +22,7 @@ final class OdbcDao {
       while($linha = odbc_fetch_array($statement)){
         $result[]=$linha;
       }
-      return $result;
+      return @$result;
     }
     public function listaTabela(){	
         $result = odbc_tables($this->getDb());
@@ -40,10 +40,19 @@ final class OdbcDao {
         return $result;
         odbc_result($result,'Border=1 cellspacing=0 cellpadding=5'); 
     }
-    public function listaCampo($tabela,$campo,$busca){
-        $sql = "SELECT * FROM $tabela WHERE $campo like '%$busca%'";
+    public function buscaConsolidada($tabela1,$tabela2,$col1,$col2){
+        $sql = "SELECT * FROM $tabela1 INNER JOIN $tabela2 ON $tabela1.$col1=$tabela2.$col2 WHERE 1";
         $conn = new OdbcDao();
-        $result=$conn -> query($sql);
+        $result=$conn->query($sql);
+        return $result;
+    }
+    public function listaCampo($tabela,$campo,$busca){
+        $sql = "SELECT * FROM $tabela WHERE $campo=$busca";
+        $conn = new OdbcDao();
+        @$result=$conn -> query($sql);
+        
+        return @$result_;
+        /*
         echo '<table>';
         while (odbc_fetch_row($result)) {
             //for($x=0;$x<count($data);$x++){
@@ -57,6 +66,7 @@ final class OdbcDao {
             echo "</tr>";
         }
         echo '</table>';
+         */
     }
     public function listaColunas($tabela){
      $conn = new OdbcDao();
