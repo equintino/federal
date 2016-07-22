@@ -1,9 +1,4 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <!--<meta charset="UTF-8">-->
@@ -26,7 +21,18 @@ and open the template in the editor.
           
           //print_r($dao->listaTabela());
           echo '<br><br>';
-          //print_r($dao->listaConteudo($tabela));
+          echo '<pre>';
+          //print_r($dao->listaConteudo($tabela2));
+          echo '</pre>';
+          //die;
+          /*
+          $conn = odbc_connect('ana','','');
+          $result=odbc_exec($conn,"SELECT * FROM $tabela2 WHERE 1 ORDER BY idtitular");
+          var_dump($result);
+          odbc_result_all($result,"border=1");
+          die;
+           * 
+           */
           
           $quant=0;
           $total=0;
@@ -38,24 +44,41 @@ and open the template in the editor.
           echo "<tr><th>SINISTRO</th><th>BENEFICIARIO</th><th>VL. INDENIZADO</th></tr>";
              $sin_numero=0;
             foreach($dao->listaConteudo($tabela2) as $item2){
-             //print_r($dao->listaConteudo($tabela2));die;
               $sinistro_[]=$item2['SINISTRO'];
               $titular[]=$item2['TITULAR'];
               $sin_numero ++;
             }
+            $linha_vazia=0;
             foreach($dao->listaConteudo($tabela) as $item){ 
               if($item['vlindeniza'] != 0){
                 echo "<tr><td align=center>".$item['sinistro']."</td><td>".$item['nome']."</td><td align=right>".number_format($item['vlindeniza'],'2',',','.')."</td></tr>";
-                if($sinistro_ant != $item['sinistro']){
-                    $y++;
+                    if($sinistro_ant != $item['sinistro']){
+                        $y++;
+                    }
+                    $sin_cadastrado[]=$item['sinistro'];
+                    $sinistro_ant=$item['sinistro'];
+                    $total=$total+$item['vlindeniza'];
+                    $x++;
+                }else{
+                    $sin_vazio[]=$item['sinistro'];
+                    $nome_vazio[]=$item['nome'];
+                    $indenizado_vazio[]=$item['vlindeniza'];
+                    $linha_vazia++;
                 }
-                $sin_cadastrado[]=$item['sinistro'];
-                $sinistro_ant=$item['sinistro'];
-                $total=$total+$item['vlindeniza'];
-                $x++;
-              }
             }
-            $campo='sinistro';
+          echo '</table>';
+        echo "</div>";
+        echo "<br><br><br><br><br><br>";
+        echo "<div>";
+            echo "<h3 align='center'><span>Cadastros Benefici&aacute;rios Incompletos</span></h3>";
+            echo "<table border=1 align=center cellspacing=0 spanspacing=0><tr><th>SINISTRO</th><th>BENEFICI&Aacute;RIO</th><th>VL. INDENIZADO</th></tr>";
+            for($a=0;$a<count($sin_vazio);$a++){
+                if($sin_vazio[$a]!=null){
+                    echo "<tr><td>".$sin_vazio[$a]."</td><td>".$nome_vazio[$a]."</td><td>".$indenizado_vazio[$a]."</td></tr>";
+                }
+            }
+        echo "</div>";
+        $campo='sinistro';
             //print_r($dao->listaCampo($tabela,$campo,93));
            /* echo '<tr><th>SINISTRO</th><th colspan=2>TITULAR</th></tr>';
             foreach ($sinistro_ as $key => $z){
@@ -65,14 +88,16 @@ and open the template in the editor.
                 echo '<tr><td>'.$z.'</td><td colspan=2>'.$titular[$key].'</td></tr>';
                }
             }*/
-          echo '</table>';
-        echo "</div>";
           echo '<table align=center border=1 cellspacing=0 class="resumo">';
           echo '<th colspan=3>RESUMO</th>';
-          echo '<tr><th>SINISTROS</th><th>BENEFICIARIOS</th><th>TOTAL A INDENIZAR</th></tr>';
+          echo '<tr><th>SINISTROS</th><th>BENEFICI&Aacute;RIOS</th><th>TOTAL A INDENIZAR</th></tr>';
           echo '<tr><td align=right>'.number_format($y,'0','','.').'</td><td align=right>'.number_format($x,'0','','.').'</td><td align=right>R$ '.number_format($total,'2',',','.').'</td></tr>';
-          echo '<tr><th colspan=3>SINISTROS IMPORTADOS <br>SEM BENEFICIÁRIOS CADASTRADOS</th></tr>';
+          echo '<tr><th colspan=3>IMPORTADOS - CADASTRADOS = <span>p/ cadastrar</span></th></tr>';
           echo '<tr><td colspan=3 align=center>';
+          echo number_format($sin_numero,'0','','.');
+          echo ' - ';
+          echo number_format($y,'0','','.');
+          echo ' = ';
           echo number_format($sin_numero-$y,'0','','.');
           echo '</td></tr>';
           die;
