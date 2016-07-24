@@ -12,7 +12,11 @@
 <?php
   if($act=='sinistro'){
    echo "<div class='construcao'>";
+<<<<<<< HEAD
    echo "<img height=300px src='img/em_construcao.png' />";
+=======
+   echo "<img height=400px src='img/em_construcao.jpg' />";
+>>>>>>> 762e151a234194756bd742c2c786eba023ac9be4
    echo "</div>";
   }
   if($act=='relatorio'){
