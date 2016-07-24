@@ -1,0 +1,13 @@
+div {
+  font-family: Arial;
+  padding: 5px;
+  margin-bottom: 10px;
+}  
+input {
+  box-sizing: border-box;
+  padding: 10px;
+  border-radius: 5px;
+  border-color: black;
+  width: 250px;
+  font-size: 1.3em;
+}

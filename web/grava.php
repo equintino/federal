@@ -21,12 +21,12 @@
           //$sql = "SELECT * FROM $tabela WHERE sinistro like '0153.93.03.0000'" ;
           //$sql = "update $tabela set exclui=0 where idbenefi=10978";
           //odbc_exec($conn,$sql);
-          //$sql = "SELECT * FROM $tabela2 WHERE exclui like 1" ;
+          $sql = "SELECT * FROM $tabela WHERE exclui like 1" ;
           //$sql="select * from $tabela where sinistro='0135.93.03.00003491'";
           /// limpar tabela ///
           
-          //$result=odbc_exec($conn,$sql);
-          //odbc_result_all($result,'border=1');
+          $result=odbc_exec($conn,$sql);
+          odbc_result_all($result,'border=1');
           die;
           
           //$sql = "alter table Beneficiarios add exclui int(1)";

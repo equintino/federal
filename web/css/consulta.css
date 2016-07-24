@@ -58,11 +58,13 @@ span{
 }
 .construcao{
     position: relative;
-<<<<<<< HEAD
     top: 50px;
     left: 35%;
-=======
-    top: 100px;
-    left: 30%;
->>>>>>> 762e151a234194756bd742c2c786eba023ac9be4
+}
+button{
+    background: transparent;
+}
+.busca{
+    float: right;
+    margin: 10px 90px;
 }

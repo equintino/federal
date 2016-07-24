@@ -5,13 +5,7 @@
         <title>Relatorio</title>
     </head>
     <body>
-        <?php
-          include '../dao/OdbcDao.php';
-          include '../dao/OdbcSearchCriteria.php';
-          include '../config/Config.php';
-          include '../model/Odbc.php';
-          include '../mapping/OdbcMapper.php';
-        
+        <?php        
           $dao = new OdbcDao();
           //$search = new OdbcSearchCriteria();
           //$search->setsinistro(93);
@@ -20,17 +14,11 @@
           $tabela2='sinipend';
           
           //print_r($dao->listaTabela());
-<<<<<<< HEAD
           echo '<br>';
           //echo '<pre>';
           //print_r($dao->listaConteudo($tabela2));
           //echo '</pre>';
-=======
-          echo '<br><br>';
-          echo '<pre>';
-          //print_r($dao->listaConteudo($tabela2));
-          echo '</pre>';
->>>>>>> 762e151a234194756bd742c2c786eba023ac9be4
+
           //die;
           /*
           $conn = odbc_connect('ana','','');
@@ -50,7 +38,6 @@
           echo '<table border=1 align=center cellspacing=0 spanspacing=0 class="tabela">';      
           echo "<tr><th>SINISTRO</th><th>BENEFICIARIO</th><th>VL. A INDENIZAR</th></tr>";
              $sin_numero=0;
-<<<<<<< HEAD
              if($dao->listaConteudo($tabela2)){
               foreach($dao->listaConteudo($tabela2) as $item2){
                $sinistro_[]=$item2['SINISTRO'];
@@ -60,14 +47,6 @@
              }
             $linha_vazia=0;
             if($dao->listaConteudo($tabela)){
-=======
-            foreach($dao->listaConteudo($tabela2) as $item2){
-              $sinistro_[]=$item2['SINISTRO'];
-              $titular[]=$item2['TITULAR'];
-              $sin_numero ++;
-            }
-            $linha_vazia=0;
->>>>>>> 762e151a234194756bd742c2c786eba023ac9be4
             foreach($dao->listaConteudo($tabela) as $item){ 
               if($item['vlindeniza'] != 0){
                 echo "<tr><td align=center>".$item['sinistro']."</td><td>".$item['nome']."</td><td align=right>".number_format($item['vlindeniza'],'2',',','.')."</td></tr>";
@@ -85,23 +64,16 @@
                     $linha_vazia++;
                 }
             }
-<<<<<<< HEAD
            }
-=======
->>>>>>> 762e151a234194756bd742c2c786eba023ac9be4
           echo '</table>';
         echo "</div>";
         echo "<br><br><br><br><br><br>";
         echo "<div>";
             echo "<h3 align='center'><span>Cadastros Benefici&aacute;rios Incompletos</span></h3>";
-<<<<<<< HEAD
             echo "<table border=1 align=center cellspacing=0 spanspacing=0><tr><th>SINISTRO</th><th>BENEFICI&Aacute;RIO</th><th>VL. A INDENIZAR</th></tr>";
             if(@!$sin_vazio){
              $sin_vazio=null;
             }
-=======
-            echo "<table border=1 align=center cellspacing=0 spanspacing=0><tr><th>SINISTRO</th><th>BENEFICI&Aacute;RIO</th><th>VL. INDENIZADO</th></tr>";
->>>>>>> 762e151a234194756bd742c2c786eba023ac9be4
             for($a=0;$a<count($sin_vazio);$a++){
                 if($sin_vazio[$a]!=null){
                     echo "<tr><td>".$sin_vazio[$a]."</td><td>".$nome_vazio[$a]."</td><td>".$indenizado_vazio[$a]."</td></tr>";

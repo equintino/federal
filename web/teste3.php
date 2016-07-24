@@ -1,6 +1,12 @@
 <link rel="stylesheet" type="text/css" href="css/consulta.css" />
 <?php
+          include '../dao/OdbcDao.php';
+          include '../dao/OdbcSearchCriteria.php';
+          include '../config/Config.php';
+          include '../model/Odbc.php';
+          include '../mapping/OdbcMapper.php';
    @$act=$_GET['act'];
+   @$busca=$_GET['busca'];
 ?>
 <div id='menu'>
     <ul>
@@ -11,13 +17,13 @@
 </div>
 <?php
   if($act=='sinistro'){
-   echo "<div class='construcao'>";
-<<<<<<< HEAD
-   echo "<img height=300px src='img/em_construcao.png' />";
-=======
-   echo "<img height=400px src='img/em_construcao.jpg' />";
->>>>>>> 762e151a234194756bd742c2c786eba023ac9be4
+   echo "<div class='busca'>";
+   //echo "<img height=300px src='img/em_construcao.png' />";
+   include_once 'busca.php';
    echo "</div>";
+    if($busca=='sinistro'){
+     print_r($_POST);
+    }
   }
   if($act=='relatorio'){
    include_once 'teste2.php';
