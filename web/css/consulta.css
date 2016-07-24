@@ -42,7 +42,7 @@ body{
 }
 #geral{
     position: relative;
-    top: 112px;
+    top: 115px;
     height: 250px;  
     overflow: auto;
 }
@@ -51,4 +51,13 @@ th{
 }
 td{
     background-color: white;
+}
+span{
+    color: red;
+    font-style: italic;
+}
+.construcao{
+    position: relative;
+    top: 50px;
+    left: 35%;
 }

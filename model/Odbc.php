@@ -85,9 +85,9 @@ final class Odbc {
     private $banco;
     private $agencia;
     private $conta;
-    private $CreateOn;
-    private $LastModifiedOn;
-    private $Deleted;
+    private $abertura;
+    private $modificacao;
+    private $exclui;
 
     // colunas tabela Beneficiarios //
     private $CÓDIGO;
@@ -98,9 +98,9 @@ final class Odbc {
     public function __construct() {
         date_default_timezone_set ( "America/Sao_Paulo" );
         $now = new DateTime();
-        $this->setCreatedOn($now);
-        $this->setLastModifiedOn($now);
-        $this->setDeleted(false);
+        $this->setabertura($now);
+        $this->setmodificacao($now);
+        $this->setexclui(false);
     }
     public static function variaveis($dados){
       foreach($dados as $item){
@@ -153,12 +153,12 @@ final class Odbc {
     /**
      * @return DateTime
      */
-    public function getCreatedOn() {
-        return $this->createdOn;
+    public function getabertura() {
+        return $this->abertura;
     }
 
-    public function setCreatedOn(DateTime $createdOn) {
-        $this->createdOn = $createdOn;
+    public function setabertura(DateTime $abertura) {
+        $this->abertura = $abertura;
     }
 
     /**
@@ -196,12 +196,12 @@ final class Odbc {
     /**
      * @return DateTime
      */
-    public function getLastModifiedOn() {
-        return $this->lastModifiedOn;
+    public function getmodificacao() {
+        return $this->modificacao;
     }
 
-    public function setLastModifiedOn(DateTime $lastModifiedOn) {
-        $this->lastModifiedOn = $lastModifiedOn;
+    public function setmodificacao(DateTime $modificacao) {
+        $this->modificacao = $modificacao;
     }
     public function getEficazData() {
         return $this->eficaz_data;
@@ -360,12 +360,12 @@ final class Odbc {
     /**
      * @return boolean
      */
-    public function getDeleted() {
-        return $this->deleted;
+    public function getexclui() {
+        return $this->exclui;
     }
 
-    public function setDeleted($deleted) {
-        $this->deleted = (bool) $deleted;
+    public function setexclui($exclui) {
+        $this->exclui = (bool) $exclui;
     }
     
     //// tabela Beneficiarios ////

@@ -5,13 +5,15 @@
 <div id='menu'>
     <ul>
         <a href="teste3.php"><li>HOME</li></a>
-        <a href="teste3.php?act=sinistro"><li>CONSULTA BENEFICIÁRIOS</li></a>
-        <a href="teste3.php?act=relatorio"><li>RELATÓRIOS</li></a>
+        <a href="teste3.php?act=sinistro"><li>CONSULTA BENEFICI&Aacute;RIOS</li></a>
+        <a href="teste3.php?act=relatorio"><li>RELAT&Oacute;RIOS</li></a>
     </ul>
 </div>
 <?php
   if($act=='sinistro'){
-   
+   echo "<div class='construcao'>";
+   echo "<img height=300px src='img/em_construcao.png' />";
+   echo "</div>";
   }
   if($act=='relatorio'){
    include_once 'teste2.php';

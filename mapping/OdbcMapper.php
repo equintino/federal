@@ -94,10 +94,10 @@ class OdbcMapper {
         }
          * 
          */
-        if (array_key_exists('created_on', $properties)) {
-            $createdOn = self::createDateTime($properties['created_on']);
-            if ($createdOn) {
-                $odbc->setCreatedOn($createdOn);
+        if (array_key_exists('abertura', $properties)) {
+            $abertura = self::createDateTime($properties['abertura']);
+            if ($abertura) {
+                $odbc->setCreatedOn($abertura);
             }
         }
         if (array_key_exists('due_on', $properties)) {
@@ -106,17 +106,17 @@ class OdbcMapper {
                 $odbc->setDueOn($dueOn);
             }
         }
-        if (array_key_exists('last_modified_on', $properties)) {
-            $lastModifiedOn = self::createDateTime($properties['last_modified_on']);
-            if ($lastModifiedOn) {
-                $odbc->setLastModifiedOn($lastModifiedOn);
+        if (array_key_exists('modificacao', $properties)) {
+            $modificacao = self::createDateTime($properties['modificacao']);
+            if ($modificacao) {
+                $odbc->setmodificacao($modificacao);
             }
         }
         if (array_key_exists('status', $properties)) {
             $odbc->setStatus($properties['status']);
         }
-        if (array_key_exists('deleted', $properties)) {
-            $odbc->setDeleted($properties['deleted']);
+        if (array_key_exists('exclui', $properties)) {
+            $odbc->setexclui($properties['exclui']);
         }
     }
     private static function createDateTime($input) {

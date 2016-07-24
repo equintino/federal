@@ -24,6 +24,13 @@ final class OdbcDao {
       }
       return @$result;
     }
+    public function query2($sql) {
+      $statement = odbc_exec($this->getDb(),$sql);
+      //while($linha = odbc_fetch_array($statement)){
+        //$result[]=$linha;
+      //}
+      return $statement;
+    }
     public function listaTabela(){	
         $result = odbc_tables($this->getDb());
         $tables = array();
@@ -34,7 +41,7 @@ final class OdbcDao {
         return $tabelas;
     }
     public function listaConteudo($tabela){
-        $sql = "SELECT * FROM $tabela WHERE 1";
+        $sql = "SELECT * FROM $tabela WHERE `exclui` like '%0%'";
         $conn = new OdbcDao();
         $result=$conn -> query($sql);
         return $result;
@@ -71,8 +78,11 @@ final class OdbcDao {
     public function listaColunas($tabela){
      $conn = new OdbcDao();
      $sql = "SELECT * FROM $tabela WHERE 1";
-     $result=$conn->query($sql);
+     $result=$conn->query2($sql);
+     //print_r($result);
+     //var_dump(odbc_num_fields($result));die;
      $colunas_num=odbc_num_fields($result);
+     //print_r($colunas_num);
      for($x=1;$x<$colunas_num+1;$x++){
        $colunas[]=odbc_field_name($result,$x);
      }
@@ -163,5 +173,97 @@ final class OdbcDao {
         }
         $sql .= ' ORDER BY ' . $orderBy;
         return $sql;
+    }
+    public function save($odbc){
+      if($odbc->getidbenefi === null){
+       return insert($odbc);
+      }
+      return update($odbc);
+    }
+    public function insert($odbc){
+        $now = new DateTime();
+        $odbc->setidbenefi(null);
+        $odbc->setCreatedOn($now);
+        $odbc->setLastModifiedOn($now);
+        
+        $sql = '
+            INSERT INTO Beneficiarios (idbenefi,idtitular,sinistro,apolice,endosso,nome,tipo,endereco,numero,complemento,bairro,municipio,estado,uf,cep,vlindeniza,tpcobertura,cpf,identidade,percentual,tel_fixo,tel_cel,email,banco,agencia,conta,abertura,modificacao,exclui)
+                VALUES (:idbenefi,:idtitular,:sinistro,:apolice,:endosso,:nome,:tipo,:endereco,:numero,:complemento,:bairro,:municipio,:estado,:uf,:cep,:vlindeniza,:tpcobertura,:cpf,:identidade,:percentual,:tel_fixo,:tel_cel,:email,:banco,:agencia,:conta,:abertura,:modificacao,:exclui)';
+        return $this->odbc_exe($sql, $odbc);
+    }
+    public function update($odbc){
+        $odbc->setLastModifiedOn(new DateTime(), new DateTimeZone('America/Sao_Paulo'));
+        $sql = '
+          UPDATE Beneficiarios SET 
+            idbenefi=:idbenefi,
+            idtitular=:idtitular,
+            sinistro=:sinistro,
+            apolice=:apolice,
+            endosso=:endosso,
+            nome=:nome,
+            tipo=:tipo,
+            endereco=:endereco,
+            numero=:numero,
+            complemento=:complemento,
+            bairro=:bairro,
+            municipio=:municipio,
+            estado=:estado,
+            uf=:uf,
+            cep=:cep,
+            vlindeniza=:vlindeniza,
+            tpcobertura=:tpcobertura,
+            cpf=:cpf,
+            identidade=:identidade,
+            percentual=:percentual,
+            tel_fixo=:tel_fixo,
+            tel_cel=:tel_cel,
+            email=:email,
+            banco=:banco,
+            agencia=:agencia,
+            conta=:conta,
+            abertura=:abertura,
+            modificacao=:modificacao,
+            exclui=:exclui
+          WHERE
+            idbenefi = :idbenefi';
+        return $this->execute($sql, $odbc);
+     
+    }
+    private function getParams(Odbc $odbc) {
+        $params = array(
+            'idbenefi' => $odbc->getidbenefi(),
+            ':idtitular' => $odbc->getidtitular(),
+            ':sinistro' => $odbc->getsinistro(),
+            ':apolice' => $odbc->getapolice(),
+            ':endosso' => $odbc->getendosso(),
+            ':nome' => $odbc->getnome(),
+            ':tipo' => $odbc->gettipo(),
+            ':endereco' => $odbc->getendereco(),
+            ':numero' => $odbc->getnumero(),
+            ':complemento' => $odbc->getcomplemento(),
+            ':bairro' => $odbc->getbairro(),
+            ':municipio' => $odbc->getmunicipio(),
+            ':estado' => $odbc->getestado(),
+            ':uf' => $odbc->getuf(),
+            ':cep' => $odbc->getcep(),
+            ':vlindeniza' => $odbc->getvlindeniza(),
+            ':tpcobertura' => $odbc->gettpcobertura(),
+            ':cpf' => $odbc->getcpf(),
+            ':identidade' => $odbc->getidentidade(),
+            ':percentual' => $odbc->getpercentual(),
+            ':tel_fixo' => $odbc->gettel_fixo(),
+            ':tel_cel' => $odbc->gettel_cel(),
+            ':email' => $odbc->getemail(),
+            ':banco' => $odbc->getbanco(),
+            ':agencia' => $odbc->getagencia(),
+            ':conta' => $odbc->getconta(),
+            ':abertura' => self::formatDateTime($odbc->getabertura()),
+            ':modificacao' => self::formatDateTime($odbc->getmodificacao()),
+            ':exclui' => $odbc->getexclui()
+        );
+        if ($odbc->getidbenefi()) {
+            unset($params[':abertura']);
+        }
+        return $params;
     }
 }
