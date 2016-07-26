@@ -18,8 +18,8 @@ final class OdbcDao {
         return $this->db;
     }
     public function query($sql) {
-        //print_r($sql);die;
-        $sql = "SELECT * FROM Beneficiarios WHERE exclui like 0";
+        //var_dump($this->getDb(),$sql);die;
+        //$sql = "SELECT * FROM Beneficiarios WHERE exclui like 0";
       $statement = odbc_exec($this->getDb(),$sql);
         //print_r($statement);die;
       while($linha = odbc_fetch_array($statement)){
@@ -43,8 +43,8 @@ final class OdbcDao {
         }
         return $tabelas;
     }
-    public function listaConteudo($tabela){
-        $sql = "SELECT * FROM $tabela WHERE `exclui` like '%0%'";
+    public function listaConteudo($table){
+        $sql = "SELECT * FROM $table WHERE exclui like 0";
         $conn = new OdbcDao();
         $result=$conn -> query($sql);
         return $result;
@@ -180,7 +180,10 @@ final class OdbcDao {
     private function getBuscaSql(OdbcSearchCriteria $search = null){
         $sql = "SELECT * FROM Beneficiarios WHERE ";
         $orderBy = 'sinistro';
-        if ($search !== null) {
+        //print_r($search->getnome());
+        //echo '<br>';
+        if ($search->getnome() !== '' && $search->getsinistro() !== '') {
+            //echo "search nao esta nulo".$search->getnome();die;
             if ($search->getsinistro() != null ) {
                 //echo "sinistro defenido";
                 $sql .= "sinistro = '".$search->getsinistro()."'";
@@ -189,7 +192,9 @@ final class OdbcDao {
                 $sql .= "nome like '%".$search->getnome()."%'";
             }
         }else{
-          $sql.= 1;
+            //echo $search->getsinistro();
+            //echo "search esta nulo";die;
+          $sql.=' 1';
         }
         //$sql .= " AND exclui like '0' ";
         //$sql .= ' ORDER BY ' . $orderBy;

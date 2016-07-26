@@ -5,27 +5,27 @@
 final class Odbc {
 
     // priority
-    const PRIORITY_HIGH = 1;
-    const PRIORITY_MEDIUM = 2;
-    const PRIORITY_LOW = 3;
+    //const PRIORITY_HIGH = 1;
+    //const PRIORITY_MEDIUM = 2;
+    //const PRIORITY_LOW = 3;
     // status
-    const STATUS_PENDING = "PENDENTE";
-    const STATUS_DONE = "RESOLVIDA";
-    const STATUS_VOIDED = "VENCIDO";
-    const STATUS_CANCELADO = "CANCELADO";
-    const ANDAMENTO = 0;
+    //const STATUS_PENDING = "PENDENTE";
+    //const STATUS_DONE = "RESOLVIDA";
+    //const STATUS_VOIDED = "VENCIDO";
+    //const STATUS_CANCELADO = "CANCELADO";
+    //const ANDAMENTO = 0;
 
     /** @var int */
     //private $id;
     /** @var string */
     //private $priority;
     /** @var DateTime */
-    private $createdOn;
+    //private $createdOn;
     /** @var DateTime */
-    private $dueOn;
+    //private $dueOn;
     //private $prazo;
     /** @var DateTime */
-    private $lastModifiedOn;
+    //private $lastModifiedOn;
     /** @var string */
     //private $title;
     /** @var string */
@@ -33,9 +33,9 @@ final class Odbc {
     /** @var string */
     //private $comment;
     /** @var string one of PENDING/COMPLETED/VOIDED */
-    private $status;
+    //private $status;
     /** @var boolean */
-    private $deleted;
+    //private $deleted;
     //private $titulo;
     //private $comentario;
     //private $detalhamento;
@@ -90,8 +90,8 @@ final class Odbc {
     private $exclui;
 
     // colunas tabela Beneficiarios //
-    private $CÓDIGO;
-    private $COBERTURA;
+    private $codigo;
+    private $cobertura;
     
     //private $status;
     
@@ -108,7 +108,7 @@ final class Odbc {
        echo "$coluna<br>";
       }
     }
-
+/*
     public static function allStatuses() {
         return array(
             self::STATUS_PENDING,
@@ -124,7 +124,7 @@ final class Odbc {
             self::PRIORITY_LOW,
         );
     }
-
+*/
     //~ Getters & setters
 
     /**
@@ -140,7 +140,7 @@ final class Odbc {
         }
         $this->idtitular = (int) $idtitular;
     }
-        
+/*        
     public function getPriority() {
         return $this->priority;
     }
@@ -149,7 +149,7 @@ final class Odbc {
         OdbcValidator::validatePriority($priority);
         $this->priority = $priority;
     }
-
+*/
     /**
      * @return DateTime
      */
@@ -164,6 +164,7 @@ final class Odbc {
     /**
      * @return DateTime
      */
+  /*
     public function getDueOn() {
         return $this->dueOn;
     }
@@ -203,6 +204,7 @@ final class Odbc {
     public function setmodificacao(DateTime $modificacao) {
         $this->modificacao = $modificacao;
     }
+ /*   
     public function getEficazData() {
         return $this->eficaz_data;
     }
@@ -214,6 +216,7 @@ final class Odbc {
     /**
      * @return string
      */
+   /*
     public function getTitle() {
         return $this->title;
     }
@@ -230,6 +233,7 @@ final class Odbc {
     /**
      * @return string
      */
+ /*   
     public function getDescription() {
         return $this->description;
     }
@@ -247,6 +251,7 @@ final class Odbc {
     /**
      * @return string
      */
+  /* 
     public function getComment() {
         return $this->comment;
     }
@@ -348,6 +353,7 @@ final class Odbc {
     /**
      * @return string one of PENDING/DONE/VOIDED
      */
+ /*
     public function getStatus() {
         return $this->status;
     }
@@ -519,17 +525,17 @@ final class Odbc {
     public function setconta($conta){
         $this->conta = $conta;
     }  
-    public function getCÓDIGO(){
-        return $this->CÓDIGO;
+    public function getcodigo(){
+        return $this->codigo;
     }
-    public function setCÓDIGO($CÓDIGO){
-        $this->CÓDIGO = $CÓDIGO;
+    public function setcodigo($codigo){
+        $this->codigo = $codigo;
     }
-    public function getCOBERTURA(){
-        return $this->COBERTURA;
+    public function getcobertura(){
+        return $this->cobertura;
     }
-    public function setCOBERTURA($COBERTURA){
-        $this->COBERTURA = $COBERTURA;
+    public function setcobertura($cobertura){
+        $this->cobertura = $cobertura;
     }
 }
 ?>

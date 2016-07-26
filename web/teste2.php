@@ -12,6 +12,8 @@
           //$search->setnome('joao');
           $tabela='Beneficiarios';
           $tabela2='sinipend';
+                 //echo "$tabela2";
+                 //print_r($dao->listaConteudo("$tabela2"));die;
           
           //print_r($dao->listaTabela());
           echo '<br>';
@@ -37,12 +39,12 @@
         echo "<div id='geral'>";
           echo '<table border=1 align=center cellspacing=0 spanspacing=0 class="tabela">';      
           echo "<tr><th>SINISTRO</th><th>BENEFICIARIO</th><th>VL. A INDENIZAR</th></tr>";
-             $sin_numero=0;
+             $sin_num=0;
              if($dao->listaConteudo($tabela2)){
               foreach($dao->listaConteudo($tabela2) as $item2){
-               $sinistro_[]=$item2['SINISTRO'];
-               $titular[]=$item2['TITULAR'];
-               $sin_numero ++;
+               @$sinistro_[]=$item2['SINISTRO'];
+               @$titular[]=$item2['TITULAR'];
+               @$sin_num ++;
               }
              }
             $linha_vazia=0;
@@ -96,11 +98,11 @@
           echo '<tr><td align=right>'.number_format($y,'0','','.').'</td><td align=right>'.number_format($x,'0','','.').'</td><td align=right>R$ '.number_format($total,'2',',','.').'</td></tr>';
           echo '<tr><th colspan=3>IMPORTADOS - CADASTRADOS = <span>p/ cadastrar</span></th></tr>';
           echo '<tr><td colspan=3 align=center>';
-          echo number_format($sin_numero,'0','','.');
+          echo number_format($sin_num,'0','','.');
           echo ' - ';
           echo number_format($y,'0','','.');
           echo ' = ';
-          echo number_format($sin_numero-$y,'0','','.');
+          echo number_format($sin_num-$y,'0','','.');
           echo '</td></tr>';
           die;
           //$odbcs = $dao->find2($search);

@@ -26,22 +26,28 @@
    echo "</div>";
    //print_r($_POST);die;
     if($busca=='sinistro'){
-     $dsn='federal';
-     $user='';
-     $password='';
-     $tabela='Beneficiarios';
-     $conn=  odbc_connect($dsn, $user, $password);
+     //$dsn='federal';
+     //$user='';
+     //$password='';
+     //$tabela='Beneficiarios';
+     //$conn=  odbc_connect($dsn, $user, $password);
+     
      $dao=new OdbcDao();
+     //print_r($dao);die;
      $odbc=new Odbc();
+     //print_r($odbc);die;
      $search=new OdbcSearchCriteria();
-     //echo $sinistro;
+     //print_r($search);die;
+     //echo $sinistro;die;
      //var_dump(preg_match('/^[a-z,A-Z]/', $sinistro));die;
      if(preg_match('/^[a-z,A-Z]/', $sinistro)){
+         //echo "nome";die;
          $search->setnome($sinistro);
          //print_r($search);die;
         $dao->busca($search);
       //$sql="select * from $tabela where nome like '%$sinistro%' and exclui like 0";
      }else{
+         //echo "numero";die;
          //echo "<h1>$num_sinistro</h1>";
          $search->setsinistro($num_sinistro);
          //print_r($search);die;
@@ -49,7 +55,9 @@
       //$sql="select * from $tabela where sinistro like '%".$num_sinistro."%' and exclui like 0";
      }
      
-     
+     //die;
+     //print_r($search);die;
+     echo "<br><br>";
      print_r($dao->busca($search));die;
      $result_id=odbc_exec($conn,$sql);
      odbc_result_all($result_id, 'border=1');

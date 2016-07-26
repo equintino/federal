@@ -15,17 +15,19 @@
           $conn=odbc_connect('federal','','');
           /// limpar tabela ///
           //$sql = "ALTER TABLE `".$tabela2."` ADD `".$file_x."` varchar(1) NOT NULL ;";// CRIA COLUNA EXCLUI
-          //$sql="UPDATE `$tabela2` SET `".$file_x."`=0 WHERE 1";//zera o conteudo exclui
+          $sql="UPDATE `$tabela2` SET `".$file_x."`=0 WHERE 1";//zera o conteudo exclui
           //$sql="update $tabela2 set exclui=1 where SINISTRO=' '";
           //$sql = "update $tabela set exclui=1 where sinistro like '0153.93.03.0000'" ;
           //$sql = "SELECT * FROM $tabela WHERE sinistro like '0153.93.03.0000'" ;
           //$sql = "update $tabela set exclui=0 where idbenefi=10978";
-          //odbc_exec($conn,$sql);
-          $sql="SELECT * FROM Beneficiarios WHERE nome like '%edmilson%' AND exclui like '0'";
+          odbc_exec($conn,$sql);
+          //$sql="SELECT * FROM Beneficiarios WHERE nome like '%edmilson%' AND exclui like '0'";
           //$sql = "SELECT * FROM $tabela WHERE sinistro like '0153.93.03.0000'" ;
           //$sql="select * from $tabela where sinistro='0135.93.03.00003491'";
           /// limpar tabela ///
           
+          
+          $sql="select * from $tabela2 where 1 order by idtitular desc";
           $result=odbc_exec($conn,$sql);
           odbc_result_all($result,'border=1');
           die;
