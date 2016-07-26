@@ -8,6 +8,8 @@
    @$act=$_GET['act'];
    @$busca=$_GET['busca'];
    @$sinistro=$_POST['sinistro'];
+   @$num_sinistro=$_POST['num_sinistro'];
+   //print_r($_POST);die;
 ?>
 <div id='menu'>
     <ul>
@@ -22,19 +24,33 @@
    //echo "<img height=300px src='img/em_construcao.png' />";
    include_once 'busca.php';
    echo "</div>";
+   //print_r($_POST);die;
     if($busca=='sinistro'){
      $dsn='federal';
      $user='';
      $password='';
      $tabela='Beneficiarios';
      $conn=  odbc_connect($dsn, $user, $password);
+     $dao=new OdbcDao();
+     $odbc=new Odbc();
+     $search=new OdbcSearchCriteria();
      //echo $sinistro;
      //var_dump(preg_match('/^[a-z,A-Z]/', $sinistro));die;
      if(preg_match('/^[a-z,A-Z]/', $sinistro)){
-      $sql="select * from $tabela where nome like '%$sinistro%' and exclui like 0";
+         $search->setnome($sinistro);
+         //print_r($search);die;
+        $dao->busca($search);
+      //$sql="select * from $tabela where nome like '%$sinistro%' and exclui like 0";
      }else{
-      $sql="select * from $tabela where sinistro like '%".$sinistro."%' and exclui like 0";
+         //echo "<h1>$num_sinistro</h1>";
+         $search->setsinistro($num_sinistro);
+         //print_r($search);die;
+        $dao->busca($search);
+      //$sql="select * from $tabela where sinistro like '%".$num_sinistro."%' and exclui like 0";
      }
+     
+     
+     print_r($dao->busca($search));die;
      $result_id=odbc_exec($conn,$sql);
      odbc_result_all($result_id, 'border=1');
     }

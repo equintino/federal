@@ -18,7 +18,10 @@ final class OdbcDao {
         return $this->db;
     }
     public function query($sql) {
+        //print_r($sql);die;
+        $sql = "SELECT * FROM Beneficiarios WHERE exclui like 0";
       $statement = odbc_exec($this->getDb(),$sql);
+        //print_r($statement);die;
       while($linha = odbc_fetch_array($statement)){
         $result[]=$linha;
       }
@@ -158,6 +161,40 @@ final class OdbcDao {
             //echo '<br>';
         //print_r($result);die;
         return @$result;
+    }
+    public function busca(OdbcSearchCriteria $search = null){
+        //print_r($search);
+        //print_r($this->getBuscaSql($search));
+        //$busca = $this->query("select * from Beneficiarios where sinistro='0153.93.03.00001654'");
+        $busca = $this->query($this->getBuscaSql($search));
+        //print_r($busca);die;
+        foreach ($busca as $key => $row) {
+            $odbc = new Odbc();
+            OdbcMapper::map($odbc, $row);
+            $result[$odbc->getsinistro()] = $odbc;
+        }
+            //print_r($odbc);die;
+        //print_r($result);die;
+        return @$result;
+    }
+    private function getBuscaSql(OdbcSearchCriteria $search = null){
+        $sql = "SELECT * FROM Beneficiarios WHERE ";
+        $orderBy = 'sinistro';
+        if ($search !== null) {
+            if ($search->getsinistro() != null ) {
+                //echo "sinistro defenido";
+                $sql .= "sinistro = '".$search->getsinistro()."'";
+            }elseif($search->getnome() != null){
+                //echo "nome defenido";
+                $sql .= "nome like '%".$search->getnome()."%'";
+            }
+        }else{
+          $sql.= 1;
+        }
+        //$sql .= " AND exclui like '0' ";
+        //$sql .= ' ORDER BY ' . $orderBy;
+        return $sql;
+        
     }
     private function getFindSql2(OdbcSearchCriteria $search = null) {
      //print_r(foreach($this->query($search) as $item));die;

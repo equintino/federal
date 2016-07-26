@@ -21,7 +21,8 @@
           //$sql = "SELECT * FROM $tabela WHERE sinistro like '0153.93.03.0000'" ;
           //$sql = "update $tabela set exclui=0 where idbenefi=10978";
           //odbc_exec($conn,$sql);
-          $sql = "SELECT * FROM $tabela WHERE exclui like 1" ;
+          $sql="SELECT * FROM Beneficiarios WHERE nome like '%edmilson%' AND exclui like '0'";
+          //$sql = "SELECT * FROM $tabela WHERE sinistro like '0153.93.03.0000'" ;
           //$sql="select * from $tabela where sinistro='0135.93.03.00003491'";
           /// limpar tabela ///
           
