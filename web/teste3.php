@@ -9,6 +9,7 @@
    @$busca=$_GET['busca'];
    @$sinistro=$_POST['sinistro'];
    @$num_sinistro=$_POST['num_sinistro'];
+   @$vlindeniza=$_POST['vlindeniza'];
 ?>
 <div id='menu'>
     <ul>
@@ -43,15 +44,19 @@
      if(preg_match('/^[a-z,A-Z]/', $sinistro)){
          //echo "nome";die;
          $search->setnome($sinistro);
+         $search->setvlindeniza($vlindeniza);
          //print_r($search);die;
         $odbcs=$dao->busca($search);
+        //print_r($odbcs);die;
       //$sql="select * from $tabela where nome like '%$sinistro%' and exclui like 0";
      }else{
          //echo "numero";die;
          //echo "<h1>$num_sinistro</h1>";
          $search->setsinistro($num_sinistro);
+         $search->setvlindeniza($vlindeniza);
          //print_r($search);die;
         $odbcs=$dao->busca($search);
+        //print_r($odbcs);die;
       //$sql="select * from $tabela where sinistro like '%".$num_sinistro."%' and exclui like 0";
      }
      

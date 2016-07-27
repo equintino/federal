@@ -4,6 +4,7 @@ final class OdbcSearchCriteria {
  
     private $sinistro = null;
     private $nome;
+    private $vlindeniza = 0;
     
     public function getsinistro() {
         return $this->sinistro;
@@ -17,6 +18,13 @@ final class OdbcSearchCriteria {
     }
     public function setnome($nome){
         $this->nome = $nome;
+        return $this;
+    }
+    public function getvlindeniza(){
+        return $this->vlindeniza;
+    }
+    public function setvlindeniza($vlindeniza){
+        $this->vlindeniza = $vlindeniza;
         return $this;
     }
 }

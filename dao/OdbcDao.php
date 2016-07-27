@@ -44,7 +44,8 @@ final class OdbcDao {
         return $tabelas;
     }
     public function listaConteudo($table){
-        $sql = "SELECT * FROM $table WHERE exclui like 0";
+        $sql = "SELECT * FROM $table WHERE 1";
+                 //"exclui like 0";
         $conn = new OdbcDao();
         $result=$conn -> query($sql);
         return $result;
@@ -190,6 +191,9 @@ final class OdbcDao {
         $orderBy = 'sinistro';
         //print_r($search->getnome());
         //echo '<br>';
+        if($search->getvlindeniza() == null){
+            $search->setvlindeniza(0);
+        }
         if ($search->getnome() !== '' && $search->getsinistro() !== '') {
             //echo "search nao esta nulo".$search->getnome();die;
             if ($search->getsinistro() != null ) {
@@ -199,13 +203,15 @@ final class OdbcDao {
                 //echo "nome defenido";
                 $sql .= "nome like '%".$search->getnome()."%'";
             }
+            $sql.= ' AND vlindeniza > '.$search->getvlindeniza().' ';
         }else{
             //echo $search->getsinistro();
             //echo "search esta nulo";die;
-          $sql.=' 1';
+          $sql.= ' vlindeniza > '.$search->getvlindeniza().' ';
         }
         //$sql .= " AND exclui like '0' ";
         //$sql .= ' ORDER BY ' . $orderBy;
+        //print_r($sql);die;
         return $sql;
         
     }
@@ -237,8 +243,8 @@ final class OdbcDao {
         $odbc->setLastModifiedOn($now);
         
         $sql = '
-            INSERT INTO Beneficiarios (idbenefi,idtitular,sinistro,apolice,endosso,nome,tipo,endereco,numero,complemento,bairro,municipio,estado,uf,cep,vlindeniza,tpcobertura,cpf,identidade,percentual,tel_fixo,tel_cel,email,banco,agencia,conta,abertura,modificacao,exclui)
-                VALUES (:idbenefi,:idtitular,:sinistro,:apolice,:endosso,:nome,:tipo,:endereco,:numero,:complemento,:bairro,:municipio,:estado,:uf,:cep,:vlindeniza,:tpcobertura,:cpf,:identidade,:percentual,:tel_fixo,:tel_cel,:email,:banco,:agencia,:conta,:abertura,:modificacao,:exclui)';
+            INSERT INTO Beneficiarios (idbenefi,idtitular,sinistro,apolice,endosso,nome,tipo,endereco,numero,complemento,bairro,municipio,estado,uf,cep,vlindeniza,tpcobertura,cpf,identidade,percentual,tel_fixo,tel_cel,email,banco,agencia,conta,abertura,modificacao)
+                VALUES (:idbenefi,:idtitular,:sinistro,:apolice,:endosso,:nome,:tipo,:endereco,:numero,:complemento,:bairro,:municipio,:estado,:uf,:cep,:vlindeniza,:tpcobertura,:cpf,:identidade,:percentual,:tel_fixo,:tel_cel,:email,:banco,:agencia,:conta,:abertura,:modificacao)';
         return $this->odbc_exe($sql, $odbc);
     }
     public function update($odbc){
@@ -272,8 +278,7 @@ final class OdbcDao {
             agencia=:agencia,
             conta=:conta,
             abertura=:abertura,
-            modificacao=:modificacao,
-            exclui=:exclui
+            modificacao=:modificacao
           WHERE
             idbenefi = :idbenefi';
         return $this->execute($sql, $odbc);
@@ -308,8 +313,7 @@ final class OdbcDao {
             ':agencia' => $odbc->getagencia(),
             ':conta' => $odbc->getconta(),
             ':abertura' => self::formatDateTime($odbc->getabertura()),
-            ':modificacao' => self::formatDateTime($odbc->getmodificacao()),
-            ':exclui' => $odbc->getexclui()
+            ':modificacao' => self::formatDateTime($odbc->getmodificacao())
         );
         if ($odbc->getidbenefi()) {
             unset($params[':abertura']);

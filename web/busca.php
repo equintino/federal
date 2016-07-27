@@ -12,6 +12,8 @@
     <input type="text" name="sinistro" placeholder="nome do benefici&aacute;rio" >
     <script src='js/vanilla-masker.min.js'></script>
     <script src="js/index.js"></script>
-    <button onclick="submit" title="No. de Sinistro" ><img src="img/lupa.png" height="12px" />
+    <button onclick="submit" title="Buscar" ><img src="img/lupa.png" height="12px" /></button>
+        <label>acima de R$ </label>
+    <input type="text" name="vlindeniza" />
     </button>
 </form>
