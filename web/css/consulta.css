@@ -68,3 +68,7 @@ button{
     float: right;
     margin: 10px 90px;
 }
+.busca_tabela{
+    clear: both;
+    margin: auto;
+}

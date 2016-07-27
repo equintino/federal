@@ -11,7 +11,7 @@ final class OdbcDao {
         }
         $config = Config::getConfig("odbc");
         try {
-            $this->db = odbc_connect($config['banco'],$config['username'],$config['password'])or die(odbc_errormsg());
+            $this->db = odbc_connect($config['banco'],$config['username'],$config['password']) or die (odbc_errormsg());
         } catch (Exception $ex) {
             throw new Exception('DB connection error: ' . $ex->getMessage());
         }
@@ -146,7 +146,7 @@ final class OdbcDao {
       //$odbc = odbc_fetch_array($busca);
       //var_dump($odbc);
          //echo "<br><br>";
-        foreach ($busca as $key => $row) {
+        foreach ($busca as $row) {
          //echo "<br><br>";
             $odbc = new Odbc();
             //print_r($row);
@@ -163,18 +163,22 @@ final class OdbcDao {
         return @$result;
     }
     public function busca(OdbcSearchCriteria $search = null){
+        $result=array();
         //print_r($search);
         //print_r($this->getBuscaSql($search));
         //$busca = $this->query("select * from Beneficiarios where sinistro='0153.93.03.00001654'");
         $busca = $this->query($this->getBuscaSql($search));
-        //print_r($busca);die;
+        //print_r($this->getBuscaSql($search));die;
         foreach ($busca as $key => $row) {
             $odbc = new Odbc();
+            //print_r($row);
             OdbcMapper::map($odbc, $row);
-            $result[$odbc->getsinistro()] = $odbc;
+            $result[$odbc->getidbenefi()] = $odbc;
+            //print_r($result);
         }
             //print_r($odbc);die;
         //print_r($result);die;
+        //die;
         return @$result;
     }
     private function getBuscaSql(OdbcSearchCriteria $search = null){
@@ -186,7 +190,7 @@ final class OdbcDao {
             //echo "search nao esta nulo".$search->getnome();die;
             if ($search->getsinistro() != null ) {
                 //echo "sinistro defenido";
-                $sql .= "sinistro = '".$search->getsinistro()."'";
+                $sql .= "sinistro like '%".$search->getsinistro()."%'";
             }elseif($search->getnome() != null){
                 //echo "nome defenido";
                 $sql .= "nome like '%".$search->getnome()."%'";
