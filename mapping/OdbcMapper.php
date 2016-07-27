@@ -9,6 +9,12 @@ class OdbcMapper {
         if (array_key_exists('idtitular', $properties)) {
             $odbc->setidtitular($properties['idtitular']);
         }
+        if (array_key_exists('TIRULAR', $properties)){
+            $odbc->setTITULAR($properties['TITULAR']);
+        }
+        if (array_key_exists('IMPORTANCIA_SEGURADA', $properties)){
+            $odbc->setIMPORTANCIA_SEGURADA($properties['IMPORTANCIA_SEGURADA']);
+        }
         if (array_key_exists('sinistro', $properties)) {
             $odbc->setsinistro($properties['sinistro']);
         }

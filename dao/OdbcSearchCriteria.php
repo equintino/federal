@@ -27,5 +27,12 @@ final class OdbcSearchCriteria {
         $this->vlindeniza = $vlindeniza;
         return $this;
     }
+    public function getTITULAR(){
+        return $this->TITULAR;
+    }
+    public function setTITULAR($TITULAR){
+        $this->TITULAR = $TITULAR;
+        return $this;
+    }
 }
 ?>

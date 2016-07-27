@@ -93,6 +93,10 @@ final class Odbc {
     private $codigo;
     private $cobertura;
     
+    // colinas sinipend //
+    private $TITULAR;
+    private $IMPORTANCIA_SEGURADA;
+    
     //private $status;
     
     public function __construct() {
@@ -536,6 +540,18 @@ final class Odbc {
     }
     public function setcobertura($cobertura){
         $this->cobertura = $cobertura;
+    }  
+    public function getTITULAR(){
+        return $this->TITULAR;
+    }
+    public function setTITULAR($TITULAR){
+        $this->TITULAR = $TITULAR;
+    }
+    public function getIMPORTANCIA_SEGURADA(){
+        return $this->IMPORTANCIA_SEGURADA;
+    }
+    public function setIMPORTANCIA_SEGURADA($IMPORTANCIA_SEGURADA){
+        $this->IMPORTANCIA_SEGURADA = $IMPORTANCIA_SEGURADA;
     }
 }
 ?>

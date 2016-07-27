@@ -10,6 +10,7 @@
    @$sinistro=$_POST['sinistro'];
    @$num_sinistro=$_POST['num_sinistro'];
    @$vlindeniza=$_POST['vlindeniza'];
+   @$titular=$_GET['titular'];
 ?>
 <div id='menu'>
     <ul>
@@ -72,7 +73,9 @@
      foreach($odbcs as $item){
       //print_r($item->getsinistro());    
        echo "<tr><td>";
+       echo "<a href='teste3.php?act=titular&titular=".$item->getsinistro()."'>";
        echo $item->getsinistro();
+       echo "</a>";
        echo "</td><td>";
        echo $item->getnome();
        echo "</td><td align=right>";
@@ -82,9 +85,15 @@
       echo "</table>";
       echo "</div>";
       die;
-     $result_id=odbc_exec($conn,$sql);
-     odbc_result_all($result_id, 'border=1');
+     //$result_id=odbc_exec($conn,$sql);
+     //odbc_result_all($result_id, 'border=1');
     }
+  }
+  if($act=='titular'){
+      echo "<div>";
+      include_once "titular.php";
+      echo "</div>";
+      die;
   }
   if($act=='relatorio'){
    include_once 'teste2.php';

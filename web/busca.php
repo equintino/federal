@@ -12,8 +12,9 @@
     <input type="text" name="sinistro" placeholder="nome do benefici&aacute;rio" >
     <script src='js/vanilla-masker.min.js'></script>
     <script src="js/index.js"></script>
-    <button onclick="submit" title="Buscar" ><img src="img/lupa.png" height="12px" /></button>
         <label>acima de R$ </label>
-    <input type="text" name="vlindeniza" />
-    </button>
+    <input type="text" name="vlindeniza" placeholder="Valor a indenizar"/>
+        <!--<label>p/ segurado: </label>
+    <input type="text" name="segurado" maxlength="19" placeholder="Pesquisa p/ segurado"/>-->
+    <button onclick="submit" title="Buscar" ><img src="img/lupa.png" height="12px" /></button>
 </form>

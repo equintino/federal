@@ -187,6 +187,7 @@ final class OdbcDao {
         return @$result;
     }
     private function getBuscaSql(OdbcSearchCriteria $search = null){
+        //$sql = "SELECT * FROM Beneficiarios WHERE ";
         $sql = "SELECT * FROM Beneficiarios WHERE ";
         $orderBy = 'sinistro';
         //print_r($search->getnome());
