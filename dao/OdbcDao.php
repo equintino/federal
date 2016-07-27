@@ -169,12 +169,16 @@ final class OdbcDao {
         //$busca = $this->query("select * from Beneficiarios where sinistro='0153.93.03.00001654'");
         $busca = $this->query($this->getBuscaSql($search));
         //print_r($this->getBuscaSql($search));die;
-        foreach ($busca as $key => $row) {
+        if(@$busca){
+         foreach ($busca as $key => $row) {
             $odbc = new Odbc();
             //print_r($row);
             OdbcMapper::map($odbc, $row);
             $result[$odbc->getidbenefi()] = $odbc;
             //print_r($result);
+         }
+        }else{
+         echo "<p>*Nao foi encontrado nenhum registro</p>"; 
         }
             //print_r($odbc);die;
         //print_r($result);die;

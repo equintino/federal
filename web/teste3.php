@@ -61,7 +61,9 @@
       //print_r($dao->busca($search));
       echo "<div class='busca_tabela'>";
       echo "<table border=1 align=center cellspacing=0 spanspacing=0 class=\"tabela\">";
-      echo "<tr><th>SINISTRO</th><th>BENEFICI&Aacute;RIO</th><th>VL. A INDENIZAR</th></tr>";
+      if($odbcs){
+       echo "<tr><th>SINISTRO</th><th>BENEFICI&Aacute;RIO</th><th>VL. A INDENIZAR</th></tr>";
+      }
      foreach($odbcs as $item){
       //print_r($item->getsinistro());    
        echo "<tr><td>";
