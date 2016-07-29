@@ -20,6 +20,7 @@ final class OdbcDao {
     public function query($sql) {
         //var_dump($this->getDb(),$sql);die;
         //$sql = "SELECT * FROM Beneficiarios WHERE exclui like 0";
+     //print_r($sql);
       $statement = odbc_exec($this->getDb(),$sql);
         //print_r($statement);die;
       while($linha = odbc_fetch_array($statement)){
@@ -186,6 +187,20 @@ final class OdbcDao {
         //die;
         return @$result;
     }
+    public function busca2(OdbcSearchCriteria $search = null){
+        $result=array();
+        $busca = $this->query($this->getBuscaSql2($search));
+        if(@$busca){
+         foreach ($busca as $key => $row) {
+            $odbc = new Odbc();
+            OdbcMapper::map($odbc, $row);
+            $result[$odbc->getidbenefi()] = $odbc;
+         }
+        }else{
+         echo "<p>*Nao foi encontrado nenhum registro</p>"; 
+        }
+        return @$result;
+    }
     private function getBuscaSql(OdbcSearchCriteria $search = null){
         //$sql = "SELECT * FROM Beneficiarios WHERE ";
         $sql = "SELECT * FROM Beneficiarios WHERE ";
@@ -215,6 +230,12 @@ final class OdbcDao {
         //print_r($sql);die;
         return $sql;
         
+    }
+    private function getBuscaSql2(OdbcSearchCriteria $search = null){
+        $sql = "SELECT * FROM sinipend WHERE ";
+        $sql .= "SINISTRO='".$search->getsinistro()."'";
+        //print_r($sql);
+        return $sql;
     }
     private function getFindSql2(OdbcSearchCriteria $search = null) {
      //print_r(foreach($this->query($search) as $item));die;

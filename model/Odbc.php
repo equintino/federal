@@ -88,6 +88,7 @@ final class Odbc {
     private $abertura;
     private $modificacao;
     private $exclui;
+    private $centavos;
 
     // colunas tabela Beneficiarios //
     private $codigo;
@@ -163,6 +164,14 @@ final class Odbc {
 
     public function setabertura(DateTime $abertura) {
         $this->abertura = $abertura;
+    }
+    public function getCentavos() {
+        return $this->centavos;
+    }
+
+    public function setCentavos($centavos) {
+        OdbcValidator::validaCentavos($centavos);
+        $this->centavos = $centavos;
     }
 
     /**

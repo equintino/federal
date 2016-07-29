@@ -45,6 +45,10 @@ final class OdbcValidator {
         }
         return $errors;
     }
+    public static function validaCentavos($centavos){
+      //echo "passei aqui";
+      return intval($centavos);
+    }
 
     /**
      * Validate the given status.

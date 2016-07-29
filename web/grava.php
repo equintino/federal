@@ -30,7 +30,7 @@
           /// limpar tabela ///
           
           
-          $sql="select * from $tabela where 1";
+          $sql="select * from $tabela2 where 1";
           $result=odbc_exec($conn,$sql);
           odbc_result_all($result,'border=1');
           die;

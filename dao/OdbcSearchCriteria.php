@@ -21,7 +21,7 @@ final class OdbcSearchCriteria {
         return $this;
     }
     public function getvlindeniza(){
-        return $this->vlindeniza;
+        return OdbcValidator::validaCentavos($this->vlindeniza);
     }
     public function setvlindeniza($vlindeniza){
         $this->vlindeniza = $vlindeniza;

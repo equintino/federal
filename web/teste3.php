@@ -5,6 +5,7 @@
           include '../config/Config.php';
           include '../model/Odbc.php';
           include '../mapping/OdbcMapper.php';
+          include '../validation/OdbcValidator.php';
    @$act=$_GET['act'];
    @$busca=$_GET['busca'];
    @$sinistro=$_POST['sinistro'];
@@ -73,7 +74,7 @@
      foreach($odbcs as $item){
       //print_r($item->getsinistro());    
        echo "<tr><td>";
-       echo "<a href='teste3.php?act=titular&titular=".$item->getsinistro()."'>";
+       echo "<a href='teste3.php?act=titular&sinistro=".$item->getsinistro()."'>";
        echo $item->getsinistro();
        echo "</a>";
        echo "</td><td>";

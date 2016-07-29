@@ -72,3 +72,7 @@ button{
     clear: both;
     margin: auto;
 }
+.voltar{
+    position: relative;
+    left: 72%;
+}
