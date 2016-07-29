@@ -174,11 +174,12 @@ final class OdbcDao {
         if(@$busca){
          foreach ($busca as $key => $row) {
             $odbc = new Odbc();
-            //print_r($row);
+            //print_r($odbc);die;
             OdbcMapper::map($odbc, $row);
             $result[$odbc->getidbenefi()] = $odbc;
             //print_r($result);
          }
+         //die;
         }else{
          echo "<p>*Nao foi encontrado nenhum registro</p>"; 
         }
@@ -190,11 +191,15 @@ final class OdbcDao {
     public function busca2(OdbcSearchCriteria $search = null){
         $result=array();
         $busca = $this->query($this->getBuscaSql2($search));
+        //print_r($busca);die;
         if(@$busca){
          foreach ($busca as $key => $row) {
             $odbc = new Odbc();
+            //print_r($row);die;
             OdbcMapper::map($odbc, $row);
-            $result[$odbc->getidbenefi()] = $odbc;
+            print_r($odbc);die;
+            //$result[$odbc->getidbenefi()] = $odbc;
+            $result[$odbc->getidtitular()] = $odbc;
          }
         }else{
          echo "<p>*Nao foi encontrado nenhum registro</p>"; 
@@ -233,8 +238,31 @@ final class OdbcDao {
     }
     private function getBuscaSql2(OdbcSearchCriteria $search = null){
         $sql = "SELECT * FROM sinipend WHERE ";
-        $sql .= "SINISTRO='".$search->getsinistro()."'";
-        //print_r($sql);
+        //$sql .= "SINISTRO='".$search->getsinistro()."'";
+        //var_dump($search->setsinistro(0));
+        if($search->getIMPORTANCIA_SEGURADA() == null){
+            //echo "nulo";
+            $search->setIMPORTANCIA_SEGURADA(0);
+        }
+        //print_r($search);
+        //var_dump($search->getsinistro() != null);die;
+        //var_dump($search->getTITULAR() != null || $search->getsinistro() != null);die;
+        if ($search->getTITULAR() != null || $search->getsinistro() != null) {
+            //echo "search nao esta nulo".$search->getnome();die;
+            if ($search->getsinistro() != null ) {
+                //echo "sinistro defenido";
+                $sql .= "SINISTRO like '%".$search->getsinistro()."%'";
+            }elseif($search->getTITULAR() != null){
+                //echo "nome defenido";
+                $sql .= "TITULAR like '%".$search->getTITULAR()."%'";
+            }
+            $sql.= ' AND IMPORTANCIA_SEGURADA > '.$search->getIMPORTANCIA_SEGURADA().' ';
+        }else{
+            //echo $search->getsinistro();
+            //echo "search esta nulo";die;
+          $sql.= ' IMPORTANCIA_SEGURADA > '.$search->getIMPORTANCIA_SEGURADA().' ';
+        }
+        //print_r($sql);die;
         return $sql;
     }
     private function getFindSql2(OdbcSearchCriteria $search = null) {

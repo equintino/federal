@@ -5,6 +5,8 @@ final class OdbcSearchCriteria {
     private $sinistro = null;
     private $nome;
     private $vlindeniza = 0;
+    private $TITULAR;
+    private $IMPORTANCIA_SEGURADA = 0;
     
     public function getsinistro() {
         return $this->sinistro;
@@ -32,6 +34,13 @@ final class OdbcSearchCriteria {
     }
     public function setTITULAR($TITULAR){
         $this->TITULAR = $TITULAR;
+        return $this;
+    }
+    public function getIMPORTANCIA_SEGURADA(){
+        return $this->IMPORTANCIA_SEGURADA;
+    }
+    public function setIMPORTANCIA_SEGURADA($IMPORTANCIA_SEGURADA){
+        $this->IMPORTANCIA_SEGURADA = $IMPORTANCIA_SEGURADA;
         return $this;
     }
 }

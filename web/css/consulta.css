@@ -64,12 +64,19 @@ span{
 button{
     background: transparent;
 }
-.busca{
+.titulo{
     float: right;
+    font-family: cursive;
+}
+.busca{
+    clear: both;
+    #float: right;
     margin: 10px 90px;
 }
 .busca_tabela{
-    clear: both;
+    position: relative;
+    top: 20px;
+    #clear: both;
     margin: auto;
 }
 .voltar{

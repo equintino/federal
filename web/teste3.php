@@ -16,6 +16,7 @@
 <div id='menu'>
     <ul>
         <a href="teste3.php"><li>HOME</li></a>
+        <a href="teste3.php?act=sinistrado"><li>SINISTRADO</li></a>
         <a href="teste3.php?act=sinistro"><li>CONSULTA BENEFICI&Aacute;RIOS</li></a>
         <a href="teste3.php?act=relatorio"><li>RELAT&Oacute;RIOS</li></a>
         <a href="teste3.php?act=restrito"><li>&Aacute;REA RESTRITA</li></a>
@@ -64,7 +65,7 @@
      
      //die;
      //print_r($search);die;
-     echo "<br><br>";
+     //echo "<br><br>";
       //print_r($dao->busca($search));
       echo "<div class='busca_tabela'>";
       echo "<table border=1 align=center cellspacing=0 spanspacing=0 class=\"tabela\">";
@@ -96,11 +97,79 @@
       echo "</div>";
       die;
   }
+  if($act=='sinistrado'){
+      echo "<div class=busca>";
+      include_once "busca.php";
+      
+      if($busca=='sinistrado'){
+        
+        $dao = new OdbcDao();
+        $odbc = new Odbc();
+        $search = new OdbcSearchCriteria();
+        
+        /*
+        print_r($_GET);
+        echo "<br><br>";
+        print_r($_POST);
+        echo "<br><br>";die;
+        print_r($dao);
+        echo "<br><br>";
+        print_r($odbc);
+        echo "<br><br>";
+        print_r($search);
+        echo "<br><br>";
+        
+         * 
+         */
+        
+        
+        @$num_sinistro=$_POST['num_sinistro'];
+        @$sinistrado=$_POST['sinistrado'];
+        @$importanciasegurada=$_POST['importanciasegurada'];
+        
+        $search->setTITULAR($sinistrado);
+        $search->setsinistro($num_sinistro);
+        $search->setIMPORTANCIA_SEGURADA($importanciasegurada);
+        
+        $odbcs=$dao->busca2($search);
+        
+        
+        //print_r($odbcs);die;
+        //foreach($odbcs as $item);
+        //print_r($dao->busca2($search));
+        //echo "<br><br>";
+        //print_r($item);die;
+        
+        echo "<div class='busca_tabela'>";
+      echo "<table border=1 align=center cellspacing=0 spanspacing=0 class=\"tabela\">";
+      if($odbcs){
+       echo "<tr><th>SINISTRO</th><th>SINISTRADO</th><th>IMPORT&Acirc;NCIA SEGURADA</th><th>VL. A INDENIZAR</th></tr>";
+      }
+     foreach($odbcs as $item){
+         print_r($item);die;
+      //print_r($item->getsinistro());    
+       echo "<tr><td>";
+       //echo "<a href='teste3.php?act=titular&sinistro=".$item->getsinistro()."'>";
+       echo $item->getsinistro();
+       //echo "</a>";
+       echo "</td><td>";
+       echo $item->getTITULAR();
+       echo "</td><td align=right>";
+       echo number_format($item->getIMPORTANCIA_SEGURADA(),2,',','.');
+       echo "</td><td align=right>";
+       echo number_format($item->getvlindeniza(),2,',','.');
+       echo "</td></tr>";
+     }
+      echo "</table>";
+    }
+      echo "</div>";
+        die;    
+  }
   if($act=='relatorio'){
    include_once 'teste2.php';
   }
   if($act=='restrito'){
-   echo "<div class='busca'>";
+   echo "<div class='construcao'>";
     echo "<img height=300px src='img/em_construcao.png' />";
    echo "</div>";
   }
