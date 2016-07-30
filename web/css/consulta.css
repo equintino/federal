@@ -74,12 +74,18 @@ button{
     margin: 10px 90px;
 }
 .busca_tabela{
-    position: relative;
-    top: 4px;
+    #clear: both;
+    #position: relative;
+    #top: 4px;
     #clear: both;
     margin: auto;
 }
 .voltar{
     position: relative;
     left: 72%;
+}
+.carregando{
+    position: relative;
+    top: 120px;
+    #margin: auto;
 }

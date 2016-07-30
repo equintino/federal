@@ -5,7 +5,7 @@
         <title>Relatorio</title>
     </head>
     <body>
-        <?php        
+        <?php 
           $dao = new OdbcDao();
           //$search = new OdbcSearchCriteria();
           //$search->setsinistro(93);

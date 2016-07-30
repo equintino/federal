@@ -1,18 +1,21 @@
 <link rel="stylesheet" type="text/css" href="css/consulta.css" />
 <?php
+   @$act=$_GET['act'];
+/*
           include '../dao/OdbcDao.php';
           include '../dao/OdbcSearchCriteria.php';
           include '../config/Config.php';
           include '../model/Odbc.php';
           include '../mapping/OdbcMapper.php';
           include '../validation/OdbcValidator.php';
-   @$act=$_GET['act'];
    @$busca=$_GET['busca'];
    @$sinistro=$_POST['sinistro'];
    @$num_sinistro=$_POST['num_sinistro'];
    @$vlindeniza=$_POST['vlindeniza'];
    @$titular=$_GET['titular'];
    @$abrir=$_GET['abrir'];
+ * 
+ */
 ?>
 <div id='menu'>
     <ul>
@@ -25,6 +28,14 @@
     </ul>
 </div>
 <?php
+        function redirecionar($tempo,$url, $mensagem){
+         header("Refresh: $tempo; url=$url");
+         echo "<div class=carregando>";
+         echo '<center>'.$mensagem.  '</center><br/>';
+         echo '<center><img src="img/carregando.gif" alt="" /><br/><br/><tt>CARREGANDO</tt></center>';
+         echo "</div>";
+        }
+/*
   if($act=='sinistro'){
    echo "<div class='busca'>";
    //echo "<img height=300px src='img/em_construcao.png' />";
@@ -99,10 +110,7 @@
       echo "</div>";
       die;
   }
-  if($act=='sinistrado'){    
-        //if (!$abrir){
-        // header('Location:carregando.php?act=sinistrado');
-        //}else{
+  if($act=='sinistrado'){
       echo "<div class=busca>";
       include_once "busca.php";
       
@@ -127,7 +135,7 @@
          * 
          */
         
-        
+    /*    
         @$num_sinistro=$_POST['num_sinistro'];
         @$sinistrado=$_POST['sinistrado'];
         @$importanciasegurada=OdbcValidator::validaCentavos($_POST['importanciasegurada']);
@@ -166,10 +174,11 @@
        }
        * 
        */
-       echo "<tr><td>";
+       //echo "<tr><td>";
        //echo "<a href='teste3.php?act=titular&sinistro=".$item->getsinistro()."'>";
-       echo $item->getsinistro();
+       //echo $item->getsinistro();
        //echo "</a>";
+/*
        echo "</td><td>";
        echo $item->getTITULAR();
        echo "</td><td align=right>";
@@ -179,15 +188,19 @@
       echo "</table>";
     }
       echo "</div>";
-        die; 
-  // }
+        die;    
   }
-  if($act=='relatorio'){      
-        if (!$abrir){
-         header('Location:carregando.php?act=relatorio');
-        }else{
-         include_once 'teste2.php';
-        }
+  if($act=='relatorio'){
+ * 
+ */
+if($act=='relatorio'){
+ redirecionar('5','teste3.php?act=relatorio&abrir=1','AGUARDE...'); 
+}
+if($act=='sinistrado'){
+ include_once 'busca.php';
+ redirecionar('5','teste3.php?act=sinistrado&abrir=1','AGUARDE...'); 
+}
+        /*
   }
   if($act=='divergente'){
       echo "<div>";
@@ -200,4 +213,6 @@
     echo "<img height=300px src='img/em_construcao.png' />";
    echo "</div>";
   }
+         * 
+         */
 ?>

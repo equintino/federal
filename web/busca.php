@@ -1,7 +1,7 @@
 <?php        
-    $dao = new OdbcDao();
-    $tabela='Beneficiarios';
-    $tabela2='sinipend';
+    //@$dao = new OdbcDao();
+    //@$tabela='Beneficiarios';
+    //@$tabela2='sinipend';
           
     //print_r($_GET);
     //echo "<br><br>";
