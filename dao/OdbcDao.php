@@ -195,9 +195,10 @@ final class OdbcDao {
         if(@$busca){
          foreach ($busca as $key => $row) {
             $odbc = new Odbc();
-            //print_r($row);die;
+            //print_r($row);echo "<br><br>";
+            //print_r($odbc);echo "<br><br>";
             OdbcMapper::map($odbc, $row);
-            print_r($odbc);die;
+            //print_r($odbc);die;
             //$result[$odbc->getidbenefi()] = $odbc;
             $result[$odbc->getidtitular()] = $odbc;
          }

@@ -125,7 +125,8 @@
         
         @$num_sinistro=$_POST['num_sinistro'];
         @$sinistrado=$_POST['sinistrado'];
-        @$importanciasegurada=$_POST['importanciasegurada'];
+        @$importanciasegurada=OdbcValidator::validaCentavos($_POST['importanciasegurada']);
+        
         
         $search->setTITULAR($sinistrado);
         $search->setsinistro($num_sinistro);
@@ -133,6 +134,7 @@
         
         $odbcs=$dao->busca2($search);
         
+        //print_r($listaBeneficiarios);echo "<br><br>";die;
         
         //print_r($odbcs);die;
         //foreach($odbcs as $item);
@@ -143,11 +145,22 @@
         echo "<div class='busca_tabela'>";
       echo "<table border=1 align=center cellspacing=0 spanspacing=0 class=\"tabela\">";
       if($odbcs){
-       echo "<tr><th>SINISTRO</th><th>SINISTRADO</th><th>IMPORT&Acirc;NCIA SEGURADA</th><th>VL. A INDENIZAR</th></tr>";
+       echo "<tr><th>SINISTRO</th><th>SINISTRADO</th><th>IMPORT&Acirc;NCIA SEGURADA</th></tr>";
       }
      foreach($odbcs as $item){
-         print_r($item);die;
-      //print_r($item->getsinistro());    
+         //print_r($item);die;
+      //print_r($item->getsinistro());
+        /// somar os valores a indenizar ///
+      /*
+        $search->setsinistro($item->getsinistro());
+        $listaBeneficiarios=$dao->busca($search);
+        print_r($listaBeneficiarios);
+        $totalaindenizar=0;
+       foreach($listaBeneficiarios as $item_){
+           $totalaindenizar=$totalaindenizar+$item_->getvlindeniza();
+       }
+       * 
+       */
        echo "<tr><td>";
        //echo "<a href='teste3.php?act=titular&sinistro=".$item->getsinistro()."'>";
        echo $item->getsinistro();
@@ -156,8 +169,6 @@
        echo $item->getTITULAR();
        echo "</td><td align=right>";
        echo number_format($item->getIMPORTANCIA_SEGURADA(),2,',','.');
-       echo "</td><td align=right>";
-       echo number_format($item->getvlindeniza(),2,',','.');
        echo "</td></tr>";
      }
       echo "</table>";

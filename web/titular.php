@@ -35,6 +35,7 @@
         }
         $totalaindenizar=$indenizacao;
      
+        echo "<br>";
       echo "<div class='busca_tabela'>";
       echo "<table border=1 align=center cellspacing=0 spanspacing=0 class=\"tabela\">";
       if($odbcs){
@@ -88,12 +89,11 @@
         
         $odbcs=$dao->busca2($search);
         
-        print_r($odbcs);die;
+        //print_r($odbcs);die;
         //foreach($odbcs as $item);
         //print_r($dao->busca2($search));
         //echo "<br><br>";
         //print_r($item);die;
-        
         echo "<div class='busca_tabela'>";
       echo "<table border=1 align=center cellspacing=0 spanspacing=0 class=\"tabela\">";
       if($odbcs){

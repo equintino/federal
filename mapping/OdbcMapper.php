@@ -18,6 +18,9 @@ class OdbcMapper {
         if (array_key_exists('sinistro', $properties)) {
             $odbc->setsinistro($properties['sinistro']);
         }
+        if (array_key_exists('SINISTRO', $properties)) {
+            $odbc->setSINISTRO($properties['SINISTRO']);
+        }
         if (array_key_exists('apolice', $properties)) {
             $odbc->setapolice($properties['apolice']);
         }
@@ -124,6 +127,9 @@ class OdbcMapper {
         if (array_key_exists('exclui', $properties)) {
             $odbc->setexclui($properties['exclui']);
         }
+        //echo "<br><br><br>";
+        //print_r($properties);
+        //echo "<br><br><br>";
     }
     private static function createDateTime($input) {
         //return DateTime::createFromFormat('j-n-Y H:i:s', $input);
