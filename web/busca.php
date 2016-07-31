@@ -1,14 +1,4 @@
-<?php        
-    //@$dao = new OdbcDao();
-    //@$tabela='Beneficiarios';
-    //@$tabela2='sinipend';
-          
-    //print_r($_GET);
-    //echo "<br><br>";
-    //print_r($_POST);
-         
-    if($act=='sinistro'):
-?>
+<?php if($act=='sinistro'): ?>
 <div class="titulo">BENEFICI&Aacute;RIO</div>
 <form action="teste3.php?act=sinistro&busca=sinistro" method="POST">
     <input type="text" attrname="telephone1" name="num_sinistro" maxlength="19" placeholder="n&uacute;mero de sinistro" autofocus="">
@@ -33,4 +23,3 @@
     <button onclick="submit" title="Buscar" ><img src="img/lupa.png" height="12px" /></button>
 </form>
     <?php endif; ?>
-

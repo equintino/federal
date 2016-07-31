@@ -33,12 +33,9 @@ body{
 .resumo{
    position: absolute;
    top: 60px;
-   #margin: auto;
    right: 32%;
 }
 .tabela{
-    #position: relative;
-    #top: 115px;
 }
 #geral{
     position: relative;
@@ -70,14 +67,9 @@ button{
 }
 .busca{
     clear: both;
-    #float: right;
     margin: 10px 90px;
 }
 .busca_tabela{
-    #clear: both;
-    #position: relative;
-    #top: 4px;
-    #clear: both;
     margin: auto;
 }
 .voltar{
@@ -87,5 +79,4 @@ button{
 .carregando{
     position: relative;
     top: 120px;
-    #margin: auto;
 }

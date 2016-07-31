@@ -1,36 +1,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <!--<meta charset="UTF-8">-->
         <title>Relatorio</title>
     </head>
     <body>
         <?php 
           $dao = new OdbcDao();
-          //$search = new OdbcSearchCriteria();
-          //$search->setsinistro(93);
-          //$search->setnome('joao');
           $tabela='Beneficiarios';
           $tabela2='sinipend';
-                 //echo "$tabela2";
-                 //print_r($dao->listaConteudo("$tabela2"));die;
-          
-          //print_r($dao->listaTabela());
-          echo '<br>';
-          //echo '<pre>';
-          //print_r($dao->listaConteudo($tabela2));
-          //echo '</pre>';
-
-          //die;
-          /*
-          $conn = odbc_connect('ana','','');
-          $result=odbc_exec($conn,"SELECT * FROM $tabela2 WHERE 1 ORDER BY idtitular");
-          var_dump($result);
-          odbc_result_all($result,"border=1");
-          die;
-           * 
-           */
-          
+          echo '<br>';          
           $quant=0;
           $total=0;
           $x=0;
@@ -83,15 +61,6 @@
             }
         echo "</div>";
         $campo='sinistro';
-            //print_r($dao->listaCampo($tabela,$campo,93));
-           /* echo '<tr><th>SINISTRO</th><th colspan=2>TITULAR</th></tr>';
-            foreach ($sinistro_ as $key => $z){
-            $consulta=$dao->listaCampo($tabela,$campo,$z);
-            var_dump($consulta);
-               if(@$consulta){
-                echo '<tr><td>'.$z.'</td><td colspan=2>'.$titular[$key].'</td></tr>';
-               }
-            }*/
           echo '<table align=center border=1 cellspacing=0 class="resumo">';
           echo '<th colspan=3>RESUMO</th>';
           echo '<tr><th>SINISTROS</th><th>BENEFICI&Aacute;RIOS</th><th>TOTAL A INDENIZAR</th></tr>';
@@ -104,23 +73,7 @@
           echo ' = ';
           echo number_format($sin_num-$y,'0','','.');
           echo '</td></tr>';
-          die;
-          //$odbcs = $dao->find2($search);
-          //print_r($odbcs);die;
-          
-          
-          //odbc_close($conn);
-	
-//$table="Beneficiarios";
-//$sql = "SELECT * FROM $table"; 
-//$result=odbc_exec($conn,$sql);
-//odbc_result_all($result, 'id="users" class="listing"');
-//odbc_result_all($result, 'border=1');
-//odbc_result_all($result, 'Border=0 cellspacing=0 cellpadding=5', "style='FONT-FAMILY:Tahoma; FONT-SIZE:8pt; BORDER-BOTTOM:solid 1pt gree'");
-//while ($rows = odbc_fetch_object($result)) {
-    //print $rows->COLUMNNAME;
-//}
-          
+          die; 
         ?>
     </body>
 </html>
