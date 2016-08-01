@@ -110,14 +110,18 @@
    if (!$abrir){
     header('Location:carregando.php?act=relatorio');
    }else{
-    include_once 'teste2.php';
+    include_once 'relatorios.php';
    }
   }
-  if($act=='divergente'){
+  if($act=='divergente'){     
+   if (!$abrir){
+    header('Location:carregando.php?act=divergente');
+   }else{
       echo "<div>";
       include_once "divergente.php";
       echo "</div>";
       die;
+   }
   }
   if($act=='restrito'){
    echo "<div class='construcao'>";

@@ -18,10 +18,9 @@
   echo "</div>";
  }
  if($act=='relatorio'){
-  redirecionar('5','teste3.php?act=relatorio&abrir=1','AGUARDE...'); 
+  redirecionar('0.01','teste3.php?act=relatorio&abrir=1','AGUARDE...'); 
  }
- if($act=='sinistrado'){
-  include_once 'busca.php';
-  redirecionar('5','teste3.php?act=sinistrado&abrir=1','AGUARDE...'); 
+ if($act=='divergente'){
+  redirecionar('1','teste3.php?act=divergente&abrir=1','AGUARDE...'); 
  }
 ?>

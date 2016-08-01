@@ -16,7 +16,7 @@
           $sinistro_ant=null;
         echo "<div id='geral'>";
           echo '<table border=1 align=center cellspacing=0 spanspacing=0 class="tabela">';      
-          echo "<tr><th>SINISTRO</th><th>BENEFICIARIO</th><th>VL. A INDENIZAR</th></tr>";
+          echo "<tr><th>SINISTRO</th><th>BENEFICI&AacuteRIO</th><th>VL. A INDENIZAR</th></tr>";
              $sin_num=0;
              if($dao->listaConteudo($tabela2)){
               foreach($dao->listaConteudo($tabela2) as $item2){

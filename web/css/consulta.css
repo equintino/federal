@@ -43,6 +43,12 @@ body{
     height: 250px;  
     overflow: auto;
 }
+.rolagem{
+    position: relative;
+    top: 120px;
+    height: 250px;  
+    overflow: auto;    
+}
 th{
     background-color: #ccc;
 }

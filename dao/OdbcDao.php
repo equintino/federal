@@ -18,6 +18,7 @@ final class OdbcDao {
         return $this->db;
     }
     public function query($sql) {
+            set_time_limit(3600);
         //var_dump($this->getDb(),$sql);die;
         //$sql = "SELECT * FROM Beneficiarios WHERE exclui like 0";
      //print_r($sql);
@@ -46,6 +47,11 @@ final class OdbcDao {
     }
     public function listaConteudo($table){
         $sql = "SELECT * FROM $table WHERE 1";
+        if($table=='Beneficiarios'){
+         $sql .= " ORDER BY sinistro";
+        }else{
+         $sql .= " ORDER BY SINISTRO";
+        }
                  //"exclui like 0";
         $conn = new OdbcDao();
         $result=$conn -> query($sql);
@@ -181,7 +187,7 @@ final class OdbcDao {
          }
          //die;
         }else{
-         echo "<p>*Nao foi encontrado nenhum registro</p>"; 
+         //echo "<p>*Nao foi encontrado nenhum registro</p>"; 
         }
             //print_r($odbc);die;
         //print_r($result);die;
