@@ -22,4 +22,18 @@
         <input type="text" name="importanciasegurada" placeholder="import&acirc;cia segurada"/>
     <button onclick="submit" title="Buscar" ><img src="img/lupa.png" height="12px" /></button>
 </form>
+    <?php elseif($act=='divergente'): ?>
+<div class="titulo">PESQUISAR DIVERG&Ecirc;NCIA</div>
+<form action="teste3.php?act=divergente&busca=divergente" method="POST">
+    <!--<input type="text" attrname="telephone1" name="num_sinistro" maxlength="19" placeholder="n&uacute;mero de sinistro" autofocus="">-->
+    Qual a sucursal a pesquisar? 
+    <input type="text" name="sucursal" placeholder="n&uacute;mero da sucursal" size=2 maxlength="2" required />
+    Qual o ramo? 
+    <input type="text" name="ramo" size=2 maxlength="2" required />
+    <script src='js/vanilla-masker.min.js'></script>
+    <script src="js/index.js"></script>
+        <!--<label>acima de R$ </label>
+        <input type="text" name="importanciasegurada" placeholder="import&acirc;cia segurada"/>-->
+    <button onclick="submit" title="Buscar" ><img src="img/lupa.png" height="12px" /></button>
+</form>
     <?php endif; ?>

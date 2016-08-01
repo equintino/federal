@@ -14,6 +14,8 @@
    @$vlindeniza=$_POST['vlindeniza'];
    @$titular=$_GET['titular'];
    @$abrir=$_GET['abrir'];
+   @$sucursal=$_POST['sucursal'];
+   @$ramo=$_POST['ramo'];
 ?>
 <div id='menu'>
     <ul>
@@ -47,17 +49,22 @@
       if($odbcs){
        echo "<tr><th>SINISTRO</th><th>BENEFICI&Aacute;RIO</th><th>VL. A INDENIZAR</th></tr>";
       }
-     foreach($odbcs as $item){   
-       echo "<tr><td>";
-       echo "<a href='teste3.php?act=titular&sinistro=".$item->getsinistro()."'>";
-       echo $item->getsinistro();
-       echo "</a>";
-       echo "</td><td>";
-       echo $item->getnome();
-       echo "</td><td align=right>";
-       echo number_format($item->getvlindeniza(),2,',','.');
-       echo "</td></tr>";
+      $totalBeneficiarios=0;
+     foreach($odbcs as $item){
+       if($item->getnome()){
+        echo "<tr><td>";
+        echo "<a href='teste3.php?act=titular&sinistro=".$item->getsinistro()."'>";
+        echo $item->getsinistro();
+        echo "</a>";
+        echo "</td><td>";
+        echo $item->getnome();
+        echo "</td><td align=right>";
+        echo number_format($item->getvlindeniza(),2,',','.');
+        echo "</td></tr>";
+        $totalBeneficiarios++;
+       }
      }
+      echo "<tr><td colspan=3 align=right>Total de benefici&aacute;rios: ".number_format($totalBeneficiarios,'0','','.')."</td></tr>";
       echo "</table>";
       echo "</div>";
       die;
@@ -69,7 +76,7 @@
    echo "</div>";
    die;
   }
-  if($act=='sinistrado'){   
+  if($act=='sinistrado'){
    echo "<div class=busca>";
     include_once "busca.php";      
      if($busca=='sinistrado'){
@@ -92,15 +99,20 @@
       if($odbcs){
        echo "<tr><th>SINISTRO</th><th>SINISTRADO</th><th>IMPORT&Acirc;NCIA SEGURADA</th></tr>";
       }
+      $y=0;
      foreach($odbcs as $item){
-      echo "<tr><td>";
-       echo $item->getsinistro();
-       echo "</td><td>";
-       echo $item->getTITULAR();
-       echo "</td><td align=right>";
-       echo number_format($item->getIMPORTANCIA_SEGURADA(),2,',','.');
-       echo "</td></tr>";
+       if($item->getTITULAR()){
+        echo "<tr><td>";
+            echo $item->getsinistro();
+        echo "</td><td>";
+            echo $item->getTITULAR();
+        echo "</td><td align=right>";
+            echo number_format($item->getIMPORTANCIA_SEGURADA(),2,',','.');
+        echo "</td></tr>";
+       $y++;
+       }
      }
+      echo "<tr><td colspan=3 align=right>Total de sinistrado: ".number_format($y,'0','','.')."</td></tr>";
       echo "</table>";
     }
       echo "</div>";
@@ -113,15 +125,28 @@
     include_once 'relatorios.php';
    }
   }
-  if($act=='divergente'){     
-   if (!$abrir){
-    header('Location:carregando.php?act=divergente');
-   }else{
-      echo "<div>";
-      include_once "divergente.php";
-      echo "</div>";
-      die;
+  if($act=='divergente'){
+      echo "<div class=busca>";
+        include_once 'busca.php';
+   if ($busca){
+   /*
+       echo "<script>
+                var confirma=confirm('Este processo pode levar aproximadamente 10 minutos');
+                if(!confirma){
+                    history.go(-1);
+                }else{
+                    window.location.assign('carregando.php?act=divergente');
+                }
+           </script>";
+    * 
+    */
+   //die;
+   
+       //echo $sucursal;
+       include_once 'divergente.php';
    }
+       echo "</div>";
+      die;
   }
   if($act=='restrito'){
    echo "<div class='construcao'>";

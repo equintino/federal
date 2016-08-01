@@ -12,6 +12,7 @@ final class OdbcSearchCriteria {
         return $this->sinistro;
     }
     public function setsinistro($sinistro) {
+        //echo "<h1>$sinistro</h1>";die;
         $this->sinistro = $sinistro;
         return $this;
     }

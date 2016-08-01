@@ -22,22 +22,31 @@
               foreach($dao->listaConteudo($tabela2) as $item2){
                @$sinistro_[]=$item2['SINISTRO'];
                @$titular[]=$item2['TITULAR'];
-               @$sin_num ++;
+               if($item2['TITULAR']){
+                @$sin_num ++;
+               }
+               //echo $item2['SINISTRO']." - ".$item2['TITULAR']."<br>";
               }
              }
+             //echo $sin_num;die;
             $linha_vazia=0;
             if($dao->listaConteudo($tabela)){
             foreach($dao->listaConteudo($tabela) as $item){ 
-              if($item['vlindeniza'] != 0){
+              //if($item['vlindeniza'] != 0){
+                if($item['nome']){
                 echo "<tr><td align=center>".$item['sinistro']."</td><td>".$item['nome']."</td><td align=right>".number_format($item['vlindeniza'],'2',',','.')."</td></tr>";
+                //echo $sinistro_ant.' != '.$item['sinistro'];
                     if($sinistro_ant != $item['sinistro']){
+                        //echo ' diferente<br>';
                         $y++;
                     }
+                    
                     $sin_cadastrado[]=$item['sinistro'];
                     $sinistro_ant=$item['sinistro'];
                     $total=$total+$item['vlindeniza'];
                     $x++;
-                }else{
+                }
+                if($item['vlindeniza'] == 0){
                     $sin_vazio[]=$item['sinistro'];
                     $nome_vazio[]=$item['nome'];
                     $indenizado_vazio[]=$item['vlindeniza'];

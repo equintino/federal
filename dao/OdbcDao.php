@@ -47,6 +47,14 @@ final class OdbcDao {
     }
     public function listaConteudo($table){
         $sql = "SELECT * FROM $table WHERE 1";
+        $conn = new OdbcDao();
+        $result=$conn -> query($sql);
+        return $result;
+        odbc_result($result,'Border=1 cellspacing=0 cellpadding=5'); 
+    }
+    public function listaConteudo2($table){
+        $sql = "SELECT * FROM $table WHERE 1";
+        
         if($table=='Beneficiarios'){
          $sql .= " ORDER BY sinistro";
         }else{
@@ -231,11 +239,12 @@ final class OdbcDao {
                 //echo "nome defenido";
                 $sql .= "nome like '%".$search->getnome()."%'";
             }
-            $sql.= ' AND vlindeniza > '.$search->getvlindeniza().' ';
+            //$sql.= ' AND vlindeniza > '.$search->getvlindeniza().' ';
         }else{
             //echo $search->getsinistro();
             //echo "search esta nulo";die;
-          $sql.= ' vlindeniza > '.$search->getvlindeniza().' ';
+           $sql .= "1";
+          //$sql.= ' vlindeniza > '.$search->getvlindeniza().' ';
         }
         //$sql .= " AND exclui like '0' ";
         //$sql .= ' ORDER BY ' . $orderBy;
@@ -263,11 +272,12 @@ final class OdbcDao {
                 //echo "nome defenido";
                 $sql .= "TITULAR like '%".$search->getTITULAR()."%'";
             }
-            $sql.= ' AND IMPORTANCIA_SEGURADA > '.$search->getIMPORTANCIA_SEGURADA().' ';
+            //$sql.= ' AND IMPORTANCIA_SEGURADA > '.$search->getIMPORTANCIA_SEGURADA().' ';
         }else{
             //echo $search->getsinistro();
             //echo "search esta nulo";die;
-          $sql.= ' IMPORTANCIA_SEGURADA > '.$search->getIMPORTANCIA_SEGURADA().' ';
+          $sql .= "1";
+          //$sql.= ' IMPORTANCIA_SEGURADA > '.$search->getIMPORTANCIA_SEGURADA().' ';
         }
         //print_r($sql);die;
         return $sql;
