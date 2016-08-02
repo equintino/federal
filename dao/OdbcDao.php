@@ -73,11 +73,13 @@ final class OdbcDao {
         return $result;
     }
     public function listaCampo($tabela,$campo,$busca){
-        $sql = "SELECT * FROM $tabela WHERE $campo=$busca";
+        //$sql = "SELECT * FROM $tabela WHERE $campo='$busca'";
+        $sql = "SELECT * FROM $tabela WHERE $campo like '%$busca%'";
         $conn = new OdbcDao();
         @$result=$conn -> query($sql);
+        //print_r($result);die;
         
-        return @$result_;
+        return @$result;
         /*
         echo '<table>';
         while (odbc_fetch_row($result)) {

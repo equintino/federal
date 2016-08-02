@@ -3,6 +3,7 @@
 final class OdbcSearchCriteria {
  
     private $sinistro = null;
+    private $certificado = null;
     private $nome;
     private $vlindeniza = 0;
     private $TITULAR;
@@ -12,8 +13,14 @@ final class OdbcSearchCriteria {
         return $this->sinistro;
     }
     public function setsinistro($sinistro) {
-        //echo "<h1>$sinistro</h1>";die;
         $this->sinistro = $sinistro;
+        return $this;
+    }
+    public function getcertificado() {
+        return $this->certificado;
+    }
+    public function setcertificado($certificado) {
+        $this->certificado = $certificado;
         return $this;
     }
     public function getnome(){

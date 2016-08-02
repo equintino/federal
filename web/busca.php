@@ -36,4 +36,15 @@
         <input type="text" name="importanciasegurada" placeholder="import&acirc;cia segurada"/>-->
     <button onclick="submit" title="Buscar" ><img src="img/lupa.png" height="12px" /></button>
 </form>
+    <?php elseif($act=='informacoes'): ?>
+<div class="titulo">INFORMA&Ccedil;&Otilde;ES</div>
+<form action="carregando.php?act=informacoes&busca=informacoes&abrir=1" method="POST">
+    <label for="certificado"><i>Certificado</i></label>
+    <input type="text" attrname="telephone1" name="certificado" maxlength="19" placeholder="n&uacute;mero de certificado" autofocus="">
+    <label for="doc"><i>Cpf</i></label>
+    <input id="doc" name="cpf" type="text" maxlength="14">
+    <script src='js/vanilla-masker.min.js'></script>
+    <script src="js/index.js"></script>
+    <button onclick="submit" title="Buscar" ><img src="img/lupa.png" height="12px" /></button>
+</form>
     <?php endif; ?>

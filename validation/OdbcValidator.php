@@ -49,6 +49,10 @@ final class OdbcValidator {
       //echo "passei aqui";
       return intval($centavos);
     }
+    public static function removePonto($dado){
+        $dado_=preg_replace( '#[^0-9]#', '', $dado );
+        return $dado_;
+    }
 
     /**
      * Validate the given status.

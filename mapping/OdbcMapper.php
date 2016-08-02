@@ -18,6 +18,9 @@ class OdbcMapper {
         if (array_key_exists('sinistro', $properties)) {
             $odbc->setsinistro($properties['sinistro']);
         }
+        if (array_key_exists('certificado', $properties)) {
+            $odbc->setcertificado($properties['certificado']);
+        }
         if (array_key_exists('SINISTRO', $properties)) {
             $odbc->setSINISTRO($properties['SINISTRO']);
         }

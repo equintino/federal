@@ -89,6 +89,7 @@ final class Odbc {
     private $modificacao;
     private $exclui;
     private $centavos;
+    private $certificado;
 
     // colunas tabela Beneficiarios //
     private $codigo;
@@ -400,6 +401,12 @@ final class Odbc {
     }
     public function setsinistro($sinistro){
         $this->sinistro = $sinistro;
+    }
+    public function getcertificado(){
+        return $this->certificado;
+    }
+    public function setcertificado($certificado){
+        $this->certificado = $certificado;
     }
     public function getapolice(){
         return $this->apolice;
