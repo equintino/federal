@@ -75,7 +75,13 @@
             echo "<i>Sinistro: </i>";
             echo $item['sinistro'];
             echo "<br>";
-            echo "<i>Sinistrado: </i>";
+            echo "<i>Cobertura: </i>";
+            echo $item['tpcobertura'];
+            echo "<br>";
+            echo "<i>Valor a indenizar: </i>";
+            echo number_format($item['vlindeniza'],'2',',','.');
+            echo "<br>";
+            echo "<i>Benefici&aacute;rio: </i>";
             echo $item['nome'];
             echo "<br>";
             echo "<i>Cpf: </i>";
