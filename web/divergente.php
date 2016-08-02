@@ -92,10 +92,11 @@
               default: 
                   $filial=null;
                   echo "Sucursal inexistente";
-                  break;
+                  die;
+                  //break;
           }
           
-          
+          //echo $filial;die; 
           //echo $filial.'.'.$ramo;die;
           //echo $search->getsinistro();
           $search->setsinistro($filial.'.'.$ramo);
@@ -117,21 +118,22 @@
                //print_r($dao->busca($search));die;  
               //foreach($dao->listaConteudo2($tabela1) as $item1){
               foreach($dao->busca2($search) as $item1){
-                  //print_r($search);
+                  //print_r($item1);die;
                   $search->setsinistro($item1->getsinistro());
                   //echo "<br><br>";
-                  //print_r($item1);
+                  //print_r($search);die;
                //if(!$item1['SINISTRO']){
                //if(!$item1->getsinistro()){
             set_time_limit(20);    
             //$search->setsinistro($item1['SINISTRO']);   
             $odbcs=$dao->busca($search);
-            //print_r($search);
+            //print_r($search);die;
             $indenizaOld=0;
             foreach($odbcs as $item2){
              //print_r($item2);die;
              $indenizaOld=$item2->getvlindeniza()+$indenizaOld;
             }
+            //echo $indenizaOld;die;
             if(number_format($item1->getIMPORTANCIA_SEGURADA(),2,',','.')!=number_format($indenizaOld,2,',','.') && number_format($indenizaOld,2,',','.')!=0){
                 echo "<tr><td>".$item1->getsinistro()."</td>";
                 echo "<td>".number_format($item1->getIMPORTANCIA_SEGURADA(),2,',','.')."</td>";

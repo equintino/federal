@@ -1,5 +1,25 @@
 <link rel="stylesheet" type="text/css" href="css/consulta.css" />
-<?php @$act=$_GET['act']; ?>
+<?php 
+ @$act=$_GET['act'];
+   if(array_key_exists('sucursal',$_POST)){
+    //print_r($_POST);
+    $sucursal=$_POST['sucursal'];
+   }
+   if(array_key_exists('ramo',$_POST)){
+    $ramo=$_POST['ramo'];
+   }
+   if(array_key_exists('sucursal',$_GET)){
+    //print_r($_GET);
+    $sucursal=$_GET['sucursal'];
+   }
+   if(array_key_exists('ramo',$_GET)){
+    $ramo=$_GET['ramo'];
+   }
+ //echo 'post';
+ //print_r($_POST);
+ //echo 'get';
+ //print_r($_GET);die;
+?>
 <div id='menu'>
  <ul>
   <a href="teste3.php?act=sinistrado"><li>SINISTRADO</li></a>
@@ -21,6 +41,7 @@
   redirecionar('0.01','teste3.php?act=relatorio&abrir=1','AGUARDE...'); 
  }
  if($act=='divergente'){
-  redirecionar('1','teste3.php?act=divergente&abrir=1','AGUARDE...'); 
+  //echo $sucursal.$ramo;
+  redirecionar('1','teste3.php?act=divergente&abrir=1&sucursal='.$sucursal.'&ramo='.$ramo.' ','PROCURANDO POR DIVERG&EcircNCIA...'); 
  }
 ?>

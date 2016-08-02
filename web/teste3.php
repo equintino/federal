@@ -14,8 +14,18 @@
    @$vlindeniza=$_POST['vlindeniza'];
    @$titular=$_GET['titular'];
    @$abrir=$_GET['abrir'];
-   @$sucursal=$_POST['sucursal'];
-   @$ramo=$_POST['ramo'];
+   if(array_key_exists('sucursal',$_POST)){
+    $sucursal=$_POST['sucursal'];
+   }
+   if(array_key_exists('ramo',$_POST)){
+    $ramo=$_POST['ramo'];
+   }
+   if(array_key_exists('sucursal',$_GET)){
+    $sucursal=$_GET['sucursal'];
+   }
+   if(array_key_exists('ramo',$_GET)){
+    $ramo=$_GET['ramo'];
+   }
 ?>
 <div id='menu'>
     <ul>
@@ -128,7 +138,14 @@
   if($act=='divergente'){
       echo "<div class=busca>";
         include_once 'busca.php';
-   if ($busca){
+   if(array_key_exists('sucursal',$_POST)){
+    $sucursal=$_POST['sucursal'];
+   }
+   if(array_key_exists('ramo',$_POST)){
+    $ramo=$_POST['ramo'];
+   }
+   if ($busca=='divergente'){
+    header('Location:carregando.php?act=divergente&sucursal='.$sucursal.'&ramo='.$ramo.' ');
    /*
        echo "<script>
                 var confirma=confirm('Este processo pode levar aproximadamente 10 minutos');
@@ -141,8 +158,10 @@
     * 
     */
    //die;
-   
+   }
+   if($abrir==1){
        //echo $sucursal;
+    //print_r($_GET);die;
        include_once 'divergente.php';
    }
        echo "</div>";
