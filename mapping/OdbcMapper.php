@@ -12,6 +12,9 @@ class OdbcMapper {
         if (array_key_exists('TITULAR', $properties)){
             $odbc->setTITULAR($properties['TITULAR']);
         }
+        if (array_key_exists('ENDOSSO', $properties)){
+            $odbc->setENDOSSO($properties['ENDOSSO']);
+        }
         if (array_key_exists('IMPORTANCIA_SEGURADA', $properties)){
             $odbc->setIMPORTANCIA_SEGURADA($properties['IMPORTANCIA_SEGURADA']);
         }

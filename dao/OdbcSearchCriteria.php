@@ -8,6 +8,9 @@ final class OdbcSearchCriteria {
     private $vlindeniza = 0;
     private $TITULAR;
     private $IMPORTANCIA_SEGURADA = 0;
+    private $ENDOSSO = null;
+    private $idtitular = 0;
+    private $idbenefi = 0;
     
     public function getsinistro() {
         return $this->sinistro;
@@ -37,11 +40,32 @@ final class OdbcSearchCriteria {
         $this->vlindeniza = $vlindeniza;
         return $this;
     }
+    public function getidtitular(){
+        return $this->idtitular;
+    }
+    public function setidtitular($idtitular){
+        $this->idtitular = $idtitular;
+        return $this;
+    }
+    public function getidbenefi(){
+        return $this->idbenefi;
+    }
+    public function setidbenefi($idbenefi){
+        $this->idbenefi = $idbenefi;
+        return $this;
+    }
     public function getTITULAR(){
         return $this->TITULAR;
     }
     public function setTITULAR($TITULAR){
         $this->TITULAR = $TITULAR;
+        return $this;
+    }
+    public function getENDOSSO(){
+        return $this->ENDOSSO;
+    }
+    public function setENDOSSO($ENDOSSO){
+        $this->ENDOSSO = $ENDOSSO;
         return $this;
     }
     public function getIMPORTANCIA_SEGURADA(){

@@ -1,7 +1,7 @@
 <?php if($act=='sinistro'): ?>
 <div class="titulo">BENEFICI&Aacute;RIO</div>
 <form action="teste3.php?act=sinistro&busca=sinistro" method="POST">
-    <input type="text" attrname="telephone1" name="num_sinistro" maxlength="19" placeholder="n&uacute;mero de sinistro" autofocus="">
+    <input type="text" attrname="telephone1" name="num_sinistro" maxlength="19" placeholder="sinistro ou certificado" autofocus="">
     ou
     <input type="text" name="sinistro" placeholder="nome do benefici&aacute;rio" >
     <script src='js/vanilla-masker.min.js'></script>
@@ -13,7 +13,7 @@
     <?php elseif($act=='sinistrado'): ?>
 <div class="titulo">SINISTRADO</div>
 <form action="teste3.php?act=sinistrado&busca=sinistrado" method="POST">
-    <input type="text" attrname="telephone1" name="num_sinistro" maxlength="19" placeholder="n&uacute;mero de sinistro" autofocus="">
+    <input type="text" attrname="telephone1" name="num_sinistro" maxlength="19" placeholder="sinistro ou certificado" autofocus="">
     ou
     <input type="text" name="sinistrado" placeholder="nome do sinistrado" >
     <script src='js/vanilla-masker.min.js'></script>

@@ -1,10 +1,23 @@
 <?php
+   include '../dao/OdbcDao.php';
+   include '../dao/OdbcSearchCriteria.php';
+   include '../config/Config.php';
+   include '../model/Odbc.php';
+   include '../mapping/OdbcMapper.php';
+   include '../validation/OdbcValidator.php';
+          $tabela1='sinipend';
+          $tabela2='Beneficiarios';
+          $file_x='exclui';
+          
+          $conn=odbc_connect('federal','','');
+          
 // Selecionar servidor
-$conectar = mysql_connect("servidor", "usuario", "senha") or die ("Erro ao logar no BD");
+//$conectar = mysql_connect("servidor", "usuario", "senha") or die ("Erro ao logar no BD");
 // Selecionar BD
-mysql_select_db("bancodedados", $conectar);
+//mysql_select_db("bancodedados", $conectar);
+
 // Pegar a página atual por GET
-$p = $_GET["p"];
+@$p = $_GET["p"];
 // Verifica se a variável tá declarada, senão deixa na primeira página como padrão
 if(isset($p)) {
 $p = $p;
@@ -17,30 +30,47 @@ $qnt = 5;
 // (página atual * quantidade por página) - quantidade por página
 $inicio = ($p*$qnt) - $qnt;
 // Seleciona no banco de dados com o LIMIT indicado pelos números acima
-$sql_select = "SELECT * FROM tabela LIMIT $inicio, $qnt";
-// Executa o Query
-$sql_query = mysql_query($sql_select);
+$sql = "SELECT top 5 * FROM $tabela1";
 
+//print_r($sql);die;
+// Executa o Query
+
+//$query=odbc_exec($conn, $sql);
+          //var_dump($query);die;
+//$sql_query = mysql_query($sql_select);
+          $result=  odbc_exec($conn,$sql);
+          //odbc_result_all($result,'border=1');
+          //die;
+
+//ar_dump(odbc_fetch_array($result));die;
 // Cria um while para pegar as informações do BD
-while($array = mysql_fetch_array($sql_query)) {
+while($array = odbc_fetch_array($result)) {
 // Variável para capturar o campo "nome" no banco de dados
-$nome = $array["nome"];
+$nome = $array["TITULAR"];
 // Exibe o nome que está no BD e pula uma linha
 echo $nome." <br /> ";
 }
+//print_r($array);die;
 
 // Depois que selecionou todos os nome, pula uma linha para exibir os links(próxima, última...)
 echo "<br />";
 
+$pag=11;
 // Faz uma nova seleção no banco de dados, desta vez sem LIMIT, 
 // para pegarmos o número total de registros
-$sql_select_all = "SELECT * FROM tabela";
+$sql_select_all = "SELECT top 2 * FROM $tabela1 where idtitular > $pag order by idtitular";
+//print_r($sql_select_all);
+//die;
 // Executa o query da seleção acimas
-$sql_query_all = mysql_query($sql_select_all);
+$sql_query_all = odbc_exec($conn,$sql_select_all);
+//print_r($sql_query_all);
+//die;
 // Gera uma variável com o número total de registros no banco de dados
-$total_registros = mysql_num_rows($sql_query_all);
+$total_registros = odbc_num_rows($sql_query_all);
+//print_r($total_registros);die;
 // Gera outra variável, desta vez com o número de páginas que será precisa. 
 // O comando ceil() arredonda "para cima" o valor
+print_r(odbc_result_all($sql_query_all));die;
 $pags = ceil($total_registros/$qnt);
 // Número máximos de botões de paginação
 $max_links = 3;

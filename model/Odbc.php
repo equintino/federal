@@ -99,6 +99,7 @@ final class Odbc {
     private $TITULAR;
     private $IMPORTANCIA_SEGURADA;
     private $SINISTRO;
+    private $ENDOSSO;
     
     //private $status;
     
@@ -570,14 +571,5 @@ final class Odbc {
     public function setIMPORTANCIA_SEGURADA($IMPORTANCIA_SEGURADA){
         $this->IMPORTANCIA_SEGURADA = $IMPORTANCIA_SEGURADA;
     }
-    /*
-    public function getSINISTRO(){
-        return $this->SINISTRO;
-    }
-    public function setSINISTRO($SINISTRO){
-        $this->SINISTRO = $SINISTRO;
-    }
-     * 
-     */
 }
 ?>
