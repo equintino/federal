@@ -87,6 +87,16 @@ button{
     top: 120px;
 }
 .informacoes{
-    margin-top: 50px;
-    margin-left: 30%;
+    #margin-top: -2px;
+    #margin-left: 30%;
+}
+.sinistrado{
+    float: left;
+    width: 450px;
+}
+.beneficiario{
+    float: right;
+    height: 280px;
+    width: 420px;
+    overflow: auto;
 }

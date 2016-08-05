@@ -22,9 +22,11 @@
     if(@$_GET['certificado']!=null){
         $campo='endosso';
         $busca=$_GET['certificado'];
+        $certificado=$busca;
     }elseif($_GET['cpf']){
         $campo='cpf';
         $busca=OdbcValidator::removePonto($_GET['cpf']);
+        $cpf=$busca;
     }
         //echo "$campo - $busca";die;
     
@@ -47,9 +49,13 @@
     }
     
     echo "<div class=informacoes>";
-    echo "<h4>SINISTRADO</h4>";
-    if($dao->listaCampo($tabela1,$campo,$busca)){
-        foreach($dao->listaCampo($tabela1,$campo,$busca) as $item){
+    echo "<h3>SINISTRADO</h3>";
+    echo "<div class=sinistrado >";
+    if($dao->listaCampo2($tabela1,$campo,$busca,$pagAtual)){
+     //print_r($dao->listaCampo2($tabela1,$campo,$busca));die;
+     //echo "<h1>$pagAtual</h1>";
+     //$odbc->setidtitular($pagAtual);
+        foreach($dao->listaCampo2($tabela1,$campo,$busca,$pagAtual) as $item){
             echo "<i>Certificado: </i>";
             echo $item['ENDOSSO'];
             echo "<br>";
@@ -62,11 +68,30 @@
             echo "<i>Cpf: </i>";
             echo mask($item['CPF'],'###.###.###-##');
             echo "<br><br>";
+            //$idtitular[]= $item['idtitular'];
+        //print_r ($idtilular);
         }
+        //print_r ($idtitular);
+        $limite=count($dao->listaCampo3($tabela1,$campo,$busca,$pagAtual));
+        //echo ($idtitular[0]-1);
+        if($limite < 4){
+         $proximo='<button disabled>';
+        }else{
+         $proximo='<button>';
+        }
+        $pagAtual=$item['idtitular'];
+        //echo "<h1>$pagAtual</h1>";
+        //$pagAtual=$odbc->getidtitular();
+        //echo "<h1>$pagAtual</h1>";
+        //echo ($pagAtual-3);
+        echo "<a href=\"teste3.php?certificado=".$certificado."&cpf=$cpf&act=informacoes&abrir=1&pagAtual=0 \"><button>IN&Iacute;CIO</button>";
+        echo "<a href=\"teste3.php?certificado=".$certificado."&cpf=$cpf&act=informacoes&abrir=1&pagAtual=$pagAtual \">".$proximo." PR&Oacute;XIMO</button></a>";
+        echo "</div>";
     }else{
         echo "N&atilde;o encontrado nenhum resultado.";
     }
-    echo "<h4>BENEFICI&Aacute;RIO(S)</h4>";
+    echo "<h3>BENEFICI&Aacute;RIO(S)</h3>";
+    echo "<div class=beneficiario>";
     if($dao->listaCampo($tabela2,$campo,$busca)){
         foreach($dao->listaCampo($tabela2,$campo,$busca) as $item){
             echo "<i>Certificado: </i>";
@@ -88,6 +113,7 @@
             echo mask($item['cpf'],'###.###.###-##');
             echo "<br><br>";
         }
+        echo "</div>";
     }else{
         echo "N&atilde;o encontrado nenhum resultado.";
     }

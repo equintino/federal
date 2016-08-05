@@ -91,7 +91,7 @@
      //print_r($search->getidbenefi());
         /// paginação ///
       //if(@!$totalPag){
-        $totalPag=($dao->totalLinhas($search,'Beneficiarios'))/20;
+        $totalPag=($dao->totalLinhas($search,'Beneficiarios'))/14;
       //}
         //if(@$search->getidbenefi()){
            // $search->setidbenefi(0);
@@ -99,8 +99,8 @@
             //$search->setidbenefi($item->getidbenefi());
      //print_r($search->getidbenefi());
         //}
-       $ultimaLinha_=$item->getidbenefi()/20;       
-      echo "<tr><th colspan=4 align=center> <a href=teste3.php?act=sinistro&busca=sinistro&pagAtual=".($item->getidbenefi()-40)."> < </a>".number_format($ultimaLinha_,'0','','.')." de ".number_format($totalPag,'0','','.')." <a href=teste3.php?act=sinistro&busca=sinistro&pagAtual=".$item->getidbenefi()."> > </a></th></tr>";
+       $ultimaLinha_=$item->getidbenefi()/14;       
+      echo "<tr><th colspan=4 align=center> <a href=teste3.php?act=sinistro&busca=sinistro&pagAtual=".($item->getidbenefi()-28)."> < &nbsp</a>".number_format($ultimaLinha_,'0','','.')." de ".number_format($totalPag,'0','','.')." <a href=teste3.php?act=sinistro&busca=sinistro&pagAtual=".$item->getidbenefi().">&nbsp > </a></th></tr>";
         /// fim paginação ///
       
       echo "</table>";
@@ -164,10 +164,10 @@
      }
         /// paginação ///
       //if(@!$totalPag){
-        $totalPag=($dao->totalLinhas($search,'sinipend'))/20;
+        $totalPag=($dao->totalLinhas($search,'sinipend'))/14;
       //}
-       $ultimaLinha=$item->getidtitular()/20;       
-      echo "<tr><th colspan=4 align=center><a href=teste3.php?act=sinistrado&busca=sinistrado&pagAtual=".($item->getidtitular()-40)."> < </a>".number_format($ultimaLinha,'0','','.')." de ".number_format($totalPag,'0','','.')." <a href=teste3.php?act=sinistrado&busca=sinistrado&pagAtual=".$item->getidtitular()."> > </a></th></tr>";
+       $ultimaLinha=$item->getidtitular()/14;       
+      echo "<tr><th colspan=4 align=center><a href=teste3.php?act=sinistrado&busca=sinistrado&pagAtual=".($item->getidtitular()-28)."> < &nbsp</a>".number_format($ultimaLinha,'0','','.')." de ".number_format($totalPag,'0','','.')." <a href=teste3.php?act=sinistrado&busca=sinistrado&pagAtual=".$item->getidtitular()." >&nbsp > </a></th></tr>";
         /// fim paginação ///
       
       echo "</table>";
@@ -215,7 +215,6 @@
   if($act=='informacoes'){
    echo "<div class='busca'>";
     include_once 'busca.php';
-    
     if(array_key_exists('certificado',$_POST)){
       $certificado=$_POST['certificado'];
     }elseif(array_key_exists('certificado',$_GET)){

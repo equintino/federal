@@ -97,6 +97,41 @@ final class OdbcDao {
         echo '</table>';
          */
     }
+    public function listaCampo2($tabela,$campo,$busca,$pagAtual){
+        $odbc = new Odbc();
+        //print_r($odbc);
+        if($odbc->getidtitular()==null){
+         $odbc->setidtitular(0);
+        }
+        if(!$pagAtual){
+         $pagAtual=0;
+        }
+         //$odbc->setidtitular($pagAtual);
+        //print_r($odbc->getidtitular());
+        $sql = "SELECT TOP 3 * FROM $tabela WHERE $campo like '%$busca%'";
+        $sql .= ' AND idtitular > '.$pagAtual;
+        $sql .= ' ORDER BY idtitular';
+        $conn = new OdbcDao();
+        @$result=$conn -> query($sql);
+        
+        return @$result;
+    }
+    public function listaCampo3($tabela,$campo,$busca,$pagAtual){
+        $odbc = new Odbc();
+        if($odbc->getidtitular()==null){
+         $odbc->setidtitular(0);
+        }
+        if(!$pagAtual){
+         $pagAtual=0;
+        }
+        $sql = "SELECT * FROM $tabela WHERE $campo like '%$busca%'";
+        $sql .= ' AND idtitular > '.$pagAtual;
+        $sql .= ' ORDER BY idtitular';
+        $conn = new OdbcDao();
+        @$result=$conn -> query($sql);
+        
+        return @$result;
+    }
     public function listaColunas($tabela){
      $conn = new OdbcDao();
      $sql = "SELECT * FROM $tabela WHERE 1";
@@ -389,7 +424,7 @@ final class OdbcDao {
         return $sql;
     }
     private function getBuscaSql3(OdbcSearchCriteria $search = null){
-        $sql = "SELECT TOP 20 * FROM sinipend WHERE ";
+        $sql = "SELECT TOP 14 * FROM sinipend WHERE ";
         $order = ' idtitular';
         //$sql .= "SINISTRO='".$search->getsinistro()."'";
         //var_dump($search->setsinistro(0));
@@ -432,7 +467,7 @@ final class OdbcDao {
         return $sql;
     }
     private function getBuscaSql4(OdbcSearchCriteria $search = null){
-        $sql = "SELECT TOP 20 * FROM Beneficiarios WHERE ";
+        $sql = "SELECT TOP 14 * FROM Beneficiarios WHERE ";
         $order = ' idbenefi';
         //$sql .= "SINISTRO='".$search->getsinistro()."'";
         //var_dump($search->setsinistro(0));
