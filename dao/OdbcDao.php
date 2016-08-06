@@ -67,6 +67,13 @@ final class OdbcDao {
         return $result;
         odbc_result($result,'Border=1 cellspacing=0 cellpadding=5'); 
     }
+    public function listaConteudo3($table){
+        $sql = "SELECT TOP 10 * FROM $table WHERE 1";
+        $conn = new OdbcDao();
+        $result=$conn -> query($sql);
+        return $result;
+        odbc_result($result,'Border=1 cellspacing=0 cellpadding=5'); 
+    }
     public function buscaConsolidada($tabela1,$tabela2,$col1,$col2){
         $sql = "SELECT * FROM $tabela1 INNER JOIN $tabela2 ON $tabela1.$col1=$tabela2.$col2 WHERE 1";
         $conn = new OdbcDao();
@@ -128,6 +135,29 @@ final class OdbcDao {
         $sql .= ' AND idtitular > '.$pagAtual;
         $sql .= ' ORDER BY idtitular';
         $conn = new OdbcDao();
+        @$result=$conn -> query($sql);
+        
+        return @$result;
+    }
+    public function listaCampo4($tabela,$campo,$busca,$pagAtual){
+     //print_r($busca);
+     //echo "<br>";
+        $odbc = new Odbc();
+        //print_r($odbc);
+        //if($odbc->getidbenefi()==null){
+         //$odbc->setidbenefi(0);
+        //}
+        //if(!$pagAtual){
+         //$pagAtual=0;
+       // }
+         //$odbc->setidtitular($pagAtual);
+        //print_r($odbc->getidtitular());
+        $sql = "SELECT * FROM $tabela WHERE $campo like '%$busca%'";
+        //$sql .= ' AND idbenefi > '.$pagAtual;
+        //$sql .= ' ORDER BY idbenefi';
+        $conn = new OdbcDao();
+        //print_r($sql);die;
+        //echo "<br>";
         @$result=$conn -> query($sql);
         
         return @$result;
@@ -214,6 +244,30 @@ final class OdbcDao {
             //print_r($result);
             //echo '<br>';
         //print_r($result);die;
+        return @$result;
+    }
+    public function ultimoSinistrado(OdbcSearchCriteria $search = null){
+        $result=array();
+        $sql="SELECT TOP 1 * FROM sinipend ORDER BY idtitular DESC";
+        $busca = $this->query($sql);
+         foreach ($busca as $key => $row) {
+            $odbc = new Odbc();
+            OdbcMapper::map($odbc, $row);
+            $result[$odbc->getidtitular()] = $odbc;
+         }
+        return @$result;
+    }
+    public function buscaSinistrado(OdbcSearchCriteria $search = null){
+        $result=array();
+        $sql="SELECT * FROM sinipend WHERE idtitular=".$search->getidtitular()." ORDER BY idtitular";
+        $busca = $this->query($sql);
+        if(@$busca){
+         foreach ($busca as $key => $row) {
+            $odbc = new Odbc();
+            OdbcMapper::map($odbc, $row);
+            $result[$odbc->getidtitular()] = $odbc;
+         }
+        }
         return @$result;
     }
     public function busca(OdbcSearchCriteria $search = null){

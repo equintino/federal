@@ -12,6 +12,23 @@
           $tabela1='sinipend';
           $tabela2='Beneficiarios';
           
+          //print_r($_GET);
+          @$idtitular__=$_GET['idtitular__'];
+           @$pagAnterior=$_GET['pagAnterior'];
+          if(@$voltar){
+           @$idtitular__=$pagAnterior;
+          }
+          @$pagAtual=$_GET['pagAtual'];
+          if(@!$idtitular__){
+            $idtitular__=1;
+            $seguencia[]=$idtitular__;
+          }
+          //echo "<h1>".$idtitular__."</h1>";
+          if(@!$pagAtual){
+            @$pagAtual=1;
+          }
+          $divergente=1;
+          
           echo '<br>';          
           $impSegurada=0;
           $aIndenizar=0;
@@ -22,6 +39,7 @@
           $sinistro_ant=null;
           
           //echo $sucursal;die;
+          /*
           switch($sucursal){
               case 15:
                   $filial='0115';
@@ -95,11 +113,19 @@
                   die;
                   //break;
           }
+           * 
+           */
           
           //echo $filial;die; 
           //echo $filial.'.'.$ramo;die;
           //echo $search->getsinistro();
-          $search->setsinistro($filial.'.'.$ramo);
+          
+          //$search->setsinistro($filial.'.'.$ramo);
+          
+          foreach($dao->ultimoSinistrado() as $id){
+           $ultimoSinistrado=$id->getidtitular();
+          }
+          //echo "<h1>".$search->getidtitular()."</h1>";
           //echo $search->getsinistro();
           //print_r($search);
           //die;
@@ -113,39 +139,93 @@
           echo "<tr><th>SINISTRO</th><th>IMPORT&AcircNCIA SEGURADA</th><th>A INDENIZAR</th></tr>";
           $totalSegurada=0;
           $totalparaIndenizar=0;
+          //while($divergente<28){
+          while($divergente<14){
+          $search->setidtitular($idtitular__);
+          $daos=$dao->buscaSinistrado($search);
+          //print_r($daos);
+          //echo "<br><br>";
           //var_dump($dao->listaConteudo2($tabela1));die;
              //if($dao->listaConteudo2($tabela1)){
                //print_r($dao->busca($search));die;  
               //foreach($dao->listaConteudo2($tabela1) as $item1){
-              foreach($dao->busca2($search) as $item1){
+              foreach($daos as $item1){
                   //print_r($item1);die;
                   $search->setsinistro($item1->getsinistro());
                   //echo "<br><br>";
-                  //print_r($search);die;
+                  //print_r($search->getsinistro());
+                  //echo "<br><br>";
+                  //die;
                //if(!$item1['SINISTRO']){
                //if(!$item1->getsinistro()){
             set_time_limit(20);    
             //$search->setsinistro($item1['SINISTRO']);   
             $odbcs=$dao->busca($search);
-            //print_r($search);die;
+            //echo "<br><br>";
+            //print_r($odbcs);
+            //die;
             $indenizaOld=0;
             foreach($odbcs as $item2){
-             //print_r($item2);die;
              $indenizaOld=$item2->getvlindeniza()+$indenizaOld;
+             //print_r($indenizaOld);
+             //die;
+             //echo "<br><br>";
             }
+            /*
+            print_r(number_format($item1->getIMPORTANCIA_SEGURADA(),2,',','.'));
+            echo " != ";
+            print_r(number_format($indenizaOld,2,',','.'));
+            echo " && ";
+            print_r(number_format($indenizaOld,2,',','.'));
+            echo " != 0";
+            echo "<br><br>";
+             * 
+             */
             //echo $indenizaOld;die;
+            //echo "<br><br>";
+            //print_r($item2);
+            //echo "<br><br>";
             if(number_format($item1->getIMPORTANCIA_SEGURADA(),2,',','.')!=number_format($indenizaOld,2,',','.') && number_format($indenizaOld,2,',','.')!=0){
                 echo "<tr><td>".$item1->getsinistro()."</td>";
                 echo "<td>".number_format($item1->getIMPORTANCIA_SEGURADA(),2,',','.')."</td>";
                 echo "<td>".number_format($indenizaOld,2,',','.')."</td></tr>";
                 $totalSegurada=$item1->getIMPORTANCIA_SEGURADA()+$totalSegurada;
                 $totalparaIndenizar=$indenizaOld+$totalparaIndenizar;
+                $divergente++;
+                @$idtitular__++;
+                $seguencia[]=$idtitular__;
              }
+               $idtitular__++;
+               //$seguencia[]=$idtitular__;
+              }
                }
              // }
             // }
              //echo "<tr><th>TOTAL</th><td>".number_format($totalSegurada,'2',',','.')."</td><td>".number_format($totalparaIndenizar,'2',',','.')."</td></tr>";
+               /*
+            if(number_format($item1->getIMPORTANCIA_SEGURADA(),2,',','.')!=number_format($indenizaOld,2,',','.') && number_format($indenizaOld,2,',','.')!=0){
+                $divergente++;
+                @$idtitular__++;
+                $seguencia[]=$idtitular__;             
+            }
+               $idtitular__++;
+                
+          }
+                */
+          if($pagAtual==1){
+            $botao="<button disabled>";
+          }else{
+            $botao="<button onclick='history.go(-1)' >";
+          }
+               
+               echo "<tr><th colspan=3>".$botao." < </button> &nbsp ".$pagAtual." &nbsp <button onclick=\"window.location.href='teste3.php?act=divergente&abrir=1&idtitular__=".$idtitular__."&pagAtual=".($pagAtual+1)."'\"> > </button></th></tr>";
+/* '\'".."\'&pagAnterior=\'".$seguencia[0]."\'\"  > 
+ */
+              //print_r($seguencia);
              die;
+             
+             
+             
             $linha_vazia=0;
             if($dao->listaConteudo($tabela2)){
             foreach($dao->listaConteudo($tabela2) as $item2){ 

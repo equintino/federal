@@ -50,7 +50,7 @@
   redirecionar('0.01','teste3.php?act=relatorio&abrir=1','AGUARDE...'); 
  }
  if($act=='divergente'){
-  redirecionar('1','teste3.php?act=divergente&abrir=1&sucursal='.$sucursal.'&ramo='.$ramo.' ','PROCURANDO POR DIVERG&EcircNCIA...'); 
+  redirecionar('1','teste3.php?act=divergente&abrir=1','PROCURANDO POR DIVERG&EcircNCIA...'); 
  }
  if($act=='informacoes'){
   if(@!$certificado && @!$cpf){

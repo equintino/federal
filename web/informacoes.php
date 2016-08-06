@@ -68,7 +68,7 @@
             echo "<i>Cpf: </i>";
             echo mask($item['CPF'],'###.###.###-##');
             echo "<br><br>";
-            //$idtitular[]= $item['idtitular'];
+            $certificado_[]= $item['ENDOSSO'];
         //print_r ($idtilular);
         }
         //print_r ($idtitular);
@@ -92,8 +92,41 @@
     }
     echo "<h3>BENEFICI&Aacute;RIO(S)</h3>";
     echo "<div class=beneficiario>";
-    if($dao->listaCampo($tabela2,$campo,$busca)){
-        foreach($dao->listaCampo($tabela2,$campo,$busca) as $item){
+   //print_r($certificado_);die;
+    if($campo=='endosso'){
+   for($x=0;$x<count(@$certificado_);$x++){
+    //print_r($certificado_[$x]);
+    //echo count($certificado_);
+    //echo "<br>";
+   //}die;
+    if($dao->listaCampo($tabela2,$campo,$certificado_[$x],$pagAtual)){
+        foreach($dao->listaCampo($tabela2,$campo,$certificado_[$x],$pagAtual) as $item){
+            echo "<i>Certificado: </i>";
+            echo $item['endosso'];
+            echo "<br>";
+            echo "<i>Sinistro: </i>";
+            echo $item['sinistro'];
+            echo "<br>";
+            echo "<i>Cobertura: </i>";
+            echo $item['tpcobertura'];
+            echo "<br>";
+            echo "<i>Valor a indenizar: </i>";
+            echo number_format($item['vlindeniza'],'2',',','.');
+            echo "<br>";
+            echo "<i>Benefici&aacute;rio: </i>";
+            echo $item['nome'];
+            echo "<br>";
+            echo "<i>Cpf: </i>";
+            echo mask($item['cpf'],'###.###.###-##');
+            echo "<br><br>";
+        }
+    //}
+   }
+   }
+        echo "</div>";
+    }else{
+    if($dao->listaCampo4($tabela2,$campo,$busca,$pagAtual)){
+        foreach($dao->listaCampo4($tabela2,$campo,$busca,$pagAtual) as $item){
             echo "<i>Certificado: </i>";
             echo $item['endosso'];
             echo "<br>";
@@ -114,8 +147,7 @@
             echo "<br><br>";
         }
         echo "</div>";
-    }else{
-        echo "N&atilde;o encontrado nenhum resultado.";
+    }
     }
     echo "</div>";
 ?>
