@@ -2,15 +2,55 @@
 <html>
     <head>
         <title>Divergente</title>
+         <!--@section Scripts {
+         @Scripts.Render("~/Content/css")
+         @Scripts.Render("~/bundles/DataTables")-->
+        <script>
+         function cookie($ultimoSinistrado){
+           //alert($ultimoSinistrado);
+           document.cookie="ultimoSinistrado="+$ultimoSinistrado;
+         }
+/*
+           $(document).ready(function () {
+              $("#divCarregando").show();
+              $(window).load(function () {
+              // Quando a página estiver totalmente carregada, remove o id
+              $('#divCarregando').fadeOut('slow');
+              });
+           });
+ */
+         /*
+         function calculando(){
+           //alert("aguarde...");
+           document.getElementById("calculando").innerHTML = "pronto!";
+         }
+         */
+        </script>
     </head>
     <body>
-        <?php 
-          $dao = new OdbcDao();
-          $search = new OdbcSearchCriteria();
-          $odbc = new Odbc();
+        <?php
+        /*
+        print_r($dao);
+        echo "<br><br>";
+        print_r($search);
+        echo "<br><br>";
+        print_r($odbc);
+        echo "<br><br>";
+          //$dao = new OdbcDao();
+          //$search = new OdbcSearchCriteria();
+          //$odbc = new Odbc();
+        print_r($dao);
+        echo "<br><br>";
+        print_r($search);
+        echo "<br><br>";
+        print_r($odbc);
+        echo "<br><br>";
+         * 
+         */
           
           $tabela1='sinipend';
           $tabela2='Beneficiarios';
+          $ultimoSinistrado=$_COOKIE['ultimoSinistrado'];
           
           //print_r($_GET);
           @$idtitular__=$_GET['idtitular__'];
@@ -37,6 +77,17 @@
           $x=0;
           $y=0;
           $sinistro_ant=null;
+               //echo "<div id=\"calculando\" class=lendo>";
+                //echo "calculando...";
+               //echo "</div>";
+          /*
+          echo "
+           <div id=\"divCarregando\" class=\"progresso\"> 
+            <img src=\"~/Img/carregando.gif\" />
+            <br /> Carregando... 
+           </div> ";
+           * 
+           */
           
           //echo $sucursal;die;
           /*
@@ -121,11 +172,15 @@
           //echo $search->getsinistro();
           
           //$search->setsinistro($filial.'.'.$ramo);
-          
-          foreach($dao->ultimoSinistrado() as $id){
-           $ultimoSinistrado=$id->getidtitular();
+          if(!isset($ultimoSinistrado)){
+            foreach($dao->ultimoSinistrado() as $id){
+             $ultimoSinistrado=$id->getidtitular();
+             //setcookie("ultimoSinistrado" ,"$ultimoSinistrado", time() + (86400 * 30), "/");
+            echo  "<script>cookie($ultimoSinistrado)</script>";
+            }
+          //echo "<h1>".$ultimoSinistrado."</h1>";
           }
-          //echo "<h1>".$search->getidtitular()."</h1>";
+          //print_r($_COOKIE);
           //echo $search->getsinistro();
           //print_r($search);
           //die;
@@ -136,21 +191,33 @@
          * 
          */
           echo "<table align=center border=1 cellspacing=0 >";
-          echo "<tr><th>SINISTRO</th><th>IMPORT&AcircNCIA SEGURADA</th><th>A INDENIZAR</th></tr>";
+          echo "<tr><th>SINISTRO</th><th>VL. SEGURADO</th><th>VL. A INDENIZAR</th></tr>";
           $totalSegurada=0;
           $totalparaIndenizar=0;
           //while($divergente<28){
           while($divergente<14){
+           //echo "<h1>$idtitular__</h1>";
+           //echo "<br><br>";
           $search->setidtitular($idtitular__);
           $daos=$dao->buscaSinistrado($search);
+          while($daos=='nulo'){
+           $semsinistrado[]=$idtitular__;
+           $idtitular__++;
+           $search->setidtitular($idtitular__);
+           $daos=$dao->buscaSinistrado($search);
+           //echo "estou aqui dentro";
+          }
+          //print_r($search);
+          //echo "<br><br>";
           //print_r($daos);
           //echo "<br><br>";
           //var_dump($dao->listaConteudo2($tabela1));die;
              //if($dao->listaConteudo2($tabela1)){
                //print_r($dao->busca($search));die;  
               //foreach($dao->listaConteudo2($tabela1) as $item1){
+          //if($)
               foreach($daos as $item1){
-                  //print_r($item1);die;
+                  //print_r($item1);
                   $search->setsinistro($item1->getsinistro());
                   //echo "<br><br>";
                   //print_r($search->getsinistro());
@@ -179,16 +246,18 @@
             print_r(number_format($indenizaOld,2,',','.'));
             echo " != 0";
             echo "<br><br>";
+            
              * 
              */
             //echo $indenizaOld;die;
             //echo "<br><br>";
             //print_r($item2);
             //echo "<br><br>";
-            if(number_format($item1->getIMPORTANCIA_SEGURADA(),2,',','.')!=number_format($indenizaOld,2,',','.') && number_format($indenizaOld,2,',','.')!=0){
+            if(number_format($item1->getIMPORTANCIA_SEGURADA(),2,',','.')!=number_format($indenizaOld,2,',','.') && number_format($indenizaOld,2,',','.')!=0 && ($item1->getsinistro()!= null || $item1->getsinistro()!= 0 )){
+             //echo "<tr><td>".$item1->getidtitular()."</td>";
                 echo "<tr><td>".$item1->getsinistro()."</td>";
-                echo "<td>".number_format($item1->getIMPORTANCIA_SEGURADA(),2,',','.')."</td>";
-                echo "<td>".number_format($indenizaOld,2,',','.')."</td></tr>";
+                echo "<td align=right>".number_format($item1->getIMPORTANCIA_SEGURADA(),2,',','.')."</td>";
+                echo "<td align=right>".number_format($indenizaOld,2,',','.')."</td></tr>";
                 $totalSegurada=$item1->getIMPORTANCIA_SEGURADA()+$totalSegurada;
                 $totalparaIndenizar=$indenizaOld+$totalparaIndenizar;
                 $divergente++;
@@ -196,9 +265,17 @@
                 $seguencia[]=$idtitular__;
              }
                $idtitular__++;
+                if ($idtitular__ > ($ultimoSinistrado)){
+                 $divergente=14;
+                }
+               //echo "passei aqui";
                //$seguencia[]=$idtitular__;
               }
                }
+               //echo $divergente;
+               //if($divergente==14){               
+                 //echo "<script>calculando()</script>";
+               //}
              // }
             // }
              //echo "<tr><th>TOTAL</th><td>".number_format($totalSegurada,'2',',','.')."</td><td>".number_format($totalparaIndenizar,'2',',','.')."</td></tr>";
@@ -217,11 +294,19 @@
           }else{
             $botao="<button onclick='history.go(-1)' >";
           }
+          if($idtitular__ > ($ultimoSinistrado)){
+            $botao_="<button disabled>";
+          }else{        
+            //redirecionar('1','teste3.php?act=divergente&abrir=1','AGUARDE...');
+            $botao_="<button onclick=\"window.location.href='carregando.php?act=divergente&abrir=1&idtitular__=".$idtitular__."&pagAtual=".($pagAtual+1)."'\">";
+          }
                
-               echo "<tr><th colspan=3>".$botao." < </button> &nbsp ".$pagAtual." &nbsp <button onclick=\"window.location.href='teste3.php?act=divergente&abrir=1&idtitular__=".$idtitular__."&pagAtual=".($pagAtual+1)."'\"> > </button></th></tr>";
+               echo "<tr><th colspan=3>".$botao." < </button> &nbsp ".$pagAtual." &nbsp   ".$botao_." ></button></th></tr>";
+               echo "</table>";
+               
 /* '\'".."\'&pagAnterior=\'".$seguencia[0]."\'\"  > 
  */
-              //print_r($seguencia);
+              //print_r(@$semsinistrado);
              die;
              
              

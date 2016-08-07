@@ -1,0 +1,7 @@
+6 sinistrador inexistente
+
+idtitular 5521 sinistro=88888888888888888
+
+idtitular 5542 a indenizar=46.510.106,25
+
+beneficiaria LORNA CATALAN DE NOSTA - sinistro 0101.82.03.00000114 - sinistrado - LORNA CATALAN DE NOSTA

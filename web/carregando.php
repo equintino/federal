@@ -2,6 +2,9 @@
 <meta charset="utf-8">
 <?php 
  @$act=$_GET['act'];
+ @$idtitular__=$_GET['idtitular__'];
+ @$pagAtual=$_GET['pagAtual'];
+ 
    if(array_key_exists('sucursal',$_POST)){
     $sucursal=$_POST['sucursal'];
    }elseif(array_key_exists('sucursal',$_GET)){
@@ -49,8 +52,9 @@
  if($act=='relatorio'){
   redirecionar('0.01','teste3.php?act=relatorio&abrir=1','AGUARDE...'); 
  }
- if($act=='divergente'){
-  redirecionar('1','teste3.php?act=divergente&abrir=1','PROCURANDO POR DIVERG&EcircNCIA...'); 
+ if($act=='divergente'){ 
+  //print_r($_GET);die;
+  redirecionar('1','teste3.php?act=divergente&abrir=1&idtitular__='.$idtitular__.'&pagAtual='.$pagAtual.'','AGUARDE...'); 
  }
  if($act=='informacoes'){
   if(@!$certificado && @!$cpf){

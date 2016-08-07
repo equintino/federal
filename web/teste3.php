@@ -38,7 +38,7 @@
         <a href="teste3.php?act=sinistrado"><li>SINISTRADO</li></a>
         <a href="teste3.php?act=sinistro"><li>CONSULTA BENEFICI&Aacute;RIOS</li></a>
         <a href="teste3.php?act=informacoes"><li>IMFORMA&Ccedil;&Otilde;ES</li></a>
-        <a href="teste3.php?act=divergente"><li>VALORES DIVERGENTES</li></a>
+        <a href="teste3.php?act=divergente&busca=divergente"><li>VALORES DIVERGENTES</li></a>
         <a href="teste3.php?act=relatorio"><li>RELAT&Oacute;RIOS</li></a>
         <!--<a href="teste3.php?act=restrito"><li>&Aacute;REA RESTRITA</li></a>-->
     </ul>
@@ -99,7 +99,7 @@
             //$search->setidbenefi($item->getidbenefi());
      //print_r($search->getidbenefi());
         //}
-       $ultimaLinha_=$item->getidbenefi()/14;       
+       $ultimaLinha_=@$item->getidbenefi()/14;       
       echo "<tr><th colspan=4 align=center> <a href=teste3.php?act=sinistro&busca=sinistro&pagAtual=".($item->getidbenefi()-28)."> < &nbsp</a>".number_format($ultimaLinha_,'0','','.')." de ".number_format($totalPag,'0','','.')." <a href=teste3.php?act=sinistro&busca=sinistro&pagAtual=".$item->getidbenefi().">&nbsp > </a></th></tr>";
         /// fim paginação ///
       
@@ -166,7 +166,7 @@
       //if(@!$totalPag){
         $totalPag=($dao->totalLinhas($search,'sinipend'))/14;
       //}
-       $ultimaLinha=$item->getidtitular()/14;       
+       $ultimaLinha=@$item->getidtitular()/14;       
       echo "<tr><th colspan=4 align=center><a href=teste3.php?act=sinistrado&busca=sinistrado&pagAtual=".($item->getidtitular()-28)."> < &nbsp</a>".number_format($ultimaLinha,'0','','.')." de ".number_format($totalPag,'0','','.')." <a href=teste3.php?act=sinistrado&busca=sinistrado&pagAtual=".$item->getidtitular()." >&nbsp > </a></th></tr>";
         /// fim paginação ///
       
@@ -184,7 +184,7 @@
   }
   if($act=='divergente'){
       echo "<div class=busca>";
-        include_once 'busca.php';
+        //include_once 'busca.php';
    if(array_key_exists('sucursal',$_POST)){
     $sucursal=$_POST['sucursal'];
    }

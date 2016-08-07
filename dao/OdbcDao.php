@@ -260,6 +260,7 @@ final class OdbcDao {
     public function buscaSinistrado(OdbcSearchCriteria $search = null){
         $result=array();
         $sql="SELECT * FROM sinipend WHERE idtitular=".$search->getidtitular()." ORDER BY idtitular";
+        if($this->query($sql)){
         $busca = $this->query($sql);
         if(@$busca){
          foreach ($busca as $key => $row) {
@@ -267,6 +268,9 @@ final class OdbcDao {
             OdbcMapper::map($odbc, $row);
             $result[$odbc->getidtitular()] = $odbc;
          }
+        }
+        }else{
+         return $result="nulo";
         }
         return @$result;
     }
@@ -411,20 +415,32 @@ final class OdbcDao {
          $campo='sinistro';
          $busca=$search->getsinistro();
         }
+        if(@!$campo){
+         $campo=null;
+        }
+        if(@!$busca){
+         $busca=null;
+        }
         
         if($search->getvlindeniza() == null){
             $search->setvlindeniza(0);
         }
+        //echo "campo - $campo -- busca - $busca";
+        //echo "<br>";
         if ($search->getnome() !== '' && $search->getsinistro() !== '') {
             //echo "search nao esta nulo".$search->getnome();die;
-            if ($search->getsinistro() != null || $search->getendosso() != null) {
+            if (($search->getsinistro() != null || $search->getendosso() != null) && $campo != null){
                 //echo "sinistro defenido";
                 $sql .= "$campo like '%".$busca."%'";
             }elseif($search->getnome() != null){
                 //echo "nome defenido";
                 $sql .= "nome like '%".$search->getnome()."%'";
             }
-            $sql.= ' AND vlindeniza > '.$search->getvlindeniza().' ';
+            if($search->getnome() == null && $campo == null){
+             $sql .= ' vlindeniza > '.$search->getvlindeniza().' ';
+            }else{
+             $sql.= ' AND vlindeniza > '.$search->getvlindeniza().' ';
+            }
         }else{
             //echo $search->getsinistro();
             //echo "search esta nulo";die;
@@ -434,7 +450,8 @@ final class OdbcDao {
         //$sql .= " AND vlindeniza > ".$search->getvlindeniza();
         //$sql .= " AND exclui like '0' ";
         //$sql .= ' ORDER BY ' . $orderBy;
-        //print_r($sql);die;
+        //print_r($sql);
+        //echo "<br><br>";
         return $sql;
         
     }

@@ -74,7 +74,7 @@ final class Odbc {
     private $estado;
     private $uf;
     private $cep;
-    private $vlindeniza;
+    private $vlindeniza = 0;
     private $tpcobertura;
     private $cpf;
     private $identidade;
@@ -97,7 +97,7 @@ final class Odbc {
     
     // colinas sinipend //
     private $TITULAR;
-    private $IMPORTANCIA_SEGURADA;
+    private $IMPORTANCIA_SEGURADA =0;
     private $SINISTRO;
     private $ENDOSSO;
     

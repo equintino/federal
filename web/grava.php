@@ -27,10 +27,17 @@
           //$sql="SELECT * FROM Beneficiarios WHERE nome like '%edmilson%' AND exclui like '0'";
           //$sql = "SELECT * FROM $tabela WHERE sinistro like '0153.93.03.0000'" ;
           //$sql="select * from $tabela where sinistro='0135.93.03.00003491'";
+         //$sql="select * from $tabela where sinistro='88888888888888888'";
+         //$sql="select * from $tabela2 where vlindeniza like '%44592308%'";
+         $sql="select * from $tabela2 where idtitular like '5586'";
+         //$sql="delete * from $tabela2 where idtitular like '5586'";
+         //$sql="select * from $tabela2 where IMPORTANCIA_SEGURADA=0.00";
+          //$sql="DELETE * from $tabela where sinistro='88888888888888888'";
+          //$sql="DELETE * FROM $tabela WHERE sinistro like '0153.93.03.0000'" ;
           /// limpar tabela ///
           
           
-          $sql="select top 3 * from $tabela where 1";
+          //$sql="select * from $tabela2 where 1";
           $result=odbc_exec($conn,$sql);
           odbc_result_all($result,'border=1');
           die;
