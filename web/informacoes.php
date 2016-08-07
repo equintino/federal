@@ -1,24 +1,8 @@
 <?php
-    $dao = new OdbcDao();
-    $search = new OdbcSearchCriteria();
-    $odbc = new Odbc();
-    
-    /*
-    print_r($dao);
-    echo "<br><br>";
-    print_r($search);
-    echo "<br><br>";
-    print_r($odbc);
-    echo "<br><br>";
-     * 
-     */
-    //print_r($_POST);
-    //echo "<br><br>";
-    
     $tabela1='sinipend';
     $tabela2='Beneficiarios';
+    @$inicio=$_GET['inicio'];
     
-    //print_r($_GET);die;
     if(@$_GET['certificado']!=null){
         $campo='endosso';
         $busca=$_GET['certificado'];
@@ -28,10 +12,6 @@
         $busca=OdbcValidator::removePonto($_GET['cpf']);
         $cpf=$busca;
     }
-        //echo "$campo - $busca";die;
-    
-    //$campo='ENDOSSO';
-    //$busca='0131.93.22.00000814';
     
     function mask($val, $mask){
         $maskared = '';
@@ -52,9 +32,6 @@
     echo "<h3>SINISTRADO</h3>";
     echo "<div class=sinistrado >";
     if($dao->listaCampo2($tabela1,$campo,$busca,$pagAtual)){
-     //print_r($dao->listaCampo2($tabela1,$campo,$busca));die;
-     //echo "<h1>$pagAtual</h1>";
-     //$odbc->setidtitular($pagAtual);
         foreach($dao->listaCampo2($tabela1,$campo,$busca,$pagAtual) as $item){
             echo "<i>Certificado: </i>";
             echo $item['ENDOSSO'];
@@ -69,22 +46,21 @@
             echo mask($item['CPF'],'###.###.###-##');
             echo "<br><br>";
             $certificado_[]= $item['ENDOSSO'];
-        //print_r ($idtilular);
         }
-        //print_r ($idtitular);
         $limite=count($dao->listaCampo3($tabela1,$campo,$busca,$pagAtual));
-        //echo ($idtitular[0]-1);
         if($limite < 4){
          $proximo='<button disabled>';
         }else{
          $proximo='<button>';
         }
         $pagAtual=$item['idtitular'];
-        //echo "<h1>$pagAtual</h1>";
-        //$pagAtual=$odbc->getidtitular();
-        //echo "<h1>$pagAtual</h1>";
-        //echo ($pagAtual-3);
-        echo "<a href=\"teste3.php?certificado=".$certificado."&cpf=$cpf&act=informacoes&abrir=1&pagAtual=0 \"><button>IN&Iacute;CIO</button>";
+        
+        if($inicio=='sim'){
+          $botao="<button disabled>";
+        }else{
+          $botao="<button onclick=history.go(-1)>";
+        }
+        echo $botao."ANTERIOR</button>";
         echo "<a href=\"teste3.php?certificado=".$certificado."&cpf=$cpf&act=informacoes&abrir=1&pagAtual=$pagAtual \">".$proximo." PR&Oacute;XIMO</button></a>";
         echo "</div>";
     }else{
@@ -92,13 +68,8 @@
     }
     echo "<h3>BENEFICI&Aacute;RIO(S)</h3>";
     echo "<div class=beneficiario>";
-   //print_r($certificado_);die;
     if($campo=='endosso'){
    for($x=0;$x<count(@$certificado_);$x++){
-    //print_r($certificado_[$x]);
-    //echo count($certificado_);
-    //echo "<br>";
-   //}die;
     if($dao->listaCampo($tabela2,$campo,$certificado_[$x],$pagAtual)){
         foreach($dao->listaCampo($tabela2,$campo,$certificado_[$x],$pagAtual) as $item){
             echo "<i>Certificado: </i>";
@@ -120,7 +91,6 @@
             echo mask($item['cpf'],'###.###.###-##');
             echo "<br><br>";
         }
-    //}
    }
    }
         echo "</div>";
@@ -151,4 +121,3 @@
     }
     echo "</div>";
 ?>
-

@@ -26,10 +26,6 @@
     $cpf=$_GET['cpf'];
    }
    
- //echo 'post';
- //print_r($_POST);
- //echo 'get';
- //print_r($_GET);die;
 ?>
 <div id='menu'>
  <ul>
@@ -38,7 +34,6 @@
         <a href="teste3.php?act=informacoes"><li>IMFORMA&Ccedil;&Otilde;ES</li></a>
         <a href="teste3.php?act=divergente"><li>VALORES DIVERGENTES</li></a>
         <a href="teste3.php?act=relatorio"><li>RELAT&Oacute;RIOS</li></a>
-        <!--<a href="teste3.php?act=restrito"><li>&Aacute;REA RESTRITA</li></a>-->
  </ul>
 </div>
 <?php
@@ -53,7 +48,6 @@
   redirecionar('0.01','teste3.php?act=relatorio&abrir=1','AGUARDE...'); 
  }
  if($act=='divergente'){ 
-  //print_r($_GET);die;
   redirecionar('1','teste3.php?act=divergente&abrir=1&idtitular__='.$idtitular__.'&pagAtual='.$pagAtual.'','AGUARDE...'); 
  }
  if($act=='informacoes'){
@@ -63,7 +57,7 @@
         history.go(-1);
       </script>";  
   }else{
-    redirecionar('1','teste3.php?act=informacoes&abrir=1&certificado='.@$certificado.'&cpf='.@$cpf.' ','PROCURANDO POR INFORMA&Ccedil;&Otilde;ES...'); 
+    redirecionar('1','teste3.php?inicio=sim&act=informacoes&abrir=1&certificado='.@$certificado.'&cpf='.@$cpf.' ','AGUARDE...'); 
   }
  }
 ?>
