@@ -5,7 +5,6 @@
     </head>
     <body>
         <?php 
-          $dao = new OdbcDao();
           $tabela='Beneficiarios';
           $tabela2='sinipend';
           echo '<br>';          
@@ -25,19 +24,14 @@
                if($item2['TITULAR']){
                 @$sin_num ++;
                }
-               //echo $item2['SINISTRO']." - ".$item2['TITULAR']."<br>";
               }
              }
-             //echo $sin_num;die;
             $linha_vazia=0;
             if($dao->listaConteudo($tabela)){
             foreach($dao->listaConteudo($tabela) as $item){ 
-              //if($item['vlindeniza'] != 0){
                 if($item['nome']){
                 echo "<tr><td align=center>".$item['sinistro']."</td><td>".$item['nome']."</td><td align=right>".number_format($item['vlindeniza'],'2',',','.')."</td></tr>";
-                //echo $sinistro_ant.' != '.$item['sinistro'];
                     if($sinistro_ant != $item['sinistro']){
-                        //echo ' diferente<br>';
                         $y++;
                     }
                     

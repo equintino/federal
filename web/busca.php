@@ -32,8 +32,6 @@
     <input type="text" name="ramo" size=2 maxlength="2" required />
     <script src='js/vanilla-masker.min.js'></script>
     <script src="js/index.js"></script>
-        <!--<label>acima de R$ </label>
-        <input type="text" name="importanciasegurada" placeholder="import&acirc;cia segurada"/>-->
     <button onclick="submit" title="Buscar" ><img src="img/lupa.png" height="12px" /></button>
 </form>
     <?php elseif($act=='informacoes'): ?>
