@@ -12,7 +12,7 @@
         <?php
           $tabela1='sinipend';
           $tabela2='Beneficiarios';
-          $ultimoSinistrado=$_COOKIE['ultimoSinistrado'];
+          @$ultimoSinistrado=$_COOKIE['ultimoSinistrado'];
           
           @$idtitular__=$_GET['idtitular__'];
           @$pagAnterior=$_GET['pagAnterior'];

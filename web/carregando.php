@@ -4,6 +4,12 @@
  @$act=$_GET['act'];
  @$idtitular__=$_GET['idtitular__'];
  @$pagAtual=$_GET['pagAtual'];
+ @$pag_=$_GET['pag_'];
+ 
+ 
+ @$num_sinistro=$_GET['num_sinistro'];
+ @$sinistrado=$_GET['sinistrado'];  
+ @$importanciasegurada=$_GET['importanciasegurada'];
  
    if(array_key_exists('sucursal',$_POST)){
     $sucursal=$_POST['sucursal'];
@@ -41,14 +47,18 @@
   header("Refresh: $tempo; url=$url");
   echo "<div class=carregando>";
   echo '<center>'.$mensagem.  '</center><br/>';
-  echo '<center><img src="img/carregando.gif" alt="" /><br/><br/><tt>CARREGANDO</tt></center>';
+  echo '<center><img src="img/carregando.gif" alt="" /><br/><br/><tt><i>lendo...</i></tt></center>';
   echo "</div>";
  }
  if($act=='relatorio'){
-  redirecionar('0.01','teste3.php?act=relatorio&abrir=1','AGUARDE...'); 
+  redirecionar('0.01','teste3.php?act=relatorio&abrir=1','AGUARDE'); 
  }
  if($act=='divergente'){ 
-  redirecionar('1','teste3.php?act=divergente&abrir=1&idtitular__='.$idtitular__.'&pagAtual='.$pagAtual.'','AGUARDE...'); 
+  redirecionar('1','teste3.php?act=divergente&abrir=1&idtitular__='.$idtitular__.'&pagAtual='.$pagAtual.'','AGUARDE'); 
+ }
+ if($act=='sinistrado'){
+     //print_r($_GET);die;
+  redirecionar('1','teste3.php?act=sinistrado&abrir=1&busca=sinistrado&num_sinistro='.$num_sinistro.'&sinistrado='.$sinistrado.'&importanciasegurada='.$importanciasegurada.'&pagAtual='.$pagAtual.'&pag_='.$pag_.'','AGUARDE'); 
  }
  if($act=='informacoes'){
   if(@!$certificado && @!$cpf){
@@ -57,7 +67,7 @@
         history.go(-1);
       </script>";  
   }else{
-    redirecionar('1','teste3.php?inicio=sim&act=informacoes&abrir=1&certificado='.@$certificado.'&cpf='.@$cpf.' ','AGUARDE...'); 
+    redirecionar('1','teste3.php?inicio=sim&act=informacoes&abrir=1&certificado='.@$certificado.'&cpf='.@$cpf.' ','AGUARDE'); 
   }
  }
 ?>
