@@ -123,4 +123,131 @@ button{
     top: 50px;
     #margin-left: 46%;
 }
+=======
+#menu{
+    background-color: #ccc;
+    width: 85%;
+    height: 35px;
+    margin: auto;
+    border-radius: 5px;
+}
+
+ul li{
+    list-style: none;
+    display: inline;
+    font-family: "Verdana";
+    padding: 5px;
+}
+ul{
+    padding-top: 10px;
+}
+ul li:hover{
+    list-style: none;
+    display: inline;
+    font-family:  "Verdana";
+    padding: 5px;
+    background-color: white;
+    border-radius: 5px;
+}
+a:link, a:visited{
+    text-decoration: none;
+    color: blue;
+}
+body{
+    background-color: cornsilk;
+}
+.resumo{
+   position: absolute;
+   top: 60px;
+   right: 32%;
+}
+.tabela{
+}
+#geral{
+    position: relative;
+    top: 120px;
+    height: 250px;  
+    overflow: auto;
+}
+.rolagem{
+    position: relative;
+    top: 120px;
+    height: 250px;  
+    overflow: auto;    
+}
+th{
+    background-color: #ccc;
+}
+td{
+    background-color: white;
+}
+span{
+    color: red;
+    font-style: italic;
+}
+.construcao{
+    position: relative;
+    top: 50px;
+    left: 35%;
+}
+button{
+    background: transparent;
+}
+.titulo{
+    float: right;
+    font-family: cursive;
+}
+.busca{
+    clear: both;
+    margin: 10px 90px;
+}
+.busca_tabela{
+    margin: auto;
+}
+.voltar{
+    position: relative;
+    left: 72%;
+}
+.carregando{
+    position: relative;
+    top: 120px;
+}
+.informacoes{
+    #margin-top: -2px;
+    #margin-left: 30%;
+}
+.sinistrado{
+    float: left;
+    width: 450px;
+}
+.beneficiario{
+    clean: left;
+    float: right;
+    height: 280px;
+    width: 420px;
+    overflow: auto;
+}
+.progresso {
+    display: none;
+    position: fixed;
+    top: 60px;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -100px;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: white;
+    border: 1px solid black;
+    height: 90px;
+    width: 120px;
+}
+/*
+.lendo{
+    position: absolute;
+    top: 50px;
+    #margin-left: 46%;
+}
+>>>>>>> 277e127e297bfdcf88c6b20650d325705391e471
 */
