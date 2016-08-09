@@ -1,9 +1,9 @@
-<?php if($act=='sinistro'): ?>
+<?php if($act=='beneficiario'): ?>
 <div class="titulo">BENEFICI&Aacute;RIO</div>
-<form action="teste3.php?act=sinistro&busca=sinistro" method="POST">
+<form action="teste3.php?act=beneficiario&busca=beneficiario" method="POST">
     <input type="text" attrname="telephone1" name="num_sinistro" maxlength="19" placeholder="sinistro ou certificado" autofocus="">
     ou
-    <input type="text" name="sinistro" placeholder="nome do benefici&aacute;rio" >
+    <input type="text" name="beneficiario" placeholder="nome do benefici&aacute;rio" >
     <script src='js/vanilla-masker.min.js'></script>
     <script src="js/index.js"></script>
         <label>acima de R$ </label>

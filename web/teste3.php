@@ -11,19 +11,20 @@
    @$busca=$_GET['busca'];
    @$sinistro=$_POST['sinistro'];
    @$num_sinistro=$_POST['num_sinistro'];
-   @$vlindeniza=$_POST['vlindeniza'];
+   @$vlindeniza=OdbcValidator::validaCentavos($_POST['vlindeniza']);
    @$titular=$_GET['titular'];
    @$abrir=$_GET['abrir'];
    @$pagAtual=$_GET['pagAtual'];
+   @$beneficiario=$_GET['beneficiario'];
+   if(@!$beneficiario){
+      @$beneficiario=$_POST['beneficiario']; 
+   }
       
    //@$num_sinistro=$_POST['num_sinistro'];
    @$sinistrado=$_POST['sinistrado'];      
    @$importanciasegurada=OdbcValidator::validaCentavos($_POST['importanciasegurada']);
    
-   
-      //print_r($_POST);
-      //echo "<br><br>";
-   
+      
      $dao=new OdbcDao();
      $search=new OdbcSearchCriteria();
    
@@ -43,64 +44,27 @@
 <div id='menu'>
     <ul>
         <a href="teste3.php?act=sinistrado"><li>SINISTRADO</li></a>
-        <a href="teste3.php?act=sinistro"><li>CONSULTA BENEFICI&Aacute;RIOS</li></a>
+        <a href="teste3.php?act=beneficiario"><li>BENEFICI&Aacute;RIOS</li></a>
         <a href="teste3.php?act=informacoes"><li>IMFORMA&Ccedil;&Otilde;ES</li></a>
         <a href="teste3.php?act=divergente&busca=divergente"><li>VALORES DIVERGENTES</li></a>
         <a href="teste3.php?act=relatorio"><li>RELAT&Oacute;RIOS</li></a>
     </ul>
 </div>
 <?php
-  if($act=='sinistro'){
+  if($act=='beneficiario'){
       if(isset($pagAtual)){
          $search->setidbenefi($pagAtual); 
       }
    echo "<div class='busca'>";
-   include_once 'busca.php';
-   echo "</div>";
-    if($busca=='sinistro'){     
-     if(preg_match('/^[a-z,A-Z]/', $sinistro)){
-      $search->setnome($sinistro);
-      $search->setvlindeniza($vlindeniza);
-      $odbcs=$dao->busca4($search);
-     }else{
-      if(substr($num_sinistro,9,1)==2){
-       $search->setendosso($num_sinistro);
-      }else{      
-       $search->setsinistro($num_sinistro);
-      }
-      $search->setvlindeniza($vlindeniza);
-      $odbcs=$dao->busca4($search);
-     }
-      echo "<div class='busca_tabela'>";
-      echo "<table border=1 align=center cellspacing=0 spanspacing=0 class=\"tabela\">";
-      if($odbcs){
-       echo "<tr><th>SINISTRO</th><th>CERTIFICADO</th><th>BENEFICI&Aacute;RIO</th><th>VL. A INDENIZAR</th></tr>";
-      }
-      $totalBeneficiarios=0;
-     foreach($odbcs as $item){
-       if($item->getnome()){
-        echo "<tr><td>";
-        echo "<a href='teste3.php?act=titular&sinistro=".$item->getsinistro()."'>";
-        echo $item->getsinistro();
-        echo "</a>";
-        echo "</td><td>";
-        echo $item->getendosso();
-        echo "</td><td>";
-        echo $item->getnome();
-        echo "</td><td align=right>";
-        echo number_format($item->getvlindeniza(),2,',','.');
-        echo "</td></tr>";
-        $totalBeneficiarios++;
-       }
-     }
-       $totalPag=($dao->totalLinhas($search,'Beneficiarios'))/14;
-       $ultimaLinha_=@$item->getidbenefi()/14;       
-      echo "<tr><th colspan=4 align=center> <a href=teste3.php?act=sinistro&busca=sinistro&pagAtual=".($item->getidbenefi()-28)."> < &nbsp</a>".number_format($ultimaLinha_,'0','','.')." de ".number_format($totalPag,'0','','.')." <a href=teste3.php?act=sinistro&busca=sinistro&pagAtual=".$item->getidbenefi().">&nbsp > </a></th></tr>";
-      
-      echo "</table>";
-      echo "</div>";
-      die;
+   include_once 'busca.php';  
+     if($busca=='beneficiario'){     
+        if (!$abrir){
+            header('Location:carregando.php?act=beneficiario&num_sinistro='.$num_sinistro.'&sinistrado='.$sinistrado.'&importanciasegurada='.$importanciasegurada.'&beneficiario='.$beneficiario.'&vlindeniza='.$vlindeniza.'');
+        }else{
+            include_once 'beneficiario.php';
+        }
     }
+   echo "</div>";
   }
   if($act=='titular'){
    echo "<div>";
@@ -110,20 +74,13 @@
   }
   if($act=='sinistrado'){
    echo "<div class=busca>";
-    include_once "busca.php";
-      //echo "post - ";
-      //print_r($_POST);
-      //echo "<br><br>";
-      //echo "get - "; 
-      //print_r($_GET);
-      //die;     
+    include_once "busca.php";    
      if($busca=='sinistrado'){     
         if (!$abrir){
             header('Location:carregando.php?act=sinistrado&num_sinistro='.$num_sinistro.'&sinistrado='.$sinistrado.'&importanciasegurada='.$importanciasegurada.'');
         }else{
             include_once 'sinistrado.php';
         }
-         //include_once 'sinistrado.php';
     }
       echo "</div>";
         die;

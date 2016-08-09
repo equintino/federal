@@ -338,7 +338,7 @@ final class OdbcDao {
         return @$result;
     }
     public function busca4(OdbcSearchCriteria $search = null){
-        //print_r($this->getBuscaSql4($search));
+        //print_r($this->getBuscaSql4($search));die;
         $result=array();
         $busca = $this->query($this->getBuscaSql4($search));
         //print_r($busca);die;
@@ -365,7 +365,7 @@ final class OdbcDao {
     public function totalLinhas(OdbcSearchCriteria $search = null,$tabela){
         $busca = $this->queryLinhas($this->getBuscaLinhas($search,$tabela)); 
         $x=0;
-        //print_r($this->getBuscaLinhas($search,$tabela));
+        //print_r($this->getBuscaLinhas($search,$tabela));die;
         //print_r(odbc_result_all($busca));
         while($linhas=odbc_fetch_row($busca)){
             $x++;
@@ -373,8 +373,8 @@ final class OdbcDao {
         return $x;
     }
     private function getBuscaLinhas(OdbcSearchCriteria $search = null,$tabela){
-        $sql = "SELECT * FROM $tabela WHERE";
-        //print_r($search);
+        $sql = "SELECT * FROM $tabela WHERE ";
+        //print_r($search);die;
         
         if(@$search->getENDOSSO()){
          $campo=' ENDOSSO';
@@ -382,21 +382,29 @@ final class OdbcDao {
         }elseif(@$search->getsinistro()){
          $campo=' SINISTRO';
          $busca=$search->getsinistro();
-        }elseif(@$search->getTITULAR()){
-         $campo=' TITULAR';
-         $busca=$search->getTITULAR();
-        }elseif($search->getIMPORTANCIA_SEGURADA()){
-            $campo=' IMPORTANCIA_SEGURADA';
-            $busca=$search->getIMPORTANCIA_SEGURADA();
+        }elseif(@$search->getTITULAR() || @$search->getnome()){           
+            if($tabela=='sinipend'){
+                $campo=' TITULAR';
+                $busca=$search->getTITULAR();
+            }else{
+                $campo=' nome';
+                $busca=$search->getnome();
+            }
         }
+        //elseif($search->getIMPORTANCIA_SEGURADA()){
+          //  $campo=' IMPORTANCIA_SEGURADA';
+            //$busca=$search->getIMPORTANCIA_SEGURADA();
+        //}
         
-        if($search->getsinistro()==null && $search->getENDOSSO()==null && $search->getTITULAR()==null && $search->getIMPORTANCIA_SEGURADA()==0){
+        if($search->getsinistro()==null && $search->getENDOSSO()==null && $search->getTITULAR()==null && $search->getnome()==null ){
             $sql .= ' 1';
         }else{
             $sql .= "$campo like '%".$busca."%'";
         }
         if($search->getIMPORTANCIA_SEGURADA()){
             $sql .=' AND IMPORTANCIA_SEGURADA > '.$search->getIMPORTANCIA_SEGURADA();
+        }elseif($search->getvlindeniza()){
+            $sql .=' AND vlindeniza > '.$search->getvlindeniza();
         }
         //print_r($sql);die;
         return $sql;
@@ -565,6 +573,11 @@ final class OdbcDao {
             //echo "nulo";
             $search->setvlindeniza(0);
         }
+        if(@!$search->getidbenefi()){
+            $idbenefi=0;
+        }else{
+            $idbenefi=$search->getidbenefi();
+        }
         //print_r($search);
         //var_dump($search->getsinistro() != null);die;
         //var_dump($search->getTITULAR() != null || $search->getsinistro() != null);die;
@@ -585,7 +598,7 @@ final class OdbcDao {
           //$sql .= "1";
           $sql.= ' vlindeniza > '.$search->getvlindeniza().' ';
         }
-        $sql .= ' AND idbenefi > '.$search->getidbenefi().' ';
+        $sql .= " AND idbenefi > $idbenefi ";
         //print_r($sql);die;
         $sql .= ' ORDER BY '.$order;
         //print_r($sql);die;

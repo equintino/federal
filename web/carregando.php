@@ -10,6 +10,10 @@
  @$num_sinistro=$_GET['num_sinistro'];
  @$sinistrado=$_GET['sinistrado'];  
  @$importanciasegurada=$_GET['importanciasegurada'];
+ @$beneficiario=$_GET['beneficiario'];
+ @$vlindeniza=$_GET['vlindeniza'];
+ 
+ //print_r($_GET);die;
  
    if(array_key_exists('sucursal',$_POST)){
     $sucursal=$_POST['sucursal'];
@@ -36,7 +40,7 @@
 <div id='menu'>
  <ul>
         <a href="teste3.php?act=sinistrado"><li>SINISTRADO</li></a>
-        <a href="teste3.php?act=sinistro"><li>CONSULTA BENEFICI&Aacute;RIOS</li></a>
+        <a href="teste3.php?act=sinistro"><li>BENEFICI&Aacute;RIOS</li></a>
         <a href="teste3.php?act=informacoes"><li>IMFORMA&Ccedil;&Otilde;ES</li></a>
         <a href="teste3.php?act=divergente"><li>VALORES DIVERGENTES</li></a>
         <a href="teste3.php?act=relatorio"><li>RELAT&Oacute;RIOS</li></a>
@@ -56,8 +60,11 @@
  if($act=='divergente'){ 
   redirecionar('1','teste3.php?act=divergente&abrir=1&idtitular__='.$idtitular__.'&pagAtual='.$pagAtual.'','AGUARDE'); 
  }
- if($act=='sinistrado'){
+ if($act=='beneficiario'){
      //print_r($_GET);die;
+  redirecionar('1','teste3.php?act=beneficiario&abrir=1&busca=beneficiario&num_sinistro='.$num_sinistro.'&beneficiario='.$beneficiario.'&vlindeniza='.$vlindeniza.'&pagAtual='.$pagAtual.'&pag_='.$pag_.'','AGUARDE'); 
+ }
+ if($act=='sinistrado'){
   redirecionar('1','teste3.php?act=sinistrado&abrir=1&busca=sinistrado&num_sinistro='.$num_sinistro.'&sinistrado='.$sinistrado.'&importanciasegurada='.$importanciasegurada.'&pagAtual='.$pagAtual.'&pag_='.$pag_.'','AGUARDE'); 
  }
  if($act=='informacoes'){
