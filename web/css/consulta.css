@@ -95,6 +95,7 @@ button{
     width: 450px;
 }
 .beneficiario{
+    clean: left;
     float: right;
     height: 280px;
     width: 420px;

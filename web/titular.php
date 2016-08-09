@@ -2,6 +2,7 @@
 
    @$act=$_GET['act'];
    @$sinistro=$_GET['sinistro'];
+   //$sinistro='0126.93.03.0000103';
      
      if($act=='titular'){
         $dao=new OdbcDao();
@@ -9,6 +10,10 @@
         $search=new OdbcSearchCriteria();
         $search->setsinistro($sinistro);
         $odbcs=$dao->busca2($search);
+        
+        //echo $sinistro;
+        //echo "<br>";
+        //print_r($odbcs);
         
         /// somando os valores indenizados ///
         $indenizacao=0;

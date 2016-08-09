@@ -15,6 +15,14 @@
    @$titular=$_GET['titular'];
    @$abrir=$_GET['abrir'];
    @$pagAtual=$_GET['pagAtual'];
+      
+   //@$num_sinistro=$_POST['num_sinistro'];
+   @$sinistrado=$_POST['sinistrado'];      
+   @$importanciasegurada=OdbcValidator::validaCentavos($_POST['importanciasegurada']);
+   
+   
+      //print_r($_POST);
+      //echo "<br><br>";
    
      $dao=new OdbcDao();
      $search=new OdbcSearchCriteria();
@@ -102,56 +110,20 @@
   }
   if($act=='sinistrado'){
    echo "<div class=busca>";
-    include_once "busca.php";      
-     if($busca=='sinistrado'){
-      
-      if(isset($pagAtual)){
-         $search->setidtitular($pagAtual); 
-      }
-      
-      @$num_sinistro=$_POST['num_sinistro'];
-      @$sinistrado=$_POST['sinistrado'];
-      
-      @$importanciasegurada=OdbcValidator::validaCentavos($_POST['importanciasegurada']);
-      
-      $search->setTITULAR($sinistrado);
-      $search->setIMPORTANCIA_SEGURADA($importanciasegurada);
-      if(substr($num_sinistro,9,1)==2){
-       $search->setENDOSSO($num_sinistro);
-      }else{      
-       $search->setsinistro($num_sinistro);
-      }
-       
-      $odbcs=$dao->busca3($search);
-            
-      
-      echo "<div class='busca_tabela'>";
-      echo "<table border=1 align=center cellspacing=0 spanspacing=0 class=\"tabela\">";
-      if($odbcs){
-       echo "<tr><th>SINISTRO</th><th>CERTIFICADO</th><th>SINISTRADO</th><th>IMPORT&Acirc;NCIA SEGURADA</th></tr>";
-      }
-      $y=0;
-     foreach($odbcs as $item){
-       if($item->getTITULAR()){
-        echo "<tr><td>";
-            echo $item->getsinistro();
-        echo "</td><td>";
-            echo $item->getENDOSSO();
-        echo "</td><td>";
-            echo $item->getTITULAR();
-        echo "</td><td align=right>";
-            echo number_format($item->getIMPORTANCIA_SEGURADA(),2,',','.');
-        echo "</td></tr>";
-       $y++;
-       }
-     }
-        /// paginação ///
-       $totalPag=($dao->totalLinhas($search,'sinipend'))/14;
-       $ultimaLinha=@$item->getidtitular()/14;       
-      echo "<tr><th colspan=4 align=center><a href=teste3.php?act=sinistrado&busca=sinistrado&pagAtual=".($item->getidtitular()-28)."> < &nbsp</a>".number_format($ultimaLinha,'0','','.')." de ".number_format($totalPag,'0','','.')." <a href=teste3.php?act=sinistrado&busca=sinistrado&pagAtual=".$item->getidtitular()." >&nbsp > </a></th></tr>";
-        /// fim paginação ///
-      
-      echo "</table>";
+    include_once "busca.php";
+      //echo "post - ";
+      //print_r($_POST);
+      //echo "<br><br>";
+      //echo "get - "; 
+      //print_r($_GET);
+      //die;     
+     if($busca=='sinistrado'){     
+        if (!$abrir){
+            header('Location:carregando.php?act=sinistrado&num_sinistro='.$num_sinistro.'&sinistrado='.$sinistrado.'&importanciasegurada='.$importanciasegurada.'');
+        }else{
+            include_once 'sinistrado.php';
+        }
+         //include_once 'sinistrado.php';
     }
       echo "</div>";
         die;
