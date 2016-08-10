@@ -220,7 +220,7 @@ final class OdbcDao {
         return $sql;
     }
     public function find2(OdbcSearchCriteria $search = null) {
-     //print_r($search);die;
+     //print_r($this->getFindSql2($search));die;
       $busca = $this->query($this->getFindSql2($search));
       //print_r($busca);die;
       //$row = odbc_($busca);
@@ -338,7 +338,7 @@ final class OdbcDao {
         return @$result;
     }
     public function busca4(OdbcSearchCriteria $search = null){
-        //print_r($this->getBuscaSql4($search));die;
+        //print_r($this->getBuscaSql4($search));
         $result=array();
         $busca = $this->query($this->getBuscaSql4($search));
         //print_r($busca);die;
@@ -350,6 +350,22 @@ final class OdbcDao {
             OdbcMapper::map($odbc, $row);
             //print_r($odbc);die;
             //$result[$odbc->getidbenefi()] = $odbc;
+            $result[$odbc->getidbenefi()] = $odbc;
+         }
+        }else{
+         echo "<p>*Nao foi encontrado nenhum registro</p>"; 
+        }
+        return @$result;
+    }
+    
+    public function busca5(OdbcSearchCriteria $search = null){
+        $result=array();
+        $busca = $this->query($this->getBuscaSql5($search));
+        //print_r($busca);die;
+        if(@$busca){
+         foreach ($busca as $key => $row) {
+            $odbc = new Odbc();
+            OdbcMapper::map($odbc, $row);
             $result[$odbc->getidbenefi()] = $odbc;
          }
         }else{
@@ -602,6 +618,12 @@ final class OdbcDao {
         //print_r($sql);die;
         $sql .= ' ORDER BY '.$order;
         //print_r($sql);die;
+        return $sql;
+    }
+    private function getBuscaSql5(OdbcSearchCriteria $search = null){
+        $sql = "SELECT * FROM Beneficiarios WHERE ";
+            $idbenefi=$search->getidbenefi();
+                $sql .= "idbenefi=$idbenefi";
         return $sql;
     }
     private function getFindSql2(OdbcSearchCriteria $search = null) {

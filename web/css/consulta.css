@@ -101,6 +101,13 @@ button{
     width: 420px;
     overflow: auto;
 }
+.valordiferente{
+    color: red;
+    font-weight: bold;
+}
+.endereco{
+    margin-left: 20%;
+}
 .progresso {
     display: none;
     position: fixed;

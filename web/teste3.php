@@ -23,8 +23,10 @@
    //@$num_sinistro=$_POST['num_sinistro'];
    @$sinistrado=$_POST['sinistrado'];      
    @$importanciasegurada=OdbcValidator::validaCentavos($_POST['importanciasegurada']);
+   @$endereco=$_GET['endereco'];
+   @$idbenefi=$_GET['idbenefi'];
    
-      
+      //print_r($_GET);
      $dao=new OdbcDao();
      $search=new OdbcSearchCriteria();
    
@@ -63,7 +65,7 @@
         }else{
             include_once 'beneficiario.php';
         }
-    }
+      }
    echo "</div>";
   }
   if($act=='titular'){

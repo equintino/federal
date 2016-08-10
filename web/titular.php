@@ -36,7 +36,11 @@
        echo $item->getTITULAR();
        echo "</td><td align=right>";
        echo number_format($item->getIMPORTANCIA_SEGURADA(),2,',','.');
-       echo "</td><td align=right>";
+       if(number_format($item->getIMPORTANCIA_SEGURADA(),2,',','.') != number_format($totalaindenizar,2,',','.')){        
+          echo "</td><td class=valordiferente align=right>";
+       }else{
+          echo "</td><td align=right>";      
+       }
        echo number_format($totalaindenizar,2,',','.');
        echo "</td></tr>";
      }

@@ -21,6 +21,7 @@
                    $pag_=1;
                }
       @$continua=$_GET['continua'];
+      //$seach=new OdbcSearchCriteria();
       
       //print_r($_COOKIE);
       
@@ -29,8 +30,7 @@
       }
       
       if($num_sinistro==null && $beneficiario==null && $importanciasegurada==0){
-          $valoresembranco=1;
-          
+          $valoresembranco=1;          
       }
       /*
       echo "post";
@@ -60,6 +60,7 @@
       //print_r($odbcs);
       echo "<div class='busca_tabela'>";
       echo "<table border=1 align=center cellspacing=0 spanspacing=0 class=\"tabela\">";
+    if(@!$idbenefi){
       if($odbcs){
        echo "<tr><th>SINISTRO</th><th>CERTIFICADO</th><th>BENEFICI&Aacute;RIO</th><th>VL. A INDENIZAR</th></tr>";
       }
@@ -75,7 +76,9 @@
         echo "</td><td>";
         echo $item->getendosso();
         echo "</td><td>";
+        echo "<a href='teste3.php?act=beneficiario&busca=beneficiario&abrir=1&idbenefi=".$item->getidbenefi()."'>";
         echo $item->getnome();
+        echo "</a>";
         echo "</td><td align=right>";
         echo number_format($item->getvlindeniza(),2,',','.');
         echo "</td></tr>";
@@ -91,6 +94,9 @@
        //print_r($totalPag);
        //print_r($search);
        $pagAtual=  number_format(@$item->getidbenefi()/14,'0','','.');
+       //print_r($pagAtual);
+       //echo "<br><br>";
+       //print_r($pag_);
        
         
        if($pagAtual==1 || $pag_==1){
@@ -105,7 +111,7 @@
        }
        
        if(@$valoresembranco==1){
-            echo "<tr><th colspan=4 align=center>".$botao." < </button> $pagAtual de ".number_format($totalPag,'0','','.')." ".$botao_." > </button></a></th></tr>";
+            echo "<tr><th colspan=4 align=center>".$botao." < </button> $pag_ de ".number_format($totalPag,'0','','.')." ".$botao_." > </button></a></th></tr>";
        }else{
         $ultimaLinha=$item->getidbenefi();
            if(number_format($totalPag,'0','','.') > 0 ){
@@ -120,7 +126,46 @@
            }
        }
         /// fim paginação ///  
-      
+      }else{
+       $search->setidbenefi($idbenefi);
+       $odbcs=$dao->busca5($search);
+       echo "<div class=endereco>";
+       foreach($odbcs as $item){
+         echo "Nome: ";
+         echo $item->getnome();
+         echo "<br>Cpf: ";
+         echo $item->getcpf();
+         echo "<br>Tel: ";
+         echo $item->gettel_fixo();
+         echo " / ";
+         echo $item->gettel_cel();
+         echo "<br>E-mail: ";
+         echo $item->getemail();
+         echo "<br>Endereço: ";
+         echo $item->gettipo();
+         echo " ";
+         echo $item->getendereco();
+         echo ", ";
+         echo $item->getnumero();
+         echo " - Complemento: ";
+         echo $item->getcomplemento();
+         echo "<br>Bairro: ";
+         echo $item->getbairro();
+         echo " - ";
+         echo $item->getmunicipio();
+         echo " - ";
+         echo $item->getestado();
+         echo "<br>Cep: ";
+         echo $item->getcep();
+       }
+       echo "<br>";
+       echo "<button onclick=history.go(-1)>";
+       echo "Voltar";
+       echo "</button>";
+       echo "</div>";
+       //echo "<br><br>";
+       //print_r ($odbcs);
+      }
       echo "</table>";
       echo "</div>";
       die;
