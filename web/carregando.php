@@ -44,6 +44,7 @@
         <a href="teste3.php?act=informacoes"><li>IMFORMA&Ccedil;&Otilde;ES</li></a>
         <a href="teste3.php?act=divergente"><li>VALORES DIVERGENTES</li></a>
         <a href="teste3.php?act=relatorio"><li>RELAT&Oacute;RIOS</li></a>
+        <a href="teste3.php?act=judiciais"><li>PROCESSOS JUDICIAIS</li></a>
  </ul>
 </div>
 <?php

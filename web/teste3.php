@@ -62,6 +62,7 @@
         <a href="teste3.php?act=informacoes"><li>IMFORMA&Ccedil;&Otilde;ES</li></a>
         <a href="teste3.php?act=divergente&busca=divergente&menu=1"><li>VALORES DIVERGENTES</li></a>
         <a href="teste3.php?act=relatorio"><li>RELAT&Oacute;RIOS</li></a>
+        <a href="teste3.php?act=judiciais"><li>PROCESSOS JUDICIAIS</li></a>
     </ul>
 </div>
 <?php
@@ -144,6 +145,15 @@
     }
        echo "</div>";
        die;
+  }
+  if($act=='judiciais'){
+      //echo "estou aqui";
+      echo "<div class=busca>";
+   if($abrir==1){
+       include_once 'judiciais.php';
+   }
+       echo "</div>";
+      die;
   }
   if($act=='restrito'){
    echo "<div class='construcao'>";
