@@ -76,3 +76,12 @@ function initChangeStatusDialog() {
         return false;
     });
 }
+function createCookie(name,value) {   
+    var date = new Date();
+    date.setTime(date.getTime()+(60*100));
+    var expires = "; expires="+true;
+    
+    //alert(date.toLocaleString());
+    //alert(name+"="+value+expires+"; path=/");
+    document.cookie = name+"="+value+expires+"; path=/";
+}

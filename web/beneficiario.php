@@ -130,33 +130,46 @@
        $search->setidbenefi($idbenefi);
        $odbcs=$dao->busca5($search);
        echo "<div class=endereco>";
+       echo "<br><br>";
        foreach($odbcs as $item){
-         echo "Nome: ";
+         echo "<label>Nome: </label>";
          echo $item->getnome();
-         echo "<br>Cpf: ";
-         echo $item->getcpf();
-         echo "<br>Tel: ";
+         echo "<br>";
+         echo "<label>Cpf: </label>";
+            if(strlen($item->getcpf()) != 11){
+                $cor='color=red';
+            }else{
+                $cor='color=black';
+            }
+         echo "<font $cor>";
+         echo OdbcValidator::mask($item->getcpf(),'###.###.###-##');
+         echo "</font>";
+         echo "<br>";
+         echo "<label>Tel: </label>";
          echo $item->gettel_fixo();
          echo " / ";
          echo $item->gettel_cel();
-         echo "<br>E-mail: ";
+         echo "<label>E-mail: </label>";
          echo $item->getemail();
-         echo "<br>Endereço: ";
+         echo "<br>";
+         echo "<label>Endere&ccedil;o: </label>";
          echo $item->gettipo();
          echo " ";
          echo $item->getendereco();
          echo ", ";
          echo $item->getnumero();
-         echo " - Complemento: ";
+         echo " - <label>Complemento: </label>";
          echo $item->getcomplemento();
-         echo "<br>Bairro: ";
+         echo "<br>";
+         echo "<label>Bairro: </label>";
          echo $item->getbairro();
          echo " - ";
          echo $item->getmunicipio();
          echo " - ";
          echo $item->getestado();
-         echo "<br>Cep: ";
-         echo $item->getcep();
+         echo "<br>";
+         echo "<label>Cep: </label>";
+         echo OdbcValidator::mask($item->getcep(),"#####-###");
        }
        echo "<br>";
        echo "<button onclick=history.go(-1)>";

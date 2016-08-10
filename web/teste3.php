@@ -1,4 +1,5 @@
 <link rel="stylesheet" type="text/css" href="css/consulta.css" />
+<script src="js/script.js"></script> 
 <?php
    include '../dao/OdbcDao.php';
    include '../dao/OdbcSearchCriteria.php';
@@ -18,6 +19,17 @@
    @$beneficiario=$_GET['beneficiario'];
    if(@!$beneficiario){
       @$beneficiario=$_POST['beneficiario']; 
+   }
+   @$menu=$_GET['menu'];
+   
+   if(@$menu=1){
+       /*
+       echo "passei aqui";
+            echo "<script>
+                document.cookie=\"ultimoSinistrado=\";
+                </script>";
+        * 
+        */
    }
       
    //@$num_sinistro=$_POST['num_sinistro'];
@@ -48,7 +60,7 @@
         <a href="teste3.php?act=sinistrado"><li>SINISTRADO</li></a>
         <a href="teste3.php?act=beneficiario"><li>BENEFICI&Aacute;RIOS</li></a>
         <a href="teste3.php?act=informacoes"><li>IMFORMA&Ccedil;&Otilde;ES</li></a>
-        <a href="teste3.php?act=divergente&busca=divergente"><li>VALORES DIVERGENTES</li></a>
+        <a href="teste3.php?act=divergente&busca=divergente&menu=1"><li>VALORES DIVERGENTES</li></a>
         <a href="teste3.php?act=relatorio"><li>RELAT&Oacute;RIOS</li></a>
     </ul>
 </div>

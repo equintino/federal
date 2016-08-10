@@ -13,37 +13,29 @@
         $cpf=$busca;
     }
     
-    function mask($val, $mask){
-        $maskared = '';
-        $k = 0;
-        for($i = 0; $i<=strlen($mask)-1; $i++){
-	 if($mask[$i] == '#'){
-            if(isset($val[$k]))
-                $maskared .= $val[$k++];
-         }else{
-            if(isset($mask[$i]))
-            $maskared .= $mask[$i];
-         }
-        }
-	 return $maskared;
-    }
-    
     echo "<div class=informacoes>";
     echo "<h3>SINISTRADO</h3>";
     echo "<div class=sinistrado >";
     if($dao->listaCampo2($tabela1,$campo,$busca,$pagAtual)){
         foreach($dao->listaCampo2($tabela1,$campo,$busca,$pagAtual) as $item){
-            echo "<i>Certificado: </i>";
+            echo "<label>Certificado: </label>";
             echo $item['ENDOSSO'];
             echo "<br>";
-            echo "<i>Sinistro: </i>";
+            echo "<label>Sinistro: </label>";
             echo $item['SINISTRO'];
             echo "<br>";
-            echo "<i>Sinistrado: </i>";
+            echo "<label>Sinistrado: </label>";
             echo $item['TITULAR'];
             echo "<br>";
-            echo "<i>Cpf: </i>";
-            echo mask($item['CPF'],'###.###.###-##');
+            echo "<label>Cpf: </label>";
+                if(strlen($item['CPF'])!=11){
+                    $cor="color=red";
+                }else{
+                    $cor="color=black";
+                }
+            echo "<font $cor>";
+            echo OdbcValidator::mask($item['CPF'],'###.###.###-##');
+            echo "</font>";
             echo "<br><br>";
             $certificado_[]= $item['ENDOSSO'];
         }
@@ -72,26 +64,33 @@
    for($x=0;$x<count(@$certificado_);$x++){
     if($dao->listaCampo($tabela2,$campo,$certificado_[$x],$pagAtual)){
         foreach($dao->listaCampo($tabela2,$campo,$certificado_[$x],$pagAtual) as $item){
-            echo "<i>Certificado: </i>";
+            echo "<label>Certificado: </label>";
             echo $item['endosso'];
             echo "<br>";
-            echo "<i>Sinistro: </i>";
+            echo "<label>Sinistro: </label>";
             echo $item['sinistro'];
             echo "<br>";
-            echo "<i>Cobertura: </i>";
+            echo "<label>Cobertura: </label>";
             echo $item['tpcobertura'];
             echo "<br>";
-            echo "<i>Valor a indenizar: </i>";
+            echo "<label>Valor a indenizar: </label>";
             echo number_format($item['vlindeniza'],'2',',','.');
             echo "<br>";
-            echo "<i>Benefici&aacute;rio: </i>";
+            echo "<label>Benefici&aacute;rio: </label>";
             echo $item['nome'];
             echo "<br>";
-            echo "<i>Cpf: </i>";
-            echo mask($item['cpf'],'###.###.###-##');
+            echo "<label>Cpf: </label>";
+                if(strlen($item['cpf'])!=11){
+                    $cor="color=red";
+                }else{
+                    $cor="color=black";
+                }
+            echo "<font $cor>";
+            echo OdbcValidator::mask($item['cpf'],'###.###.###-##');
+            echo "</font>";
             echo "<br><br>";
         }
-   }
+     }
    }
         echo "</div>";
     }else{
@@ -113,7 +112,7 @@
             echo $item['nome'];
             echo "<br>";
             echo "<i>Cpf: </i>";
-            echo mask($item['cpf'],'###.###.###-##');
+            echo OdbcValidator::mask($item['cpf'],'###.###.###-##');
             echo "<br><br>";
         }
         echo "</div>";

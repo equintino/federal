@@ -108,6 +108,9 @@ button{
 .endereco{
     margin-left: 20%;
 }
+.sinistrado label, .beneficiario label, .endereco label{
+    font-style: italic;
+}
 .progresso {
     display: none;
     position: fixed;
@@ -124,6 +127,7 @@ button{
     height: 90px;
     width: 120px;
 }
+
 /*
 .lendo{
     position: absolute;

@@ -40,7 +40,7 @@
           if(!isset($ultimoSinistrado)){
             foreach($dao->ultimoSinistrado() as $id){
              $ultimoSinistrado=$id->getidtitular();
-            echo  "<script>cookie($ultimoSinistrado)</script>";
+            echo  "<script>createCookie('ultimoSinistrado',$ultimoSinistrado)</script>";
             }
           }
           echo "<table align=center border=1 cellspacing=0 >";
