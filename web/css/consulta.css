@@ -1,6 +1,6 @@
 #menu{
     background-color: #ccc;
-    width: 89%;
+    width: 90%;
     height: 35px;
     margin: auto;
     border-radius: 5px;
@@ -13,7 +13,7 @@ ul li{
     padding: 5px;
 }
 ul{
-    padding-top: 10px;
+    padding-top: 8px;
 }
 ul li:hover{
     list-style: none;

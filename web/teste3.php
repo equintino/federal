@@ -149,9 +149,9 @@
   if($act=='judiciais'){
       //echo "estou aqui";
       echo "<div class=busca>";
-   if($abrir==1){
+   //if($abrir==1){
        include_once 'judiciais.php';
-   }
+   //}
        echo "</div>";
       die;
   }
