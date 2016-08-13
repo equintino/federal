@@ -23,17 +23,17 @@
     <button onclick="submit" title="Buscar" ><img src="img/lupa.png" height="12px" /></button>
 </form>
     <?php elseif($act=='divergente'): ?>
-<div class="titulo">PESQUISANDO DIVERG&Ecirc;NCIAS</div>
-<form action="teste3.php?act=divergente&busca=divergente" method="POST">
+<div class="titulo">VALORES DIVERG&Ecirc;NTES</div>
+<!--<form action="teste3.php?act=divergente&busca=divergente" method="POST">-->
     <!--<input type="text" attrname="telephone1" name="num_sinistro" maxlength="19" placeholder="n&uacute;mero de sinistro" autofocus="">-->
-    Qual a sucursal a pesquisar? 
+   <!-- Qual a sucursal a pesquisar? 
     <input type="text" name="sucursal" size=2 maxlength="2" required />
     Qual o ramo? 
     <input type="text" name="ramo" size=2 maxlength="2" required />
     <script src='js/vanilla-masker.min.js'></script>
     <script src="js/index.js"></script>
     <button onclick="submit" title="Buscar" ><img src="img/lupa.png" height="12px" /></button>
-</form>
+</form>-->
     <?php elseif($act=='informacoes'): ?>
 <div class="titulo">INFORMA&Ccedil;&Otilde;ES</div>
 <form action="carregando.php?act=informacoes&busca=informacoes&abrir=1" method="POST">

@@ -20,9 +20,18 @@
            @$idtitular__=$pagAnterior;
           }
           @$pagAtual=$_GET['pagAtual'];
+          //print_r($idtitular__);
           if(@!$idtitular__){
             $idtitular__=1;
             $seguencia[]=$idtitular__;
+            //echo "passei aqui<br>";
+            //print_r($dao->ultimoSinistrado());
+            foreach($dao->ultimoSinistrado() as $id);
+             $ultimoSinistrado=$id->getidtitular();
+             //echo $id->getidtitular();
+             setcookie('ultimoSinistrado',$ultimoSinistrado);
+            //echo  "<script>createCookie('ultimoSinistrado',$ultimoSinistrado)</script>";
+            //}
           }
           if(@!$pagAtual){
             @$pagAtual=1;
@@ -37,12 +46,19 @@
           $x=0;
           $y=0;
           $sinistro_ant=null;
-          if(!isset($ultimoSinistrado)){
+          //print_r($dao->ultimoSinistrado());
+          //var_dump(isset($ultimoSinistrado));
+          /*
+          if(($pagAtual==1)){
             foreach($dao->ultimoSinistrado() as $id){
              $ultimoSinistrado=$id->getidtitular();
             echo  "<script>createCookie('ultimoSinistrado',$ultimoSinistrado)</script>";
             }
           }
+           * 
+           */
+          //print_r($_COOKIE);
+          //print_r($_GET);
           echo "<table align=center border=1 cellspacing=0 >";
           echo "<tr><th>SINISTRO</th><th>VL. SEGURADO</th><th>VL. A INDENIZAR</th></tr>";
           $totalSegurada=0;

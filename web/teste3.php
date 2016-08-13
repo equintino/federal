@@ -109,6 +109,7 @@
   }
   if($act=='divergente'){
       echo "<div class=busca>";
+      include_once 'busca.php';
    if(array_key_exists('sucursal',$_POST)){
     $sucursal=$_POST['sucursal'];
    }
