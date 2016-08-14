@@ -59,6 +59,7 @@
            */
           //print_r($_COOKIE);
           //print_r($_GET);
+          echo "<div class=divergente>";
           echo "<table align=center border=1 cellspacing=0 >";
           echo "<tr><th>SINISTRO</th><th>VL. SEGURADO</th><th>VL. A INDENIZAR</th></tr>";
           $totalSegurada=0;
@@ -109,6 +110,7 @@
                
                echo "<tr><th colspan=3>".$botao." < </button> &nbsp ".$pagAtual." &nbsp   ".$botao_." ></button></th></tr>";
                echo "</table>";
+               echo "</div>";
         ?>
     </body>
 </html>

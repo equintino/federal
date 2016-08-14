@@ -1,6 +1,6 @@
 #menu{
     background-color: #ccc;
-    width: 90%;
+    width: 95%;
     height: 35px;
     margin: auto;
     border-radius: 5px;
@@ -110,6 +110,9 @@ button{
 }
 .sinistrado label, .beneficiario label, .endereco label{
     font-style: italic;
+}
+.divergente{
+    clear: both;
 }
 .progresso {
     display: none;

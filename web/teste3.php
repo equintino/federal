@@ -150,6 +150,7 @@
   if($act=='judiciais'){
       //echo "estou aqui";
       echo "<div class=busca>";
+    include_once 'busca.php';
    //if($abrir==1){
        include_once 'judiciais.php';
    //}
