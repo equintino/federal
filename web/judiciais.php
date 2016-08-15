@@ -10,10 +10,12 @@ header('Content-type: text/html; charset=UTF-8');
     @$dados=file($filename);
     echo "O conteudo e: ";
     echo "<br>";
-    //print_r($dados);
+    print_r($dados);
     @$conteudo = fread ($handle, filesize ($filename));
     //echo "<br><br>";
-    echo utf8_encode($conteudo);
+    //echo utf8_encode($conteudo);
+    //explode($, $string)
+    print_r(explode(";",$dados[1]));
     
     @fclose($handle);
 ?>
