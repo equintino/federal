@@ -5,10 +5,12 @@
 final class Todo {
 
     // priority
+    const PRIORITY_IMEDIATA = 0;
     const PRIORITY_HIGH = 1;
     const PRIORITY_MEDIUM = 2;
     const PRIORITY_LOW = 3;
     // status
+    const STATUS_NULL = null;
     const STATUS_PENDING = "PENDENTE";
     const STATUS_DONE = "RESOLVIDA";
     const STATUS_VOIDED = "VENCIDO";
@@ -22,42 +24,41 @@ final class Todo {
     /** @var DateTime */
     private $createdOn;
     /** @var DateTime */
-    private $dueOn;
-    private $prazo;
+    private $ESI;
+    private $ARQUIVO;
     /** @var DateTime */
     private $lastModifiedOn;
     /** @var string */
-    private $title;
+    private $AVISO;
     /** @var string */
-    private $description;
+    private $SINISTRO;
     /** @var string */
-    private $comment;
+    private $PESSOA;
     /** @var string one of PENDING/COMPLETED/VOIDED */
     private $status;
     /** @var boolean */
     private $deleted;
-    private $numero;
-    private $titulo;
-    private $comentario;
-    private $detalhamento;
-    private $descricao;
-    private $origem;
-    private $tipoacao;
-    private $processo;
-    private $identificador;
-    private $causa;
-    private $imediata;
-    private $corretiva;
-    private $implementador;
-    private $eliminacao;
-    private $eliminacao_novo;
-    private $reg_eficacia;
-    private $resp_verificacao;
-    private $eficaz_data;
-    private $novo_rnc;
-    private $eficaz;
-    private $andamento;
-
+    private $CERTIFICADO;
+    private $CPF;
+    private $OBS;
+    private $SEGURADOS;
+    private $N_PROC;
+    private $N_NATIGO;
+    private $NATUREZA;
+    private $PROCED;
+    private $UF;
+    private $CIDADE;
+    private $FORO;
+    private $N_VARA;
+    private $VARA;
+    private $CLIENTE;
+    private $RECLAMANTE;
+    private $FASE;
+    private $TP_PROBA;
+    private $PROVAVIL;
+    private $VLPEDIDO;
+    private $DTPEDIDO;
+    private $TPACAO;
     /**
      * Create new {@link Todo} with default properties set.
      */
@@ -72,6 +73,7 @@ final class Todo {
 
     public static function allStatuses() {
         return array(
+            self::STATUS_NULL,
             self::STATUS_PENDING,
             self::STATUS_DONE,
             self::STATUS_VOIDED,
@@ -80,6 +82,7 @@ final class Todo {
     }
     public static function allPriorities() {
         return array(
+            self::PRIORITY_IMEDIATA,
             self::PRIORITY_HIGH,
             self::PRIORITY_MEDIUM,
             self::PRIORITY_LOW,
@@ -101,11 +104,11 @@ final class Todo {
         }
         $this->id = (int) $id;
     }
-    public function getNumero(){
-        return $this->numero;
+    public function getESI(){
+        return $this->ESI;
     }
-    public function setNumero($numero){
-        $this->numero = $numero;
+    public function setESI($ESI){
+        $this->ESI = $ESI;
     }
 
     /**
@@ -119,10 +122,6 @@ final class Todo {
         TodoValidator::validatePriority($priority);
         $this->priority = $priority;
     }
-
-    /**
-     * @return DateTime
-     */
     public function getCreatedOn() {
         return $this->createdOn;
     }
@@ -130,42 +129,34 @@ final class Todo {
     public function setCreatedOn(DateTime $createdOn) {
         $this->createdOn = $createdOn;
     }
-
-    /**
-     * @return DateTime
-     */
-    public function getDueOn() {
-        return $this->dueOn;
+    public function getARQUIVO() {
+        return $this->ARQUIVO;
     }
 
-    public function setDueOn(DateTime $dueOn) {
-        $this->dueOn = $dueOn;
+    public function setARQUIVO($ARQUIVO) {
+        $this->ARQUIVO = $ARQUIVO;
     }
-    public function getEliminacao() {
-        return $this->eliminacao;
-    }
-
-    public function setEliminacao(DateTime $eliminacao) {
-        $this->eliminacao = $eliminacao;
-    }
-    public function getEliminacao_novo() {
-        return $this->eliminacao_novo;
+    public function getAVISO() {
+        return $this->AVISO;
     }
 
-    public function setEliminacao_novo(DateTime $eliminacao_novo) {
-        $this->eliminacao_novo = $eliminacao_novo;
+    public function setAVISO($AVISO) {
+        $this->AVISO = $AVISO;
     }
-    public function getPrazo() {
-        return $this->prazo;
-    }
-
-    public function setPrazo(DateTime $prazo) {
-        $this->prazo = $prazo;
+    public function getSINISTRO() {
+        return $this->SINISTRO;
     }
 
-    /**
-     * @return DateTime
-     */
+    public function setSINISTRO($SINISTRO) {
+        $this->SINISTRO = $SINISTRO;
+    }
+    public function getPESSOA() {
+        return $this->PESSOA;
+    }
+
+    public function setPESSOA($PESSOA) {
+        $this->PESSOA = $PESSOA;
+    }
     public function getLastModifiedOn() {
         return $this->lastModifiedOn;
     }
@@ -173,151 +164,135 @@ final class Todo {
     public function setLastModifiedOn(DateTime $lastModifiedOn) {
         $this->lastModifiedOn = $lastModifiedOn;
     }
-    public function getEficazData() {
-        return $this->eficaz_data;
+    public function getCERTIFICADO() {
+        return $this->CERTIFICADO;
     }
 
-    public function setEficazData(DateTime $eficaz_data) {
-        $this->eficaz_data = $eficaz_data;
+    public function setCERTIFICADO($CERTIFICADO) {
+        $this->CERTIFICADO = $CERTIFICADO;
+    }
+    public function getCPF() {
+        return $this->CPF;
+    }
+    public function setCPF($CPF) {
+        $this->CPF = $CPF;
+    }
+    public function getOBS(){
+        return $this->OBS;
+    }
+    public function setOBS($OBS){
+        $this->titulo = $OBS;
+    }
+    public function getSEGURADOS() {
+        return $this->SEGURADOS;
     }
 
-    /**
-     * @return string
-     */
-    public function getTitle() {
-        return $this->title;
+    public function setSEGURADOS($SEGURADOS) {
+        $this->SEGURADOS = $SEGURADOS;
     }
-    public function setTitle($title) {
-        $this->title = $title;
+    public function getN_PROC(){
+        return $this->N_PROC;
     }
-    public function getTitulo(){
-        return $this->titulo;
+    public function setN_PROC($N_PROC){
+        $this->N_PROC = $N_PROC;
     }
-    public function setTitulo($titulo){
-        $this->titulo = $titulo;
+    public function getN_NATIGO() {
+        return $this->N_NATIGO;
     }
 
-    /**
-     * @return string
-     */
-    public function getDescription() {
-        return $this->description;
+    public function setN_NATIGO($N_NATIGO) {
+        $this->N_NATIGO = $N_NATIGO;
     }
-
-    public function setDescription($description) {
-        $this->description = $description;
+    public function getNATUREZA(){
+        return $this->NATUREZA;
     }
-    public function getDescricao(){
-        return $this->descricao;
+    public function setNATUREZA($NATUREZA){
+        $this->NATUREZA = $NATUREZA;
     }
-    public function setDescricao($descricao){
-        $this->descricao = $descricao;
+    public function getPROCED(){
+        return $this->PROCED;
     }
-
-    /**
-     * @return string
-     */
-    public function getComment() {
-        return $this->comment;
+    public function setPROCED($PROCED){
+        $this->PROCED = $PROCED;
     }
-
-    public function setComment($comment) {
-        $this->comment = $comment;
+    public function getUF(){
+        return $this->UF;
     }
-    public function getComentario(){
-        return $this->comentario;
+    public function setUF($UF){
+        $this->UF = $UF;
     }
-    public function setComentario($comentario){
-        $this->comentario = $comentario;
+    public function getCIDADE(){
+        return $this->CIDADE;
     }
-    public function getDetalhamento(){
-        return $this->detalhamento;
+    public function setCIDADE($CIDADE){
+        $this->CIDADE = $CIDADE;
     }
-    public function setDetalhamento($detalhamento){
-        $this->detalhamento = $detalhamento;
+    public function getFORO(){
+        return $this->FORO;
     }
-    public function getOrigem(){
-        return $this->origem;
+    public function setFORO($FORO){
+        $this->FORO = $FORO;
     }
-    public function setOrigem($origem){
-        $this->origem = $origem;
+    public function getN_VARA(){
+        return $this->N_VARA;
     }
-    public function getTipoacao(){
-        return $this->tipoacao;
+    public function setN_VARA($N_VARA){
+        $this->N_VARA = $N_VARA;
     }
-    public function setTipoacao($tipoacao){
-        $this->tipoacao = $tipoacao;
+    public function getVARA(){
+        return $this->VARA;
     }
-    public function getProcesso(){
-        return $this->processo;
+    public function setVARA($VARA){
+        $this->VARA = $VARA;
     }
-    public function setProcesso($processo){
-        $this->processo = $processo;
+    public function getCLIENTE(){
+        return $this->CLIENTE;
     }
-    public function getIdentificador(){
-        return $this->identificador;
+    public function setCLIENTE($CLIENTE){
+        $this->CLIENTE = $CLIENTE;
     }
-    public function setIdentificador($identificador){
-        $this->identificador = $identificador;
+    public function getRECLAMANTE(){
+        return $this->RECLAMANTE;
     }
-    public function getCausa(){
-        return $this->causa;
+    public function setRECLAMANTE($RECLAMANTE){
+        $this->RECLAMANTE = $RECLAMANTE;
     }
-    public function setCausa($causa){
-        $this->causa = $causa;
+    public function getFASE(){
+        return $this->FASE;
     }
-    public function getimediata(){
-        return $this->imediata;
+    public function setFASE($FASE){
+        $this->FASE = $FASE;
     }
-    public function setImediata($imediata){
-        $this->imediata = $imediata;
+    public function getTP_PROBA(){
+        return $this->TP_PROBA;
     }
-    public function getCorretiva(){
-        return $this->corretiva;
+    public function setTP_PROBA($TP_PROBA){
+        $this->TP_PROBA = $TP_PROBA;
     }
-    public function setCorretiva($corretiva){
-        $this->corretiva = $corretiva;
+    public function getPROVAVIL(){
+        return $this->PROVAVIL;
     }
-    public function getImplementador(){
-        return $this->implementador;
+    public function setPROVAVIL($PROVAVIL){
+        $this->PROVAVIL = $PROVAVIL;
     }
-    public function setImplementador($implementador){
-        $this->implementador = $implementador;
+    public function getVLPEDIDO(){
+        return $this->VLPEDIDO;
     }
-    public function getRegEficacia(){
-        return $this->reg_eficacia;
+    public function setVLPEDIDO($VLPEDIDO){
+        $this->VLPEDIDO = $VLPEDIDO;
     }
-    public function setRegEficacia($reg_eficacia){
-        $this->reg_eficacia = $reg_eficacia;
+    public function getDTPEDIDO(){
+        return $this->DTPEDIDO;
     }
-    public function getRespVerificacao(){
-        return $this->resp_verificacao;
+    public function setDTPEDIDO($DTPEDIDO){
+        $this->DTPEDIDO = $DTPEDIDO;
     }
-    public function setRespVerificacao($resp_verificacao){
-        $this->resp_verificacao = $resp_verificacao;
+    public function getTPACAO(){
+        return $this->TPACAO;
     }
-    public function getNovoRnc(){
-        return $this->novo_rnc;
+    public function setTPACAO($TPACAO){
+        $this->TPACAO = $TPACAO;
     }
-    public function setNovoRnc($novo_rnc){
-        $this->novo_rnc = $novo_rnc;
-    }
-    public function getEficaz(){
-        return $this->eficaz;
-    }
-    public function setEficaz($eficaz){
-        $this->eficaz = $eficaz;
-    }
-    public function getAndamento(){
-        return $this->andamento;
-    }
-    public function setAndamento($andamento){
-        $this->andamento = $andamento;
-    }
-
-    /**
-     * @return string one of PENDING/DONE/VOIDED
-     */
     public function getStatus() {
         return $this->status;
     }
@@ -326,10 +301,6 @@ final class Todo {
         TodoValidator::validateStatus($status);
         $this->status = $status;
     }
-
-    /**
-     * @return boolean
-     */
     public function getDeleted() {
         return $this->deleted;
     }

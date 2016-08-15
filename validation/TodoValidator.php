@@ -1,18 +1,8 @@
 <?php
-/**
- * Validator for {@link Todo}.
- * @see TodoMapper
- */
 final class TodoValidator {
 
     private function __construct() {
     }
-
-    /**
-     * Validate the given {@link Todo} instance.
-     * @param Todo $todo {@link Todo} instance to be validated
-     * @return array array of {@link Error} s
-     */
     public static function validate(Todo $todo) {
         $errors = array();
         if (!$todo->getCreatedOn()) {
@@ -21,18 +11,6 @@ final class TodoValidator {
         if (!$todo->getLastModifiedOn()) {
             $errors[] = new Error('lastModifiedOn', 'Empty or invalid Last Modified On.');
         }
-        
-        if (!trim($todo->getTitle())) {
-            $errors[] = new Error('title', 'Título em branco.');
-        }
-        if (!trim($todo->getNumero())) {
-            $errors[] = new Error('numero', 'Necessário inserir o número de registro.');
-        }
-        /*
-        if (!$todo->getDueOn()) {
-            $errors[] = new Error('dueOn', 'Empty or invalid Due On.');
-        }
-         */
         if (!trim($todo->getPriority())) {
             $errors[] = new Error('priority', 'Priority cannot be empty.');
         } elseif (!self::isValidPriority($todo->getPriority())) {
@@ -45,23 +23,11 @@ final class TodoValidator {
         }
         return $errors;
     }
-
-    /**
-     * Validate the given status.
-     * @param string $status status to be validated
-     * @throws Exception if the status is not known
-     */
     public static function validateStatus($status) {
         if (!self::isValidStatus($status)) {
             throw new Exception('Unknown status: ' . $status);
         }
     }
-
-    /**
-     * Validate the given priority.
-     * @param int $priority priority to be validated
-     * @throws Exception if the priority is not known
-     */
     public static function validatePriority($priority) {
         if (!self::isValidPriority($priority)) {
             throw new Exception('Unknown priority: ' . $priority);
@@ -77,5 +43,4 @@ final class TodoValidator {
     }
 
 }
-
 ?>

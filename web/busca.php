@@ -23,7 +23,7 @@
     <button onclick="submit" title="Buscar" ><img src="img/lupa.png" height="12px" /></button>
 </form>
     <?php elseif($act=='divergente'): ?>
-<div class="titulo">VALORES DIVERG&Ecirc;NTES</div>
+<div class="titulo">VALORES DIVERGENTES</div>
 <form action="teste3.php?act=divergente&busca=divergente" method="POST">
     <!--<input type="text" attrname="telephone1" name="num_sinistro" maxlength="19" placeholder="n&uacute;mero de sinistro" autofocus="">-->
    <!-- Qual a sucursal a pesquisar? 

@@ -2,6 +2,7 @@
 final class TodoSearchCriteria {
 
     private $status = null;
+    private $SINISTRO;
 
 
     public function getStatus() {
@@ -12,6 +13,15 @@ final class TodoSearchCriteria {
         $this->status = $status;
         return $this;
     }
+    public function getSINISTRO() {
+        return $this->SINISTRO;
+    }
+
+    public function setSINISTRO($SINISTRO) {
+        $this->SINISTRO = $SINISTRO;
+        return $this;
+    }
+    
 
 }
 ?>

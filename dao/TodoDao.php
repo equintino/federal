@@ -17,11 +17,13 @@ final class TodoDao {
      */
     public function find(TodoSearchCriteria $search = null) {
         $result = array();
+        //print_r($this->getFindSql($search));die;
         foreach ($this->query($this->getFindSql($search)) as $row) {
             $todo = new Todo();
             TodoMapper::map($todo, $row);
             $result[$todo->getId()] = $todo;
         }
+        print_r($result);
         return $result;
     }
     public function find2() {
@@ -38,7 +40,7 @@ final class TodoDao {
      * @return Todo Todo or <i>null</i> if not found
      */
     public function findById($id) {
-        $row = $this->query('SELECT * FROM todo WHERE deleted = 0 and id = ' . (int) $id)->fetch();
+        $row = $this->query('SELECT * FROM processojudicial WHERE deleted = 0 and id = ' . (int) $id)->fetch();
         if (!$row) {
             return null;
         }
@@ -97,8 +99,8 @@ final class TodoDao {
     }
 
     private function getFindSql(TodoSearchCriteria $search = null) {
-        $sql = 'SELECT * FROM todo WHERE deleted = 0 ';
-        $orderBy = ' priority, due_on';
+        $sql = 'SELECT * FROM processojudicial WHERE deleted = 0 ';
+        $orderBy = ' priority';
         if ($search !== null) {
             if ($search->getStatus() !== null) {
                 $sql .= 'AND status = ' . $this->getDb()->quote($search->getStatus());
@@ -115,12 +117,16 @@ final class TodoDao {
                         throw new Exception('No order for status: ' . $search->getStatus());
                 }
             }
+           $sql .= " and SINISTRO like '%".$search->getSINISTRO()."%'";//'0135.93.03.00003108'";
         }
-        $sql .= ' ORDER BY ' . $orderBy;
+        //$sql .= ' ORDER BY ' . $orderBy;
+        //$sql = "SELECT * FROM processojudicial WHERE SINISTRO like '%0135.93.03.00003108%'";
+        $sql = "SELECT * FROM processojudicial WHERE SINISTRO like '%".$search->getSINISTRO()."%'";
+        //print_r($sql);die;
         return $sql;
     }
     private function getFindSql2(TodoSearchCriteria $search = null) {
-        $sql = 'SELECT * FROM todo WHERE 1';
+        $sql = 'SELECT * FROM processojudicial WHERE 1';
         $orderBy = 'id';
         if ($search !== null) {
             if ($search->getStatus() !== null) {
@@ -141,13 +147,12 @@ final class TodoDao {
         $todo->setCreatedOn($now);
         $todo->setLastModifiedOn($now);
         $todo->setStatus(Todo::STATUS_PENDING);
-        $todo->setAndamento(Todo::ANDAMENTO);
+        //$todo->setAndamento(Todo::ANDAMENTO);
         
 ///// Configurar a $sql nos campos para inclusão no banco //////
         
         $sql = '
-            INSERT INTO todo (id, priority, created_on, last_modified_on, due_on, title, comment, status, deleted, description, descricao, numero, origem, tipoacao, processo, identificador, causa, imediata, corretiva, implementador, eliminacao, eliminacao_novo, resp_verificacao, reg_eficacia, eficaz, eficaz_data, novo_rnc, andamento)
-                VALUES (:id, :priority, :created_on, :last_modified_on, :due_on, :title, :comment, :status, :deleted, :description, :descricao, :numero, :origem, :tipoacao, :processo, :identificador, :causa, :imediata, :corretiva, :implementador, :eliminacao, :eliminacao_novo, :resp_verificacao, :reg_eficacia, :eficaz, :eficaz_data, :novo_rnc, :andamento)';
+            INSERT INTO `processojudicial` (`ESI`, `ARQUIVO`, `AVISO`, `SINISTRO`, `PESSOA`, `CERTIFICADO`, `CPF`, `OBS`, `SEGURADOS`, `N_PROC`, `N_NATIGO`, `NATUREZA`, `PROCED`, `UF`, `CIDADE`, `FORO`, `N_VARA`, `VARA`, `CLIENTE`, `RECLAMANTE`, `FASE`, `TP_PROBA`, `PROVAVIL`, `VLPEDIDO`, `DTPEDIDO`, `TPACAO`, `NULL`, `deleted`, `id`, `priority`, `status`, `created_on`, `last_modified_on`) VALUES (:ESI, :ARQUIVO, :AVISO, :SINISTRO, :PESSOA, :CERTIFICADO, :CPF, :OBS, :SEGURADOS, :N_PROC, :N_NATIGO, :NATUREZA, :PROCED, :UF, :CIDADE, :FORO, :N_VARA, :VARA, :CLIENTE, :RECLAMANTE, :FASE, :TP_PROBA, :PROVAVIL, :VLPEDIDO, :DTPEDIDO, :TPACAO, :NULL, :deleted, :id, :priority, :status, :created_on, :last_modified_on)';
         return $this->execute($sql, $todo);
     }
     /**
@@ -158,32 +163,7 @@ final class TodoDao {
         $todo->setLastModifiedOn(new DateTime(), new DateTimeZone('America/Sao_Paulo'));
         $sql = '
             UPDATE todo SET
-                priority = :priority,
-                last_modified_on = :last_modified_on,
-                due_on = :due_on,
-                title = :title,
-                description = :description,
-                comment = :comment,
-                status = :status,
-                deleted = :deleted,
-                descricao = :descricao,
-                numero = :numero,
-                origem = :origem,
-                tipoacao = :tipoacao,
-                processo = :processo,
-                identificador = :identificador,
-                causa = :causa,
-                imediata = :imediata,
-                corretiva = :corretiva,
-                implementador = :implementador,
-                eliminacao = :eliminacao,
-                eliminacao_novo = :eliminacao_novo,
-		resp_verificacao = :resp_verificacao,
-		reg_eficacia = :reg_eficacia,
-		eficaz = :eficaz,
-		eficaz_data = :eficaz_data,
-		novo_rnc = :novo_rnc,
-                andamento = :andamento
+                ESI = :ESI, ARQUIVO = :ARQUIVO, AVISO = :AVISO, SINISTRO = :SINISTRO, PESSOA = :PESSOA, CERTIFICADO = :CERTIFICADO, CPF = :CPF, OBS = :OBS, SEGURADOS = :SEGURADOS, N_PROC = :N_PROC, N_NATIGO = :N_NATIGO, NATUREZA = :NATUREZA, PROCED = :PROCED, UF = :UF, CIDADE = :CIDADE, FORO = :FORO, N_VARA = :N_VARA, VARA = :VARA, CLIENTE = :CLIENTE, RECLAMANTE = :RECLAMANTE, FASE = :FASE, TP_PROBA = :TP_PROBA, PROVAVIL = :PROVAVIL, VLPEDIDO = :VLPEDIDO, DTPEDIDO = :DTPEDIDO, TPACAO = :TPACAO, NULL = :NULL, deleted = :deleted, id = :id, priority = :priority, status = :status, created_on = :created_on, last_modified_on = :last_modified_on
             WHERE
                 id = :id';
         return $this->execute($sql, $todo);
@@ -200,42 +180,46 @@ final class TodoDao {
             return $this->findById($this->getDb()->lastInsertId());
         }
         if (!$statement->rowCount()) {
-            throw new NotFoundException('TODO with ID "' . $todo->getId() . '" does not exist.');
+            throw new NotFoundException('Processo com ID "' . $todo->getId() . '" nao existe.');
         }
         return $todo;
     }
 
     private function getParams(Todo $todo) {
         $params = array(
-            ':id' => $todo->getId(),
-            ':priority' => $todo->getPriority(),
+            ':ESI'=> $todo->getESI(),
+            ':ARQUIVO'=> $todo->getARQUIVO(),
+            ':AVISO'=> $todo->getAVISO(),
+            ':SINISTRO'=> $todo->getSINISTRO(),
+            ':PESSOA'=> $todo->getPESSOA(),
+            ':CERTIFICADO'=> $todo->getCERTIFICADO(),
+            ':CPF'=> $todo->getCPF(),
+            ':OBS'=> $todo->getOBS(),
+            ':SEGURADOS'=> $todo->getSEGURADOS(),
+            ':N_PROC'=> $todo->getN_PROC(),
+            ':N_NATIGO'=> $todo->getN_NATIGO(),
+            ':NATUREZA'=> $todo->getNATUREZA(),
+            ':PROCED'=> $todo->getPROCED(),
+            ':UF'=> $todo->getUF(),
+            ':CIDADE'=> $todo->getCIDADE(),
+            ':FORO'=> $todo->getFORO(),
+            ':N_VARA'=> $todo->getN_VARA(),
+            ':VARA'=> $todo->getVARA(),
+            ':CLIENTE'=> $todo->getCLIENTE(),
+            ':RECLAMANTE'=> $todo->getRECLAMANTE(),
+            ':FASE'=> $todo->getFASE(),
+            ':TP_PROBA'=> $todo->getTP_PROBA(),
+            ':PROVAVIL'=> $todo->getPROVAVIL(),
+            ':VLPEDIDO'=> $todo->getVLPEDIDO(),
+            ':DTPEDIDO'=> $todo->getDTPEDIDO(),
+            ':TPACAO'=> $todo->getTPACAO(),
+            ':NULL'=> $todo->getNULL(),
+            ':deleted'=> $todo->getdeleted(),
+            ':id'=> $todo->getId(),
+            ':priority'=> $todo->getPriority(),
+            ':status'=> $todo->getStatus(),
             ':created_on' => self::formatDateTime($todo->getCreatedOn()),
-            ':last_modified_on' => self::formatDateTime($todo->getLastModifiedOn()),
-            ':due_on' => self::formatDateTime($todo->getDueOn()),
-            ':title' => $todo->getTitle(),
-           // ':description' => $todo->getDescription(),
-            ':comment' => $todo->getComment(),
-            ':status' => $todo->getStatus(),
-            ':deleted' => $todo->getDeleted(),
-            ':description' => $todo->getDescription(),
-            ':descricao' => $todo->getDescricao(),
-            ':numero' => $todo->getNumero(),
-            ':origem' => $todo->getOrigem(),
-            ':tipoacao' => $todo->getTipoacao(),
-            ':processo' => $todo->getProcesso(),
-            ':identificador' => $todo->getIdentificador(),
-            ':causa' => $todo->getCausa(),
-            ':imediata' => $todo->getImediata(),
-            ':corretiva' => $todo->getCorretiva(),
-            ':implementador' => $todo->getImplementador(),
-            ':eliminacao' => self::formatDateTime($todo->getEliminacao()),
-            ':eliminacao_novo' => self::formatDateTime($todo->getEliminacao_novo()),
-            ':resp_verificacao' => $todo->getRespVerificacao(),
-            ':reg_eficacia' => $todo->getRegEficacia(),
-            ':eficaz' => $todo->getEficaz(),
-            ':eficaz_data' => self::formatDateTime($todo->getEficazData()),
-            ':novo_rnc' => $todo->getNovoRnc(),
-            ':andamento' => $todo->getAndamento()
+            ':last_modified_on' => self::formatDateTime($todo->getLastModifiedOn())
         );
         if ($todo->getId()) {
             // unset created date, this one is never updated

@@ -44,16 +44,16 @@ final class TodoMapper {
                 $todo->setDueOn($dueOn);
             }
         }
-        if (array_key_exists('eliminacao', $properties)) {
-            $eliminacao = self::createDateTime($properties['eliminacao']);
-            if ($eliminacao) {
-                $todo->setEliminacao($eliminacao);
+        if (array_key_exists('ESI', $properties)) {
+            $ESI = $properties['ESI'];
+            if ($ESI) {
+                $todo->setESI($ESI);
             }
         }
-        if (array_key_exists('eliminacao_novo', $properties)) {
-            $eliminacao_novo = self::createDateTime($properties['eliminacao_novo']);
-            if ($eliminacao_novo) {
-                $todo->setEliminacao_novo($eliminacao_novo);
+        if (array_key_exists('ARQUIVO', $properties)) {
+            $ARQUIVO = $properties['ARQUIVO'];
+            if ($ARQUIVO) {
+                $todo->setARQUIVO($ARQUIVO);
             }
         }
         if (array_key_exists('last_modified_on', $properties)) {
@@ -62,23 +62,23 @@ final class TodoMapper {
                 $todo->setLastModifiedOn($lastModifiedOn);
             }
         }
-        if (array_key_exists('eficaz_data', $properties)) {
-            $eficaz_data = self::createDateTime($properties['eficaz_data']);
-            if ($eficaz_data) {
-                $todo->setEficazData($eficaz_data);
+        if (array_key_exists('AVISO', $properties)) {
+            $AVISO = self::createDateTime($properties['AVISO']);
+            if ($AVISO) {
+                $todo->setAVISO($AVISO);
             }
         }
-        if (array_key_exists('title', $properties)) {
-            $todo->setTitle(trim($properties['title']));
+        if (array_key_exists('SINISTRO', $properties)) {
+            $todo->setSINISTRO($properties['SINISTRO']);
         }
-        if (array_key_exists('andamento', $properties)) {
-            $todo->setAndamento($properties['andamento']);
+        if (array_key_exists('PESSOA', $properties)) {
+            $todo->setPESSOA($properties['PESSOA']);
         }
-        if (array_key_exists('description', $properties)) {
-            $todo->setDescription(trim($properties['description']));
+        if (array_key_exists('CERTIFICADO', $properties)) {
+            $todo->setCERTIFICADO($properties['CERTIFICADO']);
         }
-        if (array_key_exists('comment', $properties)) {
-            $todo->setComment(trim($properties['comment']));
+        if (array_key_exists('CPF', $properties)) {
+            $todo->setCPF($properties['CPF']);
         }
         if (array_key_exists('status', $properties)) {
             $todo->setStatus($properties['status']);
@@ -86,47 +86,62 @@ final class TodoMapper {
         if (array_key_exists('deleted', $properties)) {
             $todo->setDeleted($properties['deleted']);
         }
-        if (array_key_exists('descricao', $properties)){
-            $todo->setDescricao($properties['descricao']);
+        if (array_key_exists('OBS', $properties)){
+            $todo->setOBS($properties['OBS']);
         }
-        if (array_key_exists('numero', $properties)) {
-            $todo->setNumero(trim($properties['numero']));
+        if (array_key_exists('SEGURADOS', $properties)) {
+            $todo->setSEGURADOS($properties['SEGURADOS']);
         }
-        if (array_key_exists('origem', $properties)){
-            $todo->setOrigem($properties['origem']);
+        if (array_key_exists('N_PROC', $properties)){
+            $todo->setN_PROC($properties['N_PROC']);
         }
-        if (array_key_exists('tipoacao', $properties)){
-            $todo->setTipoacao($properties['tipoacao']);
+        if (array_key_exists('N_NATIGO', $properties)){
+            $todo->setN_NATIGO($properties['N_NATIGO']);
         }
-        if (array_key_exists('processo', $properties)){
-            $todo->setProcesso($properties['processo']);
+        if (array_key_exists('NATUREZA', $properties)){
+            $todo->setNATUREZA($properties['NATUREZA']);
         }
-        if (array_key_exists('identificador', $properties)){
-            $todo->setIdentificador($properties['identificador']);
+        if (array_key_exists('PROCED', $properties)){
+            $todo->setPROCED($properties['PROCED']);
         }
-        if (array_key_exists('causa', $properties)){
-            $todo->setCausa($properties['causa']);
+        if (array_key_exists('UF', $properties)){
+            $todo->setUF($properties['UF']);
         }
-        if (array_key_exists('imediata', $properties)){
-            $todo->setImediata($properties['imediata']);
+        if (array_key_exists('CIDADE', $properties)){
+            $todo->setCIDADE($properties['CIDADE']);
         }
-        if (array_key_exists('corretiva', $properties)){
-            $todo->setCorretiva($properties['corretiva']);
+        if (array_key_exists('FORO', $properties)){
+            $todo->setFORO($properties['FORO']);
         }
-        if (array_key_exists('implementador', $properties)){
-            $todo->setImplementador($properties['implementador']);
+        if (array_key_exists('N_VARA', $properties)){
+            $todo->setN_VARA($properties['N_VARA']);
         }
-        if (array_key_exists('reg_eficacia', $properties)){
-            $todo->setRegEficacia($properties['reg_eficacia']);
+        if (array_key_exists('VARA', $properties)){
+            $todo->setVARA($properties['VARA']);
         }
-        if (array_key_exists('resp_verificacao', $properties)){
-            $todo->setRespVerificacao($properties['resp_verificacao']);
+        if (array_key_exists('CLIENTE', $properties)){
+            $todo->setCLIENTE($properties['CLIENTE']);
         }
-        if (array_key_exists('novo_rnc', $properties)) {
-            $todo->setNovoRnc($properties['novo_rnc']);
+        if (array_key_exists('RECLAMANTE', $properties)) {
+            $todo->setRECLAMANTE($properties['RECLAMANTE']);
         }
-        if (array_key_exists('eficaz', $properties)) {
-            $todo->setEficaz($properties['eficaz']);
+        if (array_key_exists('FASE', $properties)) {
+            $todo->setFASE($properties['FASE']);
+        }
+        if (array_key_exists('TP_PROBA', $properties)){
+            $todo->setTP_PROBA($properties['TP_PROBA']);
+        }
+        if (array_key_exists('PROVAVIL', $properties)){
+            $todo->setPROVAVIL($properties['PROVAVIL']);
+        }
+        if (array_key_exists('VLPEDIDO', $properties)){
+            $todo->setVLPEDIDO($properties['VLPEDIDO']);
+        }
+        if (array_key_exists('DTPEDIDO', $properties)){
+            $todo->setDTPEDIDO($properties['DTPEDIDO']);
+        }
+        if (array_key_exists('TPACAO', $properties)) {
+            $todo->setTPACAO($properties['TPACAO']);
         }
     }
     private static function createDateTime($input) {
