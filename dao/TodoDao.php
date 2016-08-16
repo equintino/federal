@@ -23,7 +23,7 @@ final class TodoDao {
             TodoMapper::map($todo, $row);
             $result[$todo->getId()] = $todo;
         }
-        print_r($result);
+        //print_r($result);die;
         return $result;
     }
     public function find2() {
@@ -121,7 +121,7 @@ final class TodoDao {
         }
         //$sql .= ' ORDER BY ' . $orderBy;
         //$sql = "SELECT * FROM processojudicial WHERE SINISTRO like '%0135.93.03.00003108%'";
-        $sql = "SELECT * FROM processojudicial WHERE SINISTRO like '%".$search->getSINISTRO()."%'";
+        //$sql = "SELECT * FROM processojudicial WHERE SINISTRO like '%".$search->getSINISTRO()."%'";
         //print_r($sql);die;
         return $sql;
     }

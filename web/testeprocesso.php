@@ -1,11 +1,11 @@
+<link rel="stylesheet" type="text/css" href="css/consulta.css" />
+<script src="js/script.js"></script> 
 <form action="testeprocesso.php?act=sinistrado&busca=sinistrado" method="POST">
     <input type="text" attrname="telephone1" name="num_sinistro" maxlength="19" placeholder="sinistro ou certificado" autofocus="">
     ou
     <input type="text" name="nome" placeholder="nome do sinistrado" >
     <script src='js/vanilla-masker.min.js'></script>
     <script src="js/index.js"></script>
-        <label>acima de R$ </label>
-        <input type="text" name="importanciasegurada" placeholder="import&acirc;cia segurada"/>
     <button onclick="submit" title="Buscar" ><img src="img/lupa.png" height="12px" /></button>
 </form>
 <?php
@@ -29,7 +29,7 @@
          </script>";
      * 
      */
-    print_r($sinistro);
+    //print_r($sinistro);
     //echo "<br>";
     //print_r($Todosearch);
     //echo "<br>";
@@ -42,8 +42,23 @@
     $search->setSINISTRO($sinistro);
     //echo strval($search);die;
     //echo "<br><br>";
-    echo "<pre>";
-    print_r($Tododao->find($search));
-    echo "</pre>";
+    //echo "<pre>";
+    $todos=$Tododao->find($search);
+    echo "<div class=judiciais>";
+    echo "<table border=1 align=center cellspacing=0 spanspacing=0 class=\"tabela\">";
+    echo "<tr><th>SINISTRO</th><th>PROCESSO</th><th>PROC. ANTIGO</th><th>SEGURADO</th></tr>";
+    foreach($todos as $item){
+     echo "<tr><td>";
+      print_r($item->getSINISTRO());
+      echo "</td><td>";
+      print_r($item->getN_PROC());
+      echo "</td><td align=right>";
+      print_r($item->getN_NATIGO());
+      echo "</td><td>";
+      echo $item->getSEGURADOS();
+      echo "</td></tr>";
+    }
+    echo "</table>";
+    echo "</div>";
 ?>
 

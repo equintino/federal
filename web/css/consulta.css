@@ -114,6 +114,9 @@ button{
 .divergente{
     clear: both;
 }
+.judiciais{
+    #margin: auto;
+}
 .progresso {
     display: none;
     position: fixed;

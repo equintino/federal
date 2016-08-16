@@ -1,32 +1,8 @@
--- phpMyAdmin SQL Dump
--- version 4.1.4
--- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: 15-Ago-2016 às 22:03
--- Versão do servidor: 5.6.15-log
--- PHP Version: 5.4.24
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
---
--- Database: `processos_judiciais`
+-- Table structure for table `processojudicial`
 --
 
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `processojudicial`
---
-
-CREATE TABLE IF NOT EXISTS `processojudicial` (
+CREATE TABLE `processojudicial` (
   `ESI` varchar(2) DEFAULT NULL,
   `ARQUIVO` varchar(4) DEFAULT NULL,
   `AVISO` varchar(10) DEFAULT NULL,
@@ -55,20 +31,18 @@ CREATE TABLE IF NOT EXISTS `processojudicial` (
   `TPACAO` varchar(26) DEFAULT NULL,
   `NULL` varchar(10) DEFAULT NULL,
   `deleted` int(1) NOT NULL DEFAULT '0',
-  `id` int(8) NOT NULL AUTO_INCREMENT,
+  `id` int(8) NOT NULL,
   `priority` int(3) NOT NULL,
   `status` varchar(100) NOT NULL,
   `created_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `last_modified_on` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=113 ;
+  `last_modified_on` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Extraindo dados da tabela `processojudicial`
+-- Dumping data for table `processojudicial`
 --
 
 INSERT INTO `processojudicial` (`ESI`, `ARQUIVO`, `AVISO`, `SINISTRO`, `PESSOA`, `CERTIFICADO`, `CPF`, `OBS`, `SEGURADOS`, `N_PROC`, `N_NATIGO`, `NATUREZA`, `PROCED`, `UF`, `CIDADE`, `FORO`, `N_VARA`, `VARA`, `CLIENTE`, `RECLAMANTE`, `FASE`, `TP_PROBA`, `PROVAVIL`, `VLPEDIDO`, `DTPEDIDO`, `TPACAO`, `NULL`, `deleted`, `id`, `priority`, `status`, `created_on`, `last_modified_on`) VALUES
-('', 'A', '07/07/2003', '0133.93.03.00000995', '36871', '0133.93.00.00000145', '011.705.707-04', '', 'MARIO LUIS PELLON SANTOS', '0129827-18.2007.8.19.0001', '2007.001.126360-2', 'CIVEL', 'ORDINARIO', 'RIO DE JANEIRO', 'BELFORD ROXO', 'BELFORD ROXO', '1', 'VARA CIVEL', 'FEDERAL DE SEGUROS', 'ORLANDO PAULINO FERNANDES', 'INSTRUTORIA', 'PERDA', 'PROVAVEL - SEGURO DEVIDO', '', '29/09/2004', 'DANO MATERIAL E MORAL', NULL, 0, 1, 0, '', '2016-08-15 14:49:26', '0000-00-00 00:00:00'),
 ('', 'A', '02/08/2011', '0101.93.03.00000128', '613163', '0101.93.00.00000038', '134.616.056-20', '', 'DINIS CESAR GOMES GONTIJO', '0046244-09.2013.8.13.0223', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, 0, 2, 0, '', '2016-08-15 14:49:26', '0000-00-00 00:00:00'),
 ('', 'A', '15/08/2013', '0101.93.03.00000377', '845750', '0101.93.00.00000075', '766.321.137-53', '', '', '0000251-44.2014.8.26.0449', '', '', '', '', '', '', '', '', '', 'EDIMAR DE SOUZA SILVA', '', '', '', '', '', '', NULL, 0, 3, 0, '', '2016-08-15 14:49:26', '0000-00-00 00:00:00'),
 ('', 'A', '12/02/2007', '0115.93.03.00000280', '299689', '0115.93.22.00002669', '247.324.942-34', '', '', '', '', '', '', '', '', '', '', '', '', 'ALCY SOUZA CARDOZO', '', '', '', '', '', '', NULL, 0, 4, 0, '', '2016-08-15 14:49:26', '0000-00-00 00:00:00'),
@@ -180,6 +154,27 @@ INSERT INTO `processojudicial` (`ESI`, `ARQUIVO`, `AVISO`, `SINISTRO`, `PESSOA`,
 ('OK', 'A', '27/09/2013', '0132.93.03.00000366', '', '', '', '', 'MARIA DA PENHA HADDAD FONSECA', '0013085-60.2015.8.08.0024', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, 0, 110, 0, '', '2016-08-15 14:49:26', '0000-00-00 00:00:00'),
 ('OK', 'A', '17/03/2011', '0133.93.03.00004251', '', '', '', '', 'JORGE DE ANDRADE', '0233367-72.2013.8.19.0001', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, 0, 111, 0, '', '2016-08-15 14:49:26', '0000-00-00 00:00:00'),
 ('OK', 'A', '23/03/2011', '0135.93.03.00003089', '', '', '', '', 'GERALDO CAETANO', '0008438-74.2013.8.26.0126', '012.62.0130.008438', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 112, 0, '', '2016-08-15 14:49:26', '0000-00-00 00:00:00');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `processojudicial`
+--
+ALTER TABLE `processojudicial`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `processojudicial`
+--
+ALTER TABLE `processojudicial`
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;--
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
