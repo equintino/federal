@@ -1,9 +1,10 @@
+<meta charset="utf-8">
 <link rel="stylesheet" type="text/css" href="css/consulta.css" />
 <script src="js/script.js"></script> 
 <form action="testeprocesso.php?act=sinistrado&busca=sinistrado" method="POST">
-    <input type="text" attrname="telephone1" name="num_sinistro" maxlength="19" placeholder="sinistro ou certificado" autofocus="">
+    <input type="text" attrname="telephone1" name="num_sinistro" maxlength="19" placeholder="n&uacute;mero de sinistro" autofocus="">
     ou
-    <input type="text" name="nome" placeholder="nome do sinistrado" >
+    <input type="text" name="sinistrado" placeholder="nome do sinistrado" >
     <script src='js/vanilla-masker.min.js'></script>
     <script src="js/index.js"></script>
     <button onclick="submit" title="Buscar" ><img src="img/lupa.png" height="12px" /></button>
@@ -20,7 +21,9 @@
     $search=new TodoSearchCriteria;
     $Todo=new Todo();
     
-    @$sinistro=$_POST['num_sinistro'];
+    
+    @$sinistro= $_POST['num_sinistro'];
+    @$sinistrado=$_POST['sinistrado'];
     
     /*
     echo "<script>
@@ -40,25 +43,33 @@
     //echo "$sinistro";die;
     
     $search->setSINISTRO($sinistro);
+    $search->setSEGURADOS($sinistrado);
     //echo strval($search);die;
     //echo "<br><br>";
     //echo "<pre>";
     $todos=$Tododao->find($search);
+    
     echo "<div class=judiciais>";
-    echo "<table border=1 align=center cellspacing=0 spanspacing=0 class=\"tabela\">";
-    echo "<tr><th>SINISTRO</th><th>PROCESSO</th><th>PROC. ANTIGO</th><th>SEGURADO</th></tr>";
-    foreach($todos as $item){
-     echo "<tr><td>";
-      print_r($item->getSINISTRO());
-      echo "</td><td>";
-      print_r($item->getN_PROC());
-      echo "</td><td align=right>";
-      print_r($item->getN_NATIGO());
-      echo "</td><td>";
-      echo $item->getSEGURADOS();
-      echo "</td></tr>";
+    if(!$todos){
+        echo "<b>Nenhum resultado foi obtido</b>";
+    }else{
+        echo "<table border=1 align=center cellspacing=0 spanspacing=0 class=\"tabela\">";
+        echo "<tr><th>SINISTRO</th><th>PROCESSO</th><th>PROC. ANTIGO</th><th>SEGURADO</th><th>OBS.</th></tr>";
+        foreach($todos as $item){
+            echo "<tr><td>";
+            echo $item->getSINISTRO();
+            echo "</td><td>";
+            echo $item->getN_PROC();
+            echo "</td><td align=right>";
+            echo $item->getN_NATIGO();
+            echo "</td><td>";
+            echo $item->getSEGURADOS();
+            echo "</td><td>";
+            echo $item->getOBS();
+            echo "</td></tr>";
+        }
+        echo "</table>";
     }
-    echo "</table>";
     echo "</div>";
 ?>
 

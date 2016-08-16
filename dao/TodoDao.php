@@ -99,8 +99,14 @@ final class TodoDao {
     }
 
     private function getFindSql(TodoSearchCriteria $search = null) {
+        if(strlen($search->getSINISTRO())==16){
+            $sinistro=TodoValidator::mask($search->getSINISTRO(),"####.##.##.########");
+        }else{
+            $sinistro=$search->getSINISTRO();
+        }
+        
         $sql = 'SELECT * FROM processojudicial WHERE deleted = 0 ';
-        $orderBy = ' priority';
+        $orderBy = ' SINISTRO';
         if ($search !== null) {
             if ($search->getStatus() !== null) {
                 $sql .= 'AND status = ' . $this->getDb()->quote($search->getStatus());
@@ -117,9 +123,12 @@ final class TodoDao {
                         throw new Exception('No order for status: ' . $search->getStatus());
                 }
             }
-           $sql .= " and SINISTRO like '%".$search->getSINISTRO()."%'";//'0135.93.03.00003108'";
+            if($search->getSEGURADOS()){
+                $sql .= " and SEGURADOS like '%".$search->getSEGURADOS()."%'";
+            }
+           $sql .= " and SINISTRO like '%".$sinistro."%'";//'0135.93.03.00003108'";
         }
-        //$sql .= ' ORDER BY ' . $orderBy;
+        $sql .= ' ORDER BY ' . $orderBy;
         //$sql = "SELECT * FROM processojudicial WHERE SINISTRO like '%0135.93.03.00003108%'";
         //$sql = "SELECT * FROM processojudicial WHERE SINISTRO like '%".$search->getSINISTRO()."%'";
         //print_r($sql);die;

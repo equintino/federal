@@ -26,14 +26,19 @@
           $valoresembranco=1;       
       }
       //print_r(($_COOKIE));
-      
+      //echo strlen($num_sinistro);
+      if(strlen($num_sinistro)==16){
+          $sin=OdbcValidator::mask($num_sinistro,"####.##.##.########");
+      }else{
+          $sin=$num_sinistro;
+      }
       
       $search->setTITULAR($sinistrado);
       $search->setIMPORTANCIA_SEGURADA($importanciasegurada);
       if(substr($num_sinistro,9,1)==2){
-       $search->setENDOSSO($num_sinistro);
+       $search->setENDOSSO($sin);
       }else{      
-       $search->setsinistro($num_sinistro);
+       $search->setsinistro($sin);
       }
        
       $odbcs=$dao->busca3($search);

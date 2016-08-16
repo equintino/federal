@@ -78,4 +78,7 @@
     redirecionar('1','teste3.php?inicio=sim&act=informacoes&abrir=1&certificado='.@$certificado.'&cpf='.@$cpf.' ','AGUARDE'); 
   }
  }
+ if($act=='judiciais'){
+  redirecionar('1','teste3.php?act=judiciais&abrir=1&num_sinistro='.$num_sinistro.'&sinistrado='.$sinistrado.'&pagAtual='.$pagAtual.'&pag_='.$pag_.'','AGUARDE'); 
+ }
 ?>

@@ -3,62 +3,6 @@
  * Model class representing one TODO item.
  */
 final class Odbc {
-
-    // priority
-    //const PRIORITY_HIGH = 1;
-    //const PRIORITY_MEDIUM = 2;
-    //const PRIORITY_LOW = 3;
-    // status
-    //const STATUS_PENDING = "PENDENTE";
-    //const STATUS_DONE = "RESOLVIDA";
-    //const STATUS_VOIDED = "VENCIDO";
-    //const STATUS_CANCELADO = "CANCELADO";
-    //const ANDAMENTO = 0;
-
-    /** @var int */
-    //private $id;
-    /** @var string */
-    //private $priority;
-    /** @var DateTime */
-    //private $createdOn;
-    /** @var DateTime */
-    //private $dueOn;
-    //private $prazo;
-    /** @var DateTime */
-    //private $lastModifiedOn;
-    /** @var string */
-    //private $title;
-    /** @var string */
-    //private $description;
-    /** @var string */
-    //private $comment;
-    /** @var string one of PENDING/COMPLETED/VOIDED */
-    //private $status;
-    /** @var boolean */
-    //private $deleted;
-    //private $titulo;
-    //private $comentario;
-    //private $detalhamento;
-    /*
-    private $descricao;
-    private $origem;
-    private $tipoacao;
-    private $processo;
-    private $identificador;
-    private $causa;
-    private $imediata;
-    private $corretiva;
-    private $implementador;
-    private $eliminacao;
-    private $eliminacao_novo;
-    private $reg_eficacia;
-    private $resp_verificacao;
-    private $eficaz_data;
-    private $novo_rnc;
-    private $eficaz;
-    private $andamento;
-    */
-    // atributos tabela Beneficiarios //
     private $idbenefi;
     private $idtitular;
     private $sinistro;

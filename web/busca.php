@@ -36,6 +36,15 @@
 </form>
     <?php elseif($act=='judiciais'): ?>
 <div class="titulo">PROCESSOS JUDICIAIS</div>
+<form action="teste3.php?act=judiciais&busca=judiciais" method="POST">
+    <input type="text" attrname="telephone1" name="num_sinistro" maxlength="19" placeholder="n&uacute;mero de sinistro" autofocus="">
+    ou
+    <input type="text" name="sinistrado" placeholder="nome do sinistrado" >
+    <script src='js/vanilla-masker.min.js'></script>
+    <script src="js/index.js"></script>
+    <button onclick="submit" title="Buscar" ><img src="img/lupa.png" height="12px" /></button>
+</form>
+    <?php //include_once 'upload.phtml'; ?>
     <?php elseif($act=='informacoes'): ?>
 <div class="titulo">INFORMA&Ccedil;&Otilde;ES</div>
 <form action="carregando.php?act=informacoes&busca=informacoes&abrir=1" method="POST">

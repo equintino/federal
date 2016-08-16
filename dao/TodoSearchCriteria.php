@@ -3,6 +3,7 @@ final class TodoSearchCriteria {
 
     private $status = null;
     private $SINISTRO;
+    private $SEGURADOS;
 
 
     public function getStatus() {
@@ -19,6 +20,14 @@ final class TodoSearchCriteria {
 
     public function setSINISTRO($SINISTRO) {
         $this->SINISTRO = $SINISTRO;
+        return $this;
+    }
+    public function getSEGURADOS() {
+        return $this->SEGURADOS;
+    }
+
+    public function setSEGURADOS($SEGURADOS) {
+        $this->SEGURADOS = $SEGURADOS;
         return $this;
     }
     

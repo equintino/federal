@@ -301,8 +301,9 @@ final class OdbcDao {
     }
     public function busca2(OdbcSearchCriteria $search = null){
         $result=array();
+        //print_r($this->getBuscaSql2($search));
+        //die;
         $busca = $this->query($this->getBuscaSql2($search));
-        //print_r($busca);die;
         if(@$busca){
          foreach ($busca as $key => $row) {
             $odbc = new Odbc();
@@ -370,6 +371,19 @@ final class OdbcDao {
          }
         }else{
          echo "<p>*Nao foi encontrado nenhum registro</p>"; 
+        }
+        return @$result;
+    }
+    public function busca6(OdbcSearchCriteria $search = null){
+        $result=array();
+        //print_r($this->getBuscaSql2($search));die;
+        $busca = $this->query($this->getBuscaSql6($search));
+        if(@$busca){
+         foreach ($busca as $key => $row) {
+            $odbc = new Odbc();
+            OdbcMapper::map($odbc, $row);
+            $result[$odbc->getidtitular()] = $odbc;
+         }
         }
         return @$result;
     }
@@ -624,6 +638,29 @@ final class OdbcDao {
         $sql = "SELECT * FROM Beneficiarios WHERE ";
             $idbenefi=$search->getidbenefi();
                 $sql .= "idbenefi=$idbenefi";
+        return $sql;
+    }
+    private function getBuscaSql6(OdbcSearchCriteria $search = null){
+        $sql = "SELECT * FROM sinipend WHERE ";
+        if(@$search->getENDOSSO()){
+         $campo='ENDOSSO';
+         $busca=$search->getENDOSSO();
+        }elseif(@$search->getsinistro()){
+         $campo='SINISTRO';
+         $busca=$search->getsinistro();
+        }
+        if($search->getIMPORTANCIA_SEGURADA() == null){
+            $search->setIMPORTANCIA_SEGURADA(0);
+        }
+        if ($search->getTITULAR() != null || $search->getsinistro() != null || $search->getENDOSSO() != null) {
+            if ($search->getsinistro() != null || $search->getENDOSSO() != null) {
+                $sql .= "$campo like '%".$busca."%'";
+            }elseif($search->getTITULAR() != null){
+                $sql .= "TITULAR like '%".$search->getTITULAR()."%'";
+            }
+        }
+        //print_r($search);
+        //print_r($sql);die;
         return $sql;
     }
     private function getFindSql2(OdbcSearchCriteria $search = null) {

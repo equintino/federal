@@ -21,9 +21,6 @@
                    $pag_=1;
                }
       @$continua=$_GET['continua'];
-      //$seach=new OdbcSearchCriteria();
-      
-      //print_r($_COOKIE);
       
       if(isset($pagAtual)){
          $search->setidbenefi($pagAtual); 
@@ -32,16 +29,11 @@
       if($num_sinistro==null && $beneficiario==null && $importanciasegurada==0){
           $valoresembranco=1;          
       }
-      /*
-      echo "post";
-      echo "<br><br>";
-      print_r($_POST);
-      echo "<br><br>";
-      echo "get";
-      echo "<br><br>";
-      print_r($_GET);die;
-       * 
-       */
+      if(strlen($num_sinistro)==16){
+          $sin=OdbcValidator::mask($num_sinistro,"####.##.##.########");
+      }else{
+          $sin=$num_sinistro;
+      }
       
     if($busca=='beneficiario'){     
      if(preg_match('/^[a-z,A-Z]/', $beneficiario)){
@@ -49,15 +41,14 @@
       $odbcs=$dao->busca4($search);
      }else{
       if(substr($num_sinistro,9,1)==2){
-       $search->setendosso($num_sinistro);
+       $search->setendosso($sin);
       }else{      
-       $search->setsinistro($num_sinistro);
+       $search->setsinistro($sin);
       }
      }
       $search->setvlindeniza($vlindeniza);
       
       $odbcs=$dao->busca4($search);
-      //print_r($odbcs);
       echo "<div class='busca_tabela'>";
       echo "<table border=1 align=center cellspacing=0 spanspacing=0 class=\"tabela\">";
     if(@!$idbenefi){
@@ -176,8 +167,6 @@
        echo "Voltar";
        echo "</button>";
        echo "</div>";
-       //echo "<br><br>";
-       //print_r ($odbcs);
       }
       echo "</table>";
       echo "</div>";

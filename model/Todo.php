@@ -181,7 +181,7 @@ final class Todo {
         return $this->OBS;
     }
     public function setOBS($OBS){
-        $this->titulo = $OBS;
+        $this->OBS = $OBS;
     }
     public function getSEGURADOS() {
         return $this->SEGURADOS;

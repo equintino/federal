@@ -7,6 +7,11 @@
    include '../model/Odbc.php';
    include '../mapping/OdbcMapper.php';
    include '../validation/OdbcValidator.php';
+   include '../dao/TodoDao.php';
+   include '../dao/TodoSearchCriteria.php';
+   include '../model/Todo.php';
+   include '../mapping/TodoMapper.php';
+   include '../validation/TodoValidator.php';
    
    @$act=$_GET['act'];
    @$busca=$_GET['busca'];
@@ -151,9 +156,12 @@
       //echo "estou aqui";
       echo "<div class=busca>";
     include_once 'busca.php';
-   //if($abrir==1){
+    if ($busca=='judiciais'){
+        header('Location:carregando.php?act=judiciais&num_sinistro='.$num_sinistro.'&sinistrado='.$sinistrado.'');
+    }
+   if($abrir==1){
        include_once 'judiciais.php';
-   //}
+   }
        echo "</div>";
       die;
   }
