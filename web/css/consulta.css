@@ -117,6 +117,9 @@ button{
 .judiciais{
     #margin: auto;
 }
+#total{
+    font-family: cursive;
+}
 .progresso {
     display: none;
     position: fixed;

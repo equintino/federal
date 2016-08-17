@@ -40,6 +40,8 @@
     <input type="text" attrname="telephone1" name="num_sinistro" maxlength="19" placeholder="n&uacute;mero de sinistro" autofocus="">
     ou
     <input type="text" name="sinistrado" placeholder="nome do sinistrado" >
+    ou
+    <input type="text" name="processo" placeholder="processo judicial" >
     <script src='js/vanilla-masker.min.js'></script>
     <script src="js/index.js"></script>
     <button onclick="submit" title="Buscar" ><img src="img/lupa.png" height="12px" /></button>

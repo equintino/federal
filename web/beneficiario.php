@@ -1,4 +1,4 @@
-<?php
+<?php 
       @$num_sinistro=$_GET['num_sinistro'];
       if(@!$num_sinistro){
        @$num_sinistro=$_POST['num_sinistro'];
@@ -25,6 +25,7 @@
       if(isset($pagAtual)){
          $search->setidbenefi($pagAtual); 
       }
+      //print_r($pagAtual);die;
       
       if($num_sinistro==null && $beneficiario==null && $importanciasegurada==0){
           $valoresembranco=1;          
@@ -82,12 +83,16 @@
       //die;
         /// paginação ///
        $totalPag=number_format(($dao->totalLinhas($search,'Beneficiarios')/14),'0','','.');
-       //print_r($totalPag);
+       //print_r($totalPag);die;
        //print_r($search);
        $pagAtual=  number_format(@$item->getidbenefi()/14,'0','','.');
-       //print_r($pagAtual);
+       //print_r($pagAtual);die;
        //echo "<br><br>";
+       //var_dump(number_format($pagAtual,'0','','.') == $totalPag || $pag_ == $totalPag);
+       //echo "<br>";
        //print_r($pag_);
+       //echo "<br>";
+       //print_r($totalPag);die;
        
         
        if($pagAtual==1 || $pag_==1){
@@ -95,14 +100,14 @@
        }else{
            $botao="<button onclick=history.go(-1); >";
        }
-       if(number_format($pagAtual,'0','','.') == number_format($totalPag,'0','','.') || $pag_ == $totalPag){
+       if(number_format($pagAtual,'0','','.') == $totalPag || $pag_ == $totalPag){
            $botao_="<button disabled>";
        }else{
            $botao_="<a href=carregando.php?act=beneficiario&busca=beneficiario&beneficiario=$beneficiario&vlindeniza=$vlindeniza&num_sinistro=$num_sinistro&pagAtual=".$item->getidbenefi()."&pag_=".($pag_+1)." > <button>";
        }
        
        if(@$valoresembranco==1){
-            echo "<tr><th colspan=4 align=center>".$botao." < </button> $pag_ de ".number_format($totalPag,'0','','.')." ".$botao_." > </button></a></th></tr>";
+            echo "<tr><th colspan=4 align=center>".$botao." < </button> $pag_ de ".$totalPag." ".$botao_." > </button></a></th></tr>";
        }else{
         $ultimaLinha=$item->getidbenefi();
            if(number_format($totalPag,'0','','.') > 0 ){

@@ -339,7 +339,7 @@ final class OdbcDao {
         return @$result;
     }
     public function busca4(OdbcSearchCriteria $search = null){
-        //print_r($this->getBuscaSql4($search));
+        //print_r($this->getBuscaSql4($search));die;
         $result=array();
         $busca = $this->query($this->getBuscaSql4($search));
         //print_r($busca);die;

@@ -26,6 +26,10 @@
       @$beneficiario=$_POST['beneficiario']; 
    }
    @$menu=$_GET['menu'];
+   @$processo=$_POST['processo'];
+   if(@!$processo){
+       @$processo=$_GET['processo'];
+   }
    
    if(@$menu=1){
        /*
@@ -67,7 +71,7 @@
         <a href="teste3.php?act=informacoes"><li>IMFORMA&Ccedil;&Otilde;ES</li></a>
         <a href="teste3.php?act=divergente&busca=divergente&menu=1"><li>VALORES DIVERGENTES</li></a>
         <a href="teste3.php?act=relatorio"><li>RELAT&Oacute;RIOS</li></a>
-        <a href="teste3.php?act=judiciais"><li>PROCESSOS JUDICIAIS</li></a>
+        <!--<a href="teste3.php?act=judiciais"><li>PROC. JUDICIAIS</li></a>-->
     </ul>
 </div>
 <?php
@@ -157,7 +161,7 @@
       echo "<div class=busca>";
     include_once 'busca.php';
     if ($busca=='judiciais'){
-        header('Location:carregando.php?act=judiciais&num_sinistro='.$num_sinistro.'&sinistrado='.$sinistrado.'');
+        header('Location:carregando.php?act=judiciais&num_sinistro='.$num_sinistro.'&sinistrado='.$sinistrado.'&processo='.$processo.'');
     }
    if($abrir==1){
        include_once 'judiciais.php';

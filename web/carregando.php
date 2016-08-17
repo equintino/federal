@@ -12,6 +12,7 @@
  @$importanciasegurada=$_GET['importanciasegurada'];
  @$beneficiario=$_GET['beneficiario'];
  @$vlindeniza=$_GET['vlindeniza'];
+ @$processo=$_GET['processo'];
  
  //print_r($_GET);die;
  
@@ -44,7 +45,7 @@
         <a href="teste3.php?act=informacoes"><li>IMFORMA&Ccedil;&Otilde;ES</li></a>
         <a href="teste3.php?act=divergente"><li>VALORES DIVERGENTES</li></a>
         <a href="teste3.php?act=relatorio"><li>RELAT&Oacute;RIOS</li></a>
-        <a href="teste3.php?act=judiciais"><li>PROCESSOS JUDICIAIS</li></a>
+        <!--<a href="teste3.php?act=judiciais"><li>PROC. JUDICIAIS</li></a>-->
  </ul>
 </div>
 <?php
@@ -79,6 +80,6 @@
   }
  }
  if($act=='judiciais'){
-  redirecionar('1','teste3.php?act=judiciais&abrir=1&num_sinistro='.$num_sinistro.'&sinistrado='.$sinistrado.'&pagAtual='.$pagAtual.'&pag_='.$pag_.'','AGUARDE'); 
+  redirecionar('5','teste3.php?act=judiciais&abrir=1&num_sinistro='.$num_sinistro.'&sinistrado='.$sinistrado.'&pagAtual='.$pagAtual.'&pag_='.$pag_.'&processo='.$processo.'','AGUARDE'); 
  }
 ?>

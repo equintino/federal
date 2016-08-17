@@ -1,3 +1,9 @@
+<script>
+    function total($x){
+        var x='Total de processos encontrados ('+$x+')';
+        document.getElementById('total').innerHTML=x;
+    }
+</script>
 <?php
 header('Content-type: text/html; charset=UTF-8');
  /*
@@ -11,6 +17,7 @@ header('Content-type: text/html; charset=UTF-8');
     @fclose($handle);
  
  */   
+    echo "<div id=total ></div>";
     $Tododao=new TodoDao();
     $Todosearch=new TodoSearchCriteria;
     $Todo=new Todo();
@@ -24,9 +31,14 @@ header('Content-type: text/html; charset=UTF-8');
     if(@!$sinistrado){
        @$sinistrado=$_GET['sinistrado']; 
     }
+    @$processo=$_POST['processo'];
+    if(@!$processo){
+       @$processo=$_GET['processo']; 
+    }
         
     $Todosearch->setSINISTRO($sinistro);
     $Todosearch->setSEGURADOS($sinistrado);
+    $Todosearch->setN_PROC($processo);
     
     $todos=$Tododao->find($Todosearch);
     
@@ -62,7 +74,7 @@ header('Content-type: text/html; charset=UTF-8');
     //print_r($todos);
     //echo "<br><br>";
     //print_r($odbcs);die;
-    
+    $x=0;
     if($todos){
         echo "<table border=1 align=center cellspacing=0 spanspacing=0 class=\"tabela\">";
         echo "<tr><th>SINISTRO</th><th>PROCESSO</th><th>PROC. ANTIGO</th><th>SEGURADO</th><th>SINISTRADO</th><th>OBS.</th></tr>";
@@ -87,11 +99,14 @@ header('Content-type: text/html; charset=UTF-8');
                     echo "</td><td>";
                     echo $item->getOBS();
                     echo "</td></tr>";
+                    $x++;
                 }
             }
         }
         echo "</table>";
     }
+    
+    echo "<script>total($x);</script>";
     //print_r($odbcs);
     //echo "<br><br>";
     //print_r($search);

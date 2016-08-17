@@ -19,13 +19,17 @@
     //echo "<br>";
     //echo $busca;
     //echo "<br>";
-    //var_dump($dao->listaCampo2($tabela1,$campo,$busca,$pagAtual));
-    if($dao->listaCampo2($tabela1,$campo,$busca,$pagAtual)){
+    //var_dump($dao->listaCampo($tabela2,$campo,$busca,$pagAtual));
+    if($dao->listaCampo2($tabela1,$campo,$busca,$pagAtual) || $dao->listaCampo($tabela2,$campo,$busca,$pagAtual)){
      $pesquisa=$dao->listaCampo2($tabela1,$campo,$busca,$pagAtual);
     }else{
      $busca=OdbcValidator::mask($cpf,"###.###.###-##");
      $pesquisa=$dao->listaCampo2($tabela1,$campo,$busca,$pagAtual);
     }
+    //echo $busca;
+    //echo "<br>";
+    //var_dump($dao->listaCampo2($tabela1,$campo,$busca,$pagAtual));
+    //print_r($pesquisa);die;
     echo "<div class=informacoes>";
     echo "<h3>SINISTRADO</h3>";
     echo "<div class=sinistrado >";

@@ -106,7 +106,11 @@ final class TodoDao {
         }
         
         $sql = 'SELECT * FROM processojudicial WHERE deleted = 0 ';
-        $orderBy = ' SINISTRO';
+        if($search->getSINISTRO()){
+            $orderBy = ' SINISTRO';
+        }elseif($search->getN_PROC()){
+            $orderBy = ' N_PROC';
+        }
         if ($search !== null) {
             if ($search->getStatus() !== null) {
                 $sql .= 'AND status = ' . $this->getDb()->quote($search->getStatus());
@@ -125,10 +129,14 @@ final class TodoDao {
             }
             if($search->getSEGURADOS()){
                 $sql .= " and SEGURADOS like '%".$search->getSEGURADOS()."%'";
+            }elseif($search->getN_PROC()){
+                $sql .= " and N_PROC like '%".$search->getN_PROC()."%'";
             }
            $sql .= " and SINISTRO like '%".$sinistro."%'";//'0135.93.03.00003108'";
         }
-        $sql .= ' ORDER BY ' . $orderBy;
+        if(@$orderBy){
+            $sql .= ' ORDER BY ' . $orderBy;
+        }
         //$sql = "SELECT * FROM processojudicial WHERE SINISTRO like '%0135.93.03.00003108%'";
         //$sql = "SELECT * FROM processojudicial WHERE SINISTRO like '%".$search->getSINISTRO()."%'";
         //print_r($sql);die;
