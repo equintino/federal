@@ -123,17 +123,18 @@
        echo "<div class=endereco>";
        echo "<br><br>";
        foreach($odbcs as $item){
+        $cpf1=OdbcValidator::removePonto($item->getcpf());
          echo "<label>Nome: </label>";
          echo $item->getnome();
          echo "<br>";
          echo "<label>Cpf: </label>";
-            if(strlen($item->getcpf()) != 11){
+            if(strlen($cpf1) != 11){
                 $cor='color=red';
             }else{
                 $cor='color=black';
             }
          echo "<font $cor>";
-         echo OdbcValidator::mask($item->getcpf(),'###.###.###-##');
+         echo OdbcValidator::mask($cpf1,'###.###.###-##');
          echo "</font>";
          echo "<br>";
          echo "<label>Tel: </label>";

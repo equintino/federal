@@ -18,6 +18,7 @@
     echo "<div class=sinistrado >";
     if($dao->listaCampo2($tabela1,$campo,$busca,$pagAtual)){
         foreach($dao->listaCampo2($tabela1,$campo,$busca,$pagAtual) as $item){
+            $cpf1=OdbcValidator::removePonto($item['CPF']);
             echo "<label>Certificado: </label>";
             echo $item['ENDOSSO'];
             echo "<br>";
@@ -28,13 +29,13 @@
             echo $item['TITULAR'];
             echo "<br>";
             echo "<label>Cpf: </label>";
-                if(strlen($item['CPF'])!=11){
+                if(strlen($cpf1) != 11){
                     $cor="color=red";
                 }else{
                     $cor="color=black";
                 }
             echo "<font $cor>";
-            echo OdbcValidator::mask($item['CPF'],'###.###.###-##');
+            echo OdbcValidator::mask($cpf1,'###.###.###-##');
             echo "</font>";
             echo "<br><br>";
             $certificado_[]= $item['ENDOSSO'];
@@ -64,6 +65,7 @@
    for($x=0;$x<count(@$certificado_);$x++){
     if($dao->listaCampo($tabela2,$campo,$certificado_[$x],$pagAtual)){
         foreach($dao->listaCampo($tabela2,$campo,$certificado_[$x],$pagAtual) as $item){
+            $cpf2=  OdbcValidator::removePonto($item['cpf']);
             echo "<label>Certificado: </label>";
             echo $item['endosso'];
             echo "<br>";
@@ -80,13 +82,14 @@
             echo $item['nome'];
             echo "<br>";
             echo "<label>Cpf: </label>";
-                if(strlen($item['cpf'])!=11){
+                if(strlen($cpf2)!=11){
+            //print_r(strlen($item['cpf']));
                     $cor="color=red";
                 }else{
                     $cor="color=black";
                 }
             echo "<font $cor>";
-            echo OdbcValidator::mask($item['cpf'],'###.###.###-##');
+            echo OdbcValidator::mask($cpf2,'###.###.###-##');
             echo "</font>";
             echo "<br><br>";
         }
@@ -96,6 +99,7 @@
     }else{
     if($dao->listaCampo4($tabela2,$campo,$busca,$pagAtual)){
         foreach($dao->listaCampo4($tabela2,$campo,$busca,$pagAtual) as $item){
+         $cpf3=OdbcValidator::removePonto($item['cpf']);
             echo "<i>Certificado: </i>";
             echo $item['endosso'];
             echo "<br>";
@@ -112,7 +116,7 @@
             echo $item['nome'];
             echo "<br>";
             echo "<i>Cpf: </i>";
-            echo OdbcValidator::mask($item['cpf'],'###.###.###-##');
+            echo OdbcValidator::mask($cpf3,'###.###.###-##');
             echo "<br><br>";
         }
         echo "</div>";
