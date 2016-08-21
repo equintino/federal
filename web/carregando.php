@@ -5,6 +5,7 @@
  @$idtitular__=$_GET['idtitular__'];
  @$pagAtual=$_GET['pagAtual'];
  @$pag_=$_GET['pag_'];
+ @$x=$_GET['x'];
  
  
  @$num_sinistro=$_GET['num_sinistro'];
@@ -60,7 +61,7 @@
   redirecionar('0.01','teste3.php?act=relatorio&abrir=1','AGUARDE'); 
  }
  if($act=='divergente'){ 
-  redirecionar('1','teste3.php?act=divergente&abrir=1&idtitular__='.$idtitular__.'&pagAtual='.$pagAtual.'','AGUARDE'); 
+  redirecionar('1','teste3.php?act=divergente&busca=cerregando&abrir=1&idtitular__='.$idtitular__.'&pagAtual='.$pagAtual.'&x='.$x.'','AGUARDE'); 
  }
  if($act=='beneficiario'){
      //print_r($_GET);die;

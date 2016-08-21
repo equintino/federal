@@ -7,34 +7,23 @@
         $campo='endosso';
         $busca=$_GET['certificado'];
         $certificado=$busca;
+        $busca=OdbcValidator::removePonto($busca);
+        $busca=OdbcValidator::mask($busca,"####.##.##.########");
     }elseif($_GET['cpf']){
         $campo='cpf';
-        //echo $_GET['cpf'];
         $busca=OdbcValidator::removePonto($_GET['cpf']);
-        //echo $busca;
         $cpf=$busca;
     }
     
-    //echo $busca;
-    //echo "<br>";
-    //echo $busca;
-    //echo "<br>";
-    //var_dump($dao->listaCampo($tabela2,$campo,$busca,$pagAtual));
     if($dao->listaCampo2($tabela1,$campo,$busca,$pagAtual) || $dao->listaCampo($tabela2,$campo,$busca,$pagAtual)){
      $pesquisa=$dao->listaCampo2($tabela1,$campo,$busca,$pagAtual);
     }else{
      $busca=OdbcValidator::mask($cpf,"###.###.###-##");
      $pesquisa=$dao->listaCampo2($tabela1,$campo,$busca,$pagAtual);
     }
-    //echo $busca;
-    //echo "<br>";
-    //var_dump($dao->listaCampo2($tabela1,$campo,$busca,$pagAtual));
-    //print_r($pesquisa);die;
     echo "<div class=informacoes>";
     echo "<h3>SINISTRADO</h3>";
     echo "<div class=sinistrado >";
-   // print_r($dao->listaCampo2($tabela1,$campo,$busca,$pagAtual));
-    //echo "pesquisa -> $pesquisa";
     if($pesquisa){
         foreach($pesquisa as $item){
             $cpf1=OdbcValidator::removePonto($item['CPF']);

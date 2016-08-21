@@ -34,6 +34,7 @@ final class Odbc {
     private $exclui;
     private $centavos;
     private $certificado;
+    private $id;
 
     // colunas tabela Beneficiarios //
     private $codigo;
@@ -124,14 +125,15 @@ final class Odbc {
     /**
      * @return DateTime
      */
-  /*
-    public function getDueOn() {
-        return $this->dueOn;
+    public function getId() {
+        return $this->id;
     }
 
-    public function setDueOn(DateTime $dueOn) {
-        $this->dueOn = $dueOn;
+    public function setId($id) {
+        $this->id = $id;
     }
+   
+   /*
     public function getEliminacao() {
         return $this->eliminacao;
     }

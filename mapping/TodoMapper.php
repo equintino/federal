@@ -29,6 +29,9 @@ final class TodoMapper {
         if (array_key_exists('id', $properties)) {
             $todo->setId($properties['id']);
         }
+        if (array_key_exists('idtitular', $properties)) {
+            $todo->setidtitular($properties['idtitular']);
+        }
         if (array_key_exists('priority', $properties)) {
             $todo->setPriority($properties['priority']);
         }
@@ -142,6 +145,12 @@ final class TodoMapper {
         }
         if (array_key_exists('TPACAO', $properties)) {
             $todo->setTPACAO($properties['TPACAO']);
+        }
+        if (array_key_exists('vlindeniza', $properties)) {
+            $todo->setvlindeniza($properties['vlindeniza']);
+        }
+        if (array_key_exists('IMPORTANCIA_SEGURADA', $properties)) {
+            $todo->setIMPORTANCIA_SEGURADA($properties['IMPORTANCIA_SEGURADA']);
         }
     }
     private static function createDateTime($input) {

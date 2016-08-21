@@ -259,13 +259,13 @@ final class OdbcDao {
         return @$result;
     }
     public function buscaSinistrado(OdbcSearchCriteria $search = null){
+        $odbc = new Odbc();
         $result=array();
         $sql="SELECT * FROM sinipend WHERE idtitular=".$search->getidtitular()." ORDER BY idtitular";
         if($this->query($sql)){
         $busca = $this->query($sql);
         if(@$busca){
          foreach ($busca as $key => $row) {
-            $odbc = new Odbc();
             OdbcMapper::map($odbc, $row);
             $result[$odbc->getidtitular()] = $odbc;
          }
@@ -277,6 +277,7 @@ final class OdbcDao {
     }
     public function busca(OdbcSearchCriteria $search = null){
         $result=array();
+        //echo "estou aqui";
         //print_r($search);die;
         //print_r($this->getBuscaSql($search));
         //$busca = $this->query("select * from Beneficiarios where sinistro='0153.93.03.00001654'");
@@ -291,8 +292,6 @@ final class OdbcDao {
             //print_r($result);
          }
          //die;
-        }else{
-         //echo "<p>*Nao foi encontrado nenhum registro</p>"; 
         }
             //print_r($odbc);die;
         //print_r($result);die;
@@ -767,5 +766,16 @@ final class OdbcDao {
             unset($params[':abertura']);
         }
         return $params;
+    }
+    private function execute($sql, Odbc $odbc) {
+        $statement = $this->getDb()->prepare($sql);
+        $this->executeStatement($statement, $this->getParams($odbc));
+        if (!$todo->getId()) {
+            return $this->findById($this->getDb()->lastInsertId());
+        }
+        if (!$statement->rowCount()) {
+            throw new NotFoundException('Processo com ID "' . $odbc->getId() . '" nao existe.');
+        }
+        return $odbc;
     }
 }

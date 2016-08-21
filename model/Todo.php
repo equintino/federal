@@ -59,6 +59,9 @@ final class Todo {
     private $VLPEDIDO;
     private $DTPEDIDO;
     private $TPACAO;
+    private $vlindeniza;
+    private $IMPORTANCIA_SEGURADA;
+    private $idtitular;
     /**
      * Create new {@link Todo} with default properties set.
      */
@@ -104,6 +107,14 @@ final class Todo {
         }
         $this->id = (int) $id;
     }
+    
+    public function getidtitular() {
+        return $this->idtitular;
+    }
+    public function setidtitular($idtitular) {
+        $this->idtitular = (int) $idtitular;
+    }
+    
     public function getESI(){
         return $this->ESI;
     }
@@ -293,6 +304,19 @@ final class Todo {
     public function setTPACAO($TPACAO){
         $this->TPACAO = $TPACAO;
     }
+    public function getvlindeniza(){
+        return $this->vlindeniza;
+    }
+    public function setvlindeniza($vlindeniza){
+        $this->vlindeniza = $vlindeniza;
+    }
+    public function getIMPORTANCIA_SEGURADA(){
+        return $this->IMPORTANCIA_SEGURADA;
+    }
+    public function setIMPORTANCIA_SEGURADA($IMPORTANCIA_SEGURADA){
+        $this->IMPORTANCIA_SEGURADA = $IMPORTANCIA_SEGURADA;
+    }
+    
     public function getStatus() {
         return $this->status;
     }

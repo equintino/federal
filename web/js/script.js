@@ -6,6 +6,11 @@ $(document).ready(function() {
     initDeleteDialog();
 });
 
+function total($x){
+  var x='Total de processos encontrados ('+$x+')';
+  document.getElementById('total').innerHTML=x;
+}
+
 function initDatepicker() {
     $('.datepicker')
         .attr('readonly', 'readonly')

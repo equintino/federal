@@ -4,7 +4,7 @@
  * <p>
  * It is also a service, ideally, this class should be divided into DAO and Service.
  */
-final class TodoDao {
+final class TodoDao extends PDOStatement{
     /** @var PDO */
     private $db = null;
     public function __destruct() {
@@ -17,22 +17,33 @@ final class TodoDao {
      */
     public function find(TodoSearchCriteria $search = null) {
         $result = array();
-        //print_r($this->getFindSql($search));die;
+        //print_r($this->getFindSql($search));
+        //echo "<br><br>";
         foreach ($this->query($this->getFindSql($search)) as $row) {
             $todo = new Todo();
             TodoMapper::map($todo, $row);
             $result[$todo->getId()] = $todo;
         }
-        //print_r($result);die;
+        //print_r($result);
         return $result;
     }
     public function find2() {
+         //echo "estou aqui";
         foreach ($this->query($this->getFindSql2()) as $row) {
+        //print_r($row);
+        //echo "<br><br>";
+        //print_r($todo);
+        //echo "<br><br>";
             $todo = new Todo();
+            //print_r($todo);
+            //echo "<br><br>";
             TodoMapper::map($todo, $row);
-            $numero = $todo->getNumero();
+            //print_r($todo);
+            //echo "<br><br>";
+            $result[$todo->getId()] = $todo;
         }
-        return @$numero;
+        //print_r($result);
+        return @$result;
     }
 
     /**
@@ -44,6 +55,8 @@ final class TodoDao {
         if (!$row) {
             return null;
         }
+        //echo "estou aqui";
+        //print_r($row);die;
         $todo = new Todo();
         TodoMapper::map($todo, $row);
         return $todo;
@@ -59,6 +72,15 @@ final class TodoDao {
             return $this->insert($todo);
         }
         return $this->update($todo);
+    }
+    public function save2($todo) {
+     //die;
+            //var_dump(TodoMapper::map($todo, $todo));die;
+     //print_r($todo->getId());die;
+        if ($todo->getId() === null) {
+            return $this->insert2($todo);
+        }
+        //return $this->update2($todo);
     }
 
     /**
@@ -143,8 +165,9 @@ final class TodoDao {
         return $sql;
     }
     private function getFindSql2(TodoSearchCriteria $search = null) {
-        $sql = 'SELECT * FROM processojudicial WHERE 1';
-        $orderBy = 'id';
+        $sql = 'SELECT * FROM divergencia WHERE 1';
+        $orderBy = 'SINISTRO';
+        //echo $sql;
         if ($search !== null) {
             if ($search->getStatus() !== null) {
                 $sql .= 'AND status = ' . $this->getDb()->quote($search->getStatus());
@@ -172,6 +195,11 @@ final class TodoDao {
             INSERT INTO `processojudicial` (`ESI`, `ARQUIVO`, `AVISO`, `SINISTRO`, `PESSOA`, `CERTIFICADO`, `CPF`, `OBS`, `SEGURADOS`, `N_PROC`, `N_NATIGO`, `NATUREZA`, `PROCED`, `UF`, `CIDADE`, `FORO`, `N_VARA`, `VARA`, `CLIENTE`, `RECLAMANTE`, `FASE`, `TP_PROBA`, `PROVAVIL`, `VLPEDIDO`, `DTPEDIDO`, `TPACAO`, `NULL`, `deleted`, `id`, `priority`, `status`, `created_on`, `last_modified_on`) VALUES (:ESI, :ARQUIVO, :AVISO, :SINISTRO, :PESSOA, :CERTIFICADO, :CPF, :OBS, :SEGURADOS, :N_PROC, :N_NATIGO, :NATUREZA, :PROCED, :UF, :CIDADE, :FORO, :N_VARA, :VARA, :CLIENTE, :RECLAMANTE, :FASE, :TP_PROBA, :PROVAVIL, :VLPEDIDO, :DTPEDIDO, :TPACAO, :NULL, :deleted, :id, :priority, :status, :created_on, :last_modified_on)';
         return $this->execute($sql, $todo);
     }
+    private function insert2($todo) {
+        $sql = "INSERT INTO 'divergencia' (`id`,`SINISTRO`, `IMPORTANCIA_SEGURADA`, `vlindeniza`, `idtitular`) VALUES ('', :SINISTRO, :IMPORTANCIA_SEGURADA, :vlindeniza, :idtitular)";
+        //print_r($sql);die;
+        return $this->execute($sql, $todo);
+    }
     /**
      * @return Todo
      * @throws Exception
@@ -190,9 +218,13 @@ final class TodoDao {
      * @return Todo
      * @throws Exception
      */
-    private function execute($sql, Todo $todo) {
+    public function execute($sql,$todo) {
+        //print_r($todo);
+        //echo "<br><br>";
         $statement = $this->getDb()->prepare($sql);
+        //print_r($this->getParams($todo));die;
         $this->executeStatement($statement, $this->getParams($todo));
+        print_r($this->executeStatement($statement, $this->getParams($todo)));die;
         if (!$todo->getId()) {
             return $this->findById($this->getDb()->lastInsertId());
         }
@@ -202,7 +234,56 @@ final class TodoDao {
         return $todo;
     }
 
-    private function getParams(Todo $todo) {
+    private function getParams($todo) {
+        $params = array(
+            /*
+            ':ESI'=> $todo->getESI(),
+            ':ARQUIVO'=> $todo->getARQUIVO(),
+            ':AVISO'=> $todo->getAVISO(),
+             */
+            ':SINISTRO'=> $todo->getSINISTRO(),
+            /*
+            ':PESSOA'=> $todo->getPESSOA(),
+            ':CERTIFICADO'=> $todo->getCERTIFICADO(),
+            ':CPF'=> $todo->getCPF(),
+            ':OBS'=> $todo->getOBS(),
+            ':SEGURADOS'=> $todo->getSEGURADOS(),
+            ':N_PROC'=> $todo->getN_PROC(),
+            ':N_NATIGO'=> $todo->getN_NATIGO(),
+            ':NATUREZA'=> $todo->getNATUREZA(),
+            ':PROCED'=> $todo->getPROCED(),
+            ':UF'=> $todo->getUF(),
+            ':CIDADE'=> $todo->getCIDADE(),
+            ':FORO'=> $todo->getFORO(),
+            ':N_VARA'=> $todo->getN_VARA(),
+            ':VARA'=> $todo->getVARA(),
+            ':CLIENTE'=> $todo->getCLIENTE(),
+            ':RECLAMANTE'=> $todo->getRECLAMANTE(),
+            ':FASE'=> $todo->getFASE(),
+            ':TP_PROBA'=> $todo->getTP_PROBA(),
+            ':PROVAVIL'=> $todo->getPROVAVIL(),
+            ':VLPEDIDO'=> $todo->getVLPEDIDO(),
+            ':DTPEDIDO'=> $todo->getDTPEDIDO(),
+            ':TPACAO'=> $todo->getTPACAO(),
+            ':deleted'=> $todo->getdeleted(),
+             * 
+             */
+            //':id'=> $todo->getId(),
+            ':idtitular'=> $todo->getidtitular(),
+            //':priority'=> $todo->getPriority(),
+            //':status'=> $todo->getStatus(),
+            ':vlindeniza'=>$todo->getvlindeniza(),
+            ':IMPORTANCIA_SEGURADA'=>$todo->getIMPORTANCIA_SEGURADA()
+            //':created_on' => self::formatDateTime($todo->getCreatedOn()),
+            //':last_modified_on' => self::formatDateTime($todo->getLastModifiedOn())
+        );
+        if ($todo->getId()) {
+            // unset created date, this one is never updated
+            unset($params[':created_on']);
+        }
+        return $params;
+    }
+    private function getParams2(Todo $todo) {
         $params = array(
             ':ESI'=> $todo->getESI(),
             ':ARQUIVO'=> $todo->getARQUIVO(),
@@ -230,11 +311,12 @@ final class TodoDao {
             ':VLPEDIDO'=> $todo->getVLPEDIDO(),
             ':DTPEDIDO'=> $todo->getDTPEDIDO(),
             ':TPACAO'=> $todo->getTPACAO(),
-            ':NULL'=> $todo->getNULL(),
             ':deleted'=> $todo->getdeleted(),
             ':id'=> $todo->getId(),
             ':priority'=> $todo->getPriority(),
             ':status'=> $todo->getStatus(),
+            ':vlindeniza'=>$todo->getvlindeniza(),
+            ':IMPORTANCIA_SEGURADA'=>$todo->getIMPORTANCIA_SEGURADA(),
             ':created_on' => self::formatDateTime($todo->getCreatedOn()),
             ':last_modified_on' => self::formatDateTime($todo->getLastModifiedOn())
         );
@@ -242,11 +324,11 @@ final class TodoDao {
             // unset created date, this one is never updated
             unset($params[':created_on']);
         }
-       // var_dump($params);
         return $params;
     }
 
     private function executeStatement(PDOStatement $statement, array $params) {
+     //print_r($statement->execute($params));die;
         if (!$statement->execute($params)) {
             self::throwDbError($this->getDb()->errorInfo());
         }
@@ -255,7 +337,7 @@ final class TodoDao {
     /**
      * @return PDOStatement
      */
-    private function query($sql) {
+    public function query($sql) {
         $statement = $this->getDb()->query($sql, PDO::FETCH_ASSOC);
         if ($statement === false) {
             self::throwDbError($this->getDb()->errorInfo());

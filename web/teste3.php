@@ -22,6 +22,7 @@
    @$abrir=$_GET['abrir'];
    @$pagAtual=$_GET['pagAtual'];
    @$beneficiario=$_GET['beneficiario'];
+   @$x=$_POST['x'];
    if(@!$beneficiario){
       @$beneficiario=$_POST['beneficiario']; 
    }
@@ -69,7 +70,7 @@
         <a href="teste3.php?act=sinistrado"><li>SINISTRADO</li></a>
         <a href="teste3.php?act=beneficiario"><li>BENEFICI&Aacute;RIOS</li></a>
         <a href="teste3.php?act=informacoes"><li>IMFORMA&Ccedil;&Otilde;ES</li></a>
-        <a href="teste3.php?act=divergente&busca=divergente&menu=1"><li>VALORES DIVERGENTES</li></a>
+        <a href="teste3.php?act=divergente&menu=1"><li>VALORES DIVERGENTES</li></a>
         <a href="teste3.php?act=relatorio"><li>RELAT&Oacute;RIOS</li></a>
         <!--<a href="teste3.php?act=judiciais"><li>PROC. JUDICIAIS</li></a>-->
     </ul>
@@ -118,7 +119,10 @@
   }
   if($act=='divergente'){
       echo "<div class=busca>";
-      include_once 'busca.php';
+      echo "<div class=\"titulo\">VALORES DIVERGENTES</div>";
+      if(@!$busca){
+       include_once 'busca.php';
+      }
    if(array_key_exists('sucursal',$_POST)){
     $sucursal=$_POST['sucursal'];
    }
@@ -126,7 +130,8 @@
     $ramo=$_POST['ramo'];
    }
    if ($busca=='divergente'){
-    header('Location:carregando.php?act=divergente&sucursal='.$sucursal.'&ramo='.$ramo.' ');
+    //print_r($_POST);die;
+    header('Location:carregando.php?act=divergente&sucursal='.$sucursal.'&ramo='.$ramo.'&x='.$x.'');
    }
    if($abrir==1){
        include_once 'divergente.php';
