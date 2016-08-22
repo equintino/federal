@@ -9,7 +9,6 @@
 }
 </script>
 <?php
-          
           $todo=new Todo();
           $tododao=new TodoDao();
           
@@ -26,19 +25,12 @@
           }
           @$pagAtual=$_GET['pagAtual'];
           
-          //print_r($_GET);die;
-          //print_r($idtitular__);
           if(@!$idtitular__){
             $idtitular__=1;
             $seguencia[]=$idtitular__;
-            //echo "passei aqui<br>";
-            //print_r($dao->ultimoSinistrado());
             foreach($dao->ultimoSinistrado() as $id);
              $ultimoSinistrado=$id->getidtitular();
-             //echo $id->getidtitular();
              setcookie('ultimoSinistrado',$ultimoSinistrado);
-            //echo  "<script>createCookie('ultimoSinistrado',$ultimoSinistrado)</script>";
-            //}
           }
           if(@!$pagAtual){
             @$pagAtual=1;
@@ -53,41 +45,21 @@
           $x=0;
           $y=0;
           $sinistro_ant=null;
-          //print_r($dao->ultimoSinistrado());
-          //var_dump(isset($ultimoSinistrado));
-          /*
-          if(($pagAtual==1)){
-            foreach($dao->ultimoSinistrado() as $id){
-             $ultimoSinistrado=$id->getidtitular();
-            echo  "<script>createCookie('ultimoSinistrado',$ultimoSinistrado)</script>";
-            }
-          }
-           * 
-           */
-          //print_r($_COOKIE);
-          //print_r($_GET);
           echo "<div class=divergente>";
           echo "<table align=center border=1 cellspacing=0 >";
           echo "<tr><th>SINISTRO</th><th>VL. SEGURADO</th><th>VL. A INDENIZAR</th></tr>";
           $totalSegurada=0;
           $totalparaIndenizar=0;
           if(@$tipoPesquisa != 'total'){
-           //echo "$tipoPesquisa";
           while($divergente<14){
            $search->setidtitular($idtitular__);
            $daos=$dao->buscaSinistrado($search);
-           //print_r($daos);
            while($daos=='nulo'){
             $semsinistrado[]=$idtitular__;
             $idtitular__++;
             $search->setidtitular($idtitular__);
             $daos=$dao->buscaSinistrado($search);
-            //echo "<br>";
-            //print_r($daos);
            }
-           //echo "<br>";
-            //print_r($idtitular__);
-          //die;
             foreach($daos as $item1){
              $search->setsinistro($item1->getsinistro());
              set_time_limit(20);       
@@ -113,20 +85,20 @@
             }
            }
           }else{
-           //////////
+           ////////// lista banco mysql //////////
            $todos=$tododao->find2($search);
              $z=0;
              echo "<div id=total></div>";
           foreach($todos as $item1){
            echo "<div id=total></div>";
-                echo "<tr><td><a href='teste3.php?act=titular&sinistro=".$item1->getsinistro()."'>".$item1->getsinistro()."</a></td>";
+                echo "<tr><td><a href='teste3.php?act=titular&sinistro=".$item1->getsinistro()."&impSegurada=".$item1->getIMPORTANCIA_SEGURADA()."&vlindeniza=".$item1->getvlindeniza()."&id=".$item1->getid()."'>".$item1->getsinistro()."</a></td>";
                 echo "<td align=right>".@number_format($item1->getIMPORTANCIA_SEGURADA(),2,',','.')."</td>";
                 echo "<td align=right>".number_format($item1->getvlindeniza(),2,',','.')."</td></tr>";
                 $z++;
              }
              echo "<script>total($z);</script>";
            die;
-           //////////
+           ////////// fim lista banco mysql ///////
            
            
                 $arq="arquivos/divergencia.csv";
@@ -164,35 +136,9 @@
                 @$idtitular__++;
                 $seguencia[]=$idtitular__;
                 TodoMapper::map($todo, array('vlindeniza'=>$indenizaOld,'IMPORTANCIA_SEGURADA'=>$item1->getIMPORTANCIA_SEGURADA(),'SINISTRO'=>$item1->getsinistro(),'idtitular'=>$item1->getidtitular()));
-                             
                 
-                //echo "<pre>";
-                //print_r($todos);
-                //echo "</pre>";
-                //echo "<br><br>";
-                //print_r(get_class_methods($tododao));
-                //echo "<br><br>";
-                //$pdo=new PDO();
-                //$dsn = 'mysql:host=localhost;dbname=sinistro;charset=utf8';
-                //$user='root';
-                //$password='';        
-                //echo $dsn;
-                /*
-                try {
-                 $dbh = new PDO($dsn, $user, $password);
-                } catch (PDOException $e) {
-                  echo 'Connection failed: ' . $e->getMessage();
-                }
-                print_r(get_class_methods($dbh));
-                echo "<br><br>";
-                print_r(get_class_vars(get_class($tododao)));
-                echo "<br><br>";
-                var_dump(get_object_vars($todo));
-                 * 
-                 */
                 $texto="\r\n".$item1->getsinistro().";".$item1->getIMPORTANCIA_SEGURADA().";".$indenizaOld.";".$item1->getidtitular().";$divergente";
                 $escreve = fwrite($fp, $texto);
-                //fclose($fp);die;
              }             
                $idtitular__++;
            }

@@ -1,28 +1,20 @@
 <?php
-
    @$act=$_GET['act'];
    @$sinistro=$_GET['sinistro'];
-   //$sinistro='0126.93.03.0000103';
+   @$impSegurada=$_GET['impSegurada'];
+   @$vlindeniza=$_GET['vlindeniza'];
+   @$id=$_GET['id'];
      
      if($act=='titular'){
-        $dao=new OdbcDao();
-        $odbc=new Odbc();
-        $search=new OdbcSearchCriteria();
         $search->setsinistro($sinistro);
         $odbcs=$dao->busca2($search);
-        
-        //echo $sinistro;
-        //echo "<br>";
-        //print_r($odbcs);
-        
+                
         /// somando os valores indenizados ///
         $indenizacao=0;
         $beneficiarios=$dao->busca($search);
         foreach($beneficiarios as $valores){
             $indenizacao=$indenizacao+($valores->getvlindeniza());
         }
-        $totalaindenizar=$indenizacao;
-     
         echo "<br>";
       echo "<div class='busca_tabela'>";
       echo "<table border=1 align=center cellspacing=0 spanspacing=0 class=\"tabela\">";
@@ -36,15 +28,38 @@
        echo $item->getTITULAR();
        echo "</td><td align=right>";
        echo number_format($item->getIMPORTANCIA_SEGURADA(),2,',','.');
-       if(number_format($item->getIMPORTANCIA_SEGURADA(),2,',','.') != number_format($totalaindenizar,2,',','.')){        
+       if(number_format($item->getIMPORTANCIA_SEGURADA(),2,',','.') != number_format($indenizacao,2,',','.')){        
           echo "</td><td class=valordiferente align=right>";
        }else{
           echo "</td><td align=right>";      
        }
-       echo number_format($totalaindenizar,2,',','.');
+       echo number_format($indenizacao,2,',','.');
        echo "</td></tr>";
      }
       echo "</table>";
+            
+      //// Atualizando a tabela divergencia ////
+      if($impSegurada != $item->getIMPORTANCIA_SEGURADA() || $vlindeniza != $indenizacao){
+       echo "<br>";
+       echo "Valores antigos = $impSegurada e $vlindeniza";
+       echo "<br>";
+       echo "Novos valores = ".$item->getIMPORTANCIA_SEGURADA()." e $indenizacao";
+      
+       $Tododao=new TodoDao();
+       $todo=new Todo();
+       
+       $todo->setId($id);
+       $todo->setIMPORTANCIA_SEGURADA($item->getIMPORTANCIA_SEGURADA());
+       $todo->setvlindeniza($indenizacao);
+       
+       $Tododao->save($todo);
+       
+       print_r(get_class_methods($Tododao));
+       echo "<br>";
+       print_r($Tododao);
+      }
+      //// Fim atualizacao ////
+      
       echo "<button class='voltar' onclick=history.go(-1); >VOLTAR</button>";
       echo "</div>";
       die;
