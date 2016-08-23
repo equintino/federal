@@ -44,11 +44,16 @@
                         $Tododao=new TodoDao();
                         $Todosearch=new TodoSearchCriteria();
                         $Todosearch->setSINISTRO($item['sinistro']);
+                        
                         //print_r($Todosearch);die;
-                        $todos=$Tododao->find($Todosearch);
-                        if($todos){
+                        
+                        //$todos=$Tododao->find($Todosearch);
+                        
+                        //print_r($todos);die;
+                        
+                        if(@$todos){
                          foreach ($todos as $sin){
-                           $sinJud[]=$sin->getSINISTRO();
+                           //$sinJud[]=$sin->getSINISTRO();
                          }
                         }
                     }
@@ -86,7 +91,7 @@
         echo "</div>";
         echo "<script>total($linha_vazia)</script>";
         $campo='sinistro';
-        $processos=count($sinJud);
+        $processos=count(@$sinJud);
           echo '<table align=center border=1 cellspacing=0 class="resumo">';
           echo '<th colspan=3>RESUMO</th>';
           echo '<tr><th>SINISTROS</th><th>BENEFICI&Aacute;RIOS</th><th>TOTAL A INDENIZAR</th></tr>';

@@ -1,5 +1,6 @@
 <?php
-final class TodoDao extends PDOStatement{
+final class TodoDao {
+    //extends PDOStatement
     /** @var PDO */
     private $db = null;
     public function __destruct() {
@@ -8,11 +9,14 @@ final class TodoDao extends PDOStatement{
     }
     public function find(TodoSearchCriteria $search = null) {
         $result = array();
+        //print_r($search);die;
         foreach ($this->query($this->getFindSql($search)) as $row) {
             $todo = new Todo();
+            //print_r($todo);
             TodoMapper::map($todo, $row);
             $result[$todo->getId()] = $todo;
         }
+        //print_r($result);
         return $result;
     }
     public function find2() {

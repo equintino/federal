@@ -37,9 +37,18 @@
        echo "</td></tr>";
      }
       echo "</table>";
+      /*
+          echo "impSegurada -> ".number_format($impSegurada,'2',',','.')." != ";
+          echo number_format($item->getIMPORTANCIA_SEGURADA(),'2',',','.')." OU ";
+          echo "vlindeniza -> ". number_format($vlindeniza,'2',',','.')." != ".number_format($indenizacao,'2',',','.')."";
+          
+       * 
+       */
+          //echo "passei aqui";
             
       //// Atualizando a tabela divergencia ////
-      if($impSegurada != $item->getIMPORTANCIA_SEGURADA() || $vlindeniza != $indenizacao){
+      if(number_format($impSegurada,'2',',','.') != number_format($item->getIMPORTANCIA_SEGURADA(),'2',',','.') || number_format($vlindeniza,'2',',','.') != number_format($indenizacao,'2',',','.')){
+          //echo "estou aqui";die;
        //echo "<br>";
        //echo "Valores antigos = $impSegurada e $vlindeniza";
        //echo "<br>";
@@ -52,7 +61,7 @@
        $todo->setIMPORTANCIA_SEGURADA($item->getIMPORTANCIA_SEGURADA());
        $todo->setvlindeniza($indenizacao);
        
-       if($item->getIMPORTANCIA_SEGURADA() == $indenizacao){
+       if(number_format($item->getIMPORTANCIA_SEGURADA(),'2',',','.') == number_format($indenizacao,'2',',','.')){
         $Tododao->delete($id);
        }else{
         $Tododao->save($todo);
