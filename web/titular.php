@@ -40,10 +40,10 @@
             
       //// Atualizando a tabela divergencia ////
       if($impSegurada != $item->getIMPORTANCIA_SEGURADA() || $vlindeniza != $indenizacao){
-       echo "<br>";
-       echo "Valores antigos = $impSegurada e $vlindeniza";
-       echo "<br>";
-       echo "Novos valores = ".$item->getIMPORTANCIA_SEGURADA()." e $indenizacao";
+       //echo "<br>";
+       //echo "Valores antigos = $impSegurada e $vlindeniza";
+       //echo "<br>";
+       //echo "Novos valores = ".$item->getIMPORTANCIA_SEGURADA()." e $indenizacao";
       
        $Tododao=new TodoDao();
        $todo=new Todo();
@@ -52,15 +52,25 @@
        $todo->setIMPORTANCIA_SEGURADA($item->getIMPORTANCIA_SEGURADA());
        $todo->setvlindeniza($indenizacao);
        
-       $Tododao->save($todo);
+       if($item->getIMPORTANCIA_SEGURADA() == $indenizacao){
+        $Tododao->delete($id);
+       }else{
+        $Tododao->save($todo);
+       }
        
-       print_r(get_class_methods($Tododao));
-       echo "<br>";
-       print_r($Tododao);
+       //print_r(get_class_methods($Tododao));
+       //echo "<br>";
+       //print_r($Tododao);
       }
       //// Fim atualizacao ////
-      
+      //echo $id;die;
+      //print_r($_GET);die;
+      if($id){
+       //echo "estou aqui";
+       echo "<button class='voltar' onclick=location.assign('teste3.php?act=divergente&busca=voltar&&abrir=1&x=total')>VOLTAR</button>";
+      }else{
       echo "<button class='voltar' onclick=history.go(-1); >VOLTAR</button>";
+      }
       echo "</div>";
       die;
      }

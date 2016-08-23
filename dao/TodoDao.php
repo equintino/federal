@@ -50,17 +50,18 @@ final class TodoDao extends PDOStatement{
     }
     public function delete($id) {
         $sql = '
-            UPDATE todo SET
-                last_modified_on = :last_modified_on,
-                deleted = :deleted
+          delete from divergencia
             WHERE
                 id = :id';
+        //echo $sql;die;
+            /*UPDATE todo SET
+                last_modified_on = :last_modified_on,
+                deleted = :deleted*/
         $statement = $this->getDb()->prepare($sql);
         $this->executeStatement($statement, array(
-            ':last_modified_on' => self::formatDateTime(new DateTime(), new DateTimeZone('America/Sao_Paulo')),
-            ':deleted' => true,
-            ':id' => $id,
+            ':id' => $id
         ));
+        //':last_modified_on' => self::formatDateTime(new DateTime(), new DateTimeZone('America/Sao_Paulo')),':deleted' => true,
         return $statement->rowCount() == 1;
     }
     private function getDb() {
@@ -149,7 +150,7 @@ final class TodoDao extends PDOStatement{
     private function update(Todo $todo) {
         $todo->setLastModifiedOn(new DateTime(), new DateTimeZone('America/Sao_Paulo'));
         $sql = '
-            UPDATE todo SET
+            UPDATE divergencia SET
                 IMPORTANCIA_SEGURADA = :IMPORTANCIA_SEGURADA, vlindeniza = :vlindeniza
             WHERE
                 id = :id';
@@ -157,19 +158,20 @@ final class TodoDao extends PDOStatement{
     }
     public function execute($sql,$todo) {
         $statement = $this->getDb()->prepare($sql);
-        echo "<br>";
-        print_r($statement);
-        echo "<br>";
+        //echo "<br>";
+        //print_r($statement);
+        //echo "<br>";
         //print_r($this->getParams($todo));die;
-        print_r($statement, $this->getParams($todo));die;
+        //print_r($statement, $this->getParams($todo));die;
         $this->executeStatement($statement, $this->getParams($todo));
-        print_r($this->executeStatement($statement, $this->getParams($todo)));die;
+        //var_dump($this->executeStatement($statement, $this->getParams($todo)));die;
         if (!$todo->getId()) {
             return $this->findById($this->getDb()->lastInsertId());
         }
         if (!$statement->rowCount()) {
-            throw new NotFoundException('Processo com ID "' . $todo->getId() . '" nao existe.');
+            //throw new NotFoundException('Processo com ID "' . $todo->getId() . '" nao existe.');
         }
+        //print_r($todo);die;
         return $todo;
     }
 

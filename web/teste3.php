@@ -12,6 +12,7 @@
    include '../model/Todo.php';
    include '../mapping/TodoMapper.php';
    include '../validation/TodoValidator.php';
+   include '../exception/NotFoundException.php';
    
    @$act=$_GET['act'];
    @$busca=$_GET['busca'];

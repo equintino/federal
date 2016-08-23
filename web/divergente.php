@@ -85,6 +85,7 @@
             }
            }
           }else{
+           //print_r($_GET);die;
            ////////// lista banco mysql //////////
            $todos=$tododao->find2($search);
              $z=0;
