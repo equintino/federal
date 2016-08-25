@@ -9,7 +9,8 @@ final class TodoDao {
     }
     public function find(TodoSearchCriteria $search = null) {
         $result = array();
-        //print_r($search);die;
+        //print_r($search);
+        //print_r($this->getFindSql($search));die;
         foreach ($this->query($this->getFindSql($search)) as $row) {
             $todo = new Todo();
             //print_r($todo);
@@ -88,7 +89,8 @@ final class TodoDao {
             $sinistro=$search->getSINISTRO();
         }
         
-        $sql = 'SELECT * FROM processojudicial WHERE deleted = 0 ';
+        $sql = 'SELECT * FROM processojudicial WHERE 1';
+                // 'deleted = 0 ';
         if($search->getSINISTRO()){
             $orderBy = ' SINISTRO';
         }elseif($search->getN_PROC()){

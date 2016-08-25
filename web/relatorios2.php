@@ -31,17 +31,17 @@
                @$sinistro_[]=$item2['SINISTRO'];
                @$titular[]=$item2['TITULAR'];
                @$certificado2[]=$item2['ENDOSSO'];
-               if($item2['SINISTRO']){
+               if($item2['TITULAR']){
                 @$sin_num ++;
-               }               
+               }
               }
              }
+             
           //// lista de BENEFICIARIOS ////   
             $linha_vazia=0;
-
             if($dao->listaConteudo($tabela)){
             foreach($dao->listaConteudo($tabela) as $item){ 
-                if($item['sinistro']){
+                if($item['nome']){
                 echo "<tr><td align=center>".$item['sinistro']."</td><td>".$item['nome']."</td><td align=right>".number_format($item['vlindeniza'],'2',',','.')."</td></tr>";
                     if($sinistro_ant != $item['sinistro']){
                         $y++;
@@ -55,9 +55,9 @@
                         if($Todosearch->getSINISTRO()){
                             //$todos=$Tododao->find($Todosearch);
                         }
-                        //echo "<pre>";
-                        //print_r(@$y);
-                        //echo "</pre>";
+                        echo "<pre>";
+                        //print_r(@$todos);
+                        echo "</pre>";
                         //print $y;
                         //echo "<br>";
                         if(@$todos){
@@ -75,7 +75,7 @@
                     $x++;
                 }
             $key=array_search($item['sinistro'],$sinistro_);   
-            if($item['vlindeniza'] == 0 || $item['endosso'] != $certificado2[$key] || $item['sinistro'] == ''){
+            if($item['vlindeniza'] == 0 || $item['endosso'] != $certificado2[$key] || $sin_cadastrado == ''){
                     $sin_vazio[]=$item['sinistro'];
                     $nome_vazio[]=$item['nome'];
                     $certificado[]=$item['endosso'];

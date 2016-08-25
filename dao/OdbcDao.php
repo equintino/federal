@@ -49,6 +49,11 @@ final class OdbcDao {
     }
     public function listaConteudo($table){
         $sql = "SELECT * FROM $table WHERE 1";
+        if($table == 'sinipend'){
+            $sql .= " ORDER BY SINISTRO ";
+        }elseif($table == 'Beneficiarios'){
+            $sql .= " ORDER BY sinistro";
+        }
         $conn = new OdbcDao();
         $result=$conn -> query($sql);
         return $result;
@@ -84,6 +89,7 @@ final class OdbcDao {
     public function listaCampo($tabela,$campo,$busca){
         //$sql = "SELECT * FROM $tabela WHERE $campo='$busca'";
         $sql = "SELECT * FROM $tabela WHERE $campo like '%$busca%'";
+        //print_r($sql);die;
         $conn = new OdbcDao();
         @$result=$conn -> query($sql);
         //print_r($result);die;
