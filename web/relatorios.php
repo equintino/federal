@@ -22,7 +22,7 @@
           $sinistro_ant=null;
         echo "<div id='geral'>";
           echo '<table border=1 align=center cellspacing=0 spanspacing=0 class="tabela">';      
-          echo "<tr><th>SINISTRO</th><th>BENEFICI&AacuteRIO</th><th>VL. A INDENIZAR</th></tr>";
+          echo "<tr><th>SINISTRO</th><th>AP&Oacute;LICE</th><th>CERTIFICADO</th><th>BENEFICI&AacuteRIO</th><th>VL. A INDENIZAR</th></tr>";
           
           //// Lista de SINISTRADO ////
              $sin_num=0;
@@ -42,7 +42,7 @@
             if($dao->listaConteudo($tabela)){
             foreach($dao->listaConteudo($tabela) as $item){ 
                 if($item['sinistro']){
-                echo "<tr><td align=center>".$item['sinistro']."</td><td>".$item['nome']."</td><td align=right>".number_format($item['vlindeniza'],'2',',','.')."</td></tr>";
+                echo "<tr><td align=center>".$item['sinistro']."</td><td>".$item['apolice']."</td><td>".$item['endosso']."</td><td>".$item['nome']."</td><td align=right>".number_format($item['vlindeniza'],'2',',','.')."</td></tr>";
                     if($sinistro_ant != $item['sinistro']){
                         $y++;
                         $Tododao=new TodoDao();
@@ -53,7 +53,7 @@
                         
                         //print_r($Todosearch->getSINISTRO());
                         if($Todosearch->getSINISTRO()){
-                            //$todos=$Tododao->find($Todosearch);
+                            $todos=$Tododao->find($Todosearch);
                         }
                         //echo "<pre>";
                         //print_r(@$y);
@@ -62,25 +62,31 @@
                         //echo "<br>";
                         if(@$todos){
                          foreach ($todos as $sin){
-                           //$sinJud[]=$sin->getSINISTRO();
+                           $sinJud[]=$sin->getSINISTRO();
+                           //echo " - ";
+                           //echo $sin->getN_PROC();
+                           //echo "<br>";
                          }
-                        }else{
-                            //echo $item['sinistro'];
-                            //echo "<br>";
+                           //echo count($sinJud);
                         }
+                        //print_r($todos);
                     }
                     $sin_cadastrado[]=$item['sinistro'];
                     $sinistro_ant=$item['sinistro'];
                     $total=$total+$item['vlindeniza'];
+                    //$apolices[]=$item['apolice'];
                     $x++;
                 }
-            $key=array_search($item['sinistro'],$sinistro_);   
-            if($item['vlindeniza'] == 0 || $item['endosso'] != $certificado2[$key] || $item['sinistro'] == ''){
+            $key=array_search($item['sinistro'],$sinistro_); 
+            //print_r(substr($item['apolice'],8,2));
+            //echo "<br>";
+            if($item['vlindeniza'] == 0 || $item['endosso'] != $certificado2[$key] || $item['sinistro'] == '' || (substr($item['apolice'],8,2) != 00 && $item['endosso'] != $certificado2[$key])){
                     $sin_vazio[]=$item['sinistro'];
                     $nome_vazio[]=$item['nome'];
                     $certificado[]=$item['endosso'];
                     $indenizado_vazio[]=$item['vlindeniza'];
                     $certificado2[]=$certificado2[$key];
+                    $apolices[]=$item['apolice'];
                     $linha_vazia++;
                 }
             }
@@ -91,13 +97,13 @@
         echo "<div>";
             echo "<h3 align='center'><span>Cadastros Benefici&aacute;rios Incompletos ou Certificado diverg&ecirc;nte</span></h3>";
             echo "<div id=total class=busca></div>";
-            echo "<table border=1 align=center cellspacing=0 spanspacing=0><tr><th>SINISTRO</th><th>CERTIFICADO</th><th>BENEFICI&Aacute;RIO</th><th>VL. A INDENIZAR</th></tr>";
+            echo "<table border=1 align=center cellspacing=0 spanspacing=0><tr><th>SINISTRO</th><th>AP&Oacute;LICE</th><th>CERTIFICADO</th><th>BENEFICI&Aacute;RIO</th><th>VL. A INDENIZAR</th></tr>";
             if(@!$sin_vazio){
              $sin_vazio=null;
             }
             for($a=0;$a<count($sin_vazio);$a++){
                 if($sin_vazio[$a]!=null){
-                    echo "<tr><td>".$sin_vazio[$a]."</td><td>".$certificado[$a]."</td><td>".$nome_vazio[$a]."</td><td align=right>".number_format($indenizado_vazio[$a],'2',',','.')."</td></tr>";
+                    echo "<tr><td>".$sin_vazio[$a]."</td><td>".$apolices[$a]."</td><td>".$certificado[$a]."</td><td>".$nome_vazio[$a]."</td><td align=right>".number_format($indenizado_vazio[$a],'2',',','.')."</td></tr>";
                 }
             }
         echo "</div>";
