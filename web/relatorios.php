@@ -53,7 +53,7 @@
                         
                         //print_r($Todosearch->getSINISTRO());
                         if($Todosearch->getSINISTRO()){
-                            $todos=$Tododao->find($Todosearch);
+                            //$todos=$Tododao->find($Todosearch);
                         }
                         //echo "<pre>";
                         //print_r(@$y);
@@ -80,7 +80,7 @@
             $key=array_search($item['sinistro'],$sinistro_); 
             //print_r(substr($item['apolice'],8,2));
             //echo "<br>";
-            if($item['vlindeniza'] == 0 || $item['endosso'] != $certificado2[$key] || $item['sinistro'] == '' || (substr($item['apolice'],8,2) != 00 && $item['endosso'] != $certificado2[$key])){
+            if($item['vlindeniza'] == 0 || $item['endosso'] != $certificado2[$key] || $item['sinistro'] == '' || (substr($item['apolice'],8,2) != 00)){
                     $sin_vazio[]=$item['sinistro'];
                     $nome_vazio[]=$item['nome'];
                     $certificado[]=$item['endosso'];

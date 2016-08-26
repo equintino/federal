@@ -647,6 +647,7 @@ final class OdbcDao {
     }
     private function getBuscaSql6(OdbcSearchCriteria $search = null){
         $sql = "SELECT * FROM sinipend WHERE ";
+        $order = ' SINISTRO';
         if(@$search->getENDOSSO()){
          $campo='ENDOSSO';
          $busca=$search->getENDOSSO();
@@ -664,6 +665,7 @@ final class OdbcDao {
                 $sql .= "TITULAR like '%".$search->getTITULAR()."%'";
             }
         }
+        $sql .= ' ORDER BY'.$order;
         //print_r($search);
         //print_r($sql);die;
         return $sql;
