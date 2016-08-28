@@ -102,18 +102,15 @@
         $processos=count(@$sinJud);
           echo '<table align=center border=1 cellspacing=0 class="resumo">';
           echo '<th colspan=3>RESUMO</th>';
-          echo '<tr><th>SINISTROS CADASTRADOS</th><th>BENEFICI&Aacute;RIOS</th><th>TOTAL A INDENIZAR</th></tr>';
-          echo '<tr><td align=center>'.number_format($y,'0','','.').'</td><td align=center>'.number_format($x,'0','','.').'</td><td align=center>R$ '.number_format($total,'2',',','.').'</td></tr>';
           echo '<tr><th colspan=2>IMPORTADOS (proc. jud.)</th><th><span>p/ cadastrar</span></th></tr>';
           echo '<tr><td colspan=2 align=center>';
           echo number_format($sin_num,'0','','.');
           echo " (".($processos).")";
-          //echo '</td><td align=center>';
-          //echo number_format($y,'0','','.');
           echo '</td><td align=center>';
           echo number_format(($sin_num-$processos)-$y,'0','','.');
           echo '</td></tr>';
-                           //echo count($sinJud);die;
+          echo '<tr><th>SINISTROS CADASTRADOS</th><th>BENEFICI&Aacute;RIOS</th><th>TOTAL A INDENIZAR</th></tr>';
+          echo '<tr><td align=center>'.number_format($y,'0','','.').'</td><td align=center>'.number_format($x,'0','','.').'</td><td align=center>R$ '.number_format($total,'2',',','.').'</td></tr>';
           die; 
         ?>
     </body>
