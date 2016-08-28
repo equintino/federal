@@ -71,7 +71,7 @@
              if(number_format($item1->getIMPORTANCIA_SEGURADA(),2,',','.')!=number_format($indenizaOld,2,',','.') && number_format($indenizaOld,2,',','.')!=0 && ($item1->getsinistro()!= null || $item1->getsinistro()!= 0 )){
                 echo "<tr><td>".$item1->getsinistro()."</td>";
                 echo "<td align=right>".number_format($item1->getIMPORTANCIA_SEGURADA(),2,',','.')."</td>";
-                echo "<td align=right>".number_format($indenizaOld,2,',','.')."</td><td>".$item1->getDT_AVISO()."</td></tr>";
+                echo "<td align=right>".number_format($indenizaOld,2,',','.')."</td><td>".  OdbcValidator::data($item1->getDT_AVISO())."</td></tr>";
                 
                 $totalSegurada=$item1->getIMPORTANCIA_SEGURADA()+$totalSegurada;
                 $totalparaIndenizar=$indenizaOld+$totalparaIndenizar;
@@ -142,7 +142,7 @@
                 $seguencia[]=$idtitular__;
                 TodoMapper::map($todo, array('vlindeniza'=>$indenizaOld,'IMPORTANCIA_SEGURADA'=>$item1->getIMPORTANCIA_SEGURADA(),'DT_AVISO'=>$item1->getDT_AVISO(),'SINISTRO'=>$item1->getsinistro(),'idtitular'=>$item1->getidtitular()));
                 
-                $texto="\r\n".$item1->getsinistro().";".$item1->getIMPORTANCIA_SEGURADA().";".$indenizaOld.";".$item1->getidtitular().";$divergente;".  OdbcValidator::data($item1->getDT_AVISO())."";
+                $texto="\r\n".$item1->getsinistro().";".$item1->getIMPORTANCIA_SEGURADA().";".$indenizaOld.";".$item1->getidtitular().";$divergente;".OdbcValidator::data($item1->getDT_AVISO())."";
                 //echo $texto;die;
                 $escreve = fwrite($fp, $texto);
              }             
@@ -163,7 +163,7 @@
           }else{  
             $botao_="<button onclick=\"window.location.href='carregando.php?act=divergente&abrir=1&idtitular__=".$idtitular__."&pagAtual=".($pagAtual+1)."'\">";
           }               
-           echo "<tr><th colspan=3>".$botao." < </button> &nbsp ".$pagAtual." &nbsp   ".$botao_." ></button></th></tr>";
+           echo "<tr><th colspan=4>".$botao." < </button> &nbsp ".$pagAtual." &nbsp   ".$botao_." ></button></th></tr>";
            echo "</table>";
            echo "</div>";
 ?>
