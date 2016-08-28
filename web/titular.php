@@ -28,10 +28,11 @@
        echo $item->getTITULAR();
        echo "</td><td align=right>";
        echo number_format($item->getIMPORTANCIA_SEGURADA(),2,',','.');
+       echo "</td>";
        if(number_format($item->getIMPORTANCIA_SEGURADA(),2,',','.') != number_format($indenizacao,2,',','.')){        
-          echo "</td><td class=valordiferente align=right>";
+          echo "<td class=valordiferente align=right>";
        }else{
-          echo "</td><td align=right>";      
+          echo "<td align=right>";      
        }
        echo number_format($indenizacao,2,',','.');
        echo "</td></tr>";
@@ -47,7 +48,7 @@
           //echo "passei aqui";
             
       //// Atualizando a tabela divergencia ////
-      if(number_format($impSegurada,'2',',','.') != number_format(@$item->getIMPORTANCIA_SEGURADA(),'2',',','.') || number_format($vlindeniza,'2',',','.') != number_format($indenizacao,'2',',','.')){
+      if(@number_format(@$impSegurada,'2',',','.') != @number_format(@$item->getIMPORTANCIA_SEGURADA(),'2',',','.') || @number_format(@$vlindeniza,'2',',','.') != @number_format(@$indenizacao,'2',',','.')){
           //echo "estou aqui";die;
        //echo "<br>";
        //echo "Valores antigos = $impSegurada e $vlindeniza";

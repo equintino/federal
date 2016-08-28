@@ -21,7 +21,7 @@
                    $pag_=1;
                }
       @$continua=$_GET['continua'];
-      
+      //print_r($_GET);die;
       if(isset($pagAtual)){
          $search->setidbenefi($pagAtual); 
       }
@@ -41,7 +41,7 @@
       $search->setnome($beneficiario);
       $odbcs=$dao->busca4($search);
      }else{
-      if(substr($num_sinistro,9,1)==2){
+      if(substr($sin,9,1)==2){
        $search->setendosso($sin);
       }else{      
        $search->setsinistro($sin);
@@ -50,14 +50,16 @@
       $search->setvlindeniza($vlindeniza);
       
       $odbcs=$dao->busca4($search);
+      
       echo "<div class='busca_tabela'>";
       echo "<table border=1 align=center cellspacing=0 spanspacing=0 class=\"tabela\">";
     if(@!$idbenefi){
       if($odbcs){
-       echo "<tr><th>SINISTRO</th><th>CERTIFICADO</th><th>BENEFICI&Aacute;RIO</th><th>VL. A INDENIZAR</th></tr>";
+       echo "<tr><th>SINISTRO</th><th>AP&Oacute;LICE</th><th>CERTIFICADO</th><th>BENEFICI&Aacute;RIO</th><th>A INDENIZAR</th></tr>";
       }
       $totalBeneficiarios=0;
      foreach($odbcs as $item){
+      //print_r($item);
        if($item->getnome()){
         echo "<tr><td>";
            //echo $item->getidbenefi();
@@ -65,6 +67,8 @@
         echo "<a href='teste3.php?act=titular&sinistro=".$item->getsinistro()."'>";
         echo $item->getsinistro();
         echo "</a>";
+        echo "</td><td>";
+        echo $item->getapolice();
         echo "</td><td>";
         echo $item->getendosso();
         echo "</td><td>";
@@ -107,7 +111,7 @@
        }
        
        if(@$valoresembranco==1){
-            echo "<tr><th colspan=4 align=center>".$botao." < </button> $pag_ de ".$totalPag." ".$botao_." > </button></a></th></tr>";
+            echo "<tr><th colspan=5 align=center>".$botao." < </button> $pag_ de ".$totalPag." ".$botao_." > </button></a></th></tr>";
        }else{
         $ultimaLinha=$item->getidbenefi();
            if(number_format($totalPag,'0','','.') > 0 ){
@@ -116,9 +120,9 @@
                         document.cookie=\"totalPag=$totalPag\";
                         document.cookie=\"ultimoBeneficiario=$ultimaLinha\";
                     </script>";
-               echo "<tr><th colspan=4 align=center>".$botao." < </button> $pag_ de $totalPag ".$botao_." > </button></a></th></tr>";
+               echo "<tr><th colspan=5 align=center>".$botao." < </button> $pag_ de $totalPag ".$botao_." > </button></a></th></tr>";
            }else{
-               echo "<tr><th colspan=4 align=center><button disabled> < </button> 1 de 1 <button disabled> > </button></a></th></tr>";
+               echo "<tr><th colspan=5 align=center><button disabled> < </button> 1 de 1 <button disabled> > </button></a></th></tr>";
            }
        }
         /// fim paginação ///  

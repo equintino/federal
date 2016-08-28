@@ -98,5 +98,24 @@ final class OdbcValidator {
         }
 	 return $maskared;
     }
+    public static function data($data){    
+      /// extraindo dia ///
+      if(strlen(strstr($data,'/',true))==1){
+        $dia='0'.strstr($data,'/',true);
+      }else{
+        $dia=strstr($data,'/',true);
+      }
+      /// extraindo mes ///
+      if(substr($data,-7,1) == "/" ){
+        $mes='0'.substr($data,-6,1);
+      }else{
+        $mes=substr($data,-7,2);
+      }
+      /// extraindo ano ///
+        $ano = strrchr($data,"/");           
+      /// fim data ///
+        $data=$dia.'/'.$mes.$ano;
+      return $data;
+    }
 }
 ?>

@@ -11,7 +11,19 @@
     <button onclick="submit" title="Buscar" ><img src="img/lupa.png" height="12px" /></button>
 </form>
     <?php elseif($act=='sinistrado'): ?>
-<div class="titulo">SINISTRADO</div>
+<form action="teste3.php?act=beneficiario&busca=beneficiario" method="POST">
+    <input type="hidden" name="num_sinistro" value="<?php echo @$_GET['num_sinistro'] ?>" >
+    <div class="titulo">
+    <?php 
+     @$digitos=strlen($_GET['num_sinistro']);
+      if(@$digitos == 16 || @$digitos == 19){
+       echo '<button onlick="submit">';
+       echo '<i>ver Benefici&aacute;rios</i></button></div>';
+      }else{
+       echo 'SINISTRADO</div>';
+      }
+     ?>
+</form>
 <form action="teste3.php?act=sinistrado&busca=sinistrado" method="POST">
     <input type="text" attrname="telephone1" name="num_sinistro" maxlength="19" placeholder="sinistro ou certificado" autofocus="">
     ou

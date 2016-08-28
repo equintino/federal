@@ -47,7 +47,7 @@
           $sinistro_ant=null;
           echo "<div class=divergente>";
           echo "<table align=center border=1 cellspacing=0 >";
-          echo "<tr><th>SINISTRO</th><th>VL. SEGURADO</th><th>VL. A INDENIZAR</th></tr>";
+          echo "<tr><th>SINISTRO</th><th>IMP. SEGURADO</th><th>A INDENIZAR</th><th>DT AVISO</th></tr>";
           $totalSegurada=0;
           $totalparaIndenizar=0;
           if(@$tipoPesquisa != 'total'){
@@ -71,7 +71,8 @@
              if(number_format($item1->getIMPORTANCIA_SEGURADA(),2,',','.')!=number_format($indenizaOld,2,',','.') && number_format($indenizaOld,2,',','.')!=0 && ($item1->getsinistro()!= null || $item1->getsinistro()!= 0 )){
                 echo "<tr><td>".$item1->getsinistro()."</td>";
                 echo "<td align=right>".number_format($item1->getIMPORTANCIA_SEGURADA(),2,',','.')."</td>";
-                echo "<td align=right>".number_format($indenizaOld,2,',','.')."</td></tr>";
+                echo "<td align=right>".number_format($indenizaOld,2,',','.')."</td><td>".$item1->getDT_AVISO()."</td></tr>";
+                
                 $totalSegurada=$item1->getIMPORTANCIA_SEGURADA()+$totalSegurada;
                 $totalparaIndenizar=$indenizaOld+$totalparaIndenizar;
                 $divergente++;
@@ -88,13 +89,15 @@
            //print_r($_GET);die;
            ////////// lista banco mysql //////////
            $todos=$tododao->find2($search);
+           //print_r($todos);
              $z=0;
              echo "<div id=total></div>";
           foreach($todos as $item1){
            echo "<div id=total></div>";
                 echo "<tr><td><a href='teste3.php?act=titular&sinistro=".$item1->getsinistro()."&impSegurada=".$item1->getIMPORTANCIA_SEGURADA()."&vlindeniza=".$item1->getvlindeniza()."&id=".$item1->getid()."'>".$item1->getsinistro()."</a></td>";
                 echo "<td align=right>".@number_format($item1->getIMPORTANCIA_SEGURADA(),2,',','.')."</td>";
-                echo "<td align=right>".number_format($item1->getvlindeniza(),2,',','.')."</td></tr>";
+                echo "<td align=right>".number_format($item1->getvlindeniza(),2,',','.')."</td>";
+                echo "<td>".$item1->getDT_AVISO()."</td></tr>";
                 $z++;
              }
              echo "<script>total($z);</script>";
@@ -103,7 +106,7 @@
            
            
                 $arq="arquivos/divergencia.csv";
-                $texto="SINISTRO;IMPORTANCIA_SEGURADA;vlindeniza;idtitular;id";
+                $texto="SINISTRO;IMPORTANCIA_SEGURADA;vlindeniza;idtitular;id;DT_AVISO";
                 $fp = fopen($arq, "w+");
                 fwrite($fp, $texto);
              
@@ -111,6 +114,7 @@
            while($idtitular__ < ($ultimoSinistrado+1)){
            $search->setidtitular($idtitular__);
            $daos=$dao->buscaSinistrado($search);
+           //print_r($daos);die;
            while($daos=='nulo'){
             $semsinistrado[]=$idtitular__;
             $idtitular__++;
@@ -136,9 +140,10 @@
                 $divergente++;
                 @$idtitular__++;
                 $seguencia[]=$idtitular__;
-                TodoMapper::map($todo, array('vlindeniza'=>$indenizaOld,'IMPORTANCIA_SEGURADA'=>$item1->getIMPORTANCIA_SEGURADA(),'SINISTRO'=>$item1->getsinistro(),'idtitular'=>$item1->getidtitular()));
+                TodoMapper::map($todo, array('vlindeniza'=>$indenizaOld,'IMPORTANCIA_SEGURADA'=>$item1->getIMPORTANCIA_SEGURADA(),'DT_AVISO'=>$item1->getDT_AVISO(),'SINISTRO'=>$item1->getsinistro(),'idtitular'=>$item1->getidtitular()));
                 
-                $texto="\r\n".$item1->getsinistro().";".$item1->getIMPORTANCIA_SEGURADA().";".$indenizaOld.";".$item1->getidtitular().";$divergente";
+                $texto="\r\n".$item1->getsinistro().";".$item1->getIMPORTANCIA_SEGURADA().";".$indenizaOld.";".$item1->getidtitular().";$divergente;".  OdbcValidator::data($item1->getDT_AVISO())."";
+                //echo $texto;die;
                 $escreve = fwrite($fp, $texto);
              }             
                $idtitular__++;

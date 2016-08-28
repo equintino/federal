@@ -13,6 +13,8 @@
         <?php 
           $tabela='Beneficiarios';
           $tabela2='sinipend';
+          $Tododao=new TodoDao();
+          $Todosearch=new TodoSearchCriteria();
           echo '<br>';          
           $quant=0;
           $total=0;
@@ -22,7 +24,7 @@
           $sinistro_ant=null;
         echo "<div id='geral'>";
           echo '<table border=1 align=center cellspacing=0 spanspacing=0 class="tabela">';      
-          echo "<tr><th>SINISTRO</th><th>AP&Oacute;LICE</th><th>CERTIFICADO</th><th>BENEFICI&AacuteRIO</th><th>VL. A INDENIZAR</th></tr>";
+          echo "<tr><th>SINISTRO</th><th>AP&Oacute;LICE</th><th>CERTIFICADO</th><th>BENEFICI&AacuteRIO</th><th>A INDENIZAR</th></tr>";
           
           //// Lista de SINISTRADO ////
              $sin_num=0;
@@ -32,6 +34,17 @@
                @$titular[]=$item2['TITULAR'];
                @$certificado2[]=$item2['ENDOSSO'];
                if($item2['SINISTRO']){
+                $Todosearch->setSINISTRO($item2['SINISTRO']);
+                if($Todosearch->getSINISTRO()){
+                 $todos=$Tododao->find($Todosearch);
+                 foreach ($todos as $sin){
+                  $sinJud[]=$sin->getSINISTRO();
+                  //echo $sin->getSINISTRO();
+                  //echo " - ";
+                  //echo $sin->getN_PROC();
+                  //echo "<br>";
+                 }
+                }
                 @$sin_num ++;
                }               
               }
@@ -45,31 +58,6 @@
                 echo "<tr><td align=center>".$item['sinistro']."</td><td>".$item['apolice']."</td><td>".$item['endosso']."</td><td>".$item['nome']."</td><td align=right>".number_format($item['vlindeniza'],'2',',','.')."</td></tr>";
                     if($sinistro_ant != $item['sinistro']){
                         $y++;
-                        $Tododao=new TodoDao();
-                        $Todosearch=new TodoSearchCriteria();
-                        $Todosearch->setSINISTRO($item['sinistro']);
-                        
-                        //$Todosearch->setSINISTRO('0152.93.03.00000276');
-                        
-                        //print_r($Todosearch->getSINISTRO());
-                        if($Todosearch->getSINISTRO()){
-                            //$todos=$Tododao->find($Todosearch);
-                        }
-                        //echo "<pre>";
-                        //print_r(@$y);
-                        //echo "</pre>";
-                        //print $y;
-                        //echo "<br>";
-                        if(@$todos){
-                         foreach ($todos as $sin){
-                           $sinJud[]=$sin->getSINISTRO();
-                           //echo " - ";
-                           //echo $sin->getN_PROC();
-                           //echo "<br>";
-                         }
-                           //echo count($sinJud);
-                        }
-                        //print_r($todos);
                     }
                     $sin_cadastrado[]=$item['sinistro'];
                     $sinistro_ant=$item['sinistro'];
@@ -95,15 +83,17 @@
         echo "</div>";
         echo "<br><br><br><br><br><br>";
         echo "<div>";
+        //echo '<form action="teste3.php?act=beneficiario&busca=beneficiario" method="POST">';
             echo "<h3 align='center'><span>Cadastros Benefici&aacute;rios Incompletos ou Certificado diverg&ecirc;nte</span></h3>";
             echo "<div id=total class=busca></div>";
-            echo "<table border=1 align=center cellspacing=0 spanspacing=0><tr><th>SINISTRO</th><th>AP&Oacute;LICE</th><th>CERTIFICADO</th><th>BENEFICI&Aacute;RIO</th><th>VL. A INDENIZAR</th></tr>";
+            echo "<table border=1 align=center cellspacing=0 spanspacing=0><tr><th>SINISTRO</th><th>AP&Oacute;LICE</th><th>CERTIFICADO</th><th>BENEFICI&Aacute;RIO</th><th>A INDENIZAR</th></tr>";
             if(@!$sin_vazio){
              $sin_vazio=null;
             }
             for($a=0;$a<count($sin_vazio);$a++){
                 if($sin_vazio[$a]!=null){
-                    echo "<tr><td>".$sin_vazio[$a]."</td><td>".$apolices[$a]."</td><td>".$certificado[$a]."</td><td>".$nome_vazio[$a]."</td><td align=right>".number_format($indenizado_vazio[$a],'2',',','.')."</td></tr>";
+                   //echo '<input type="hidden" name="num_sinistro" value="'.$sin_vazio[$a].'" >';
+                    echo "<tr><td><a href=teste3.php?act=beneficiario&busca=beneficiario&abrir=1&num_sinistro=".$sin_vazio[$a].">".$sin_vazio[$a]."</a></td><td>".$apolices[$a]."</td><td>".$certificado[$a]."</td><td>".$nome_vazio[$a]."</td><td align=right>".number_format($indenizado_vazio[$a],'2',',','.')."</td></tr>";
                 }
             }
         echo "</div>";
@@ -112,17 +102,18 @@
         $processos=count(@$sinJud);
           echo '<table align=center border=1 cellspacing=0 class="resumo">';
           echo '<th colspan=3>RESUMO</th>';
-          echo '<tr><th>SINISTROS</th><th>BENEFICI&Aacute;RIOS</th><th>TOTAL A INDENIZAR</th></tr>';
-          echo '<tr><td align=right>'.number_format($y,'0','','.').'</td><td align=right>'.number_format($x,'0','','.').'</td><td align=right>R$ '.number_format($total,'2',',','.').'</td></tr>';
-          echo '<tr><th colspan=3>IMPORTADOS (c/ proc. jud.) - CADASTRADOS = <span>p/ cadastrar</span></th></tr>';
-          echo '<tr><td colspan=3 align=center>';
+          echo '<tr><th>SINISTROS CADASTRADOS</th><th>BENEFICI&Aacute;RIOS</th><th>TOTAL A INDENIZAR</th></tr>';
+          echo '<tr><td align=center>'.number_format($y,'0','','.').'</td><td align=center>'.number_format($x,'0','','.').'</td><td align=center>R$ '.number_format($total,'2',',','.').'</td></tr>';
+          echo '<tr><th colspan=2>IMPORTADOS (proc. jud.)</th><th><span>p/ cadastrar</span></th></tr>';
+          echo '<tr><td colspan=2 align=center>';
           echo number_format($sin_num,'0','','.');
           echo " (".($processos).")";
-          echo ' - ';
-          echo number_format($y,'0','','.');
-          echo ' = ';
+          //echo '</td><td align=center>';
+          //echo number_format($y,'0','','.');
+          echo '</td><td align=center>';
           echo number_format(($sin_num-$processos)-$y,'0','','.');
           echo '</td></tr>';
+                           //echo count($sinJud);die;
           die; 
         ?>
     </body>

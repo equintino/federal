@@ -332,7 +332,7 @@ final class OdbcDao {
          foreach ($busca as $key => $row) {
             $odbc = new Odbc();
             //print_r($row);echo "<br><br>";
-            //print_r($odbc);echo "<br><br>";
+            //print_r($odbc);echo "<br><br>";die;
             OdbcMapper::map($odbc, $row);
             //print_r($odbc);die;
             //$result[$odbc->getidbenefi()] = $odbc;

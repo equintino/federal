@@ -146,6 +146,9 @@ final class TodoMapper {
         if (array_key_exists('TPACAO', $properties)) {
             $todo->setTPACAO($properties['TPACAO']);
         }
+        if (array_key_exists('DT_AVISO', $properties)) {
+            $todo->setDT_AVISO($properties['DT_AVISO']);
+        }
         if (array_key_exists('vlindeniza', $properties)) {
             $todo->setvlindeniza($properties['vlindeniza']);
         }

@@ -62,6 +62,7 @@ final class Todo {
     private $vlindeniza;
     private $IMPORTANCIA_SEGURADA;
     private $idtitular;
+    private $DT_AVISO;
     /**
      * Create new {@link Todo} with default properties set.
      */
@@ -303,6 +304,12 @@ final class Todo {
     }
     public function setTPACAO($TPACAO){
         $this->TPACAO = $TPACAO;
+    }
+    public function getDT_AVISO(){
+        return $this->DT_AVISO;
+    }
+    public function setDT_AVISO($DT_AVISO){
+        $this->DT_AVISO = $DT_AVISO;
     }
     public function getvlindeniza(){
         return $this->vlindeniza;

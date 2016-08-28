@@ -32,7 +32,7 @@
    if(@!$processo){
        @$processo=$_GET['processo'];
    }
-   
+   //print_r($_GET);die;
    if(@$menu=1){
        /*
        echo "passei aqui";

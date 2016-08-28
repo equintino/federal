@@ -25,8 +25,6 @@
       if($num_sinistro==null && $sinistrado==null && $importanciasegurada==0){
           $valoresembranco=1;       
       }
-      //print_r(($_COOKIE));
-      //echo strlen($num_sinistro);
       if(strlen($num_sinistro)==16){
           $sin=OdbcValidator::mask($num_sinistro,"####.##.##.########");
       }else{
@@ -35,30 +33,37 @@
       
       $search->setTITULAR($sinistrado);
       $search->setIMPORTANCIA_SEGURADA($importanciasegurada);
-      if(substr($num_sinistro,9,1)==2){
+      if(substr($sin,9,1)==2){
        $search->setENDOSSO($sin);
       }else{      
        $search->setsinistro($sin);
       }
        
       $odbcs=$dao->busca3($search);
+      //print_r($odbcs);die;
       
       echo "<div class='busca_tabela'>";
       echo "<table border=1 align=center cellspacing=0 spanspacing=0 class=\"tabela\">";
       if($odbcs){
-       echo "<tr><th>SINISTRO</th><th>CERTIFICADO</th><th>SINISTRADO</th><th>IMPORT&Acirc;NCIA SEGURADA</th></tr>";
+       echo "<tr><th>SINISTRO</th><th>AP&Oacute;LICE</th><th>CERTIFICADO</th><th>SINISTRADO</th><th>IMP.<br>SEGURADA</th><th>DT<br>AVISO</th></tr>";
       }
       $y=0;
+     // print_r($odbcs);die;
      foreach($odbcs as $item){
        if($item->getTITULAR()){
         echo "<tr><td>";
             echo $item->getsinistro();
+        echo "</td><td>";
+            echo $item->getapolice();
         echo "</td><td>";
             echo $item->getENDOSSO();
         echo "</td><td>";
             echo $item->getTITULAR();
         echo "</td><td align=right>";
             echo number_format($item->getIMPORTANCIA_SEGURADA(),2,',','.');
+        echo "</td><td>";
+            $data=$item->getDT_AVISO();
+            echo OdbcValidator::data($data);
         echo "</td></tr>";
        $y++;
        }
@@ -86,7 +91,7 @@
        }
        
        if(@$valoresembranco==1){
-            echo "<tr><th colspan=4 align=center>".$botao." < </button> $pag_ de ".number_format($totalPag,'0','','.')." ".$botao_." > </button></a></th></tr>";
+            echo "<tr><th colspan=6 align=center>".$botao." < </button> $pag_ de ".number_format($totalPag,'0','','.')." ".$botao_." > </button></a></th></tr>";
        }else{
         $ultimoSinistrado=$item->getidtitular();
         //echo $totalPag;
@@ -97,10 +102,10 @@
                         document.cookie=\"totalPag=$totalPag\";
                         document.cookie=\"ultimoSinistrado=$ultimoSinistrado\";
                     </script>";
-               echo "<tr><th colspan=4 align=center>".$botao." < </button> $pag_ de $totalPag ".$botao_." > </button></a></th></tr>";
+               echo "<tr><th colspan=6 align=center>".$botao." < </button> $pag_ de $totalPag ".$botao_." > </button></a></th></tr>";
                //$pagAtual=$pag_;
            }else{
-               echo "<tr><th colspan=4 align=center><button disabled> < </button> 1 de 1 <button disabled> > </button></a></th></tr>";
+               echo "<tr><th colspan=6 align=center><button disabled> < </button> 1 de 1 <button disabled> > </button></a></th></tr>";
            }
        }
         /// fim paginação ///   

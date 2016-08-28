@@ -43,8 +43,10 @@ final class Odbc {
     // colinas sinipend //
     private $TITULAR;
     private $IMPORTANCIA_SEGURADA =0;
-    private $SINISTRO;
+    //private $SINISTRO;
     private $ENDOSSO;
+    private $DT_AVISO;
+    //private $APOLICE;
     
     //private $status;
     
@@ -516,6 +518,12 @@ final class Odbc {
     }
     public function setIMPORTANCIA_SEGURADA($IMPORTANCIA_SEGURADA){
         $this->IMPORTANCIA_SEGURADA = $IMPORTANCIA_SEGURADA;
+    }
+    public function getDT_AVISO(){
+        return $this->DT_AVISO;
+    }
+    public function setDT_AVISO($DT_AVISO){
+        $this->DT_AVISO = $DT_AVISO;
     }
 }
 ?>
