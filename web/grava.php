@@ -43,7 +43,7 @@
           //$sql="select * from $tabela2 where idtitular=5788";
           //$sql="select * from $tabela where idbenefi=9067";
           //$sql="select * from $tabela2 where SINISTRO='0126.93.03.00001032'";
-          $sql="select * from $tabela where 1";
+          $sql="select * from $tabela2 where 1";
           $result=odbc_exec($conn,$sql);
           odbc_result_all($result,'border=1');
           die;

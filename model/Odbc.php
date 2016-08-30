@@ -46,6 +46,7 @@ final class Odbc {
     //private $SINISTRO;
     private $ENDOSSO;
     private $DT_AVISO;
+    private $DT_SINISTRO;
     //private $APOLICE;
     
     //private $status;
@@ -524,6 +525,12 @@ final class Odbc {
     }
     public function setDT_AVISO($DT_AVISO){
         $this->DT_AVISO = $DT_AVISO;
+    }
+    public function getDT_SINISTRO(){
+        return $this->DT_SINISTRO;
+    }
+    public function setDT_SINISTRO($DT_SINISTRO){
+        $this->DT_SINISTRO = $DT_SINISTRO;
     }
 }
 ?>

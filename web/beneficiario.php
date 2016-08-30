@@ -171,6 +171,12 @@
          echo "<br>";
          echo "<label>Cep: </label>";
          echo OdbcValidator::mask($item->getcep(),"#####-###");
+         echo "<br>";
+         echo "<label>Cobertura: </label>";
+         echo $item->gettpcobertura();
+         echo "<br>";
+         echo "<label>A Indenizar: </label>R$ ";
+         echo number_format($item->getvlindeniza(),2,',','.');
        }
        echo "<br>";
        echo "<button onclick=history.go(-1)>";

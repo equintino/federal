@@ -25,6 +25,10 @@ class OdbcMapper {
         if (array_key_exists('DT_AVISO', $properties)){
             $odbc->setDT_AVISO($properties['DT_AVISO']);
         }
+        if (array_key_exists('DT_SINISTRO', $properties)){
+            $DT_SINISTRO = OdbcValidator::data($properties['DT_SINISTRO']);
+            $odbc->setDT_SINISTRO($DT_SINISTRO);
+        }
         if (array_key_exists('sinistro', $properties)) {
             $odbc->setsinistro($properties['sinistro']);
         }

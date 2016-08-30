@@ -45,7 +45,7 @@
       echo "<div class='busca_tabela'>";
       echo "<table border=1 align=center cellspacing=0 spanspacing=0 class=\"tabela\">";
       if($odbcs){
-       echo "<tr><th>SINISTRO</th><th>AP&Oacute;LICE</th><th>CERTIFICADO</th><th>SINISTRADO</th><th>IMP.<br>SEGURADA</th><th>DT<br>AVISO</th></tr>";
+       echo "<tr><th>SINISTRO</th><th>AP&Oacute;LICE</th><th>CERTIFICADO</th><th>SINISTRADO</th><th>IMP.<br>SEGURADA</th><th>DT<br>&OacuteBTO</th><th>DT<br>AVISO</th></tr>";
       }
       $y=0;
      // print_r($odbcs);die;
@@ -61,6 +61,8 @@
             echo $item->getTITULAR();
         echo "</td><td align=right>";
             echo number_format($item->getIMPORTANCIA_SEGURADA(),2,',','.');
+        echo "</td><td>";
+            echo $item->getDT_SINISTRO();
         echo "</td><td>";
             $data=$item->getDT_AVISO();
             echo OdbcValidator::data($data);
@@ -91,7 +93,7 @@
        }
        
        if(@$valoresembranco==1){
-            echo "<tr><th colspan=6 align=center>".$botao." < </button> $pag_ de ".number_format($totalPag,'0','','.')." ".$botao_." > </button></a></th></tr>";
+            echo "<tr><th colspan=7 align=center>".$botao." < </button> $pag_ de ".number_format($totalPag,'0','','.')." ".$botao_." > </button></a></th></tr>";
        }else{
         $ultimoSinistrado=$item->getidtitular();
         //echo $totalPag;
@@ -102,10 +104,10 @@
                         document.cookie=\"totalPag=$totalPag\";
                         document.cookie=\"ultimoSinistrado=$ultimoSinistrado\";
                     </script>";
-               echo "<tr><th colspan=6 align=center>".$botao." < </button> $pag_ de $totalPag ".$botao_." > </button></a></th></tr>";
+               echo "<tr><th colspan=7 align=center>".$botao." < </button> $pag_ de $totalPag ".$botao_." > </button></a></th></tr>";
                //$pagAtual=$pag_;
            }else{
-               echo "<tr><th colspan=6 align=center><button disabled> < </button> 1 de 1 <button disabled> > </button></a></th></tr>";
+               echo "<tr><th colspan=7 align=center><button disabled> < </button> 1 de 1 <button disabled> > </button></a></th></tr>";
            }
        }
         /// fim paginação ///   
