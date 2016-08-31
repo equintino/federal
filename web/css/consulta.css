@@ -118,6 +118,10 @@ button{
 .judiciais{
     #margin: auto;
 }
+.avisado{
+    weidht: 100px;
+    margin: auto;
+}
 #total{
     font-family: cursive;
 }
