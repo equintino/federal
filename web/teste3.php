@@ -114,6 +114,8 @@
   if($act=='relatorio'){      
    if (!$abrir){
     header('Location:carregando.php?act=relatorio');
+   }elseif($abrir==2){
+    include_once 'pCadastrar.php';
    }else{
     include_once 'relatorios.php';
    }
