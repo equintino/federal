@@ -35,8 +35,6 @@ body{
    top: 60px;
    right: 30%;
 }
-.tabela{
-}
 #geral{
     position: relative;
     top: 120px;
@@ -118,17 +116,34 @@ button{
 .judiciais{
     #margin: auto;
 }
-.avisado{
-    #border: solid 1px red;
-    width: 90%;
-    position: relative;
-    margin: auto;
-}
 #avisado{
-    position: relative;
-    top: 20px;
+    #border: solid 1px red;
+    width: 50%;
+    #position: relative;
+    margin: auto;
+    text-align: center;
+}
+.tabelaEsq{
+    #display: inline-table;
+    #border: solid 1px red;
+    #clear: both;
+    #position: relative;
+    margin: 20px 58px;
+    #left: 50px;
     height: 250px;  
     overflow: auto;
+    width: 200px;
+    float: left;
+}
+.tabelaDir{
+    #border: solid 1px red;
+    #clear: both;
+    #float: right;
+    #position: absolute;
+    margin-top: 20px;
+    height: 250px;  
+    overflow: auto;
+    width: 200px;
 }
 #total{
     font-family: cursive;
