@@ -119,8 +119,16 @@ button{
     #margin: auto;
 }
 .avisado{
-    weidht: 100px;
+    #border: solid 1px red;
+    width: 90%;
+    position: relative;
     margin: auto;
+}
+#avisado{
+    position: relative;
+    top: 20px;
+    height: 250px;  
+    overflow: auto;
 }
 #total{
     font-family: cursive;
