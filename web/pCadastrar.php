@@ -26,8 +26,8 @@
     //echo "</table>";
     echo "<div class=tabelaEsq>";
     echo "<table border=1 align=center cellspacing=0 spanspacing=0 ><tr><th>SINISTRO</th>";
-    $y=1;
-    $z=1;
+    $y=0;
+    $z=0;
     for($x=0;$x<count($array);$x++){
      @$dt_aviso=$array[$x+1];
      $ano = substr(strrchr($dt_aviso,"/"),-2,2);

@@ -56,35 +56,6 @@ $ora_bd_old = "(DESCRIPTION=
           (CONNECT_DATA=(SERVICE_NAME=ORCL))
      )"; 
 $ora_bd = "
-SNGSPROD.FEDERAL-PDC =
-  (DESCRIPTION =
-    (ADDRESS_LIST =
-      (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.10.110)(PORT = 1521))
-    )
-    (CONNECT_DATA =
-      (SID = PRD1)
-    )
-  )
-BANCO.FEDERAL.LOCAL =
-  (DESCRIPTION =
-    (ADDRESS_LIST =
-      (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.10.110)(PORT = 1521))
-    )
-    (CONNECT_DATA =
-      (SERVICE_NAME = prd1)
-    )
-  )
-
-SNGS.FEDERAL-PDC =
-  (DESCRIPTION =
-    (ADDRESS_LIST =
-      (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.10.110)(PORT = 1521))
-    )
-    (CONNECT_DATA =
-      (SID = prd1)
-    )
-  )
-
 SNGS.FEDERAL.LOCAL =
   (DESCRIPTION =
     (ADDRESS_LIST =
