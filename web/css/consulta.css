@@ -145,6 +145,9 @@ button{
     overflow: auto;
     width: 200px;
 }
+.tituloAvisado{
+    font-size: 20px;
+}
 #total{
     font-family: cursive;
 }

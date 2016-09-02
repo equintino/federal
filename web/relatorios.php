@@ -33,6 +33,7 @@
                @$sinistro_[]=$item2['SINISTRO'];
                @$titular[]=$item2['TITULAR'];
                @$certificado2[]=$item2['ENDOSSO'];
+               @$dt_aviso[]=$item2['DT_AVISO'];
                if($item2['SINISTRO']){
                 $Todosearch->setSINISTRO($item2['SINISTRO']);
                 if($Todosearch->getSINISTRO()){
@@ -45,6 +46,7 @@
                }               
               }
              }
+             //print_r($dt_aviso);die;
           //// lista de BENEFICIARIOS ////   
             $linha_vazia=0;
 
@@ -94,8 +96,33 @@
         $processos=count(@$sinJud);
         
         /// sinistros p/ cadastrar ///
+            $dados='';
             $pCadastrar=array_diff($sinistro_,$sin_cadastrado);
-            $texto=serialize($pCadastrar);
+            //foreach($pCadastrar as $key => $valores){
+             //$keys[]=$key;
+             //$dados=$pCadastrar[$key]=>$dt_aviso[$key]);
+             //echo "<br>";
+            //}
+            $keys=array_keys($pCadastrar);
+            //print_r($keys);
+            $contador=0;
+            foreach($keys as $item){
+             if($pCadastrar[$item]){
+              $dados .= $pCadastrar[$item].",".OdbcValidator::data($dt_aviso[$item]);
+              if($contador<count($keys)){
+               $dados .= ",";
+              }
+             }
+             $contador++;
+            }
+            //print_r($dados);die;
+            //print_r($dados);die;
+            //echo array_pop($keys);die;
+            //print_r($dados);die;
+            //print_r($keys);die;
+            //print_r($texto);die;
+            //print_r($cadastro);die;
+            $texto=($dados);
             $filename='arquivos/pCadastrar.txt';
             $handle=fopen($filename, 'w+');
             fwrite($handle, $texto);
