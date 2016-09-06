@@ -155,6 +155,31 @@ final class TodoMapper {
         if (array_key_exists('IMPORTANCIA_SEGURADA', $properties)) {
             $todo->setIMPORTANCIA_SEGURADA($properties['IMPORTANCIA_SEGURADA']);
         }
+        
+        if (array_key_exists('COD_SIN', $properties)) {
+            $todo->setCOD_SIN($properties['COD_SIN']);
+        }
+        if (array_key_exists('DTH_FASE_SIN', $properties)) {
+            $todo->setDTH_FASE_SIN($properties['DTH_FASE_SIN']);
+        }
+        if (array_key_exists('COD_FASE_SIN', $properties)) {
+            $todo->setCOD_FASE_SIN($properties['COD_FASE_SIN']);
+        }
+        if (array_key_exists('OBS_FASE_SIN', $properties)) {
+            $todo->setOBS_FASE_SIN($properties['OBS_FASE_SIN']);
+        }
+        if (array_key_exists('USR_ATU', $properties)) {
+            $todo->setUSR_ATU($properties['USR_ATU']);
+        }
+        if (array_key_exists('COD_DOC_EXTER', $properties)) {
+            $todo->setCOD_DOC_EXTER($properties['COD_DOC_EXTER']);
+        }
+        if (array_key_exists('NUM_ITEM_EXTER', $properties)) {
+            $todo->setNUM_ITEM_EXTER($properties['NUM_ITEM_EXTER']);
+        }
+        if (array_key_exists('SEQ_PGTO_SIN', $properties)) {
+            $todo->setSEQ_PGTO_SIN($properties['SEQ_PGTO_SIN']);
+        }    
     }
     private static function createDateTime($input) {
         //return DateTime::createFromFormat('j-n-Y H:i:s', $input);

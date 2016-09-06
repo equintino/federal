@@ -63,6 +63,15 @@ final class Todo {
     private $IMPORTANCIA_SEGURADA;
     private $idtitular;
     private $DT_AVISO;
+    
+    private $COD_SIN;
+    private $DTH_FASE_SIN;
+    private $COD_FASE_SIN;
+    private $OBS_FASE_SIN;
+    private $USR_ATU;
+    private $COD_DOC_EXTER;
+    private $NUM_ITEM_EXTER;
+    private $SEQ_PGTO_SIN;
     /**
      * Create new {@link Todo} with default properties set.
      */
@@ -338,6 +347,55 @@ final class Todo {
 
     public function setDeleted($deleted) {
         $this->deleted = (bool) $deleted;
+    }
+    
+    public function getCOD_SIN(){
+        return $this->COD_SIN;
+    }
+    public function setCOD_SIN($COD_SIN){
+        $this->COD_SIN = $COD_SIN;
+    }
+    public function getDTH_FASE_SIN(){
+        return $this->DTH_FASE_SIN;
+    }
+    public function setDTH_FASE_SIN($DTH_FASE_SIN){
+        $this->DTH_FASE_SIN = $DTH_FASE_SIN;
+    }
+    public function getCOD_FASE_SIN(){
+        return $this->COD_FASE_SIN;
+    }
+    public function setCOD_FASE_SIN($COD_FASE_SIN){
+        $this->COD_FASE_SIN = $COD_FASE_SIN;
+    }
+    public function getUSR_ATU(){
+        return $this->USR_ATU;
+    }
+    public function setUSR_ATU($USR_ATU){
+        $this->USR_ATU = $USR_ATU;
+    }
+    public function getCOD_DOC_EXTER(){
+        return $this->COD_DOC_EXTER;
+    }
+    public function setCOD_DOC_EXTER($COD_DOC_EXTER){
+        $this->COD_DOC_EXTER = $COD_DOC_EXTER;
+    }
+    public function getNUM_ITEM_EXTER(){
+        return $this->NUM_ITEM_EXTER;
+    }
+    public function setNUM_ITEM_EXTER($NUM_ITEM_EXTER){
+        $this->NUM_ITEM_EXTER = $NUM_ITEM_EXTER;
+    }
+    public function getOBS_FASE_SIN(){
+        return $this->OBS_FASE_SIN;
+    }
+    public function setOBS_FASE_SIN($OBS_FASE_SIN){
+        $this->OBS_FASE_SIN = $OBS_FASE_SIN;
+    }
+    public function getSEQ_PGTO_SIN(){
+        return $this->SEQ_PGTO_SIN;
+    }
+    public function setSEQ_PGTO_SIN($SEQ_PGTO_SIN){
+        $this->SEQ_PGTO_SIN = $SEQ_PGTO_SIN;
     }
 }
 ?>

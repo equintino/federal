@@ -28,6 +28,18 @@ final class TodoDao {
         }
         return @$result;
     }
+    public function find3() {
+        foreach ($this->query($this->getFindSql3()) as $row) {
+            $todo = new Todo();
+         //print_r($todo);die;
+            TodoMapper::map($todo, $row);
+            //echo "<br><br>";
+          //print_r($todo);  
+            $result[$todo->getId()] = $todo;
+        }
+        //print_r($result);die;
+        return @$result;
+    }
     public function findById($id) {
         $row = $this->query('SELECT * FROM processojudicial WHERE deleted = 0 and id = ' . (int) $id)->fetch();
         if (!$row) {
@@ -133,6 +145,20 @@ final class TodoDao {
             }
         }
         $sql .= ' ORDER BY ' . $orderBy;
+        return $sql;
+    }
+    private function getFindSql3(TodoSearchCriteria $search = null) {
+     print_r($search);
+        $sql = 'SELECT * FROM sinistros_fup WHERE 1';//COD_SIN=\'0126.93.03.00000046\'';
+        $orderBy = 'COD_SIN';
+        //$sql .= ' COD_SIN='.$search->getSINISTRO().'';
+        if ($search !== null) {
+            if ($search->getStatus() !== null) {
+                $sql .= ' AND status = ' . $this->getDb()->quote($search->getStatus());
+            }
+        }
+        $sql .= ' ORDER BY ' . $orderBy;
+        $sql .= ' limit 0,15';
         return $sql;
     }
     private function insert(Todo $todo) {
@@ -281,6 +307,7 @@ final class TodoDao {
         }
     }
     public function query($sql) {
+            set_time_limit(3600);
         $statement = $this->getDb()->query($sql, PDO::FETCH_ASSOC);
         if ($statement === false) {
             self::throwDbError($this->getDb()->errorInfo());
