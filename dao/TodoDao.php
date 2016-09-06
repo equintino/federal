@@ -28,8 +28,8 @@ final class TodoDao {
         }
         return @$result;
     }
-    public function find3() {
-        foreach ($this->query($this->getFindSql3()) as $row) {
+    public function find3(TodoSearchCriteria $search = null) {
+        foreach ($this->query($this->getFindSql3($search)) as $row) {
             $todo = new Todo();
          //print_r($todo);die;
             TodoMapper::map($todo, $row);
@@ -148,10 +148,10 @@ final class TodoDao {
         return $sql;
     }
     private function getFindSql3(TodoSearchCriteria $search = null) {
-     print_r($search);
-        $sql = 'SELECT * FROM sinistros_fup WHERE 1';//COD_SIN=\'0126.93.03.00000046\'';
+     //print_r($search);die;
+        $sql = 'SELECT * FROM sinistros_fup WHERE ';//COD_SIN=\'0126.93.03.00000046\'';
         $orderBy = 'COD_SIN';
-        //$sql .= ' COD_SIN='.$search->getSINISTRO().'';
+        $sql .= ' COD_SIN=\''.$search->getSINISTRO().'\'';
         if ($search !== null) {
             if ($search->getStatus() !== null) {
                 $sql .= ' AND status = ' . $this->getDb()->quote($search->getStatus());
@@ -159,6 +159,7 @@ final class TodoDao {
         }
         $sql .= ' ORDER BY ' . $orderBy;
         $sql .= ' limit 0,15';
+        //print_r($sql);die;
         return $sql;
     }
     private function insert(Todo $todo) {

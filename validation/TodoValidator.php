@@ -55,6 +55,15 @@ final class TodoValidator {
         }
 	 return $maskared;
     }
+    public static function data($data){
+        $ano=substr($data,0,4);
+        $mes=substr($data,5,2);
+        $dia=substr($data,8,2);
+        
+        $data="$dia/$mes/$ano";
+        return $data;
+        //print_r(substr($data,8,2));die;
+    }
 
 }
 ?>

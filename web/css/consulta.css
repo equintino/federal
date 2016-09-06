@@ -151,6 +151,21 @@ button{
 #total{
     font-family: cursive;
 }
+.detalhe{
+    width: 60%;
+    #text-align: center;
+    margin: 20px auto;
+    background-image: url('../img/fundo_madeira.jpg');
+    padding: 4px;   
+    box-shadow: 10px 10px 5px #888888;
+    #color: graytext;
+}
+.bt_detalhe{
+    background-color: burlywood;
+    margin-right: 100px;
+    float: right;
+    box-shadow: 10px 10px 5px #888888;
+}
 .progresso {
     display: none;
     position: fixed;

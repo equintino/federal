@@ -1,0 +1,2 @@
+mysql -u root -p
+source C:\ARQUIV~1\EASYPH~1.1VC\data\localweb\projects\federal\sinistro\federal\db\tabelas\ceps.sql

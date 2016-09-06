@@ -17,6 +17,9 @@
    @$act=$_GET['act'];
    @$busca=$_GET['busca'];
    @$sinistro=$_POST['sinistro'];
+   if(@!$sinistro){
+       @$sinistro=$_GET['sinistro'];
+   }
    @$num_sinistro=$_POST['num_sinistro'];
    @$vlindeniza=OdbcValidator::validaCentavos($_POST['vlindeniza']);
    @$titular=$_GET['titular'];
@@ -70,7 +73,7 @@
     <ul>
         <a href="teste3.php?act=sinistrado"><li>SINISTRADO</li></a>
         <a href="teste3.php?act=beneficiario"><li>BENEFICI&Aacute;RIOS</li></a>
-        <a href="teste3.php?act=informacoes"><li>IMFORMA&Ccedil;&Otilde;ES</li></a>
+        <a href="teste3.php?act=informacoes"><li>INFORMA&Ccedil;&Otilde;ES</li></a>
         <a href="teste3.php?act=divergente&menu=1"><li>VALORES DIVERGENTES</li></a>
         <a href="teste3.php?act=relatorio"><li>RELAT&Oacute;RIOS</li></a>
         <!--<a href="teste3.php?act=judiciais"><li>PROC. JUDICIAIS</li></a>-->
@@ -176,6 +179,13 @@
    }
        echo "</div>";
       die;
+  }
+  if($act=='status'){
+      echo "<div class=busca>";
+        include_once 'busca.php';
+        //print_r($_GET);die;
+        include_once 'status.php';
+      echo "</div>";
   }
   if($act=='restrito'){
    echo "<div class='construcao'>";

@@ -73,4 +73,6 @@
     <script src="js/index.js"></script>
     <button onclick="submit" title="Buscar" ><img src="img/lupa.png" height="12px" /></button>
 </form>
+    <?php elseif($act=='status'): ?>
+<div class="titulo">DETALHES</div>
     <?php endif; ?>
