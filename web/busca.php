@@ -36,11 +36,6 @@
 </form>
     <?php elseif($act=='divergente'): ?>
 <form action="teste3.php?act=divergente&busca=divergente" method="POST">
-    <!--<input type="text" attrname="telephone1" name="num_sinistro" maxlength="19" placeholder="n&uacute;mero de sinistro" autofocus="">-->
-   <!-- Qual a sucursal a pesquisar? 
-    <input type="text" name="sucursal" size=2 maxlength="2" required />
-    Qual o ramo? 
-    <input type="text" name="ramo" size=2 maxlength="2" required />-->
    <span>Qual a op&ccedil;&acirc;o de pesquisa?</span>
    <input name="x" type="radio" value="total" required> Total
    <input name="x" type="radio" value="parcial"> Parcial
@@ -68,6 +63,17 @@
     <label for="certificado"><i>Certificado</i></label>
     <input type="text" attrname="telephone1" name="certificado" maxlength="19" placeholder="n&uacute;mero de certificado" autofocus="">
     <label for="doc"><i>Cpf</i></label>
+    <input id="doc" name="cpf" type="text" maxlength="14">
+    <script src='js/vanilla-masker.min.js'></script>
+    <script src="js/index.js"></script>
+    <button onclick="submit" title="Buscar" ><img src="img/lupa.png" height="12px" /></button>
+</form>
+    <?php elseif($act=='pesquisa'): ?>
+<div class="titulo">BUSCA</div>
+<form action="carregando.php?act=pesquisa&busca=pesquisa" method="POST">
+    <label for="certificado"><i>Digite o nome do titular: </i></label>
+    <input type="text" size="50" name="sinistrado" >
+    <label for="doc"><i> ou Cpf: </i></label>
     <input id="doc" name="cpf" type="text" maxlength="14">
     <script src='js/vanilla-masker.min.js'></script>
     <script src="js/index.js"></script>

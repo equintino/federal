@@ -147,7 +147,7 @@ final class OdbcDao {
         return @$result;
     }
     public function listaCampo4($tabela,$campo,$busca,$pagAtual){
-     //print_r($busca);
+     //print_r($campo);
      //echo "<br>";
         $odbc = new Odbc();
         //print_r($odbc);

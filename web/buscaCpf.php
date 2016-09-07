@@ -1,63 +1,60 @@
-<link rel="stylesheet" type="text/css" href="css/consulta.css" />
-<script src="js/script.js"></script> 
-<?php
-   include '../dao/OdbcDao.php';
-   include '../dao/OdbcSearchCriteria.php';
-   include '../config/Config.php';
-   include '../model/Odbc.php';
-   include '../mapping/OdbcMapper.php';
-   include '../validation/OdbcValidator.php';
-   include '../dao/TodoDao.php';
-   include '../dao/TodoSearchCriteria.php';
-   include '../model/Todo.php';
-   include '../mapping/TodoMapper.php';
-   include '../validation/TodoValidator.php';
-   include '../exception/NotFoundException.php';
-   
+<?php   
     $tabela1='sinipend';
     $tabela2='Beneficiarios';
     @$inicio=$_GET['inicio'];
+    @$sinistrado=$_GET['sinistrado'];
+    @$cpf=$_GET['cpf'];
+    @$sinistro=$_GET['sinistro'];
     
     $dao = new OdbcDao();
     $Tododao = new TodoDao();
     $search = new TodoSearchCriteria();
-    //print_r($search);
-    foreach($dao->listaConteudo($tabela1) as $item){
-     //print_r($item);die;
-     $search->setSINISTRO(@$item['SINISTRO']);
-     //print_r($search);
     
-     @$cpf =  OdbcValidator::removePonto($item['CPF']);
-     //print_r(($search));die;
-      if(strlen($cpf) != 11){
-       if(@$item['SINISTRO']){
-        if($Tododao->find4($search)){
-          foreach($Tododao->find4($search) as $item2);
-        }
-        print_r($item['SINISTRO']);
-        echo ";";
-        print_r($item['CPF']);
-        echo ";";
-        if(strlen($item2->getCPF())==11){
-          print_r($item2->getCPF());
-          //echo "(".strlen($item2->getCPF()).")";
-        }
-        echo "<br>";
-      }
-      }
-    }die;
+    //print_r($_GET);die;
+    if(!$sinistrado && !$cpf && !$sinistro){
+     echo '<table border=1 align=center cellspacing=0 spanspacing=0 class="tabela">';      
+     echo "<tr><th>SINISTRO</th><th>SINISTRADO</th><th>CPF(CORRETO)</th><th>CPF(ERRADO)</th></tr>";
+     foreach($dao->listaConteudo($tabela1) as $item){
+      $search->setSINISTRO(@$item['SINISTRO']);
     
-    if(@$_GET['certificado']!=null){
-        $campo='endosso';
-        $busca=$_GET['certificado'];
-        $certificado=$busca;
-        $busca=OdbcValidator::removePonto($busca);
-        $busca=OdbcValidator::mask($busca,"####.##.##.########");
+      @$cpf =  OdbcValidator::removePonto($item['CPF']);
+       if(strlen($cpf) != 11){
+        if(@$item['SINISTRO']){
+         if($Tododao->find4($search)){
+           foreach($Tododao->find4($search) as $item2);
+         }
+         echo "<tr><td>".($item['SINISTRO'])."</td>";
+         //echo "<td>".$item2->getSEGURADOS()."</td>";
+         echo "<td>".$item['TITULAR']."</td>";
+         echo "<td align=center>";
+         if(strlen($item2->getCPF())==11){
+          echo "'".($item2->getCPF());
+         }
+         echo "</td><td align=center>";
+         echo "'".($item['CPF']);
+         echo "</ts></tr>";
+        }
+       }
+     }
+     die;
+    }
+    
+    if(@$_GET['sinistrado']!=null){
+        $campo='TITULAR';
+        $busca=$_GET['sinistrado'];
+        //$certificado=$busca;
+        //$busca=OdbcValidator::removePonto($busca);
+        //$busca=OdbcValidator::mask($busca,"####.##.##.########");
     }elseif(@$_GET['cpf']){
         $campo='cpf';
         $busca=OdbcValidator::removePonto($_GET['cpf']);
         $cpf=$busca;
+    }else{
+      $campo='nome';
+      $busca=$_GET['sinistrado'];
     }
+    
+    //echo "campo -> $campo -- busca -> $busca";
     
     if(@$dao->listaCampo2($tabela1,$campo,$busca,$pagAtual) || $dao->listaCampo($tabela2,$campo,$busca,$pagAtual)){
      $pesquisa=$dao->listaCampo2($tabela1,$campo,$busca,$pagAtual);
@@ -65,6 +62,7 @@
      $busca=OdbcValidator::mask($cpf,"###.###.###-##");
      $pesquisa=$dao->listaCampo2($tabela1,$campo,$busca,$pagAtual);
     }
+    //print_r($pesquisa);die;
     echo "<div class=informacoes>";
     echo "<h3>SINISTRADO</h3>";
     echo "<div class=sinistrado >";
@@ -90,8 +88,9 @@
             echo OdbcValidator::mask($cpf1,'###.###.###-##');
             echo "</font>";
             echo "<br><br>";
-            $certificado_[]= $item['ENDOSSO'];
+            $sinistro_[]= $item['SINISTRO'];
         }
+        //print_r($sinistro_);die;
         $limite=count($dao->listaCampo3($tabela1,$campo,$busca,$pagAtual));
         if($limite < 4){
          $proximo='<button disabled>';
@@ -106,17 +105,19 @@
           $botao="<button onclick=history.go(-1)>";
         }
         echo $botao."ANTERIOR</button>";
-        echo "<a href=\"teste3.php?certificado=".$certificado."&cpf=$cpf&act=informacoes&abrir=1&pagAtual=$pagAtual \">".$proximo." PR&Oacute;XIMO</button></a>";
+        echo "<a href=\"teste3.php?sinistro=".$sinistro."&cpf=$cpf&act=pesquisa&abrir=1&pagAtual=$pagAtual \">".$proximo." PR&Oacute;XIMO</button></a>";
         echo "</div>";
     }else{
         echo "N&atilde;o encontrado nenhum resultado.";
     }
     echo "<h3>BENEFICI&Aacute;RIO(S)</h3>";
     echo "<div class=beneficiario>";
-    if($campo=='endosso'){
-   for($x=0;$x<count(@$certificado_);$x++){
-    if($dao->listaCampo($tabela2,$campo,$certificado_[$x],$pagAtual)){
-        foreach($dao->listaCampo($tabela2,$campo,$certificado_[$x],$pagAtual) as $item){
+    //echo $pesquisa;
+    if($pesquisa){
+     $campo='sinistro';
+   for($x=0;$x<count(@$sinistro_);$x++){
+    if($dao->listaCampo($tabela2,$campo,$sinistro_[$x],$pagAtual)){
+        foreach($dao->listaCampo($tabela2,$campo,$sinistro_[$x],$pagAtual) as $item){
             $cpf2=  OdbcValidator::removePonto($item['cpf']);
             echo "<label>Certificado: </label>";
             echo $item['endosso'];
@@ -145,10 +146,15 @@
             echo "</font>";
             echo "<br><br>";
         }
+        //print_r($item);die;
      }
    }
-        echo "</div>";
+        echo "</div>";die;
     }else{
+     //echo $campo;
+     if($campo == 'TITULAR'){
+      $campo='nome';
+     }
     if($dao->listaCampo4($tabela2,$campo,$busca,$pagAtual)){
         foreach($dao->listaCampo4($tabela2,$campo,$busca,$pagAtual) as $item){
          $cpf3=OdbcValidator::removePonto($item['cpf']);
@@ -172,8 +178,7 @@
             echo "<br><br>";
         }
         echo "</div>";
+     }
     }
-    }
-    echo "</div>";
- 
+    echo "</div>"; 
 ?> 

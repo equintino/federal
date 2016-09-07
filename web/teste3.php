@@ -76,6 +76,7 @@
         <a href="teste3.php?act=informacoes"><li>INFORMA&Ccedil;&Otilde;ES</li></a>
         <a href="teste3.php?act=divergente&menu=1"><li>VALORES DIVERGENTES</li></a>
         <a href="teste3.php?act=relatorio"><li>RELAT&Oacute;RIOS</li></a>
+        <a href="teste3.php?act=pesquisa"><li>CPF/TITULAR</li></a>
         <!--<a href="teste3.php?act=judiciais"><li>PROC. JUDICIAIS</li></a>-->
     </ul>
 </div>
@@ -191,5 +192,27 @@
    echo "<div class='construcao'>";
     echo "<img height=300px src='img/em_construcao.png' />";
    echo "</div>";
+  }
+  if($act=='pesquisa'){
+   echo "<div class='busca'>";
+    include_once 'busca.php';
+    if(array_key_exists('certificado',$_POST)){
+      $certificado=$_POST['certificado'];
+    }elseif(array_key_exists('certificado',$_GET)){
+      $certificado=$_GET['certificado'];
+    }
+    if(array_key_exists('cpf',$_POST)){
+      $cpf=$_POST['cpf'];
+    }elseif(array_key_exists('cpf',$_GET)){
+      $cpf=$_GET['cpf'];
+    }
+    if ($busca=='pesquisa'){
+        header('Location:carregando.php?act=pesquisa');
+    }
+    if($abrir==1){
+       include_once 'buscaCpf.php';
+    }
+       echo "</div>";
+       die;
   }
 ?>

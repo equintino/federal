@@ -14,8 +14,10 @@
  @$beneficiario=$_GET['beneficiario'];
  @$vlindeniza=$_GET['vlindeniza'];
  @$processo=$_GET['processo'];
- 
- //print_r($_GET);die;
+ if(@!$sinistrado){
+   @$sinistrado=$_POST['sinistrado'];
+ }
+ //print_r($_POST);die;
  
    if(array_key_exists('sucursal',$_POST)){
     $sucursal=$_POST['sucursal'];
@@ -46,6 +48,7 @@
         <a href="teste3.php?act=informacoes"><li>INFORMA&Ccedil;&Otilde;ES</li></a>
         <a href="teste3.php?act=divergente"><li>VALORES DIVERGENTES</li></a>
         <a href="teste3.php?act=relatorio"><li>RELAT&Oacute;RIOS</li></a>
+        <a href="teste3.php?act=pesquisa"><li>CPF/TITULAR</li></a>
         <!--<a href="teste3.php?act=judiciais"><li>PROC. JUDICIAIS</li></a>-->
  </ul>
 </div>
@@ -79,6 +82,9 @@
   }else{
     redirecionar('1','teste3.php?inicio=sim&act=informacoes&abrir=1&certificado='.@$certificado.'&cpf='.@$cpf.' ','AGUARDE'); 
   }
+ }
+ if($act=='pesquisa'){
+   redirecionar('1','teste3.php?inicio=sim&act=pesquisa&abrir=1&certificado='.@$certificado.'&cpf='.@$cpf.'&sinistrado='.@$sinistrado.'','AGUARDE'); 
  }
  if($act=='judiciais'){
   redirecionar('5','teste3.php?act=judiciais&abrir=1&num_sinistro='.$num_sinistro.'&sinistrado='.$sinistrado.'&pagAtual='.$pagAtual.'&pag_='.$pag_.'&processo='.$processo.'','AGUARDE'); 
