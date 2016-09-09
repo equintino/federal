@@ -99,7 +99,7 @@ final class Oracle {
         }
         $config = Config::getConfig("oracle");
         try {
-            $this->db = new PDO("oci:dbname=xe",$config['username'], $config['password']);
+            $this->db = new PDO("oci:dbname=".$config['dsn'],$config['username'], $config['password']);
         } catch (Exception $ex) {
             throw new Exception('DB connection error: ' . $ex->getMessage());
         }

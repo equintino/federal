@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="css/consulta.css" />
 <script src="js/script.js"></script> 
 <?php
-print phpinfo();die;
+//print phpinfo();die;
    include '../dao/OdbcDao.php';
    include '../dao/OdbcSearchCriteria.php';
    include '../config/Config.php';
