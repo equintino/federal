@@ -99,7 +99,21 @@ final class Oracle {
         }
         $config = Config::getConfig("oracle");
         try {
-            $this->db = new PDO("oci:dbname=".$config['dsn'],$config['username'], $config['password']);
+            $db_test = '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)) (CONNECT_DATA=(SID=xe)))';
+            //$this->db = oci_connect('system', '');
+            $c = oci_connect("user", "passwd", $db_test);
+            //$s = oci_parse($c, 'select * from some_table order by some_column');
+            //oci_execute($s);
+            /*
+            putenv("ORACLE_SID=xe");
+            putenv("OraHome92=C:\oracle\ora92");
+            putenv("TNS_ADMIN=C:\oracle\ora92\network\ADMIN");
+            putenv("ORACLE_HOME=C:\oracle\ora92");
+            putenv("TNS_ADMIN=C:\oracle\ora92\network\ADMIN\tnsnames.ora");
+            
+             * 
+             */
+            //$this->db = oci_connect('sngsprod', 'SFS#01PROD');
         } catch (Exception $ex) {
             throw new Exception('DB connection error: ' . $ex->getMessage());
         }
