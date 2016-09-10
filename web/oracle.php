@@ -10,7 +10,7 @@ putenv("Oracle=C:\ARQUIV~1\EASYPH~1.1VC\binaries\php\php_runningversion\ext");
 
 //echo $test;die;
 
-phpinfo();die;
+//phpinfo();die;
 //echo getenv("OraHome92");
 
 //print_r(getenv("ORACLE_HOME"));
@@ -30,13 +30,13 @@ phpinfo();die;
    
    
    
-   echo getenv("ORACLE_HOME");
-   $db_test = '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)) (CONNECT_DATA=(SID=xe)))';
-   $conn = oci_connect('sys as sysdba', '12345', '//localhost/orcl');
-   echo $conn;
-   die;
+   //echo getenv("ORACLE_HOME");
+   //$db_test = '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)) (CONNECT_DATA=(SID=xe)))';
+   //$conn = oci_connect('sys as sysdba', '12345', '//localhost/orcl');
+   //echo $conn;
+   //die;
    $oracle = new Oracle();
-   print_r($oracle);
+   //print_r($oracle);
    print_r($oracle->find());
    die;
 $conn = oci_connect('system', 'monica924', 'host:localhost/sinistro');

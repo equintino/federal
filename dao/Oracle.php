@@ -99,9 +99,9 @@ final class Oracle {
         }
         $config = Config::getConfig("oracle");
         try {
-            $db_test = '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)) (CONNECT_DATA=(SID=xe)))';
-            //$this->db = oci_connect('system', '');
-            $c = oci_connect("user", "passwd", $db_test);
+            $db_test = '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)) (CONNECT_DATA=(SID=prd1)))';
+            $this->db = new PDO("oci:dbname=xe",'sngsprod', 'SFS#01PROD');
+            //$c = oci_connect("user", "passwd", $db_test);
             //$s = oci_parse($c, 'select * from some_table order by some_column');
             //oci_execute($s);
             /*
@@ -121,15 +121,16 @@ final class Oracle {
     }
 
     private function getFindSql(TodoSearchCriteria $search = null) {
-     /*
-        if(strlen($search->getSINISTRO())==16){
-            $sinistro=TodoValidator::mask($search->getSINISTRO(),"####.##.##.########");
-        }else{
-            $sinistro=$search->getSINISTRO();
-        }
-      * 
-      */
-       $sql = "show databases"; 
+
+       $sql = "select * from v\$version where banner like '%Oracle%'"; 
+       /*
+       $sql = "
+        CREATE TABLE EDMILSON.TABLE1(
+        COLUMN1 VARCHAR2(20) 
+        )
+       ";
+        * 
+        */
        //print_r($sql);
         //$sql = 'SELECT * FROM processojudicial WHERE 1';
                 // 'deleted = 0 ';
@@ -162,7 +163,7 @@ final class Oracle {
             }elseif($search->getN_PROC()){
                 $sql .= " and N_PROC like '%".$search->getN_PROC()."%'";
             }
-           $sql .= " and SINISTRO like '%".$sinistro."%'";
+           //$sql .= " and SINISTRO like '%".$sinistro."%'";
         }
         if(@$orderBy){
             $sql .= ' ORDER BY ' . $orderBy;
@@ -356,8 +357,14 @@ final class Oracle {
         }
     }
     public function query($sql) {
-            set_time_limit(3600);
+     echo $sql;
+     echo "<br>";
+            //set_time_limit(3600);
         $statement = $this->getDb()->query($sql, PDO::FETCH_ASSOC);
+        echo "<br>";
+        print_r(get_class_methods($this->db));
+        echo "<br>";
+        print_r($this->getDb()->errorInfo());
         if ($statement === false) {
             self::throwDbError($this->getDb()->errorInfo());
         }
