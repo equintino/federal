@@ -9,14 +9,19 @@ final class Oracle {
     }
     public function find(TodoSearchCriteria $search = null) {
         $result = array();
+        
         //print_r($search);
-        //print_r($this->getFindSql($search));die;
+        //print_r($this->query($this->getFindSql($search)));die;
         foreach ($this->query($this->getFindSql($search)) as $row) {
+         //die;
+         print_r($row);
+         echo "<br>";
             $todo = new Todo();
-            //print_r($todo);
+            //print_r($todo);die;
             TodoMapper::map($todo, $row);
             $result[$todo->getId()] = $todo;
         }
+        die;
         //print_r($result);
         return $result;
     }
@@ -99,8 +104,11 @@ final class Oracle {
         }
         $config = Config::getConfig("oracle");
         try {
-            $db_test = '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)) (CONNECT_DATA=(SID=prd1)))';
-            $this->db = new PDO("oci:dbname=xe",'sngsprod', 'SFS#01PROD');
+            //$db_test = '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)) (CONNECT_DATA=(SID=xe)))';
+            //$this->db = new PDO("oci:dbname=//192.168.10.110:1521/prd1",'sngsprod', 'SFS#01PROD');
+            $this->db = new PDO("oci:dbname=".$config['dsn'],$config['username'],$config['password']);
+            //DIE;
+            //var_dump($this->db);die;
             //$c = oci_connect("user", "passwd", $db_test);
             //$s = oci_parse($c, 'select * from some_table order by some_column');
             //oci_execute($s);
@@ -122,7 +130,9 @@ final class Oracle {
 
     private function getFindSql(TodoSearchCriteria $search = null) {
 
-       $sql = "select * from v\$version where banner like '%Oracle%'"; 
+       $sql = "select * from v\$version where banner like '%Oracle%'";
+       $sql = "select * from teste "; 
+       $sql = "select * from SINISTROS_FUP";
        /*
        $sql = "
         CREATE TABLE EDMILSON.TABLE1(
@@ -357,14 +367,14 @@ final class Oracle {
         }
     }
     public function query($sql) {
-     echo $sql;
-     echo "<br>";
+     //echo $sql;
+     //echo "<br>";
             //set_time_limit(3600);
         $statement = $this->getDb()->query($sql, PDO::FETCH_ASSOC);
-        echo "<br>";
-        print_r(get_class_methods($this->db));
-        echo "<br>";
-        print_r($this->getDb()->errorInfo());
+        //print_r($statement);die;
+        //print_r(get_class_methods($this->db));
+        //echo "<br>";
+        //print_r($this->getDb()->errorInfo());
         if ($statement === false) {
             self::throwDbError($this->getDb()->errorInfo());
         }

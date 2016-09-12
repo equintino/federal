@@ -1,11 +1,14 @@
 <link rel="stylesheet" type="text/css" href="css/consulta.css" />
 <script src="js/script.js"></script> 
 <?php
+/*
 putenv("OraHome92=C:\oracle\ora92");
 putenv("TNS_ADMIN=C:\oracle\ora92\network\ADMIN");
 putenv("ORACLE_HOME=C:\ARQUIV~1\EASYPH~1.1VC\binaries\php\php_runningversion\\ext");
 putenv("TNS_ADMIN=C:\oracle\ora92\network\ADMIN\tnsnames.ora");
 putenv("Oracle=C:\ARQUIV~1\EASYPH~1.1VC\binaries\php\php_runningversion\ext");
+ * 
+ */
 //$test = getenv('LD_LIBRARY_PATH')."  ".getenv('ORACLE_HOME');
 
 //echo $test;die;
@@ -35,10 +38,18 @@ putenv("Oracle=C:\ARQUIV~1\EASYPH~1.1VC\binaries\php\php_runningversion\ext");
    //$conn = oci_connect('sys as sysdba', '12345', '//localhost/orcl');
    //echo $conn;
    //die;
+   
+   //$db_test = '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=192.168.10.110)(PORT=1521)) (CONNECT_DATA=(SID=prd1)))';
+   //echo $db_test;die;
+   //$conn = new PDO("oci:dbname=xe",'sngsprod', 'SFS#01PROD');
+   
+   //var_dump($conn);die;
+   
+   
    $oracle = new Oracle();
    //print_r($oracle);
    print_r($oracle->find());
-   die;
+   //die;
 $conn = oci_connect('system', 'monica924', 'host:localhost/sinistro');
 $query = 'select table_name from user_tables';
 $stid = oci_parse($conn, $query);
