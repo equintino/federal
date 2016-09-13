@@ -102,7 +102,7 @@ final class Oracle {
         if ($this->db !== null) {
             return $this->db;
         }
-        $config = Config::getConfig("oracle");
+        $config = Config::getConfig("oracle_local");
         try {
             //$db_test = '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)) (CONNECT_DATA=(SID=xe)))';
             //$this->db = new PDO("oci:dbname=//192.168.10.110:1521/prd1",'sngsprod', 'SFS#01PROD');
@@ -132,7 +132,7 @@ final class Oracle {
 
        $sql = "select * from v\$version where banner like '%Oracle%'";
        $sql = "select * from teste "; 
-       $sql = "select * from SINISTROS_FUP";
+       //$sql = "select * from SINISTROS_FUP";
        /*
        $sql = "
         CREATE TABLE EDMILSON.TABLE1(
