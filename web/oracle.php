@@ -1,6 +1,9 @@
 <link rel="stylesheet" type="text/css" href="css/consulta.css" />
 <script src="js/script.js"></script> 
 <?php
+//putenv("ORACLE_HOME=C:\ARQUIV~1\EASYPH~1.1VC\binaries\php\php_runningversion\\ext");
+//foreach(PDO::getAvailableDrivers() as $driver)
+  //  echo $driver, '<br>';die;
 /*
 putenv("OraHome92=C:\oracle\ora92");
 putenv("TNS_ADMIN=C:\oracle\ora92\network\ADMIN");
@@ -171,4 +174,36 @@ else
     echo "Erro na conexão com o Oracle.";					   
 
 print_r($ora_conexao);
+
+/// para testar ////
+/*
+ $conn = oci_connect('user' , 'password','
+    (DESCRIPTION =
+        (ADDRESS_LIST =
+            (ADDRESS = (PROTOCOL=TCP)(HOST=serveurdeBDD)(PORT=1664))
+        )
+        (CONNECT_DATA =
+            (SERVICE_NAME=monservicedulistener)
+        )
+    )');
+         
+                 
+        if (!$conn) {
+    $e = oci_error();
+    trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
+}
+ 
+$stid = oci_parse($conn, 'SELECT SYSDATE FROM dual');
+oci_execute($stid);
+ 
+echo "<table border='1'>\n";
+while ($row = oci_fetch_array($stid, OCI_ASSOC+OCI_RETURN_NULLS)) {
+    echo "<tr>\n";
+    foreach ($row as $item) {
+        echo "    <td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "") . "</td>\n";
+    }
+    echo "</tr>\n";
+}
+echo "</table>\n";
+ */
 ?>
