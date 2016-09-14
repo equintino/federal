@@ -99,10 +99,11 @@ final class Oracle {
         return $statement->rowCount() == 1;
     }
     private function getDb() {
+     //ECHO "PASSEI POR AQUI";
         if ($this->db !== null) {
             return $this->db;
         }
-        $config = Config::getConfig("oracle_local");
+        $config = Config::getConfig("oracle");
         try {
             //$db_test = '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)) (CONNECT_DATA=(SID=xe)))';
             //$this->db = new PDO("oci:dbname=//192.168.10.110:1521/prd1",'sngsprod', 'SFS#01PROD');
