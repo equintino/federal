@@ -104,10 +104,7 @@ final class Oracle {
             return $this->db;
         }
         $config = Config::getConfig("oracle");
-<<<<<<< HEAD
         $config2 = Config::getConfig("oracle_local");
-=======
->>>>>>> 11f3c090311f85f86195bdb0f280c62180c51820
         try {
             //$db_test = '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)) (CONNECT_DATA=(SID=xe)))';
             //$this->db = new PDO("oci:dbname=//192.168.10.110:1521/prd1",'sngsprod', 'SFS#01PROD');
