@@ -133,7 +133,7 @@ final class Oracle {
 
        $sql = "select * from v\$version where banner like '%Oracle%'";
        $sql = "select * from teste "; 
-       $sql = "select * from SINISTROS_FUP";
+       //$sql = "select * from SINISTROS_FUP";
        /*
        $sql = "
         CREATE TABLE EDMILSON.TABLE1(
