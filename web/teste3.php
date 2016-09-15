@@ -76,8 +76,8 @@
         <a href="teste3.php?act=informacoes"><li>INFORMA&Ccedil;&Otilde;ES</li></a>
         <a href="teste3.php?act=divergente&menu=1"><li>VALORES DIVERGENTES</li></a>
         <a href="teste3.php?act=relatorio"><li>RELAT&Oacute;RIOS</li></a>
-        <a href="teste3.php?act=pesquisa"><li>CPF/TITULAR</li></a>
-        <!--<a href="teste3.php?act=judiciais"><li>PROC. JUDICIAIS</li></a>-->
+        <!--<a href="teste3.php?act=pesquisa"><li>CPF/TITULAR</li></a>-->
+        <a href="teste3.php?act=judiciais"><li>PROC. JUDICIAIS</li></a>
     </ul>
 </div>
 <?php

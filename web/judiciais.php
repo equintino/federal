@@ -23,6 +23,8 @@ header('Content-type: text/html; charset=UTF-8');
     $Todo=new Todo();
     $odbc=new Odbc();
     
+    print_r($Tododao->find5());die;
+    
     @$sinistro= $_POST['num_sinistro'];
     if(@!$sinistro){
        @$sinistro= $_GET['num_sinistro']; 

@@ -52,6 +52,19 @@ final class TodoDao {
         //print_r($result);die;
         return @$result;
     }
+    public function find5(TodoSearchCriteria $search = null) {
+        foreach ($this->query($this->getFindSql5($search)) as $row) {
+            $todo = new Todo();
+         //print_r($todo);
+         //echo "<br><br>";
+            TodoMapper::map($todo, $row);
+            //echo "<br><br>";
+          //print_r($todo);  
+            $result[$todo->getId()] = $todo;
+        }
+        //print_r($result);die;
+        return @$result;
+    }
     public function findById($id) {
         $row = $this->query('SELECT * FROM processojudicial WHERE deleted = 0 and id = ' . (int) $id)->fetch();
         if (!$row) {
@@ -186,6 +199,16 @@ final class TodoDao {
         }
         $sql .= ' ORDER BY ' . $orderBy;
         $sql .= ' limit 0,15';
+        //print_r($sql);die;
+        return $sql;
+    }
+    private function getFindSql5(TodoSearchCriteria $search = null) {
+     //print_r($search);die;
+        $sql = 'SELECT * FROM jd_sinistrado INNER JOIN jd_possivel ON jd_sinistrado.SEGURADO=jd_possivel.Segurado ';//WHERE ';//COD_SIN=\'0126.93.03.00000046\'';
+        //$orderBy = ' Segurado';
+        //$sql .= ' PROCESSO_SINISTRO=\''.$search->getSINISTRO().'\'';
+        //$sql .= ' ORDER BY ' . $orderBy;
+        //$sql .= ' limit 0,15';
         //print_r($sql);die;
         return $sql;
     }
