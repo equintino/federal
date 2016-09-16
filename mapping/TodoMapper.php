@@ -179,7 +179,22 @@ final class TodoMapper {
         }
         if (array_key_exists('SEQ_PGTO_SIN', $properties)) {
             $todo->setSEQ_PGTO_SIN($properties['SEQ_PGTO_SIN']);
-        }    
+        } 
+        if (array_key_exists('POSSIVEL', $properties)) {
+            $todo->setPOSSIVEL($properties['POSSIVEL']);
+        }
+        if (array_key_exists('PROVAVEL', $properties)) {
+            $todo->setPROVAVEL($properties['PROVAVEL']);
+        }
+        if (array_key_exists('PARTE_CONTRARIA', $properties)) {
+            $todo->setPARTE_CONTRARIA($properties['PARTE_CONTRARIA']);
+        }
+        if (array_key_exists('VALOR_PEDIDO', $properties)) {
+            $todo->setVALOR_PEDIDO($properties['VALOR_PEDIDO']);
+        }
+        if (array_key_exists('HONORARIOS', $properties)) {
+            $todo->setHONORARIOS($properties['HONORARIOS']);
+        }  
     }
     private static function createDateTime($input) {
         //return DateTime::createFromFormat('j-n-Y H:i:s', $input);
