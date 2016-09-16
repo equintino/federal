@@ -72,6 +72,12 @@ final class Todo {
     private $COD_DOC_EXTER;
     private $NUM_ITEM_EXTER;
     private $SEQ_PGTO_SIN;
+    
+    private $POSSIVEL;
+    private $PROVAVEL;
+    private $PARTE_CONTRARIA;
+    private $VALOR_PEDIDO;
+    private $HONORARIOS;
     /**
      * Create new {@link Todo} with default properties set.
      */
@@ -396,6 +402,36 @@ final class Todo {
     }
     public function setSEQ_PGTO_SIN($SEQ_PGTO_SIN){
         $this->SEQ_PGTO_SIN = $SEQ_PGTO_SIN;
+    }
+    public function getPOSSIVEL(){
+        return $this->POSSIVEL;
+    }
+    public function setPOSSIVEL($POSSIVEL){
+        $this->POSSIVEL = $POSSIVEL;
+    }
+    public function getPROVAVEL(){
+        return $this->PROVAVEL;
+    }
+    public function setPROVAVEL($PROVAVEL){
+        $this->PROVAVEL = $PROVAVEL;
+    }
+    public function getPARTE_CONTRARIA(){
+        return $this->PARTE_CONTRARIA;
+    }
+    public function setPARTE_CONTRARIA($PARTE_CONTRARIA){
+        $this->PARTE_CONTRARIA = $PARTE_CONTRARIA;
+    }
+    public function getVALOR_PEDIDO(){
+        return $this->VALOR_PEDIDO;
+    }
+    public function setVALOR_PEDIDO($VALOR_PEDIDO){
+        $this->VALOR_PEDIDO = $VALOR_PEDIDO;
+    }
+    public function getHONORARIOS(){
+        return $this->HONORARIOS;
+    }
+    public function setHONORARIOS($HONORARIOS){
+        $this->HONORARIOS = $HONORARIOS;
     }
 }
 ?>

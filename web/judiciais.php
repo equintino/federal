@@ -23,8 +23,35 @@ header('Content-type: text/html; charset=UTF-8');
     $Todo=new Todo();
     $odbc=new Odbc();
     
-    print_r($Tododao->find5());die;
+    //print_r($Tododao->find5());die;
+    echo "<table border=1 align=center cellspacing=0 spanspacing=0 class=\"tabela\">";
+    echo "<tr><th>SINISTRO</th><th>SEGURADO</th><th>PARTE CONTR&Aacute;RIA</th><th>VALOR PEDIDO</th><th>HONOR&Aacute;RIOS</th><th>POSSIVEL</th><th>PROVAVEL</th></tr>";
+    foreach($Tododao->find5() as $possivel){
+     //print_r($Tododao->find5());die;
+      echo "<tr><td>";
+      echo $possivel->getSINISTRO();
+      echo "</td><td>";
+      echo $possivel->getSEGURADOS();
+      echo "</td><td>";
+      echo $possivel->getPARTE_CONTRARIA();
+      echo "</td><td>";
+      echo $possivel->getVALOR_PEDIDO();
+      echo "</td><td>";
+      echo $possivel->getHONORARIOS();
+      echo "</td><td>";
+      echo @$possivel->getPOSSIVEL();
+      //echo "</td><td>";
+      //$Todosearch->setSEGURADOS($possivel->getSEGURADOS());
+      //print_r($Todosearch);
+      //$provavel=$Tododao->find6($Todosearch);
+      //print_r($provavel);
+      //echo @$provavel->getPROVAVEL();
+      echo "</td><td>";
+    }
+      echo "</tr></table>";
     
+      die;
+      
     @$sinistro= $_POST['num_sinistro'];
     if(@!$sinistro){
        @$sinistro= $_GET['num_sinistro']; 

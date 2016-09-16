@@ -39,7 +39,5 @@ final class TodoSearchCriteria {
         $this->N_PROC = $N_PROC;
         return $this;
     }
-    
-
 }
 ?>
