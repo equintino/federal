@@ -108,7 +108,7 @@ final class Oracle {
         try {
             //$db_test = '(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)) (CONNECT_DATA=(SID=xe)))';
             //$this->db = new PDO("oci:dbname=//192.168.10.110:1521/prd1",'sngsprod', 'SFS#01PROD');
-            $this->db = new PDO("oci:dbname=".$config['dsn'],$config['username'],$config['password']);
+            $this->db = new PDO("oci:dbname=".$config2['dsn'],$config2['username'],$config2['password']);
             //DIE;
             //var_dump($this->db);die;
             //$c = oci_connect("user", "passwd", $db_test);
@@ -133,8 +133,19 @@ final class Oracle {
     private function getFindSql(TodoSearchCriteria $search = null) {
 
        $sql = "select * from v\$version where banner like '%Oracle%'";
+       $sql = "select * from SINISTROS_FUP";
+       $sql = "SELECT * FROM DOCUMENTOS_FUP";
+       $sql = "SELECT * FROM EXTRATOS_BANCARIOS";
+       $sql = "SELECT * FROM MOTIVOS_ENCERRAMENTO_SIN";
+       $sql = "SELECT * FROM TMP_PROCS_JURID_201309";
+       $sql = "SELECT * FROM TMP_PROCS_JURID_201309_FINAL";
+       $sql = "SELECT * FROM TMP_PROCESSOS_SIN";
+       $sql = "SELECT * FROM LISTA_SINISTROS";
+       $sql = "SELECT * FROM SINISTROS_DG";
+       $sql = "SELECT * FROM DOCUMENTOS_DG";
        $sql = "select * from teste "; 
-       //$sql = "select * from SINISTROS_FUP";
+       $sql = "SELECT owner, table_name FROM dba_tables";
+       
        /*
        $sql = "
         CREATE TABLE EDMILSON.TABLE1(
