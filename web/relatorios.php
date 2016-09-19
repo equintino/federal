@@ -36,16 +36,22 @@
                @$certificado2[]=$item2['ENDOSSO'];
                @$dt_aviso[]=$item2['DT_AVISO'];
                @$imp_segurada[]=$item2['IMPORTANCIA_SEGURADA'];
+               
                if($item2['SINISTRO']){
                 $Todosearch->setSINISTRO($item2['SINISTRO']);
+                /*
                 if($Todosearch->getSINISTRO()){
                  $todos=$Tododao->find($Todosearch);
                  foreach ($todos as $sin){
                   $sinJud[]=$sin->getSINISTRO();
                  }
                 }
+                 * 
+                 */
                 @$sin_num ++;
-               } 
+                }               
+                 //$todos=count($Tododao->find($Todosearch));
+                 //print_r($sinJud);
                //echo "<tr><td>";
                //echo $item2['SINISTRO'];
                //echo "</td><td>";
@@ -53,6 +59,8 @@
                //echo "</td></tr>";
               }
              }
+             //print_r($sinJud);
+             //die;
            //echo "</table>";
              
             ///// Lista BENEFICIARIOS ///// 
@@ -123,8 +131,8 @@
         echo "</div>";
         echo "<script>total($linha_vazia)</script>";
         $campo='sinistro';
-        $processos=count(@$sinJud);
-        
+        $processos=count($Tododao->find($Todosearch));//count(@$sinJud);
+        //ECHO $processos;die;
         /// sinistros p/ cadastrar ///
             $dados='';
             $pCadastrar=array_diff($sinistro_,$sin_cadastrado);
@@ -197,7 +205,7 @@
           echo " (".($processos).")";
           echo '</td><td align=center>';
           echo "<a href=teste3.php?act=relatorio&abrir=2>";
-          echo number_format(($sin_num-$processos)-$y,'0','','.');
+          echo number_format(($sin_num)-$y,'0','','.');
           echo "</a>";
           echo '</td></tr>';
           echo '<tr><th>SINISTROS CADASTRADOS</th><th>BENEFICI&Aacute;RIOS</th><th>TOTAL A INDENIZAR</th></tr>';

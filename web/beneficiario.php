@@ -1,4 +1,5 @@
 <?php 
+//phpinfo();die;
       @$num_sinistro=$_GET['num_sinistro'];
       if(@!$num_sinistro){
        @$num_sinistro=$_POST['num_sinistro'];
@@ -7,6 +8,7 @@
       if(@!$beneficiario){
        @$beneficiario=$_POST['beneficiario'];
       }
+      //echo $beneficiario;
       @$importanciasegurada=$_GET['importanciasegurada'];
       if(@!$importanciasegurada){
        @$importanciasegurada=$_POST['importanciasegurada'];

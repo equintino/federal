@@ -12,6 +12,11 @@
    include '../model/Todo.php';
    include '../mapping/TodoMapper.php';
    include '../validation/TodoValidator.php';
+   include '../dao/OracleDao.php';
+   include '../dao/OracleSearchCriteria.php';
+   include '../model/Oracle.php';
+   include '../mapping/OracleMapper.php';
+   include '../validation/OracleValidator.php';
    include '../exception/NotFoundException.php';
    
    @$act=$_GET['act'];

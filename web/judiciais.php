@@ -6,6 +6,7 @@
 </script>
 <?php
 header('Content-type: text/html; charset=UTF-8');
+
  /*
     @$filename=$_GET['arquivo'];
     $mode='r';
@@ -19,10 +20,16 @@ header('Content-type: text/html; charset=UTF-8');
  */   
     echo "<div id=total ></div>";
     $Tododao=new TodoDao();
-    $Todosearch=new TodoSearchCriteria;
-    $Todo=new Todo();
-    $odbc=new Odbc();
+    $Todosearch=new TodoSearchCriteria();
+    //$Todo=new Todo();
+    //$odbc=new Odbc();
+    $Oracledao=new OracleDao();
+    $Oraclesearch=new OracleSearchCriteria();
+    //$oracle=new Odbc();die;
     
+    //print_r($oracle);die;
+    
+    /*
     //print_r($Tododao->find5());die;
     echo "<table border=1 align=center cellspacing=0 spanspacing=0 class=\"tabela\">";
     echo "<tr><th>SINISTRO</th><th>SEGURADO</th><th>PARTE CONTR&Aacute;RIA</th><th>VALOR PEDIDO</th><th>HONOR&Aacute;RIOS</th><th>POSSIVEL</th><th>PROVAVEL</th></tr>";
@@ -51,6 +58,8 @@ header('Content-type: text/html; charset=UTF-8');
       echo "</tr></table>";
     
       die;
+     * 
+     */
       
     @$sinistro= $_POST['num_sinistro'];
     if(@!$sinistro){
@@ -58,18 +67,26 @@ header('Content-type: text/html; charset=UTF-8');
     }
     @$sinistrado=$_POST['sinistrado'];
     if(@!$sinistrado){
-       @$sinistrado=$_GET['sinistrado']; 
+       @$sinistrado=$_GET['sinistrado'];//  OdbcValidator::tirarAcento($_GET['sinistrado']); 
     }
     @$processo=$_POST['processo'];
     if(@!$processo){
        @$processo=$_GET['processo']; 
-    }
-        
+    }    
     $Todosearch->setSINISTRO($sinistro);
     $Todosearch->setSEGURADOS($sinistrado);
     $Todosearch->setN_PROC($processo);
     
     $todos=$Tododao->find($Todosearch);
+    //echo @$sinistrado;die;
+     
+     //print_r(count($todos));die;  
+    //$Oraclesearch->setSINISTRO($sinistro);
+    //$Oraclesearch->setSEGURADOS($sinistrado);
+    //$Oraclesearch->setN_PROC($processo);
+    
+    //$oracles=$Oracledao->find($Oraclesearch);
+    //$OracleSeaech->
     
     //print_r($todos);die;
     
@@ -102,35 +119,45 @@ header('Content-type: text/html; charset=UTF-8');
     
     //print_r($todos);
     //echo "<br><br>";
-    //print_r($odbcs);die;
+    //print_r($oracles);die;
     $x=0;
     if($todos){
+     //echo "existe todos";die;
+     //print_r($todos);
         echo "<table border=1 align=center cellspacing=0 spanspacing=0 class=\"tabela\">";
-        echo "<tr><th>SINISTRO</th><th>PROCESSO</th><th>PROC. ANTIGO</th><th>SEGURADO</th><th>SINISTRADO</th><th>OBS.</th></tr>";
+        echo "<tr><th>SINISTRO</th><th>SEGURADO</th><th>PARTE CONTR&Aacute;RIA</th><th>VALOR PEDIDO</th><th>HONOR&Aacute;RIOS
+</th><th>POS/PROV</th><th>DIGITADOR</th></tr>";
         foreach($todos as $item){
-                $search->setsinistro($item->getsinistro());
+                //$search->setsinistro($item->getSINISTRO());
                 //echo "<tr><td>";
                 //echo($item->getsinistro());
                 //echo "</td>";
-                @$odbcs=$dao->busca6($search);
-            if($odbcs){
-                foreach($odbcs as $item3){
+                //@$todos=$Tododao->busca6($search);
+            //if($todos){
+             //print_r($todos);die;
+                //foreach($todos as $item3){
                     echo "<tr><td>";
-                    echo $item3->getsinistro();
-                    echo "</td><td>";
-                    echo $item->getN_PROC();
-                    echo "</td><td align=right>";
-                    echo $item->getN_NATIGO();
+                    echo $item->getSINISTRO();
                     echo "</td><td>";
                     echo $item->getSEGURADOS();
                     echo "</td><td>";
-                    echo $item3->getTITULAR();
+                    echo $item->getPARTE_CONTRARIA();
+                    echo "</td><td align=right>";
+                    echo $item->getVALOR_PEDIDO();
+                    echo "</td><td align=right>";
+                    echo $item->getHONORARIOS();
                     echo "</td><td>";
-                    echo $item->getOBS();
+                    if($item->getPOSSIVEL()){
+                     echo $item->getPOSSIVEL();
+                    }elseif($item->getPROVAVEL()){
+                     echo $item->getPROVAVEL();
+                    }
+                    echo "</td><td align=center>";
+                     echo $item->getDIGITADOR();
                     echo "</td></tr>";
                     $x++;
-                }
-            }
+                //}
+           // }
         }
         echo "</table>";
     }

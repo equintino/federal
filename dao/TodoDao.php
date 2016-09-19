@@ -8,16 +8,19 @@ final class TodoDao {
         $this->db = null;
     }
     public function find(TodoSearchCriteria $search = null) {
+            set_time_limit(3600);
+            ini_set('memory_limit', '-1');
         $result = array();
-        //print_r($search);
-        //print_r($this->getFindSql($search));die;
+        //print_r($this->getFindSql($search));
+        //echo "<br><br>";
+        //print_r($this->query($this->getFindSql($search)));//die;
         foreach ($this->query($this->getFindSql($search)) as $row) {
             $todo = new Todo();
             //print_r($todo);
             TodoMapper::map($todo, $row);
             $result[$todo->getId()] = $todo;
         }
-        //print_r($result);
+        //print_r($result);die;
         return $result;
     }
     public function find2() {
@@ -146,6 +149,7 @@ final class TodoDao {
         }elseif($search->getN_PROC()){
             $orderBy = ' N_PROC';
         }
+        //print_r($search);
         if ($search !== null) {
             if ($search->getStatus() !== null) {
                 $sql .= 'AND status = ' . $this->getDb()->quote($search->getStatus());
@@ -167,7 +171,7 @@ final class TodoDao {
             }elseif($search->getN_PROC()){
                 $sql .= " and N_PROC like '%".$search->getN_PROC()."%'";
             }
-           $sql .= " and SINISTRO like '%".$sinistro."%'";
+           //$sql .= " and SINISTRO like '%".$sinistro."%'";
         }
         if(@$orderBy){
             $sql .= ' ORDER BY ' . $orderBy;

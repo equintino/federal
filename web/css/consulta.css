@@ -152,19 +152,25 @@ button{
     font-family: cursive;
 }
 .detalhe{
+    #boder: 500px solid red;
     width: 60%;
     #text-align: center;
+    text-shadow: #000 1px 1px 1px, #FFF -1px -1px 1px;
     margin: 20px auto;
     background-image: url('../img/fundo_madeira.jpg');
-    padding: 4px;   
+    padding: 5px;   
     box-shadow: 10px 10px 5px #888888;
-    #color: graytext;
+    color: white;
 }
 .bt_detalhe{
+    text-shadow: #000 1px 1px 1px, #FFF -1px -1px 1px;
     background-color: burlywood;
     margin-right: 100px;
     float: right;
+    padding: 3px; 
     box-shadow: 10px 10px 5px #888888;
+    color: white;
+    font-weight: bold;
 }
 .progresso {
     display: none;

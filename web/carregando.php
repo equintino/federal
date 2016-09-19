@@ -1,6 +1,8 @@
 <link rel="stylesheet" type="text/css" href="css/consulta.css" />
-<meta charset="utf-8">
+<!--<meta charset="utf-8">-->
 <?php 
+ include '../validation/OdbcValidator.php';
+ 
  @$act=$_GET['act'];
  @$idtitular__=$_GET['idtitular__'];
  @$pagAtual=$_GET['pagAtual'];
@@ -9,15 +11,16 @@
  
  
  @$num_sinistro=$_GET['num_sinistro'];
- @$sinistrado=$_GET['sinistrado'];  
+ @$sinistrado=OdbcValidator::tirarAcento($_GET['sinistrado']);  
  @$importanciasegurada=$_GET['importanciasegurada'];
- @$beneficiario=$_GET['beneficiario'];
+ @$beneficiario=  OdbcValidator::tirarAcento($_GET['beneficiario']);
  @$vlindeniza=$_GET['vlindeniza'];
  @$processo=$_GET['processo'];
  if(@!$sinistrado){
    @$sinistrado=$_POST['sinistrado'];
  }
- //print_r($_POST);die;
+ //echo OdbcValidator::tirarAcento($_GET['sinistrado']);die;
+ //print_r($_GET);die;
  
    if(array_key_exists('sucursal',$_POST)){
     $sucursal=$_POST['sucursal'];

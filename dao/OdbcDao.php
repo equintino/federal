@@ -12,7 +12,8 @@ final class OdbcDao {
         }
         $config = Config::getConfig("odbc");
         try {
-            $this->db = odbc_connect($config['banco'],$config['username'],$config['password']) or die (odbc_errormsg());
+            //$this->db = odbc_connect($config['dsn'],$config['username'],$config['password']) or die (odbc_errormsg());
+            $this->db = new PDO($config['dsn'],$config['username'],$config['password']);
         } catch (Exception $ex) {
             throw new Exception('DB connection error: ' . $ex->getMessage());
         }
@@ -20,16 +21,22 @@ final class OdbcDao {
     }
     public function query($sql) {
             set_time_limit(3600);
+        $statement = $this->getDb()->query($sql, PDO::FETCH_ASSOC);
+        if ($statement === false) {
+            self::throwDbError($this->getDb()->errorInfo());
+        }
+        return $statement;
         //var_dump($this->getDb(),$sql);die;
         //$sql = "SELECT * FROM Beneficiarios WHERE exclui like 0";
      //print_r($sql);
+        /*
       $statement = odbc_exec($this->getDb(),$sql);
-      //print_r($sql);die;
-        //print_r($statement);die;
       while($linha = odbc_fetch_array($statement)){
         $result[]=$linha;
       }
       return @$result;
+         * 
+         */
     }
     public function query2($sql) {
       $statement = odbc_exec($this->getDb(),$sql);
@@ -390,21 +397,30 @@ final class OdbcDao {
             $result[$odbc->getidtitular()] = $odbc;
          }
         }
+        //PRINT_R($result);
         return @$result;
     }
     public function queryLinhas($sql){
       set_time_limit(3600);
+        $statement = $this->getDb()->query($sql, PDO::FETCH_ASSOC);
+        if ($statement === false) {
+            self::throwDbError($this->getDb()->errorInfo());
+        }
+        return $statement;
+        /*
       $statement = odbc_exec($this->getDb(),$sql);
       return @$statement;
+      */
     }
     public function totalLinhas(OdbcSearchCriteria $search = null,$tabela){
         $busca = $this->queryLinhas($this->getBuscaLinhas($search,$tabela)); 
         $x=0;
         //print_r($this->getBuscaLinhas($search,$tabela));die;
         //print_r(odbc_result_all($busca));
-        while($linhas=odbc_fetch_row($busca)){
-            $x++;
-        }
+        $x=count($busca->fetchAll(PDO::FETCH_ASSOC));
+        //while($linhas=odbc_fetch_row($busca)){
+            //$x++;
+        //}
         return $x;
     }
     private function getBuscaLinhas(OdbcSearchCriteria $search = null,$tabela){

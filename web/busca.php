@@ -1,3 +1,4 @@
+<meta Content-type: text charset=UTF-8 >
 <?php if($act=='beneficiario'): ?>
 <div class="titulo">BENEFICI&Aacute;RIO</div>
 <form action="teste3.php?act=beneficiario&busca=beneficiario" method="POST">

@@ -2,7 +2,7 @@
 /**
  * Model class representing one TODO item.
  */
-final class Todo {
+final class Oracle {
 
     // priority
     const PRIORITY_IMEDIATA = 0;
@@ -78,7 +78,6 @@ final class Todo {
     private $PARTE_CONTRARIA;
     private $VALOR_PEDIDO;
     private $HONORARIOS;
-    private $DIGITADOR;
     /**
      * Create new {@link Todo} with default properties set.
      */
@@ -119,9 +118,9 @@ final class Todo {
     }
 
     public function setId($id) {
-        if ($this->id !== null && $this->id != $id) {
-            throw new Exception('Cannot change identifier to ' . $id . ', already set to ' . $this->id);
-        }
+        //if ($this->id !== null && $this->id != $id) {
+            //throw new Exception('Cannot change identifier to ' . $id . ', already set to ' . $this->id);
+        //}
         $this->id = (int) $id;
     }
     
@@ -433,12 +432,6 @@ final class Todo {
     }
     public function setHONORARIOS($HONORARIOS){
         $this->HONORARIOS = $HONORARIOS;
-    }
-    public function getDIGITADOR(){
-        return $this->DIGITADOR;
-    }
-    public function setDIGITADOR($DIGITADOR){
-        $this->DIGITADOR = $DIGITADOR;
     }
 }
 ?>

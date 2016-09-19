@@ -1,5 +1,5 @@
 <?php
-final class TodoValidator {
+final class OracleValidator {
 
     private function __construct() {
     }
