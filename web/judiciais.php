@@ -80,7 +80,7 @@ header('Content-type: text/html; charset=UTF-8');
     $todos=$Tododao->find($Todosearch);
     //echo @$sinistrado;die;
      
-     //print_r(count($todos));die;  
+     //print_r($todos);die;  
     //$Oraclesearch->setSINISTRO($sinistro);
     //$Oraclesearch->setSEGURADOS($sinistrado);
     //$Oraclesearch->setN_PROC($processo);
@@ -125,9 +125,13 @@ header('Content-type: text/html; charset=UTF-8');
      //echo "existe todos";die;
      //print_r($todos);
         echo "<table border=1 align=center cellspacing=0 spanspacing=0 class=\"tabela\">";
-        echo "<tr><th>SINISTRO</th><th>SEGURADO</th><th>PARTE CONTR&Aacute;RIA</th><th>VALOR PEDIDO</th><th>HONOR&Aacute;RIOS
+        echo "<tr><th>SINISTRO</th><th>SEGURADO</th><th>PARTE CONTR&Aacute;RIA</th><th>VALOR PEDIDO</th><th>VALOR ADMINISTRATIVO</th><th>HONOR&Aacute;RIOS
 </th><th>POS/PROV</th><th>DIGITADOR</th></tr>";
-        foreach($todos as $item){
+        foreach($todos as $item){          
+            $search->setsinistro($item->getSINISTRO());
+            $odbcs=$dao->busca3($search);
+            foreach($odbcs as $item2);
+            //print_r($item2);die;
                 //$search->setsinistro($item->getSINISTRO());
                 //echo "<tr><td>";
                 //echo($item->getsinistro());
@@ -144,6 +148,8 @@ header('Content-type: text/html; charset=UTF-8');
                     echo $item->getPARTE_CONTRARIA();
                     echo "</td><td align=right>";
                     echo $item->getVALOR_PEDIDO();
+                    echo "</td><td align=right>";
+                    echo number_format($item2->getIMPORTANCIA_SEGURADA(),'2',',','.');
                     echo "</td><td align=right>";
                     echo $item->getHONORARIOS();
                     echo "</td><td>";

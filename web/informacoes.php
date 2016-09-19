@@ -1,4 +1,5 @@
 <?php
+//phpinfo();
     $tabela1='sinipend';
     $tabela2='Beneficiarios';
     @$inicio=$_GET['inicio'];
@@ -14,9 +15,13 @@
         $busca=OdbcValidator::removePonto($_GET['cpf']);
         $cpf=$busca;
     }
+    //print_r($dao->listaCampo2($tabela1,$campo,$busca,$pagAtual));
+    //echo "<br><br>";
+    //print_r($dao->listaCampo($tabela2,$campo,$busca,$pagAtual));die;
     
     if($dao->listaCampo2($tabela1,$campo,$busca,$pagAtual) || $dao->listaCampo($tabela2,$campo,$busca,$pagAtual)){
      $pesquisa=$dao->listaCampo2($tabela1,$campo,$busca,$pagAtual);
+     //print_r($pesquisa);
     }else{
      $busca=OdbcValidator::mask($cpf,"###.###.###-##");
      $pesquisa=$dao->listaCampo2($tabela1,$campo,$busca,$pagAtual);
@@ -25,6 +30,7 @@
     echo "<h3>SINISTRADO</h3>";
     echo "<div class=sinistrado >";
     if($pesquisa){
+        //print_r($pesquisa);die;
         foreach($pesquisa as $item){
             $cpf1=OdbcValidator::removePonto($item['CPF']);
             echo "<label>Certificado: </label>";
@@ -49,6 +55,7 @@
             $certificado_[]= $item['ENDOSSO'];
         }
         $limite=count($dao->listaCampo3($tabela1,$campo,$busca,$pagAtual));
+        //var_dump($limite);die;
         if($limite < 4){
          $proximo='<button disabled>';
         }else{

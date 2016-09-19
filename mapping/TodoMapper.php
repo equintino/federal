@@ -197,6 +197,9 @@ final class TodoMapper {
         }
         if (array_key_exists('DIGITADOR', $properties)) {
             $todo->setDIGITADOR($properties['DIGITADOR']);
+        } 
+        if (array_key_exists('VALOR_ADMINISTRATIVO', $properties)) {
+            $todo->setVALOR_ADMINISTRATIVO($properties['VALOR_ADMINISTRATIVO']);
         }  
     }
     private static function createDateTime($input) {

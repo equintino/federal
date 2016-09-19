@@ -79,6 +79,7 @@ final class Todo {
     private $VALOR_PEDIDO;
     private $HONORARIOS;
     private $DIGITADOR;
+    private $VALOR_ADMINISTRATIVO;
     /**
      * Create new {@link Todo} with default properties set.
      */
@@ -439,6 +440,12 @@ final class Todo {
     }
     public function setDIGITADOR($DIGITADOR){
         $this->DIGITADOR = $DIGITADOR;
+    }
+    public function getVALOR_ADMINISTRATIVO(){
+        return $this->VALOR_ADMINISTRATIVO;
+    }
+    public function setVALOR_ADMINISTRATIVO($VALOR_ADMINISTRATIVO){
+        $this->VALOR_ADMINISTRATIVO = $VALOR_ADMINISTRATIVO;
     }
 }
 ?>

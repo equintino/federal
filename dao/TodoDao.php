@@ -142,7 +142,7 @@ final class TodoDao {
             $sinistro=$search->getSINISTRO();
         }
         
-        $sql = 'SELECT * FROM processojudicial WHERE 1';
+        $sql = 'SELECT * FROM processo_judicial WHERE 1';
                 // 'deleted = 0 ';
         if($search->getSINISTRO()){
             $orderBy = ' SINISTRO';
