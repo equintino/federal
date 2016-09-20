@@ -26,16 +26,45 @@
           
           //// Lista de SINISTRADO ////
           //echo '<table border=1 align=center cellspacing=0 spanspacing=0 class="tabela">';      
-          //echo "<tr><th>SINISTRO</th><th>SEGURADO</th></tr>";
+          //echo "<tr><th>SINISTRO</th><th>SEGURADO</th></tr>";  
+           
+        /// Criando arquivo com segurados administratativo ///
+            $filename_='arquivos/administrativo.csv';
+            $handle_=fopen($filename_, 'w+');
+            $texto_="SINISTRO;SINISTRADO;VALOR_INDENIZAR\r\n";
+            fwrite($handle_, $texto_);
+        /// continua ///
+            
              $sin_num=0;
              if($dao->listaConteudo($tabela2)){
               foreach($dao->listaConteudo($tabela2) as $item2){
-                  //print_r($item2);die;
                @$sinistro_[]=$item2['SINISTRO'];
                @$titular[]=$item2['TITULAR'];
                @$certificado2[]=$item2['ENDOSSO'];
                @$dt_aviso[]=$item2['DT_AVISO'];
-               @$imp_segurada[]=$item2['IMPORTANCIA_SEGURADA'];
+               @$imp_segurada[]=$item2['IMPORTANCIA_SEGURADA']; 
+               
+               if($item2['SINISTRO']){
+                   $Todosearch->setSINISTRO($item2['SINISTRO']);
+                   //print_r($Todosearch->getSINISTRO());die;
+                  $sinSemJd=$Tododao->findBySinistro($Todosearch);
+                  //print_r($sinSemJd);
+                  //echo "<br><br>";
+                  //if($sinSemJd){
+                    //foreach($sinSemJd as $lista){
+                        //print_r($lista->getSINISTRO());DIE;
+                    //}
+                  //}
+                  if(!$sinSemJd){
+               
+                    /// continuacao ///
+                        $texto_=$item2['SINISTRO'].";".$item2['TITULAR'].";".number_format($item2['IMPORTANCIA_SEGURADA'],'2',',','.')."\r\n";
+                        fwrite($handle_, $texto_);
+                    /// continua ///
+                        
+                
+                  }
+                }
                
                if($item2['SINISTRO']){
                 $Todosearch->setSINISTRO($item2['SINISTRO']);
@@ -58,17 +87,19 @@
                //echo $item2['TITULAR'];
                //echo "</td></tr>";
               }
-             }
-             //print_r($sinJud);
-             //die;
+             }        
+                    /// continuacao ///
+                        fclose($handle_);
+                        unset($texto_);
+                    /// fim administrativo ///
+
            //echo "</table>";
              
             ///// Lista BENEFICIARIOS ///// 
           echo '<table border=1 align=center cellspacing=0 spanspacing=0 class="tabela">';      
           echo "<tr><th>SINISTRO</th><th>AP&Oacute;LICE</th><th>CERTIFICADO</th><th>BENEFICI&AacuteRIO</th><th>A INDENIZAR</th></tr>";
-             //print_r($dt_aviso);die;
           //// lista de BENEFICIARIOS ////   
-            $linha_vazia=0;
+            $linha_vazia=0;     
 
             if($dao->listaConteudo($tabela)){
             foreach($dao->listaConteudo($tabela) as $item){ 
@@ -83,11 +114,6 @@
                     $x++;
                 }
             $key=array_search($item['sinistro'],$sinistro_); 
-            //print_r(array_search('0124.93.03.00000526',$sinistro_));
-            //echo "<br>";
-            //echo $sinistro_[797];
-            //die;
-            //echo "<br>";
             
                 if($item['vlindeniza'] == 0 || $item['endosso'] != $certificado2[$key] || $item['sinistro'] == '' || (substr($item['apolice'],8,2) != 00)){
                     $sin_vazio[]=$item['sinistro'];
@@ -98,28 +124,30 @@
                     $apolices[]=$item['apolice'];
                     $linha_vazia++;
                 }
-                    //if(@$key != @$key_old){
-                        //$titular_cad[]=$titular[$key];
-                        //$sinistro_cad[]=$sinistro_[$key];
-                        //$imp_segurada_cad[]=$imp_segurada[$key];
+                ///////// Levantamento ////////
+                        /*
+                    if(@$key != @$key_old){
+                        $titular_cad[]=$titular[$key];
+                        $sinistro_cad[]=$sinistro_[$key];
+                        $imp_segurada_cad[]=$imp_segurada[$key];
                         //echo $titular[$key];
                         //echo " - $key";
                         //echo "<br>"; 
-                    //}
-                    //$key_old=$key;
+                    }
+                    $key_old=$key;
+                         */
+                //////// continua ////////
             }
-                //print_r($titular_cad);
-                //$titular_cad[797];
-                //die;
-           }
+         }
           echo '</table>';
-        echo "</div>";
-                      
+        echo "</div>";               
         echo "<br><br><br><br><br><br>";
         echo "<div>";
             echo "<h3 align='center'><span>Cadastros Benefici&aacute;rios Incompletos ou Certificado diverg&ecirc;nte</span></h3>";
             echo "<div id=total class=busca></div>";
             echo "<table border=1 align=center cellspacing=0 spanspacing=0><tr><th>SINISTRO</th><th>AP&Oacute;LICE</th><th>CERTIFICADO</th><th>BENEFICI&Aacute;RIO</th><th>A INDENIZAR</th></tr>";
+            
+            
             if(@!$sin_vazio){
              $sin_vazio=null;
             }
@@ -141,6 +169,15 @@
              //$keys[]=$key;
              //$dados=$pCadastrar[$key]=>$dt_aviso[$key]);
             //}
+            
+            
+            //foreach($sinistro_ as $individual){
+                //$sin_cadastrado_unico[]=  in_array($individual, $sin_cadastrado);
+                //echo $individual."<br>";
+            //}
+            //die;
+            
+            
             $keys=array_keys($pCadastrar);
             unset($sinistro_,$sin_cadastrado);
             $contador=0;
@@ -162,7 +199,7 @@
         /// fim ///
             
             
-          /////////////////////////////////////////////////
+          ////////////////////Levantamento/////////////////////////////
             /*
              echo "SOMA DO VALOR INDENIZADO POR SEGURADO - <b>R$ ";
              print_r(number_format(array_sum($imp_segurada),'2',',','.'));
@@ -179,16 +216,16 @@
             echo $sinistro_cad[$x];
             echo "</td><td>";
             echo $titular_cad[$x];
-            echo "</td><td>";
-            echo $imp_segurada_cad[$x];
+            echo "</td><td align=right>";
+            echo number_format($imp_segurada_cad[$x],'2',',','.');
             echo "</td></tr>";
           }
             echo "</table>";
              die;
-             
              * 
              */
-          //////////////////////////////////////////////////////////
+            
+          //////////////////////////fim Levantamento////////////////////////////////
             
           echo '<table align=center border=1 cellspacing=0 class="resumo">';
           echo '<th colspan=3>RESUMO</th>';

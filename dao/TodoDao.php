@@ -90,6 +90,19 @@ final class TodoDao {
         TodoMapper::map($todo, $row);
         return $todo;
     }
+    public function findBySinistro(TodoSearchCriteria $Todosearch = null) {
+        //print_r($Todosearch->getSINISTRO());die;
+        $row = $this->query("SELECT SINISTRO FROM processo_judicial WHERE SINISTRO = '".$Todosearch->getSINISTRO()."'") ->fetch();
+        //print_r($row);die;
+        if (!$row) {
+            //echo "passei por aqui";
+            return null;
+        }
+        //print_r($row);die;
+        $todo = new Todo();
+        TodoMapper::map($todo, $row);
+        return $todo;
+    }
     public function save(ToDo $todo) {
      //print_r($todo);die;
         if ($todo->getId() === null) {
