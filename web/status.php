@@ -4,6 +4,7 @@
    $search = new OracleSearchCriteria();
    //$todos = new Todo();
     //print_r($_GET);die;
+   //print_r($search);die;
    
    $sinistro=$_GET['sinistro'];
    $beneficiario=$_GET['beneficiario'];
@@ -13,6 +14,7 @@
    $search->setSINISTRO($sinistro); 
    
    $oracles=$oracleDao->find3($search);
+   //print_r($oracles);die;
    //print_r(foreach($oracles as $x));die;
    //echo "<br>";
    echo "<div class=detalhe>";
