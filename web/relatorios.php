@@ -98,15 +98,15 @@
                     $apolices[]=$item['apolice'];
                     $linha_vazia++;
                 }
-                    if(@$key != @$key_old){
-                        $titular_cad[]=$titular[$key];
-                        $sinistro_cad[]=$sinistro_[$key];
-                        $imp_segurada_cad[]=$imp_segurada[$key];
+                    //if(@$key != @$key_old){
+                        //$titular_cad[]=$titular[$key];
+                        //$sinistro_cad[]=$sinistro_[$key];
+                        //$imp_segurada_cad[]=$imp_segurada[$key];
                         //echo $titular[$key];
                         //echo " - $key";
                         //echo "<br>"; 
-                    }
-                    $key_old=$key;
+                    //}
+                    //$key_old=$key;
             }
                 //print_r($titular_cad);
                 //$titular_cad[797];
@@ -133,16 +133,16 @@
         $campo='sinistro';
         $processos=count($Tododao->find($Todosearch));//count(@$sinJud);
         //ECHO $processos;die;
+        
         /// sinistros p/ cadastrar ///
             $dados='';
             $pCadastrar=array_diff($sinistro_,$sin_cadastrado);
             //foreach($pCadastrar as $key => $valores){
              //$keys[]=$key;
              //$dados=$pCadastrar[$key]=>$dt_aviso[$key]);
-             //echo "<br>";
             //}
             $keys=array_keys($pCadastrar);
-            //print_r($keys);
+            unset($sinistro_,$sin_cadastrado);
             $contador=0;
             foreach($keys as $item){
              if($pCadastrar[$item]){
@@ -153,19 +153,12 @@
              }
              $contador++;
             }
-            //print_r($dados);die;
-            //print_r($dados);die;
-            //echo array_pop($keys);die;
-            //print_r($dados);die;
-            //print_r($keys);die;
-            //print_r($texto);die;
-            //print_r($cadastro);die;
             $texto=($dados);
             $filename='arquivos/pCadastrar.txt';
             $handle=fopen($filename, 'w+');
             fwrite($handle, $texto);
             fclose($handle);
-            //print_r($pCadastrar);die;
+            unset($texto);
         /// fim ///
             
             
@@ -202,7 +195,7 @@
           echo '<tr><th colspan=2>IMPORTADOS (proc. jud.)</th><th><span>p/ cadastrar</span></th></tr>';
           echo '<tr><td colspan=2 align=center>';
           echo number_format($sin_num,'0','','.');
-          echo " (".($processos).")";
+          echo " (<a href=\"teste3.php?act=judiciais&busca=judiciais\">".($processos)."</a>)";
           echo '</td><td align=center>';
           echo "<a href=teste3.php?act=relatorio&abrir=2>";
           echo number_format(($sin_num)-$y,'0','','.');
