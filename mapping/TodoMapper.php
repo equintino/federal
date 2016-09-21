@@ -200,6 +200,48 @@ final class TodoMapper {
         } 
         if (array_key_exists('VALOR_ADMINISTRATIVO', $properties)) {
             $todo->setVALOR_ADMINISTRATIVO($properties['VALOR_ADMINISTRATIVO']);
+        } 
+        if (array_key_exists('JANEIRO', $properties)) {
+            $todo->setJANEIRO($properties['JANEIRO']);
+        } 
+        if (array_key_exists('FEVEREIRO', $properties)) {
+            $todo->setFEVEREIRO($properties['FEVEREIRO']);
+        } 
+        if (array_key_exists('MARCO', $properties)) {
+            $todo->setMARCO($properties['MARCO']);
+        } 
+        if (array_key_exists('ABRIL', $properties)) {
+            $todo->setABRIL($properties['ABRIL']);
+        } 
+        if (array_key_exists('MAIO', $properties)) {
+            $todo->setMAIO($properties['MAIO']);
+        } 
+        if (array_key_exists('JUNHO', $properties)) {
+            $todo->setJUNHO($properties['JUNHO']);
+        } 
+        if (array_key_exists('JULHO', $properties)) {
+            $todo->setJULHO($properties['JULHO']);
+        } 
+        if (array_key_exists('AGOSTO', $properties)) {
+            $todo->setAGOSTO($properties['AGOSTO']);
+        } 
+        if (array_key_exists('SETEMBRO', $properties)) {
+            $todo->setSETEMBRO($properties['SETEMBRO']);
+        } 
+        if (array_key_exists('OUTUBRO', $properties)) {
+            $todo->setOUTUBRO($properties['OUTUBRO']);
+        } 
+        if (array_key_exists('NOVEMBRO', $properties)) {
+            $todo->setNOVEMBRO($properties['NOVEMBRO']);
+        } 
+        if (array_key_exists('DEZEMBRO', $properties)) {
+            $todo->setDEZEMBRO($properties['DEZEMBRO']);
+        } 
+        if (array_key_exists('ANO', $properties)) {
+            $todo->setANO($properties['ANO']);
+        } 
+        if (array_key_exists('ACUMULADO', $properties)) {
+            $todo->setACUMULADO($properties['ACUMULADO']);
         }  
     }
     private static function createDateTime($input) {

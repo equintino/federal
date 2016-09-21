@@ -80,6 +80,22 @@ final class Todo {
     private $HONORARIOS;
     private $DIGITADOR;
     private $VALOR_ADMINISTRATIVO;
+    
+    
+    private $JANEIRO;
+    private $FEVEREIRO;
+    private $MARCO;
+    private $ABRIL;
+    private $MAIO;
+    private $JUNHO;
+    private $JULHO;
+    private $AGOSTO;
+    private $SETEMBRO;
+    private $OUTUBRO;
+    private $NOVEMBRO;
+    private $DEZEMBRO;
+    private $ANO;
+    private $ACUMULADO;
     /**
      * Create new {@link Todo} with default properties set.
      */
@@ -446,6 +462,90 @@ final class Todo {
     }
     public function setVALOR_ADMINISTRATIVO($VALOR_ADMINISTRATIVO){
         $this->VALOR_ADMINISTRATIVO = $VALOR_ADMINISTRATIVO;
+    }
+    public function getJANEIRO(){
+        return $this->JANEIRO;
+    }
+    public function setJANEIRO($JANEIRO){
+        $this->JANEIRO = $JANEIRO;
+    }
+    public function getFEVEREIRO(){
+        return $this->FEVEREIRO;
+    }
+    public function setFEVEREIRO($FEVEREIRO){
+        $this->FEVEREIRO = $FEVEREIRO;
+    }
+    public function getMARCO(){
+        return $this->MARCO;
+    }
+    public function setMARCO($MARCO){
+        $this->MARCO = $MARCO;
+    }
+    public function getABRIL(){
+        return $this->ABRIL;
+    }
+    public function setABRIL($ABRIL){
+        $this->ABRIL = $ABRIL;
+    }
+    public function getMAIO(){
+        return $this->MAIO;
+    }
+    public function setMAIO($MAIO){
+        $this->MAIO = $MAIO;
+    }
+    public function getJUNHO(){
+        return $this->JUNHO;
+    }
+    public function setJUNHO($JUNHO){
+        $this->JUNHO = $JUNHO;
+    }
+    public function getJULHO(){
+        return $this->JULHO;
+    }
+    public function setJULHO($JULHO){
+        $this->JULHO = $JULHO;
+    }
+    public function getAGOSTO(){
+        return $this->AGOSTO;
+    }
+    public function setAGOSTO($AGOSTO){
+        $this->AGOSTO = $AGOSTO;
+    }
+    public function getSETEMBRO(){
+        return $this->SETEMBRO;
+    }
+    public function setSETEMBRO($SETEMBRO){
+        $this->SETEMBRO = $SETEMBRO;
+    }
+    public function getOUTUBRO(){
+        return $this->OUTUBRO;
+    }
+    public function setOUTUBRO($OUTUBRO){
+        $this->OUTUBRO = $OUTUBRO;
+    }
+    public function getNOVEMBRO(){
+        return $this->NOVEMBRO;
+    }
+    public function setNOVEMBRO($NOVEMBRO){
+        $this->NOVEMBRO = $NOVEMBRO;
+    }
+    public function getDEZEMBRO(){
+        return $this->DEZEMBRO;
+    }
+    public function setDEZEMBRO($DEZEMBRO){
+        $this->DEZEMBRO = $DEZEMBRO;
+    }
+    public function getANO(){
+        return $this->ANO;
+    }
+    public function setANO($ANO){
+        $this->ANO = $ANO;
+    }
+    public function getACUMULADO(){
+        return $this->ACUMULADO;
+    }
+    public function setACUMULADO($ACUMULADO){
+        $this->ACUMULADO = $ACUMULADO;
     }
 }
 ?>

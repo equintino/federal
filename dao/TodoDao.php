@@ -81,6 +81,19 @@ final class TodoDao {
         //print_r($result);die;
         return @$result;
     }
+    public function find7(TodoSearchCriteria $search = null) {
+         //print_r($search);die;
+        foreach ($this->query($this->getFindSql7($search)) as $row) {
+            $todo = new Todo();
+         //echo "<br><br>";
+            TodoMapper::map($todo, $row);
+            //echo "<br><br>";
+          //print_r($todo);  
+            $result[$todo->getId()] = $todo;
+        }
+        //print_r($result);die;
+        return @$result;
+    }
     public function findById($id) {
         $row = $this->query('SELECT * FROM processojudicial WHERE deleted = 0 and id = ' . (int) $id)->fetch();
         if (!$row) {
@@ -245,6 +258,16 @@ final class TodoDao {
     private function getFindSql6(TodoSearchCriteria $search = null) {
      //print_r($search);die;
         $sql = 'SELECT * FROM jd_sinistrado INNER JOIN jd_provavel ON jd_sinistrado.SEGURADOS=jd_provavel.SEGURADOS ';//WHERE ';//COD_SIN=\'0126.93.03.00000046\'';
+        //$orderBy = ' Segurado';
+        //$sql .= ' SEGURADOS=\''.$search->getSEGURADOS().'\'';
+        //$sql .= ' ORDER BY ' . $orderBy;
+        //$sql .= ' limit 0,15';
+        //print_r($sql);die;
+        return $sql;
+    }
+    private function getFindSql7(TodoSearchCriteria $search = null) {
+     //print_r($search);die;
+        $sql = 'SELECT * FROM igpm';//WHERE ';//COD_SIN=\'0126.93.03.00000046\'';
         //$orderBy = ' Segurado';
         //$sql .= ' SEGURADOS=\''.$search->getSEGURADOS().'\'';
         //$sql .= ' ORDER BY ' . $orderBy;
