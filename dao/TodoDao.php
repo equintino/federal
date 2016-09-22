@@ -104,14 +104,26 @@ final class TodoDao {
         return $todo;
     }
     public function findBySinistro(TodoSearchCriteria $Todosearch = null) {
+<<<<<<< aabd58afdcead23c32280fff61c8d3d950f4b7b3
         $row = $this->query("SELECT SINISTRO FROM processo_judicial WHERE SINISTRO = '".$Todosearch->getSINISTRO()."'") ->fetch();
         if (!$row) {
             return null;
         }
+=======
+        //print_r($Todosearch->getSINISTRO());die;
+        $row = $this->query("SELECT SINISTRO FROM processo_judicial WHERE SINISTRO = '".$Todosearch->getSINISTRO()."'") ->fetch();
+        //print_r($row);die;
+        if (!$row) {
+            //echo "passei por aqui";
+            return null;
+        }
+        //print_r($row);die;
+>>>>>>> casa
         $todo = new Todo();
         TodoMapper::map($todo, $row);
         return $todo;
     }
+<<<<<<< aabd58afdcead23c32280fff61c8d3d950f4b7b3
     public function findByIgpm(TodoSearchCriteria $Todosearch = null) {
         $row = $this->query("SELECT * FROM igpm WHERE ANO = '".$Todosearch->getANO()."'") ->fetch();
         if (!$row) {
@@ -162,6 +174,8 @@ final class TodoDao {
         //print_r($todos);die;
         return $todos;
     }
+=======
+>>>>>>> casa
     public function save(ToDo $todo) {
      //print_r($todo);die;
         if ($todo->getId() === null) {
