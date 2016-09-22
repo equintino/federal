@@ -42,6 +42,7 @@ final class Todo {
     private $CPF;
     private $OBS;
     private $SEGURADOS;
+    private $SEGURADO;
     private $N_PROC;
     private $N_NATIGO;
     private $NATUREZA;
@@ -80,6 +81,7 @@ final class Todo {
     private $HONORARIOS;
     private $DIGITADOR;
     private $VALOR_ADMINISTRATIVO;
+    private $MENOR_VALOR;
     
     
     private $JANEIRO;
@@ -96,6 +98,9 @@ final class Todo {
     private $DEZEMBRO;
     private $ANO;
     private $ACUMULADO;
+    private $CORRECAO_IGPM;
+    private $CORRECAO_TR;
+    
     /**
      * Create new {@link Todo} with default properties set.
      */
@@ -234,6 +239,13 @@ final class Todo {
 
     public function setSEGURADOS($SEGURADOS) {
         $this->SEGURADOS = $SEGURADOS;
+    }
+    public function getSEGURADO() {
+        return $this->SEGURADO;
+    }
+
+    public function setSEGURADO($SEGURADO) {
+        $this->SEGURADO = $SEGURADO;
     }
     public function getN_PROC(){
         return $this->N_PROC;
@@ -463,6 +475,12 @@ final class Todo {
     public function setVALOR_ADMINISTRATIVO($VALOR_ADMINISTRATIVO){
         $this->VALOR_ADMINISTRATIVO = $VALOR_ADMINISTRATIVO;
     }
+    public function getMENOR_VALOR(){
+        return $this->MENOR_VALOR;
+    }
+    public function setMENOR_VALOR($MENOR_VALOR){
+        $this->MENOR_VALOR = $MENOR_VALOR;
+    }
     public function getJANEIRO(){
         return $this->JANEIRO;
     }
@@ -546,6 +564,18 @@ final class Todo {
     }
     public function setACUMULADO($ACUMULADO){
         $this->ACUMULADO = $ACUMULADO;
+    }
+    public function getCORRECAO_IGPM(){
+        return $this->CORRECAO_IGPM;
+    }
+    public function setCORRECAO_IGPM($CORRECAO_IGPM){
+        $this->CORRECAO_IGPM = $CORRECAO_IGPM;
+    }
+    public function getCORRECAO_TR(){
+        return $this->CORRECAO_TR;
+    }
+    public function setCORRECAO_TR($CORRECAO_TR){
+        $this->CORRECAO_TR = $CORRECAO_TR;
     }
 }
 ?>

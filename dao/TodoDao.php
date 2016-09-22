@@ -104,17 +104,63 @@ final class TodoDao {
         return $todo;
     }
     public function findBySinistro(TodoSearchCriteria $Todosearch = null) {
-        //print_r($Todosearch->getSINISTRO());die;
         $row = $this->query("SELECT SINISTRO FROM processo_judicial WHERE SINISTRO = '".$Todosearch->getSINISTRO()."'") ->fetch();
-        //print_r($row);die;
         if (!$row) {
-            //echo "passei por aqui";
             return null;
         }
-        //print_r($row);die;
         $todo = new Todo();
         TodoMapper::map($todo, $row);
         return $todo;
+    }
+    public function findByIgpm(TodoSearchCriteria $Todosearch = null) {
+        $row = $this->query("SELECT * FROM igpm WHERE ANO = '".$Todosearch->getANO()."'") ->fetch();
+        if (!$row) {
+            return null;
+        }
+        $todo = new Todo();
+        TodoMapper::map($todo, $row);
+        return $todo;
+    }
+    public function findByTr(TodoSearchCriteria $Todosearch = null) {
+        $row = $this->query("SELECT * FROM tr WHERE ANO = '".$Todosearch->getANO()."'") ->fetch();
+        if (!$row) {
+            return null;
+        }
+        $todo = new Todo();
+        TodoMapper::map($todo, $row);
+        return $todo;
+    }
+    public function findByProvavel(TodoSearchCriteria $Todosearch = null) {
+        $row = $this->query("SELECT * FROM jd_provavel WHERE SINISTRO = '".$Todosearch->getSINISTRO()."'") ->fetch();
+        if (!$row) {
+            return null;
+        }
+        $todo = new Todo();
+        TodoMapper::map($todo, $row);
+        return $todo;
+    }
+    public function findByProvavelHenrique(TodoSearchCriteria $Todosearch = null) {
+        $row = $this->query("SELECT * FROM geral_henrique WHERE SINISTRO = '".$Todosearch->getSINISTRO()."'") ->fetch();
+        if (!$row) {
+            return null;
+        }
+        $todo = new Todo();
+        TodoMapper::map($todo, $row);
+        return $todo;
+    }
+    public function listaProvavel(TodoSearchCriteria $Todosearch = null) {
+        $rows = $this->query("SELECT * FROM jd_provavel INNER JOIN geral_henrique ON jd_provavel.SINISTRO = geral_henrique.SINISTRO") ->fetchAll();
+        //print_r($row);die;
+        //if (!$row) {
+            //return null;
+        //}
+        $todo = new Todo();
+        foreach($rows as $row){
+            TodoMapper::map($todo, $row);
+            $todos[]=$row;
+        }
+        //print_r($todos);die;
+        return $todos;
     }
     public function save(ToDo $todo) {
      //print_r($todo);die;

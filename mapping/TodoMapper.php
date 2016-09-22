@@ -95,6 +95,9 @@ final class TodoMapper {
         if (array_key_exists('SEGURADOS', $properties)) {
             $todo->setSEGURADOS($properties['SEGURADOS']);
         }
+        if (array_key_exists('SEGURADO', $properties)) {
+            $todo->setSEGURADO($properties['SEGURADO']);
+        }
         if (array_key_exists('N_PROC', $properties)){
             $todo->setN_PROC($properties['N_PROC']);
         }
@@ -201,6 +204,9 @@ final class TodoMapper {
         if (array_key_exists('VALOR_ADMINISTRATIVO', $properties)) {
             $todo->setVALOR_ADMINISTRATIVO($properties['VALOR_ADMINISTRATIVO']);
         } 
+        if (array_key_exists('MENOR_VALOR', $properties)) {
+            $todo->setMENOR_VALOR($properties['MENOR_VALOR']);
+        } 
         if (array_key_exists('JANEIRO', $properties)) {
             $todo->setJANEIRO($properties['JANEIRO']);
         } 
@@ -242,7 +248,13 @@ final class TodoMapper {
         } 
         if (array_key_exists('ACUMULADO', $properties)) {
             $todo->setACUMULADO($properties['ACUMULADO']);
+        } 
+        if (array_key_exists('CORRECAO_IGPM', $properties)) {
+            $todo->setCORRECAO_IGPM($properties['CORRECAO_IGPM']);
         }  
+        if (array_key_exists('CORRECAO_TR', $properties)) {
+            $todo->setCORRECAO_TR($properties['CORRECAO_TR']);
+        }   
     }
     private static function createDateTime($input) {
         //return DateTime::createFromFormat('j-n-Y H:i:s', $input);
