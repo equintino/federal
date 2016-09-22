@@ -1,16 +1,23 @@
+<<<<<<< 0bcb9db44cdaa5ded769cf1b647ab0bb1e6a25c5
 <meta charset="utf8">
+=======
+>>>>>>> casa3
 <?php
    include '../dao/TodoDao.php';
    include '../dao/TodoSearchCriteria.php';
    include '../config/Config.php';
    include '../model/Todo.php';
    include '../validation/TodoValidator.php';
+<<<<<<< 0bcb9db44cdaa5ded769cf1b647ab0bb1e6a25c5
    include '../validation/OdbcValidator.php';
+=======
+>>>>>>> casa3
    include '../mapping/TodoMapper.php';
    
    $Tododao=new TodoDao(); 
    $Todosearch=new TodoSearchCriteria();
    
+<<<<<<< 0bcb9db44cdaa5ded769cf1b647ab0bb1e6a25c5
    $Todosearch->setANO(2015);
    
    $provaveis=$Tododao->listaProvavel();
@@ -42,5 +49,8 @@
        echo "</td></tr>";
    }
     echo "</table>";
+=======
+   print_r($Tododao->find7());
+>>>>>>> casa3
 ?>
 

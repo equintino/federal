@@ -81,7 +81,10 @@ final class Todo {
     private $HONORARIOS;
     private $DIGITADOR;
     private $VALOR_ADMINISTRATIVO;
+<<<<<<< 0bcb9db44cdaa5ded769cf1b647ab0bb1e6a25c5
     private $MENOR_VALOR;
+=======
+>>>>>>> casa3
     
     
     private $JANEIRO;
@@ -98,9 +101,12 @@ final class Todo {
     private $DEZEMBRO;
     private $ANO;
     private $ACUMULADO;
+<<<<<<< 0bcb9db44cdaa5ded769cf1b647ab0bb1e6a25c5
     private $CORRECAO_IGPM;
     private $CORRECAO_TR;
     
+=======
+>>>>>>> casa3
     /**
      * Create new {@link Todo} with default properties set.
      */
@@ -475,12 +481,15 @@ final class Todo {
     public function setVALOR_ADMINISTRATIVO($VALOR_ADMINISTRATIVO){
         $this->VALOR_ADMINISTRATIVO = $VALOR_ADMINISTRATIVO;
     }
+<<<<<<< 0bcb9db44cdaa5ded769cf1b647ab0bb1e6a25c5
     public function getMENOR_VALOR(){
         return $this->MENOR_VALOR;
     }
     public function setMENOR_VALOR($MENOR_VALOR){
         $this->MENOR_VALOR = $MENOR_VALOR;
     }
+=======
+>>>>>>> casa3
     public function getJANEIRO(){
         return $this->JANEIRO;
     }
@@ -565,6 +574,7 @@ final class Todo {
     public function setACUMULADO($ACUMULADO){
         $this->ACUMULADO = $ACUMULADO;
     }
+<<<<<<< 0bcb9db44cdaa5ded769cf1b647ab0bb1e6a25c5
     public function getCORRECAO_IGPM(){
         return $this->CORRECAO_IGPM;
     }
@@ -577,5 +587,7 @@ final class Todo {
     public function setCORRECAO_TR($CORRECAO_TR){
         $this->CORRECAO_TR = $CORRECAO_TR;
     }
+=======
+>>>>>>> casa3
 }
 ?>
