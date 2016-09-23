@@ -204,12 +204,9 @@ final class TodoMapper {
         if (array_key_exists('VALOR_ADMINISTRATIVO', $properties)) {
             $todo->setVALOR_ADMINISTRATIVO($properties['VALOR_ADMINISTRATIVO']);
         } 
-<<<<<<< 0bcb9db44cdaa5ded769cf1b647ab0bb1e6a25c5
         if (array_key_exists('MENOR_VALOR', $properties)) {
             $todo->setMENOR_VALOR($properties['MENOR_VALOR']);
         } 
-=======
->>>>>>> casa3
         if (array_key_exists('JANEIRO', $properties)) {
             $todo->setJANEIRO($properties['JANEIRO']);
         } 
@@ -251,12 +248,9 @@ final class TodoMapper {
         } 
         if (array_key_exists('ACUMULADO', $properties)) {
             $todo->setACUMULADO($properties['ACUMULADO']);
-<<<<<<< 0bcb9db44cdaa5ded769cf1b647ab0bb1e6a25c5
         } 
         if (array_key_exists('CORRECAO_IGPM', $properties)) {
             $todo->setCORRECAO_IGPM($properties['CORRECAO_IGPM']);
-=======
->>>>>>> casa3
         }  
         if (array_key_exists('CORRECAO_TR', $properties)) {
             $todo->setCORRECAO_TR($properties['CORRECAO_TR']);
