@@ -25,11 +25,13 @@
     */
    $igpms=$Tododao->findByIgpm($Todosearch);
    //print_r($igpms);die;
+   //print_r($provaveis);die;
    foreach($provaveis as $provavel){
     $mes=substr($provavel['DT_AVISO'],3,2);
     $ano=substr($provavel['DT_AVISO'],6,4);
     $nomeMes=TodoValidator::nomeMes($mes);
     $valorCorrigido=$provavel['VALOR_ADMINISTRATIVO'];
+    $sinistro=$provavel['SINISTRO'];
     //$mes=5;
     //$ano=2012;
     if($ano<2014 && $mes<'8'){
@@ -88,11 +90,16 @@
            //$mes_='getJUNHO()';
            //echo $ig;
              $igpm_mes=(OdbcValidator::removePonto($mes_))/10000;
+             PRINT_R($sinistro);
+             echo " - ";
              print_r($valorCorrigido);
-             echo " * ";
+             echo " ) $nomeMes -> $mes_ ";
              print_r($igpm_mes);
+             echo "<br>";
+             $correcao=((OdbcValidator::removePonto($provavel['VALOR_ADMINISTRATIVO'])/100)*$igpm_mes);
+             echo $correcao;die;
              $valorCorrigido=$valorCorrigido+(((OdbcValidator::removePonto($provavel['VALOR_ADMINISTRATIVO'])/100)*$igpm_mes)+(OdbcValidator::removePonto($provavel['VALOR_ADMINISTRATIVO'])/100));
-             echo " ($valorCorrigido) ";
+             echo " ($valorCorrigido) ";die;
            //foreach ($igpm as $item){
            // print_r($item);die;
              //echo $item->getJUNHO();//TodoValidator::nomeMes($y);
@@ -102,7 +109,7 @@
            //}die;
            //echo "$taxa";
            echo " - ";
-         }
+         }die;
          $mes=1;
         }else{
          for($y=$mes;$y<8;$y++){
